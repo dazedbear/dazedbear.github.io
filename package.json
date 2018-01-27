@@ -44,7 +44,9 @@
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -c .storybook -o .out",
+    "storybook-to-ghpages": "storybook-to-ghpages",
+    "deploy-storybook": "npm run build-storybook && npm run storybook-to-ghpages -- --existing-output-dir=.out --branch=master"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
@@ -247,6 +249,11 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.3.11",
+    "@storybook/addon-links": "^3.3.11",
+    "@storybook/addons": "^3.3.11",
+    "@storybook/react": "^3.3.11",
+    "@storybook/storybook-deployer": "^2.2.0",
     "add-asset-html-webpack-plugin": "2.0.1",
     "babel-cli": "6.24.1",
     "babel-core": "6.24.1",
@@ -297,10 +304,11 @@
     "url-loader": "0.5.8",
     "webpack": "3.5.5",
     "webpack-dev-middleware": "1.11.0",
-    "webpack-hot-middleware": "2.18.0",
-    "@storybook/react": "^3.3.11",
-    "@storybook/addon-actions": "^3.3.11",
-    "@storybook/addon-links": "^3.3.11",
-    "@storybook/addons": "^3.3.11"
+    "webpack-hot-middleware": "2.18.0"
+  },
+  "storybook-deployer": {
+    "gitUsername": "dazedbear",
+    "gitEmail": "einfachstudio@gmail.com",
+    "commitMessage": "Deploy Storybook."
   }
 }
