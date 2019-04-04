@@ -4,8 +4,6 @@
 
 這是 dazedbear 的個人網站，包含學習筆記、作品 demo，主題涵蓋 Web Development、作曲、數位音樂、音樂科技等。
 
-## Repos
-
 | Repo | Description |
 | -- | -- |
 | [dazedbear.github.io](https://github.com/dazedbear/dazedbear.github.io) | 個人網站，展示 demo、Medium 文章 |
