@@ -1,15 +1,13 @@
-# Dazedbear Palyground
+# Einfach Studio 艾音法工作室
 
-This is a playground for development.
+[![medium](https://img.shields.io/badge/Medium-dazedbear-green.svg)](https://medium.com/@dazedbear) [![Linkedin](https://img.shields.io/badge/Linkedin-chih--yuanchen-blue.svg)](https://www.linkedin.com/in/chih-yuanchen/)
 
-## Tech Stack
+這是 dazedbear 的個人網站，包含學習筆記、作品 demo，主題涵蓋 Web Development、作曲、數位音樂、音樂科技等。
 
-- [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate)
-- [storybook](https://github.com/storybooks/storybook)
-- [storybook-deployer](https://github.com/storybooks/storybook-deployer)
+## Repos
 
-## Practice Demos
-
-- [Codepen](https://codepen.io/dazedbear/)
-- [LeetCode Logbook](https://github.com/dazedbear/leetcode-logbook)
-- [Blog](https://einfach-studio.github.io/)
+| Repo | Description |
+| -- | -- |
+| [dazedbear.github.io](https://github.com/dazedbear/dazedbear.github.io) | 個人網站，展示 demo、Medium 文章 |
+| [applets](https://github.com/dazedbear/applets) | 開發庫，包含 UI 元件、模組、API 文件 |
+| [apim](https://github.com/dazedbear/apim) | Swagger 展示所有開發的 Back-end API |
