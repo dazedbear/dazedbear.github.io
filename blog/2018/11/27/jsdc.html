@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>2018 JSDC 筆記 · DazedBear Studio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="今年的主題是「整合」，但其實議程絕大多數集中在以太坊，特別是針對 Web3.js ，再來就是一些初階推廣向的主題，像是 Reactive Programming 、無痛轉移到 Vue.js 等，整體來說覺得有點可惜，議題不夠廣也不夠深入(對於以太坊的共鳴實在不高...)，我們對於 JavaScript 的想像可能還太過狹隘片面了。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="2018 JSDC 筆記 · DazedBear Studio"/><meta property="og:type" content="website"/><meta property="og:url" content="https://www.dazedbear.pro/blog/2018/11/27/jsdc"/><meta property="og:description" content="今年的主題是「整合」，但其實議程絕大多數集中在以太坊，特別是針對 Web3.js ，再來就是一些初階推廣向的主題，像是 Reactive Programming 、無痛轉移到 Vue.js 等，整體來說覺得有點可惜，議題不夠廣也不夠深入(對於以太坊的共鳴實在不高...)，我們對於 JavaScript 的想像可能還太過狹隘片面了。"/><meta property="og:image" content="https://www.dazedbear.pro/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://www.dazedbear.pro/img/undraw_tweetstorm.svg"/><meta name="robots" content="noindex"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://www.dazedbear.pro/blog/atom.xml" title="DazedBear Studio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://www.dazedbear.pro/blog/feed.xml" title="DazedBear Studio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/harmony-note-06" target="_self">Notes</a></li><li class=""><a href="/docs/harmony-note-06" target="_self">Demos</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/04/21/jazz-big-band-madness">談爵士春唱 &amp; 我的音樂歷程回顧</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/10/tmdf">2018 台北音樂設計節 TMDF</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/02/25/new-theme">2018 新年快樂! 除舊佈新</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/24/tmdf">2017 台北音樂設計節 TMDF 筆記</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></h1><p class="post-meta">November 27, 2018</p><div class="authorBlock"></div></header><div><span><p><img src="https://cdn-images-1.medium.com/max/2400/1*yRKwjf8lH9S1_gavi5rxLw.png" alt="main"></p>
+<p>今年的主題是「整合」，但其實議程絕大多數集中在以太坊，特別是針對 Web3.js ，再來就是一些初階推廣向的主題，像是 Reactive Programming 、無痛轉移到 Vue.js 等，整體來說覺得有點可惜，議題不夠廣也不夠深入(對於以太坊的共鳴實在不高...)，我們對於 JavaScript 的想像可能還太過狹隘片面了。</p>
+<!-- truncate -->
+<h2><a class="anchor" aria-hidden="true" id="聽的議程"></a><a href="#聽的議程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>聽的議程</h2>
+<ul>
+<li>Deno, A New Server-Side Runtime by Ryan Dahl</li>
+<li>How Reactive Programming makes developer lives easier. by Tracy Lee</li>
+<li>初嘗去中化應用 - Web3.js入門 by David Ng</li>
+<li>AMP and Multithreaded JS by William Chou</li>
+<li>Convertine to vue.js the right way by Ruben Tan</li>
+<li>Dapp 跨平台相容性解決方案 by Mars Peng</li>
+<li>Web3.js - Getting started with the development of an Dapp by Samuel Furter</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="得到了甚麼"></a><a href="#得到了甚麼" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>得到了甚麼</h2>
+<p>來說說看這次 JSDC 得到了哪些 concept</p>
+<h3><a class="anchor" aria-hidden="true" id="deno"></a><a href="#deno" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Deno</h3>
+<p>Node.js 作者帶來的全新 server-side framework，以 Mozilla 開源的程式語言 Rust 寫成，針對 Node.js 的設計缺失打掉重練。目前還在開發階段，未來希望能取代 Node.js 與 npm。</p>
+<ul>
+<li>一樣建構在 V8 引擎上，原生支援 TypeScript</li>
+<li>重新建構「module」的觀念： 捨棄中央集權的 npm、繁雜的 package.json、肥大有如黑洞的 node_modules，改用 URI 引入模組</li>
+<li><a href="https://tinyclouds.org/deno_jsdc.pptx">講者簡報</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="reactive-programming"></a><a href="#reactive-programming" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reactive Programming</h3>
+<p>響應式程式設計 (翻中文好奇怪)，簡單說就是著重在資料流 Stream 、基於訂閱模型的程式設計方式，很適合處理複雜非同步邏輯，更可以結合 Functional Programming 概念，凸顯資料流的處理意圖 (像是專注於商務邏輯 operator 組合) 而隱藏實作細節。它是一種設計模式，有著 DSL (Domain Specific Language) 特性，僅定義最少的抽象介面，其餘完全依賴各語言自己實作。</p>
+<ul>
+<li>參考 Spec 有 <a href="http://www.reactive-streams.org/">Reactive Streams</a></li>
+<li>ECMAScript 將 <a href="https://github.com/tc39/proposal-observable">Observable</a> 納入了 Stage 1 ，簡言之 JavaScript 未來可能會原生支援 Reactive Programming</li>
+<li>現階段以 framework 為主 (Angular + NgRX、React + redux-observable + MobX、Vue +Vue-Rx、RxJS)</li>
+<li>轉換成 Reactive 思維：Event-Driven</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="web3js-dapp"></a><a href="#web3js-dapp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Web3.js &amp; Dapp</h3>
+<p>區塊鏈應用有幾個核心要素：區塊鏈本身、與鏈溝通的 API、電子錢包、自己寫的應用。Web3.js 就是包裝了以太坊 <a href="https://www.wikiwand.com/zh-tw/JSON-RPC">JSON-RPC API</a> ，方便與 Ethereum 區塊鏈溝通的 Library。Dapp 則是其中一種電子錢包的 WebApp。</p>
+<p>這個主題分成幾個面向探討：「初嘗去中心化應用」著重在產品開發經驗、「Dapp 跨平台相容性解決方案」比較了各種電子錢包並提出最佳實作、「Getting started with the development of an Dapp」則是從 Web3.js 開發者的角度，探討相關 API 的設計概念。</p>
+<ul>
+<li><a href="https://like.co/">LikeCoin</a> 主打以創作挖礦、合理分配創作利益給各階段協作者，產品概念相當有意思</li>
+<li>LikeCoin 主要使用 Nuxt.js + Web3.js + Firebase (App + firestore) 開發</li>
+<li>使用 <a href="https://oembed.com/">oembed</a> 處理嵌入內容到第三方網站</li>
+<li>使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API">Web Authentication API</a> 處理認證與授權</li>
+<li>電子錢包的運作機制</li>
+<li>每個錢包都有自己的 Provider (處理交易的介面)</li>
+<li>Provider 三種模式：postMessage (常規)、custom API (少見)、export Private Key (最危險，但自由度最高、寫出來的應用使用者體驗最好)</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="amp-and-multithreaded-js"></a><a href="#amp-and-multithreaded-js" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>AMP and Multithreaded JS</h3>
+<p>這是我覺得最有趣的議程，講者為 Google AMP 核心開發者，上次在 Google AMP 研討會有見過。前半段是盡盡義務推廣 AMP，後半段講多線程 Web Workers 與 WorkerDOM 才是重點。</p>
+<ul>
+<li>使用 AMP 好處：簡化開發、只需要一個 framework</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Window.requestAnimationFrame">JavaScript Chunking</a></li>
+<li>瀏覽器一般只有一個 main thread，JS 只能在這個 thread 上執行。若想獲得更好的效能，就必須考慮平行處理 (Concurrency)。</li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Web_Workers_API/Using_web_workers">Web Workers</a>：創建背景執行序跑 JS，有以下特性：無法接觸到 DOM、workers 彼此不能共享狀態、透過 postMessage() 彼此溝通</li>
+<li>Virtual DOM in Web Workers = <a href="https://github.com/ampproject/worker-dom">WorkerDOM</a>：計算新狀態、處理 Event handling</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="vuejs"></a><a href="#vuejs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vue.js</h3>
+<p>這算是推廣類議程，重點只有一句話：採用 Vue.js 可以很輕鬆地階段性翻新陳年的 jQuery Code，不必像採用 React 或 Angular 那樣全部打掉重來，學習曲線相對簡易，適合想快速投入但不想花太多成本 (前期研究、翻掉重構) 的情境。</p>
+<ul>
+<li><a href="https://nuxtjs.org/guide/">Nuxt.js</a>：Vue 版本的快速開發模板，類似 react 的 create-react-app</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="它們能解決什麼問題"></a><a href="#它們能解決什麼問題" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>它們能解決什麼問題</h2>
+<ul>
+<li>RxJS 處理複雜非同步邏輯 (已經有在使用了)</li>
+<li><a href="https://oembed.com/">oembed</a> 處理嵌入內容到第三方網站</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API">Web Authentication API</a> 處理認證與授權</li>
+<li>Deno 需要再多觀察，未來有望取代 Node.js</li>
+<li>TypeScript 強型別語言取代 JavaScript：減少不預期的型別錯誤、簡化模組介面設計、擴展使用 OOP 等各種程式設計方法</li>
+<li>Web Workers 與 WorkerDOM 用來優化效能</li>
+<li>從 jQuery 升級到 Modern Frontend 用 Vue.js 就對了</li>
+</ul>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#聽的議程">聽的議程</a></li><li><a href="#得到了甚麼">得到了甚麼</a><ul class="toc-headings"><li><a href="#deno">Deno</a></li><li><a href="#reactive-programming">Reactive Programming</a></li><li><a href="#web3js-dapp">Web3.js &amp; Dapp</a></li><li><a href="#amp-and-multithreaded-js">AMP and Multithreaded JS</a></li><li><a href="#vuejs">Vue.js</a></li></ul></li><li><a href="#它們能解決什麼問題">它們能解決什麼問題</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div><div class="community__tab"><a href="https://www.linkedin.com/in/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-linkedin fa-3x community__tab-icon"></i><p class="community__tab-name">Linkedin</p></a></div><div class="community__tab"><a href="https://soundcloud.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-soundcloud fa-3x community__tab-icon"></i><p class="community__tab-name">SoundCloud</p></a></div></section><section class="copyright">Copyright © 2019 DazedBear Studio</section></footer></div></body></html>

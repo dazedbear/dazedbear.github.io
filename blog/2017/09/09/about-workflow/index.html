@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>談談工作流程 · DazedBear Studio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="最近DB為了要讓自己工作更有效率，希望用最短的時間把任務一次做完~~然後準時下班~~，開始嘗試應用一些工作方法。試用以後，有一些不同的心得想分享。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="談談工作流程 · DazedBear Studio"/><meta property="og:type" content="website"/><meta property="og:url" content="https://www.dazedbear.pro/blog/2017/09/09/about-workflow"/><meta property="og:description" content="最近DB為了要讓自己工作更有效率，希望用最短的時間把任務一次做完~~然後準時下班~~，開始嘗試應用一些工作方法。試用以後，有一些不同的心得想分享。"/><meta property="og:image" content="https://www.dazedbear.pro/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://www.dazedbear.pro/img/undraw_tweetstorm.svg"/><meta name="robots" content="noindex"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://www.dazedbear.pro/blog/atom.xml" title="DazedBear Studio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://www.dazedbear.pro/blog/feed.xml" title="DazedBear Studio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/harmony-note-06" target="_self">Notes</a></li><li class=""><a href="/docs/harmony-note-06" target="_self">Demos</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/04/21/jazz-big-band-madness">談爵士春唱 &amp; 我的音樂歷程回顧</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/10/tmdf">2018 台北音樂設計節 TMDF</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/02/25/new-theme">2018 新年快樂! 除舊佈新</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/24/tmdf">2017 台北音樂設計節 TMDF 筆記</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/09/09/about-workflow">談談工作流程</a></h1><p class="post-meta">September 9, 2017</p><div class="authorBlock"></div></header><div><span><p>最近DB為了要讓自己工作更有效率，希望用最短的時間把任務一次做完<del>然後準時下班</del>，開始嘗試應用一些工作方法。試用以後，有一些不同的心得想分享。</p>
+<p>我們先一步步來，認識一下有哪些「有效率」的工作方法。</p>
+<!--truncate -->
+<h2><a class="anchor" aria-hidden="true" id="有效率的工作方法"></a><a href="#有效率的工作方法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>有效率的工作方法</h2>
+<p>工作方法有很多種，大原則不外乎以下幾點：</p>
+<ol>
+<li>一眼就能看懂的明確目標</li>
+<li>計算花費時間，限時 or 計時</li>
+<li>區分任務優先順序</li>
+<li>了解自己的能耐，不貪多</li>
+</ol>
+<p>以下就簡單介紹我聽過的方法。</p>
+<h3><a class="anchor" aria-hidden="true" id="pomodoro-番茄鐘"></a><a href="#pomodoro-番茄鐘" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pomodoro 番茄鐘</h3>
+<ul>
+<li>每30分鐘為一單位的蕃茄鐘，25分鐘工作、5分鐘休息</li>
+<li>每6個蕃茄鐘安排一次長時間休息</li>
+<li>任務切割成小單位，以「幾個蕃茄鐘」的方式安排日程</li>
+</ul>
+<p>每個人可專注的時間不一定，但普遍都不會超過90分鐘。因此，將任務切割成小單位，以蕃茄鐘為單位短期衝刺，把困難的任務用「每次做一點」的方式做完。</p>
+<p>其實可依自己習慣修改作法。以我來說專注30分鐘真的太短了，所以改成每1小時為單位去排。</p>
+<p>重點就是：切成小目標、定時、做一段時間要休息</p>
+<h3><a class="anchor" aria-hidden="true" id="gtd-getting-things-done"></a><a href="#gtd-getting-things-done" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GTD (Getting Things Done)</h3>
+<ol>
+<li>建立收集夾放「任何關於專案、工作的一切」（任務、目標、困惑、資訊....）</li>
+<li>分類（按內容、流程階段...）</li>
+<li>拆成具體待辦事項</li>
+<li>按輕重緩急排順序</li>
+<li>一次只專心做一件事</li>
+<li>定期清空收集夾</li>
+</ol>
+<p><strong>「Think One &amp; Do One」</strong>。GTD包含了幾個核心概念：</p>
+<ul>
+<li>收集 -&gt; 規劃 -&gt; 專心做一件事</li>
+<li>寫下來，不要用腦袋記</li>
+<li>唯一的收集夾，要定期清空</li>
+</ul>
+<p>GTD簡化了可能讓腦袋混亂的流程，因為<strong>腦袋是用來思考、它的可靠性是不被信任的</strong>。經常會搭配使用待辦清單（To Do List）、或者Trello等其他工作方法、工具實現。</p>
+<h3><a class="anchor" aria-hidden="true" id="the-1-3-5-rule"></a><a href="#the-1-3-5-rule" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The 1-3-5 Rule</h3>
+<ul>
+<li>每日清單這樣列
+<ul>
+<li>1件重要任務（3h）</li>
+<li>3件中型任務（1件1h）</li>
+<li>5件瑣事（1件30min）</li>
+</ul></li>
+<li>瑣事下班前再處理</li>
+<li>任務要非常明確</li>
+<li>盡可能不要列滿這張清單</li>
+</ul>
+<p>我們都知道可以列待辦清單，但經常因為清單太長做不完、任務又寫得不具體看不懂在幹麻。那怎麼列才算有效？</p>
+<p><strong>「只列做得完的清單」</strong>，一天就列這幾件事，<strong>最好還不要列滿</strong>，以便能應付臨時的插件。</p>
+<h3><a class="anchor" aria-hidden="true" id="time-tracking"></a><a href="#time-tracking" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Time Tracking</h3>
+<ul>
+<li>使用計時器追蹤每件任務花費時間</li>
+<li>根據結果做調整</li>
+</ul>
+<p>實際作法很簡單，開始每個任務時，按下計時器、碼表，中途短暫離開按暫停、任務結束時按停止。</p>
+<p>這個很適合SOHO族精算自己的實際工時，方便做規劃、報價。</p>
+<h3><a class="anchor" aria-hidden="true" id="參考來源"></a><a href="#參考來源" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>參考來源</h3>
+<p>想知道詳細的實作步驟、相關的工具，請參考<a href="http://www.playpcesor.com/">電腦玩物</a>的文章，基本上這些全都是從那邊學來的，包含筆記的方法也是，對這方面有興趣的歡迎關注<a href="http://www.playpcesor.com/">電腦玩物</a>喔！</p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="反思"></a><a href="#反思" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>反思</h2>
+<p>看完了，然後呢？
+接下來的部份，我要說說自己試用後的心得。</p>
+<h3><a class="anchor" aria-hidden="true" id="適合自己就是好方法"></a><a href="#適合自己就是好方法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>適合自己就是好方法</h3>
+<p>工作方法這麼多，到底哪種好用？</p>
+<p><strong>適合自己的方法最好用。</strong></p>
+<p><del>這不是在講幹話，</del>那要怎麼挑呢？</p>
+<p>回歸到自己的需求，覺得自己在浪費時間就用Time Tracking工具、覺得不知道該做什麼，就用GTD和1-3-5法則。總之，<strong>親自試過立刻就會知道適不適合</strong>。違反自己性格、習慣的事肯定沒辦法長久，這個只能自己嘗試、自己歸納哪種好用。</p>
+<h3><a class="anchor" aria-hidden="true" id="規劃其實很浪費時間"></a><a href="#規劃其實很浪費時間" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>規劃其實很浪費時間</h3>
+<p>我用了Time Tracking工具追蹤這個月的工作狀況時，發現了一個有趣的現象：每天一早的「規劃」其實花了我最多的時間。這點其實很弔詭，良好的規劃可以省下時間、但規劃時間又很浪費時間。</p>
+<h3><a class="anchor" aria-hidden="true" id="剖析痛點-節省規劃時間"></a><a href="#剖析痛點-節省規劃時間" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>剖析痛點，節省規劃時間</h3>
+<p>仔細探究後，我發現問題出在以下幾點：</p>
+<ol>
+<li>規劃資料分散在各服務中</li>
+<li>工具很難操作</li>
+<li>花太多時間做筆記</li>
+</ol>
+<p>甚至有一天花了2小時就為了把hackMD的筆記改寫格式到Trac中回報進度，根本超浪費時間的我說。</p>
+<p>身為小工程師，決定要優化這個流程。</p>
+<p>首先是架構好自己的工作流程：每天一來我要怎麼開工？用什麼服務看進度？用什麼工具追蹤狀況？回報進度時要用到哪些工具？怎樣的流程最順手？</p>
+<p>以我自己來說，我用了以下工具：</p>
+<ul>
+<li>專案管理：Trello</li>
+<li>筆記、草稿、規劃：hackMD</li>
+<li>進度回報：Trac</li>
+<li>時間追蹤：Toggl</li>
+<li>每日待辦事項：Todoist</li>
+</ul>
+<p>因為太分散，資料搜尋、同步的成本很高，所以我決定使用基於API和webhook的自動化服務，把我愛用的服務們串接在一起。好比說：Trello在卡片中新增待辦事項時，自動在Todoist新增一個Task、hackMD透過格式轉換工具轉成Trac的格式...等。下次再另開一篇介紹我的wrokflow和自動化工具zapier怎麼使用。</p>
+<h2><a class="anchor" aria-hidden="true" id="小結"></a><a href="#小結" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>小結</h2>
+<p>今天簡單介紹了工作方法&amp;一些心得，利用這些方法可以多多認識自己，越了解自己的習性、就能工作越有效率，<del>然後準時下班走人！</del></p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#有效率的工作方法">有效率的工作方法</a><ul class="toc-headings"><li><a href="#pomodoro-番茄鐘">pomodoro 番茄鐘</a></li><li><a href="#gtd-getting-things-done">GTD (Getting Things Done)</a></li><li><a href="#the-1-3-5-rule">The 1-3-5 Rule</a></li><li><a href="#time-tracking">Time Tracking</a></li><li><a href="#參考來源">參考來源</a></li></ul></li><li><a href="#反思">反思</a><ul class="toc-headings"><li><a href="#適合自己就是好方法">適合自己就是好方法</a></li><li><a href="#規劃其實很浪費時間">規劃其實很浪費時間</a></li><li><a href="#剖析痛點-節省規劃時間">剖析痛點，節省規劃時間</a></li></ul></li><li><a href="#小結">小結</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div><div class="community__tab"><a href="https://www.linkedin.com/in/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-linkedin fa-3x community__tab-icon"></i><p class="community__tab-name">Linkedin</p></a></div><div class="community__tab"><a href="https://soundcloud.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-soundcloud fa-3x community__tab-icon"></i><p class="community__tab-name">SoundCloud</p></a></div></section><section class="copyright">Copyright © 2019 DazedBear Studio</section></footer></div></body></html>

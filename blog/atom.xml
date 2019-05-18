@@ -2,74 +2,132 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.dazedbear.pro/blog</id>
     <title>DazedBear Studio Blog</title>
-    <updated>2017-10-24T06:00:00Z</updated>
+    <updated>2019-04-21T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://www.dazedbear.pro/blog"/>
     <subtitle>The best place to stay up-to-date with the latest DazedBear Studio news and events.</subtitle>
     <logo>https://www.dazedbear.pro/img/favicon.ico</logo>
     <rights>Copyright © 2019 DazedBear Studio</rights>
     <entry>
-        <title type="html"><![CDATA[New Version 1.0.0]]></title>
-        <id>https://www.dazedbear.pro/blog/2017/10/24/new-version-1.0.0.html</id>
-        <link href="https://www.dazedbear.pro/blog/2017/10/24/new-version-1.0.0.html">
+        <title type="html"><![CDATA[談爵士春唱 & 我的音樂歷程回顧]]></title>
+        <id>https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness.html</id>
+        <link href="https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness.html">
         </link>
-        <updated>2017-10-24T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>This blog post will test file name parsing issues when periods are present.</p> ]]></summary>
-        <author>
-            <name>Eric Nakagawa</name>
-            <uri>http://twitter.com/ericnakagawa</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Adding RSS Support]]></title>
-        <id>https://www.dazedbear.pro/blog/2017/09/26/adding-rss.html</id>
-        <link href="https://www.dazedbear.pro/blog/2017/09/26/adding-rss.html">
-        </link>
-        <updated>2017-09-26T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>This is a test post.</p> <p>A whole bunch of other information.</p> ]]></summary>
-        <author>
-            <name>Eric Nakagawa</name>
-            <uri>http://twitter.com/ericnakagawa</uri>
-        </author>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Adding RSS Support - RSS Truncation Test]]></title>
-        <id>https://www.dazedbear.pro/blog/2017/09/25/testing-rss.html</id>
-        <link href="https://www.dazedbear.pro/blog/2017/09/25/testing-rss.html">
-        </link>
-        <updated>2017-09-25T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</p>
-<p>This should be truncated.</p>
+        <updated>2019-04-21T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/54434681_2310380525847662_6283584544717144064_o.jpg?_nc_cat=102&amp;_nc_ht=scontent.ftpe7-3.fna&amp;oh=3316185f76c9a7823105c23ecf9c7542&amp;oe=5D63271D" alt="main"></p>
+<p>今天到花博流行館去聽 <a href="https://www.facebook.com/bigbandmadness/">爵士大樂團嘉年華 Big Band Madness</a> ，覺得有點感觸想趁新鮮時寫下來。其實前兩年我就知道有這活動，每年約莫三、四月會有爵士樂 Big Band 的接力演出，每一次都決定要去，但最後都被非常臨時且無關緊要的行程綁住而無法成行。今年本來差點重蹈覆轍，好在最後協調好（強硬）把這天都空下來，總算從説說哥畢業，好好地欣賞演出（笑）。</p>
 ]]></summary>
         <author>
-            <name>Eric Nakagawa</name>
-            <uri>http://twitter.com/ericnakagawa</uri>
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[New Blog Post]]></title>
-        <id>https://www.dazedbear.pro/blog/2017/04/10/blog-post-two.html</id>
-        <link href="https://www.dazedbear.pro/blog/2017/04/10/blog-post-two.html">
+        <title type="html"><![CDATA[2018 JSDC 筆記]]></title>
+        <id>https://www.dazedbear.pro/blog/2018/11/27/jsdc.html</id>
+        <link href="https://www.dazedbear.pro/blog/2018/11/27/jsdc.html">
         </link>
-        <updated>2017-04-10T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum massa eget nulla aliquet sagittis. Proin odio tortor, vulputate ut odio in, ultrices ultricies augue. Cras ornare ultrices lorem malesuada iaculis. Etiam sit amet libero tempor, pulvinar mauris sed, sollicitudin sapien.</p>
+        <updated>2018-11-27T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/2400/1*yRKwjf8lH9S1_gavi5rxLw.png" alt="main"></p>
+<p>今年的主題是「整合」，但其實議程絕大多數集中在以太坊，特別是針對 Web3.js ，再來就是一些初階推廣向的主題，像是 Reactive Programming 、無痛轉移到 Vue.js 等，整體來說覺得有點可惜，議題不夠廣也不夠深入(對於以太坊的共鳴實在不高...)，我們對於 JavaScript 的想像可能還太過狹隘片面了。</p>
 ]]></summary>
         <author>
-            <name>Blog Author</name>
-            <uri>http://twitter.com/</uri>
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Blog Title]]></title>
-        <id>https://www.dazedbear.pro/blog/2016/03/11/blog-post.html</id>
-        <link href="https://www.dazedbear.pro/blog/2016/03/11/blog-post.html">
+        <title type="html"><![CDATA[2018 台北音樂設計節 TMDF]]></title>
+        <id>https://www.dazedbear.pro/blog/2018/09/10/tmdf.html</id>
+        <link href="https://www.dazedbear.pro/blog/2018/09/10/tmdf.html">
         </link>
-        <updated>2016-03-11T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum massa eget nulla aliquet sagittis. Proin odio tortor, vulputate ut odio in, ultrices ultricies augue. Cras ornare ultrices lorem malesuada iaculis. Etiam sit amet libero tempor, pulvinar mauris sed, sollicitudin sapien.</p>
+        <updated>2018-09-10T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1600/1*sx4Hk1Fnj4rphyP7Z42TlA.jpeg" alt="cover"></p>
+<p><a href="https://www.tmdf.info">台北音樂設計節</a>是由加點音樂舉辦的 Conference，涵蓋音樂、影視、設計等領域，去年參加過覺得還不錯，今年一收到活動消息立馬買了早鳥票 (NTD 2000)。雖然講次比起去年較少只分成三軌，行銷設計的場次也銳減(去年還有講 A&amp;R 的說)，今年更 Focus 在配樂、錄混音的部分 (畢竟多數會眾都是這兩種從業人員)。此外，多了幾場「雙講師」的講次，有配樂 x 混音、企劃 x 配樂、律師 x 配樂、導演 x 歌手...，找了曾合作的不同角色同台，分享合作、溝通的經驗，從不同視角看事情，這是相當難得的！希望明年續辦的話，還能有這類型的講次。</p>
+<p>活動議程在此，我就簡單紀錄聽過的場次吧！</p>
 ]]></summary>
         <author>
-            <name>Blog Author</name>
-            <uri>http://twitter.com/</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2018 新年快樂! 除舊佈新]]></title>
+        <id>https://www.dazedbear.pro/blog/2018/02/25/new-theme.html</id>
+        <link href="https://www.dazedbear.pro/blog/2018/02/25/new-theme.html">
+        </link>
+        <updated>2018-02-25T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>先祝各位新年快樂啦！（灑花</p>
+<p>今年過年期間時間很多，由於 DB 是北部人沒有返鄉的問題，初二固定舉辦的姑姑們回娘家聚餐也因故取消，就不用特別張羅這些事情。在家也沒事，大家也沒怎麼想出門，就是很閒啊~</p>
+<p>這麼多的時間，當然要拿來寫 code 還還技術債啊~</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2017 台北音樂設計節 TMDF 筆記]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/12/24/tmdf.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/12/24/tmdf.html">
+        </link>
+        <updated>2017-12-24T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>這次很開心可以參與到 <a href="https://www.tmdf.info/">2017 台北音樂設計節</a> 這場活動，這是一場跨足聲音、影視、配樂、廣告、幕後工程的 conference，凡舉和音樂、聲音有關的行業，幾乎都有出現在議程中。我覺得能夠辦這樣的 conference 交流是件很棒的事。</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2017 JSDC 筆記]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/12/03/jsdc.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/12/03/jsdc.html">
+        </link>
+        <updated>2017-12-03T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>大約11月中，跟著公司的大家一起參與 <a href="http://2017.jsdc.tw/">2017 JSDC Conference</a> ，這場主要是針對網頁前端開發者的年會，介紹許多前端技術的趨勢。公司很佛心地贊助了報名費（據說有4k），免費去聽課聽爽爽的，回來只要繳一篇學習報告就好，超划算的啊對不對！(wiwi 語調。所以，這篇就是那個報告，稍微加了一點自己的 murmnur這樣XD。</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Berklee音樂講座 - 如何練習爵士與即興 | Julian Moehring]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/11/26/lecture-how-to-practice-improvisation.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/11/26/lecture-how-to-practice-improvisation.html">
+        </link>
+        <updated>2017-11-26T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://i.imgur.com/dMmM9TU.jpg" alt="講座合照"></p>
+<p>週五因為 Frinny 的邀約得知這個<a href="https://www.accupass.com/event/1711121138327500378210">講座</a>，迅速的辦了 Accupass 取得免費的電子票券，也順便買了下個月<a href="https://www.tmdf.info/">台北音樂設計節</a>的早鳥票。簡單分享一下今天的心得。</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[談談工作流程]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/09/09/about-workflow.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/09/09/about-workflow.html">
+        </link>
+        <updated>2017-09-09T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>最近DB為了要讓自己工作更有效率，希望用最短的時間把任務一次做完<del>然後準時下班</del>，開始嘗試應用一些工作方法。試用以後，有一些不同的心得想分享。</p>
+<p>我們先一步步來，認識一下有哪些「有效率」的工作方法。</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Eee PC 翻身計畫！]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan.html">
+        </link>
+        <updated>2017-08-21T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<h2><a class="anchor" aria-hidden="true" id="談談舊電腦翻身計畫"></a><a href="#談談舊電腦翻身計畫" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>談談舊電腦翻身計畫</h2>
+<p>先聲明一下～這篇是單純的紀錄與心得，網路上有太多寫得很好的教學了，因此直接貼連結照著做就OK啦！</p>
+<p>想重新整理舊電腦的契機，最早追溯到去年6月的某個週末，我回台南參加母校社團的畢業演唱會。當時正值準備碩士班考試的備審資料，為了輕巧，我帶了iPad和EeePC下去作業，結果可害慘我了！XP沒裝office，網路又只有手機3G，chrome瀏覽器跑不太動office 365 online，google docs也跑得頗痛苦，但是隔天週日要拿推薦信給鋼琴老師簽，結果完全沒辦法打！最後還被迫取消隔天中午的聚餐，直接改用手寫的推薦信取代，吃足了苦頭。</p>
+<p>所以後來才開始思考：要如何才能行動作業，兼顧輕巧和效能性（當然，前提是盡可能的省錢，買不起Macbook的窮人家），另一方面，家裡有些舊電腦沒在使用，想說盡可能改造後讓它重生吧！</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[新站開幕啦！]]></title>
+        <id>https://www.dazedbear.pro/blog/2017/08/14/new-blog-open.html</id>
+        <link href="https://www.dazedbear.pro/blog/2017/08/14/new-blog-open.html">
+        </link>
+        <updated>2017-08-14T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<h3><a class="anchor" aria-hidden="true" id="緣由"></a><a href="#緣由" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>緣由</h3>
+<p>其實「架站」這個構想已經計畫許久了。提及緣由以前，先講點前情提要吧(?</p>
+]]></summary>
+        <author>
         </author>
     </entry>
 </feed>

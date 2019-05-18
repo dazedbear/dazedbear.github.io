@@ -1,0 +1,144 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>2017 JSDC 筆記 · DazedBear Studio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="大約11月中，跟著公司的大家一起參與 [2017 JSDC Conference](http://2017.jsdc.tw/) ，這場主要是針對網頁前端開發者的年會，介紹許多前端技術的趨勢。公司很佛心地贊助了報名費（據說有4k），免費去聽課聽爽爽的，回來只要繳一篇學習報告就好，超划算的啊對不對！(wiwi 語調。所以，這篇就是那個報告，稍微加了一點自己的 murmnur這樣XD。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="2017 JSDC 筆記 · DazedBear Studio"/><meta property="og:type" content="website"/><meta property="og:url" content="https://www.dazedbear.pro/blog/2017/12/03/jsdc"/><meta property="og:description" content="大約11月中，跟著公司的大家一起參與 [2017 JSDC Conference](http://2017.jsdc.tw/) ，這場主要是針對網頁前端開發者的年會，介紹許多前端技術的趨勢。公司很佛心地贊助了報名費（據說有4k），免費去聽課聽爽爽的，回來只要繳一篇學習報告就好，超划算的啊對不對！(wiwi 語調。所以，這篇就是那個報告，稍微加了一點自己的 murmnur這樣XD。"/><meta property="og:image" content="https://www.dazedbear.pro/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://www.dazedbear.pro/img/undraw_tweetstorm.svg"/><meta name="robots" content="noindex"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://www.dazedbear.pro/blog/atom.xml" title="DazedBear Studio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://www.dazedbear.pro/blog/feed.xml" title="DazedBear Studio Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/harmony-note-06" target="_self">Notes</a></li><li class=""><a href="/docs/harmony-note-06" target="_self">Demos</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Recent Posts</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Recent Posts</h3><ul class=""><li class="navListItem"><a class="navItem" href="/blog/2019/04/21/jazz-big-band-madness">談爵士春唱 &amp; 我的音樂歷程回顧</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/09/10/tmdf">2018 台北音樂設計節 TMDF</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/02/25/new-theme">2018 新年快樂! 除舊佈新</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/24/tmdf">2017 台北音樂設計節 TMDF 筆記</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2017/12/03/jsdc">2017 JSDC 筆記</a></h1><p class="post-meta">December 3, 2017</p><div class="authorBlock"></div></header><div><span><p>大約11月中，跟著公司的大家一起參與 <a href="http://2017.jsdc.tw/">2017 JSDC Conference</a> ，這場主要是針對網頁前端開發者的年會，介紹許多前端技術的趨勢。公司很佛心地贊助了報名費（據說有4k），免費去聽課聽爽爽的，回來只要繳一篇學習報告就好，超划算的啊對不對！(wiwi 語調。所以，這篇就是那個報告，稍微加了一點自己的 murmnur這樣XD。</p>
+<!--truncate -->
+<h1><a class="anchor" aria-hidden="true" id="兩天聆聽的議程"></a><a href="#兩天聆聽的議程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>兩天聆聽的議程</h1>
+<table>
+<thead>
+<tr><th>11/04</th><th>11/05</th></tr>
+</thead>
+<tbody>
+<tr><td>Turbo Boost Next Node.js</td><td>Egg &amp; Node.js 從小工坊走向企業級開發</td></tr>
+<tr><td>Fetch Web Streams</td><td>變數握手，CSS、JS 樂無窮</td></tr>
+<tr><td>前端也能做的 DevOps</td><td>jscodeshift: Refactor JS w/ JS</td></tr>
+<tr><td>Ultra Simple Isomorphic with Next.js</td><td>The Way to Fantasyland</td></tr>
+<tr><td>RxJS - 封裝程式的藝術</td><td>擊殺！前端測試Boss全攻略！</td></tr>
+<tr><td>Why Redux-Observable ?</td><td>從 VueJS 看前端生態圈的發展變化</td></tr>
+<tr><td>React Server-side Render Nightmare Gone</td></tr>
+<tr><td>使用 Vue 結合 A-Frame 進入 360 panorama VR 的世界</td></tr>
+</tbody>
+</table>
+<ul>
+<li><a href="http://beta.hackfoldr.org/jsdc2017">議程簡報</a></li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="我得到了什麼"></a><a href="#我得到了什麼" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>我得到了什麼</h1>
+<p>整體來說，這次的JSDC品質算是普普，有幾場講得特別好的，例如：RxJS講的淺顯易懂、jscodeshift很生動卻很有料、React SSR 和 Next.js 內容很扎實、VueJS 看前端生態圈則不只講了VueJS，而是比較了各家前端技術，內容很扎實。但同時，也有幾場講得很糟的：前端測試那場完全令人失望，講者根本沒做什麼準備就來耗時間、Egg &amp; Node.js 內容太著重在形式表面，明顯有畫大餅推銷自家技術的意圖。此外，像是前端也能做DevOps，則是有點標題誤導人，以為說有新的前端技術可以實作DevOps，結果只是一位前端被當成全端做DevOps的心路歷程而已。</p>
+<p>綜合以上的議程，簡單列出本次JSDC得到的名詞：</p>
+<ul>
+<li><a href="https://nodejs.org/en/blog/release/v8.0.0/">New Support of Node.js v8.x</a>
+<ul>
+<li><a href="https://nodejs.org/api/http2.html">HTTP 2</a></li>
+<li><a href="https://v8project.blogspot.tw/2017/05/launching-ignition-and-turbofan.html">TurboFan / Ignition Interpreter</a></li>
+</ul></li>
+<li><a href="https://streams.spec.whatwg.org/">Streams API</a></li>
+<li><a href="https://github.com/Netflix/chaosmonkey">Service Health Check with Chaos Monkey</a></li>
+<li><a href="http://blog.techbridge.cc/2016/08/27/react-redux-immutablejs-node-server-isomorphic-tutorial/">Isomorphic and Universal</a></li>
+<li>Enhance Efficiency of React Server-side Render
+<ul>
+<li><a href="https://github.com/canner/coren">Coren</a></li>
+<li><a href="https://github.com/aickin/react-dom-stream">react-dom-stream</a></li>
+<li><a href="https://learnnextjs.com/">Next.js</a></li>
+<li><a href="https://github.com/airbnb/hypernova">hypernova</a></li>
+<li><a href="https://css-tricks.com/prefetching-preloading-prebrowsing/"><code>&lt;Link /&gt;</code> prerendering</a></li>
+</ul></li>
+<li><a href="http://blog.techbridge.cc/2016/05/28/reactive-programming-intro-by-rxjs/">RxJS</a></li>
+<li><a href="https://redux-observable.js.org/">Redux-Observable</a></li>
+<li>VR with Web
+<ul>
+<li><a href="https://medium.com/@moz2000tw/webvr-%E4%BB%8A%E6%97%A5%E4%B8%8A%E7%B7%9A-%E7%B5%82%E7%B5%90%E9%95%B7%E9%81%94-23-%E5%B9%B4%E7%9A%84%E6%BC%AB%E9%95%B7%E7%AD%89%E5%BE%85-d2e2f7ed603">WebVR</a></li>
+<li><a href="https://aframe.io/">A-frame</a></li>
+<li><a href="https://krpano.com/">krpano</a></li>
+<li><a href="https://github.com/mozilla/webxr-api">WebXR</a></li>
+</ul></li>
+<li>3D with JavaScript
+<ul>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/WebGL_API">WebGL</a></li>
+<li><a href="https://threejs.org/">three.js</a></li>
+</ul></li>
+<li><a href="http://samnewman.io/patterns/architectural/bff/">Backends for Frontends</a></li>
+<li><a href="https://github.com/koajs/koa">koa</a></li>
+<li><a href="https://github.com/eggjs/egg">Egg</a></li>
+<li><a href="https://hackmd.io/p/r107MbSCb#/">CSS Custom Property and Variables</a></li>
+<li><a href="https://github.com/facebook/jscodeshift">jscodeshift</a></li>
+<li><a href="https://github.com/fantasyland/fantasy-land">Fantasyland</a></li>
+<li>Testing
+<ul>
+<li><a href="https://facebook.github.io/jest/">Jest</a></li>
+<li><a href="http://airbnb.io/enzyme/">Enzyme</a></li>
+</ul></li>
+<li><a href="https://speakerdeck.com/kurotanshi/jsdc2017-cong-vuejs-kan-qian-duan-sheng-tai-quan-de-fa-zhan-bian-hua">Vue.js</a></li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="它們能為我解決什麼問題"></a><a href="#它們能為我解決什麼問題" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>它們能為我解決什麼問題</h1>
+<p>總結以上的技術，可以解決以下的問題：</p>
+<ol>
+<li>優化Server端執行效能
+<ul>
+<li>更輕量的SSR解決方案</li>
+<li>V8引擎的優化</li>
+</ul></li>
+<li>更直覺的方式處理複雜的非同步行為
+<ul>
+<li>用Stream方式處理Event、Data</li>
+<li>新的API處理串流</li>
+<li>優化request的呼叫</li>
+</ul></li>
+<li>自動化重構程式碼</li>
+<li>更簡便的UI測試解決方案</li>
+<li>使用Web技術開發新媒體
+<ul>
+<li>呈現AR、VR</li>
+<li>繪製3D</li>
+</ul></li>
+</ol>
+<p>當然，有部份技術在各瀏覽器的支援度仍有限，能否使用在產品中仍需要再觀望，不過仍可吸收它們背後的理念，用現有的資源實作這些理念，解決產品中遇到的問題。</p>
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbMTk0NjAxMzE0Nl19
+--></span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div><div class="community__tab"><a href="https://www.linkedin.com/in/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-linkedin fa-3x community__tab-icon"></i><p class="community__tab-name">Linkedin</p></a></div><div class="community__tab"><a href="https://soundcloud.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-soundcloud fa-3x community__tab-icon"></i><p class="community__tab-name">SoundCloud</p></a></div></section><section class="copyright">Copyright © 2019 DazedBear Studio</section></footer></div></body></html>
