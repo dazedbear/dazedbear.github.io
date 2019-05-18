@@ -29,6 +29,8 @@ const siteConfig = {
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
+  cname: 'site.dazedbear.pro',
+
   // Used for publishing and more
   projectName: 'dazedbear.github.io',
   organizationName: 'dazedbear',
