@@ -20,6 +20,8 @@ script:
   - yarn install
   - GIT_USER="${GH_NAME}" CURRENT_BRANCH=master yarn run publish-gh-pages
 notifications:
-  email: "${GH_EMAIL}"
-  on_success: always
-  on_failure: always
+  email:
+    recipients:
+      - secure: PCe5HG9T+6q+hG1rSX8oJHXg094kfIwRDref12slY/LVwj7X9aMMTchbFtl9NDKu/DgOBwxIK5NVbPbiFibz8IBP4bnvjswBZM71zwKyhg2461tv7Tmi7qmaEdH4yEV3PWCBWtJoljA8JSB7e5ABRbCxCuY1h7+YWIDlc4AIX9nCjxgRVzx9Ag3MaVLlAdHprfK+c87FisqdXXweQ8jJBIgLcohfAA5H/Pb+OJVCPGL1CEDelrz7HjIh49puqOagRnAfzu8Y/8hoSWL3ZgdPrOUHIv47OwQdPit4ab9SjHy8P9hGw0Ydm6qD02AOjfxix9yQbK5R3M7ZRgw/DNhZul0zB+9SuZrtY3ycxsJMDYrFdD15KMMRLLMeT/YN938EZ3wxoCJ3rlJdtLVImDfHiNcQPi/RR23cwBELgDOX5XoJpNBQfd4y2d3HElCQR97M+/+cPfrYdS/CCkK+upP1QmAX36639TMNezU8qE6b8wIYMoQqK+dupJ4XboObfsmL8+/6MK7DC5lXo8eXJiaBHb/038wNhorDro5kIpvIPJdqLcloWQKv8m+itSWRLGUrvVOTsR8FzoPjQK/3tosDPbUHg8gQzh1ViGCPUhnaEYa0uftT6LyFjx+G2U8bbsMTAkj9SNT5WV7bkWPNSEIo1iDRBMPvpnL7uvEGp400xhc=
+    on_success: always
+    on_failure: always
