@@ -40,10 +40,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {page: 'help', label: 'About'},
+    // {page: 'about', label: 'About'},
     {doc: 'doc1', label: 'Notes'},
-    {doc: 'doc4', label: 'Demos'},
+    {doc: 'doc2', label: 'Demos'},
     {blog: true, label: 'Articles'},
+    {search: true},
   ],
 
   // If you have users set above, you add it here:
@@ -61,6 +62,8 @@ const siteConfig = {
     highlightColor: '#D41D47',
     footerColor: '#36324A',
   },
+
+  noIndex: true,
 
   /* Custom fonts for website */
   /*
