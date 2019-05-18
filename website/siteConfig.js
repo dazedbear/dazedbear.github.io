@@ -23,13 +23,13 @@
 const siteConfig = {
   title: 'DazedBear Studio', // Title for your website.
   tagline: 'Web x Digital Music x Composing',
-  url: 'https://dazedbear.github.io', // Your website URL
+  url: 'https://site.dazedbear.pro', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
-  cname: 'site.dazedbear.pro',
+  // cname: '',
 
   // Used for publishing and more
   projectName: 'dazedbear.github.io',
