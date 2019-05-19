@@ -29,7 +29,8 @@ const siteConfig = {
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
-  // cname: '',
+  // The CNAME for your website. It will go into a CNAME file when your site is built.
+  cname: 'www.dazedbear.pro',
 
   // Used for publishing and more
   projectName: 'dazedbear.github.io',
