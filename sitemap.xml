@@ -5,7 +5,6 @@
 <url> <loc>https://www.dazedbear.pro/users</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/en/users" /> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2018/11/27/jsdc</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://www.dazedbear.pro/blog/2018/09/10/tmdf</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2018/02/25/new-theme</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2017/12/24/tmdf</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2017/12/03/jsdc</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
@@ -13,6 +12,12 @@
 <url> <loc>https://www.dazedbear.pro/blog/2017/09/09/about-workflow</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2017/08/14/new-blog-open</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
-<url> <loc>https://www.dazedbear.pro/docs/doc1</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/doc1" /> </url>
-<url> <loc>https://www.dazedbear.pro/docs/harmony-note-06</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/harmony-note-06" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo/apim</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo/apim" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo/music-player</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo/music-player" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo/react-redux-boilerplate</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo/react-redux-boilerplate" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo/simple-login</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo/simple-login" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/demo/volume-meter</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/demo/volume-meter" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/note-harmony/ch06</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/note-harmony/ch06" /> </url>
+<url> <loc>https://www.dazedbear.pro/docs/note</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/docs/note" /> </url>
 </urlset>
