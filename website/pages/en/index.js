@@ -12,7 +12,9 @@ const Block = props => (
   <Container
     padding={['bottom', 'top']}
     id={props.id}
-    background={props.background}>
+    background={props.background}
+    className="feature-topic"
+  >
     <GridBlock
       align="center"
       contents={props.children}

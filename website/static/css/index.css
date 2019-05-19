@@ -9,12 +9,12 @@
   background-position: center;
 }
 
-.container {
+.feature-topic {
   background: rgba(255, 255, 255, 0.6);
   border-radius: 0.75em;
 }
 
-.container > .wrapper {
+.feature-topic > .wrapper {
   color:#565656;
   font-weight: 550;
 }
