@@ -66,6 +66,7 @@ const siteConfig = {
   },
 
   noIndex: true,
+  gaTrackingId: 'UA-83233420-3',
 
   /* Custom fonts for website */
   /*
