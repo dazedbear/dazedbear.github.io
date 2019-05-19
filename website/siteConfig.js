@@ -22,7 +22,7 @@
 
 const siteConfig = {
   title: 'DazedBear Studio', // Title for your website.
-  tagline: 'Web x Digital Music x Composing',
+  tagline: 'Web。Digital Music。Self Development',
   url: 'https://www.dazedbear.pro', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -59,7 +59,8 @@ const siteConfig = {
   colors: {
     primaryColor: '#584F8D',
     secondaryColor: '#8F5881',
-    highlightColor: '#D41D47',
+    primaryHighlightColor: '#D41D47',
+    secondaryHightlightColor: '#1cd5ff',
     footerColor: '#36324A',
   },
 

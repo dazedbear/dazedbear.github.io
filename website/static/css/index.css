@@ -1,3 +1,57 @@
-.homeContainer {
-  min-height: 700px;
+.projectTitle {
+  margin: 0.5em 0 1.5em 0;
+}
+
+.homeSplashFade {
+  background: url('../img/cover.jpg');
+  min-height: 800px;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 0.75em;
+}
+
+.container > .wrapper {
+  color:#565656;
+  font-weight: 550;
+}
+
+.blockContent > div {
+  text-align: left;
+}
+
+.imageAlignTop .blockImage {
+  max-width: 150px;
+  min-height: 150px;
+  position: relative;
+}
+
+.imageAlignTop .blockImage::after {
+  content: '';
+  height: 100%;
+  width: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.imageAlignTop .blockImage img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.unsplash-hint {
+  margin: 1em 0;
+  text-align: center;
+  color: #dedede;
+  font-size: 0.9em;
+}
+
+.unsplash-hint > a {
+  display: inline-block;
+  margin: 0 0.25em;
+  font-weight: 700;
+  color: $secondaryHightlightColor;
 }
