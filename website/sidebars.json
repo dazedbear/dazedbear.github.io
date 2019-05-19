@@ -1,5 +1,40 @@
 {
-  "harmony": {
-    "和聲學筆記": ["harmony-note-06"]
+  "note": {
+    "系列筆記": [
+      "note",
+      {
+        "type": "subcategory",
+        "label": "和聲學",
+        "ids": [
+          "note-harmony/ch06"
+        ]
+      }
+    ]
+  },
+  "demo": {
+    "作品展示": [
+      "demo",
+      {
+        "type": "subcategory",
+        "label": "程式練習作品",
+        "ids": [
+          "demo/simple-login",
+          "demo/react-redux-boilerplate",
+          "demo/music-player",
+          "demo/volume-meter",
+          "demo/apim"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "作曲/編曲",
+        "ids": []
+      },
+      {
+        "type": "subcategory",
+        "label": "演奏影片",
+        "ids": []
+      }
+    ]
   }
 }

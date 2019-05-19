@@ -42,11 +42,17 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     // {page: 'about', label: 'About'},
-    {doc: 'harmony-note-06', label: 'Notes'},
-    {doc: 'harmony-note-06', label: 'Demos'},
+    {doc: 'note', label: 'Notes'},
+    {doc: 'demo', label: 'Demos'},
     {blog: true, label: 'Articles'},
     // {search: true},
   ],
+
+  blogSidebarCount: 'ALL',
+  blogSidebarTitle: {
+    default: '近期文章',
+    all: '所有文章'
+  },
 
   // If you have users set above, you add it here:
   // users,
