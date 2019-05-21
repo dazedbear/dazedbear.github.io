@@ -4,7 +4,7 @@
         <title>DazedBear Studio Blog</title>
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
-        <lastBuildDate>Sun, 21 Apr 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 21 May 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,15 @@
             <link>https://www.dazedbear.pro/blog</link>
         </image>
         <copyright>Copyright © 2019 DazedBear Studio</copyright>
+        <item>
+            <title><![CDATA[網站翻新 2.0]]></title>
+            <link>https://www.dazedbear.pro/blog/2019/05/21/refactor-site.html</link>
+            <guid>https://www.dazedbear.pro/blog/2019/05/21/refactor-site.html</guid>
+            <pubDate>Tue, 21 May 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>沒錯！這次是網站的 Breaking Change，從網域到背後架構整套翻新了，只留下舊有文章而已。
+今天來簡單介紹翻新的理由與過程~</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[談爵士春唱 & 我的音樂歷程回顧]]></title>
             <link>https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness.html</link>

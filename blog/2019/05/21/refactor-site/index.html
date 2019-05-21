@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>網站翻新 2.0 · DazedBear Studio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="沒錯！這次是網站的 Breaking Change，從網域到背後架構整套翻新了，只留下舊有文章而已。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="網站翻新 2.0 · DazedBear Studio"/><meta property="og:type" content="website"/><meta property="og:url" content="https://www.dazedbear.pro/blog/2019/05/21/refactor-site"/><meta property="og:description" content="沒錯！這次是網站的 Breaking Change，從網域到背後架構整套翻新了，只留下舊有文章而已。"/><meta property="og:image" content="https://www.dazedbear.pro/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://www.dazedbear.pro/img/undraw_tweetstorm.svg"/><meta name="robots" content="noindex"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://www.dazedbear.pro/blog/atom.xml" title="DazedBear Studio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://www.dazedbear.pro/blog/feed.xml" title="DazedBear Studio Blog RSS Feed"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-83233420-3', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/note" target="_self">Notes</a></li><li class=""><a href="/docs/demo" target="_self">Demos</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>所有文章</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">所有文章</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2019/05/21/refactor-site">網站翻新 2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/21/jazz-big-band-madness">談爵士春唱 &amp; 我的音樂歷程回顧</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/02/25/new-theme">2018 新年快樂! 除舊佈新</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/24/tmdf">2017 台北音樂設計節 TMDF 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/03/jsdc">2017 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/11/26/lecture-how-to-practice-improvisation">Berklee音樂講座 - 如何練習爵士與即興 | Julian Moehring</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/09/09/about-workflow">談談工作流程</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/08/21/eeepc-relife-plan">Eee PC 翻身計畫！</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/08/14/new-blog-open">新站開幕啦！</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/05/21/refactor-site">網站翻新 2.0</a></h1><p class="post-meta">May 21, 2019</p><div class="authorBlock"></div></header><div><span><p>沒錯！這次是網站的 Breaking Change，從網域到背後架構整套翻新了，只留下舊有文章而已。
+今天來簡單介紹翻新的理由與過程~</p>
+<!-- truncate -->
+<h2><a class="anchor" aria-hidden="true" id="重建的理由"></a><a href="#重建的理由" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>重建的理由</h2>
+<p>上一版採用 <a href="https://www.gatsbyjs.org/docs/">Gatsby.js</a>，搭配 Material UI 的 <a href="https://www.gatsbyjs.org/starters/Vagr9K/gatsby-material-starter/">gastby-material-starter</a> 模板快速建了一個站，雖然還不錯，但有些地方可以再改善：</p>
+<ul>
+<li>外觀配色不順眼</li>
+<li>用手機瀏覽文章，一些如文章綱要等操作都沒有，有點不方便</li>
+<li>要客製化外觀，有點受限於 Material UI 的設計，style 撰寫、顏色選擇上比較受限</li>
+<li>我建了一個 organization <code>Einfach Studio</code> 想獨立經營，但年初換工作時才發現反而自己的 github 帳號都沒有 contribute 活動，索性決定移除它，搬回主帳號下用 <code>DazedBear Studio</code> 經營</li>
+<li>前一版只有放置文章，但我希望能把所有文章、做過的練習、side project、甚至是影音都放在同一個地方，當作數位個人品牌經營</li>
+</ul>
+<p>基於這些理由，我才決定要重建網站，雖然想法寫下來到完成拖了很久就是了 (笑)</p>
+<h2><a class="anchor" aria-hidden="true" id="製作過程"></a><a href="#製作過程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>製作過程</h2>
+<h3><a class="anchor" aria-hidden="true" id="docusaurus"></a><a href="#docusaurus" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Docusaurus</h3>
+<p>前兩週我在嘗試製作團隊用的文件時，碰巧查到眾多開源文件的產生器 <a href="https://docusaurus.io/en/">Docusaurus</a>，試用一下覺得很好上手，加上它的版型是我想要的 (左側有選單、右側有文章綱要導覽 onPageNav)，預設就有支援 RWD ，雖然坦白說客製的彈性比 <a href="https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-default/">gatsby-starter-default</a> 還少，但它確實能符合我的需求：雙導覽列、demo、文件、blog 等，因此決定採用它。</p>
+<p>基本上照官方文件做很快就好了，直接跳過它~</p>
+<h3><a class="anchor" aria-hidden="true" id="ci-建置"></a><a href="#ci-建置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CI 建置</h3>
+<p>沒意外持續沿用 Travis CI，只是在 build 成功或失敗時，通知方式由 slack 改回 email (原本個人的 slack 我移除了，追求環保)。</p>
+<h4><a class="anchor" aria-hidden="true" id="environment-variables-並非萬能"></a><a href="#environment-variables-並非萬能" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Environment Variables 並非萬能</h4>
+<p>過程中遇到一個問題：我不想要信箱直接寫進原始碼，可能會收到很多垃圾信 (?) 於是嘗試用環境變數像這樣餵進去：</p>
+<pre><code class="hljs css language-yml"><span class="hljs-comment"># .travis.yml</span>
+<span class="hljs-attr">notifications:</span>
+<span class="hljs-attr">  email:</span>
+<span class="hljs-attr">    recipients:</span>
+<span class="hljs-bullet">      -</span> <span class="hljs-string">"${GH_EMAIL}"</span>
+<span class="hljs-attr">    on_success:</span> <span class="hljs-string">always</span>
+<span class="hljs-attr">    on_failure:</span> <span class="hljs-string">always</span>
+</code></pre>
+<p>BUT！ Travis CI 在 notification 的欄位沒辦法在 runtime 動態帶值進去，詳情請見這個 <a href="https://github.com/travis-ci/travis-ci/issues/2711">issue</a>，因此行不通導致收不到信，也不會有任何 error 訊息。</p>
+<h4><a class="anchor" aria-hidden="true" id="encrypt-without-travis-cli"></a><a href="#encrypt-without-travis-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Encrypt without Travis CLI</h4>
+<p>既然橫豎都要寫進去，換個手法加密它好了。以往都需要設定 ruby 和 gem，然後安裝 <a href="https://github.com/travis-ci/travis.rb">Travis Client CLI</a> 像這樣執行加密指令再複製貼回 <code>.travis.yml</code></p>
+<pre><code class="hljs css language-bash">$ travis encrypt &lt;my_email&gt;
+Please add the following to your .travis.yml file:
+
+  secure: <span class="hljs-string">"gSly+Kvzd5uSul15CVaEV91ALwsGSU7yJLHSK0vk+oqjmLm0jp05iiKfs08j\n/Wo0DG8l4O9WT0mCEnMoMBwX4GiK4mUmGdKt0R2/2IAea+M44kBoKsiRM7R3\n+62xEl0q9Wzt8Aw3GCDY4XnoCyirO49DpCH6a9JEAfILY/n6qF8="</span>
+
+Pro Tip: You can add it automatically by running with --add.
+</code></pre>
+<pre><code class="hljs css language-yml"><span class="hljs-comment"># .travis.yml</span>
+<span class="hljs-attr">notifications:</span>
+<span class="hljs-attr">  email:</span>
+<span class="hljs-attr">    recipients:</span>
+<span class="hljs-attr">      - secure:</span> <span class="hljs-string">"gSly+Kvzd5uSul15CVaEV91ALwsGSU7yJLHSK0vk+oqjmLm0jp05iiKfs08j\n/Wo0DG8l4O9WT0mCEnMoMBwX4GiK4mUmGdKt0R2/2IAea+M44kBoKsiRM7R3\n+62xEl0q9Wzt8Aw3GCDY4XnoCyirO49DpCH6a9JEAfILY/n6qF8="</span>
+</code></pre>
+<p>但其實很麻煩...像我運氣不好環境搞不定時，根本就不能執行安裝指令，怎麼加密啊!! 只好找找看有沒有別的解法了。果然自己並不孤單，StackOverflow 就有人<a href="https://stackoverflow.com/questions/48013546/how-to-encrypt-api-keys-for-travis-ci-configuration-with-bash-cli-without-ruby">問過這問題</a>，找到可以不用裝 CLI 也能加密的方法：</p>
+<ol>
+<li>新建一支 shell script <code>travis-encrypt.sh</code> 內容如下：</li>
+</ol>
+<pre><code class="hljs css language-shell"><span class="hljs-meta">#</span><span class="bash">!/bin/bash</span>
+<span class="hljs-meta">#</span><span class="bash"> Code from https://gist.github.com/openscript/082bd53b28505337510d9e69386b5fc5</span>
+
+usage() { echo -e "Travis Encrypt Script\nUsage:\t$0 \n -r\t&lt;username/repository&gt; \n -e\t&lt;string which should be encrypted&gt;" 1&gt;&amp;2; exit 1; }
+
+while getopts ":r:e:" param; do
+  case "${param}" in
+    r)
+      r=${OPTARG}
+      ;;
+    e)
+      e=${OPTARG}
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if [ -z "${r}" ] || [[ !(${r} =~ [[:alnum:]]/[[:alnum:]]) ]] || [ -z "${e}" ]; then
+  usage
+fi
+
+key_match="\"key\":\"([^\"]+)\""
+key_url="https://api.travis-ci.org/repos/${r}/key"
+request_result=$(curl --silent $key_url)
+
+if [[ !($request_result =~ $key_match) ]]; then
+  echo "Couldn't retrieve key from ${key_url}. "
+  usage
+fi
+
+echo -n "${e}" | openssl rsautl -encrypt -pubin -inkey &lt;(echo -e "${BASH_REMATCH[1]}") | openssl base64 -A
+echo
+</code></pre>
+<ol start="2">
+<li>添加 script 的執行權限</li>
+</ol>
+<pre><code class="hljs css language-bash">chmod +x travis-encrypt.sh
+</code></pre>
+<ol start="3">
+<li>執行指令得到加密字串</li>
+</ol>
+<pre><code class="hljs css language-bash">./travis-encrypt.sh -r &lt;username&gt;/&lt;repositoryname&gt; -e &lt;YOUR_SECURE_DATA&gt;
+</code></pre>
+<p>原理簡單說就是<a href="https://docs.travis-ci.com/user/encryption-keys/#fetching-the-public-key-for-your-repository">打 Travis CI API 取得自己 repo 的 public key</a>，然後用 <a href="https://www.openssl.org/">OpenSSL</a> 搭配這把公鑰將輸入的值進行 RSA 加密就完成了！可以不用再裝 Travis CLI 覺得很開心~</p>
+<h3><a class="anchor" aria-hidden="true" id="部署到-github-pages-與自訂-domain"></a><a href="#部署到-github-pages-與自訂-domain" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>部署到 Github Pages 與自訂 Domain</h3>
+<p>將靜態網站部署到 Github Pages 幾乎是常識了，沒有對 domain 有太多要求的話非常方便。<a href="https://docusaurus.io/docs/en/publishing#using-github-pages">Docusaurus 也內建了指令方便執行 Github Pages 部署</a>。</p>
+<h4><a class="anchor" aria-hidden="true" id="custom-domain-vs-ssl-certificate"></a><a href="#custom-domain-vs-ssl-certificate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Domain vs. SSL Certificate</h4>
+<p>但是若想要用自己購買的 domain (custom domain) 的話，以往的教學文章都說不支援 custom domain 之下提供 SSL 憑證，需要搭配 <a href="https://www.cloudflare.com/zh-tw/">Cloudflare</a> 處理。但從<a href="https://blog.gslin.org/archives/2018/05/02/8295/github-%E9%80%8F%E9%81%8E-lets-encrypt-%E6%8F%90%E4%BE%9B%E8%87%AA%E8%A8%82%E7%B6%B2%E5%9F%9F%E7%9A%84-https-%E6%9C%8D%E5%8B%99/">這篇文章</a>得知 2018 年 5 月 Github Pages 就和 <a href="https://letsencrypt.org/">Let's Encrypt</a> 服務合作解決這個問題，正好也要換新 domain 就順便試試看。</p>
+<h4><a class="anchor" aria-hidden="true" id="通用頂級域名"></a><a href="#通用頂級域名" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>通用頂級域名</h4>
+<p>我的新 domain 是從 AWS Route 53 購買，順道一提 <code>.com</code>、<code>.org</code> 之類的<a href="https://www.wikiwand.com/zh-tw/%E9%80%9A%E7%94%A8%E9%A0%82%E7%B4%9A%E5%9F%9F">通用頂級域名 (gTLD)</a> 通常價格都相對便宜，約略每年 USD 10 ~ 15 左右 ( <code>.io</code> 現在超貴，一年要 USD 49，不如花 USD 12 買 <code>.com</code> )，另外從 2015 年起各個通用頂級網域的限制放寬鬆以後，多了很多選擇，可以多參考比較看看 ~ 像我就買了 <code>.pro</code> 的網域自己開心一下哈哈！</p>
+<h4><a class="anchor" aria-hidden="true" id="設定-dns-record-ssl-certificate"></a><a href="#設定-dns-record-ssl-certificate" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設定 DNS Record &amp; SSL Certificate</h4>
+<p>這一段我卡超久的，主要原因是以前用 AWS 架靜態網站，不外乎是這樣</p>
+<ul>
+<li>新建 S3 放檔案</li>
+<li>Route 53 購買 Domain</li>
+<li>AWS Certificate Manager 到 US Virginia Region 申請新的 SSL 憑證</li>
+<li>新建 CloudFront Source 源指向 S3 bucket，備用 CNAME 加上你想使用的網域名稱，然後掛上 SSL 憑證</li>
+<li>Route 53 A record ALIAS 到 CloudFront，大功告成</li>
+</ul>
+<p>原先以為 CloudFront 可以類似 Cloudflare 的功能幫網站加上 SSL 憑證，再 CNAME 回 github pages 即可，所以在 Route 53 做了這樣的設定：</p>
+<pre><code class="hljs css language-dns">www.dazedbear.pro <span class="hljs-keyword">A</span> ALIAS CloudFront (optinal <span class="hljs-keyword">CNAME</span>: site.dazedbear.pro)
+site.dazedbear.pro <span class="hljs-keyword">CNAME</span> dazedbear.github.io
+</code></pre>
+<p>打開 Github Repo Setting，custom domain 填入 <code>site.dazedbear.pro</code>，勾選 enforce HTTP to HTTPS。</p>
+<p>結果各種「轉導次數太多」、「DNS Resolve Failed」的錯誤。又因為短時間一直改 DNS Record，導致每次測試結果都會變來變去 (DNS Propogation 需要一點時間)。後來隔天再嘗試，發現根本不用這麼麻煩，你只需要這樣設定就好：</p>
+<pre><code class="hljs css language-dns">www.dazedbear.pro <span class="hljs-keyword">CNAME</span> dazedbear.github.io
+</code></pre>
+<p>打開 Github Repo Setting， custom domain 填入 <code>www.dazedbear.pro</code> ，勾選 enforce HTTP to HTTPS，就設定完成了！</p>
+<p>超簡單的啊對不對～詳細可以參考<a href="https://help.github.com/en/articles/using-a-custom-domain-with-github-pages">官方文件</a>實作看看。</p>
+<h2><a class="anchor" aria-hidden="true" id="小結"></a><a href="#小結" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>小結</h2>
+<p>這次用了一個週末整整兩天的時間，從開新 Repo 到全部做完串完 CI 和 Google Analytics，是真的挺衝動的哈哈哈，不過看到全新的樣貌心情就很好，再加上內容空空的就很想要補上去 XD 希望接下來可以持續充實這裡~</p>
+<p>今後也請多多指教噢！</p>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#重建的理由">重建的理由</a></li><li><a href="#製作過程">製作過程</a><ul class="toc-headings"><li><a href="#docusaurus">Docusaurus</a></li><li><a href="#ci-建置">CI 建置</a></li><li><a href="#部署到-github-pages-與自訂-domain">部署到 Github Pages 與自訂 Domain</a></li></ul></li><li><a href="#小結">小結</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div><div class="community__tab"><a href="https://www.linkedin.com/in/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-linkedin fa-3x community__tab-icon"></i><p class="community__tab-name">Linkedin</p></a></div><div class="community__tab"><a href="https://soundcloud.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-soundcloud fa-3x community__tab-icon"></i><p class="community__tab-name">SoundCloud</p></a></div></section><section class="copyright">Copyright © 2019 DazedBear Studio</section></footer></div></body></html>

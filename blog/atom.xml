@@ -2,12 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.dazedbear.pro/blog</id>
     <title>DazedBear Studio Blog</title>
-    <updated>2019-04-21T06:00:00Z</updated>
+    <updated>2019-05-21T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://www.dazedbear.pro/blog"/>
     <subtitle>The best place to stay up-to-date with the latest DazedBear Studio news and events.</subtitle>
     <logo>https://www.dazedbear.pro/img/favicon.ico</logo>
     <rights>Copyright © 2019 DazedBear Studio</rights>
+    <entry>
+        <title type="html"><![CDATA[網站翻新 2.0]]></title>
+        <id>https://www.dazedbear.pro/blog/2019/05/21/refactor-site.html</id>
+        <link href="https://www.dazedbear.pro/blog/2019/05/21/refactor-site.html">
+        </link>
+        <updated>2019-05-21T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>沒錯！這次是網站的 Breaking Change，從網域到背後架構整套翻新了，只留下舊有文章而已。
+今天來簡單介紹翻新的理由與過程~</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[談爵士春唱 & 我的音樂歷程回顧]]></title>
         <id>https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness.html</id>
