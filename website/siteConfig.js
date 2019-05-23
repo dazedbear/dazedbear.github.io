@@ -71,7 +71,7 @@ const siteConfig = {
     footerColor: '#36324A',
   },
 
-  noIndex: true,
+  noIndex: false,
   gaTrackingId: 'UA-83233420-3',
 
   /* Custom fonts for website */

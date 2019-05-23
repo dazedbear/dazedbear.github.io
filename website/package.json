@@ -11,5 +11,7 @@
   "devDependencies": {
     "docusaurus": "^1.9.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "logrocket": "^1.0.0"
+  }
 }
