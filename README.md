@@ -1,5 +1,7 @@
 # Dazedbear Studio 個人工作室
 
+[![Build Status](https://travis-ci.org/dazedbear/dazedbear.github.io.svg?branch=develop)](https://travis-ci.org/dazedbear/dazedbear.github.io)
+
 這是 dazedbear 的個人網站，包含學習筆記、作品 demo，主題涵蓋 Web Development、作曲、數位音樂、音樂科技等。
 
 | Repo | Description |
