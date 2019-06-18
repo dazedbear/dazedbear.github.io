@@ -13,11 +13,10 @@ sidebar_label: Swagger API Playground
 背後實作細節如下
 
 - AWS API Gateway：負責 API 管理 (key 派發與用量計算)、提供 mock 資料、觸發 Lambda 執行拉資料的程序
-- AWS LightSail：主要起一台便宜的機器，裡面再手動安裝 Redis 當作簡單的 Redis server
-- Lambda 負責從 Redis server 要資料，如果沒有的話再去打政府 Open Data API 要資料，經過簡單處理後存入 Redis server 並返回給上游的 API Gateway
+- Lambda 負責從 Layer 取得預置的 Raw Data 再經過排序等處理返回給上游的 API Gateway
 
 ## Preview
 
-[API Doc](https://einfach-studio.github.io/apim/) | [Github Repo](https://github.com/dazedbear/apim)
+[API Doc](https://www.dazedbear.pro/apim/) | [Github Repo](https://github.com/dazedbear/apim)
 
-<iframe src="https://einfach-studio.github.io/apim/" width="100%" height="500"></iframe>
+<iframe src="https://www.dazedbear.pro/apim/" width="100%" height="500"></iframe>
