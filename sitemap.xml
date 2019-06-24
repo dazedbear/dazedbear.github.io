@@ -3,7 +3,7 @@
 <url> <loc>https://www.dazedbear.pro/about</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/en/about" /> </url>
 <url> <loc>https://www.dazedbear.pro/index</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/en/index" /> </url>
 <url> <loc>https://www.dazedbear.pro/users</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://www.dazedbear.pro/en/users" /> </url>
-<url> <loc>https://www.dazedbear.pro/blog/2019/06/23/Itzhak</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
+<url> <loc>https://www.dazedbear.pro/blog/2019/06/24/Itzhak</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2019/05/21/refactor-site</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://www.dazedbear.pro/blog/2018/11/27/jsdc</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
