@@ -26,5 +26,6 @@
 | `website/draft/` | 放置文章草稿 |
 | `docs/demo/` | 放置每個作品的介紹頁 |
 | `docs/note/` | 放置系列筆記文章 |
+| `diagram/` | 放置來自 [draw.io](https://www.draw.io) 的各種圖工作檔 |
 | `website/sidebar.json` | 作品、系列筆記的左側選單設定檔 |
 | `website/siteConfig.js` | 網站的所有設定，包含引用的 js 與 css |
