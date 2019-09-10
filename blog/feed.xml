@@ -4,7 +4,7 @@
         <title>DazedBear Studio Blog</title>
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
-        <lastBuildDate>Mon, 24 Jun 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 31 Aug 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,15 @@
             <link>https://www.dazedbear.pro/blog</link>
         </image>
         <copyright>Copyright © 2019 DazedBear Studio</copyright>
+        <item>
+            <title><![CDATA[ModernWeb'19 筆記 (上)]]></title>
+            <link>https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html</link>
+            <guid>https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html</guid>
+            <pubDate>Sat, 31 Aug 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/modernweb-2019-reward.jpg" alt="Cover"></p>
+<p>又到了一年一度的 ModernWeb'19 大會，一起來看看 Web 又有什麼有趣的技術討論吧！</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[電影觀後感：帕爾曼的音樂遍歷]]></title>
             <link>https://www.dazedbear.pro/blog/2019/06/24/Itzhak.html</link>

@@ -2,12 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.dazedbear.pro/blog</id>
     <title>DazedBear Studio Blog</title>
-    <updated>2019-06-24T06:00:00Z</updated>
+    <updated>2019-08-31T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://www.dazedbear.pro/blog"/>
     <subtitle>The best place to stay up-to-date with the latest DazedBear Studio news and events.</subtitle>
     <logo>https://www.dazedbear.pro/img/favicon.ico</logo>
     <rights>Copyright © 2019 DazedBear Studio</rights>
+    <entry>
+        <title type="html"><![CDATA[ModernWeb'19 筆記 (上)]]></title>
+        <id>https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html</id>
+        <link href="https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html">
+        </link>
+        <updated>2019-08-31T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/modernweb-2019-reward.jpg" alt="Cover"></p>
+<p>又到了一年一度的 ModernWeb'19 大會，一起來看看 Web 又有什麼有趣的技術討論吧！</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[電影觀後感：帕爾曼的音樂遍歷]]></title>
         <id>https://www.dazedbear.pro/blog/2019/06/24/Itzhak.html</id>

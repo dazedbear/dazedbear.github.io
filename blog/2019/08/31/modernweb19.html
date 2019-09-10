@@ -1,0 +1,676 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>ModernWeb&#x27;19 筆記 (上) · DazedBear Studio</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="又到了一年一度的 ModernWeb&#x27;19 大會，一起來看看 Web 又有什麼有趣的技術討論吧！"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="ModernWeb&#x27;19 筆記 (上) · DazedBear Studio"/><meta property="og:type" content="website"/><meta property="og:url" content="https://www.dazedbear.pro/blog/2019/08/31/modernweb19"/><meta property="og:description" content="又到了一年一度的 ModernWeb&#x27;19 大會，一起來看看 Web 又有什麼有趣的技術討論吧！"/><meta property="og:image" content="https://www.dazedbear.pro/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://www.dazedbear.pro/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://www.dazedbear.pro/blog/atom.xml" title="DazedBear Studio Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://www.dazedbear.pro/blog/feed.xml" title="DazedBear Studio Blog RSS Feed"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-83233420-3', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/note" target="_self">Notes</a></li><li class=""><a href="/docs/demo" target="_self">Demos</a></li><li class="siteNavGroupActive"><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>所有文章</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">所有文章</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/blog/2019/08/31/modernweb19">ModernWeb&#x27;19 筆記 (上)</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/06/24/Itzhak">電影觀後感：帕爾曼的音樂遍歷</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/05/21/refactor-site">網站翻新 2.0</a></li><li class="navListItem"><a class="navItem" href="/blog/2019/04/21/jazz-big-band-madness">談爵士春唱 &amp; 我的音樂歷程回顧</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/11/27/jsdc">2018 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2018/02/25/new-theme">2018 新年快樂! 除舊佈新</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/24/tmdf">2017 台北音樂設計節 TMDF 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/12/03/jsdc">2017 JSDC 筆記</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/11/26/lecture-how-to-practice-improvisation">Berklee音樂講座 - 如何練習爵士與即興 | Julian Moehring</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/09/09/about-workflow">談談工作流程</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/08/21/eeepc-relife-plan">Eee PC 翻身計畫！</a></li><li class="navListItem"><a class="navItem" href="/blog/2017/08/14/new-blog-open">新站開幕啦！</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2019/08/31/modernweb19">ModernWeb&#x27;19 筆記 (上)</a></h1><p class="post-meta">August 31, 2019</p><div class="authorBlock"></div></header><div><span><p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/modernweb-2019-reward.jpg" alt="Cover"></p>
+<p>又到了一年一度的 ModernWeb'19 大會，一起來看看 Web 又有什麼有趣的技術討論吧！</p>
+<!-- truncate -->
+<p>平心而論，這兩年有點盲目地參加 Conference，幾乎都是「聽到某 Conference 要辦了 $\rightarrow$ 請假買票」，沒有仔細看過議程 (通常早鳥票也不會有完整議程就是了)，經常是前一天要排議程時才整個看過。有時候真的沒有想聽的也還是得選一個 (都買票了 OAO)，不像有的同事是兩個人分兩天來聽，各自聽有興趣的這樣 (雖然有點鑽漏洞其實)。</p>
+<p>回到正題，讓我們開始吧！</p>
+<h2><a class="anchor" aria-hidden="true" id="議程"></a><a href="#議程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>議程</h2>
+<blockquote>
+<p><a href="https://modernweb.tw/agenda.html">所有議程</a></p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="如何選擇議程"></a><a href="#如何選擇議程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>如何選擇議程</h3>
+<p>我來說說自己選擇議程時的考量</p>
+<ul>
+<li>技術含量高的最優先 (談架構、模式、最佳實踐等)</li>
+<li>討論新潮的技術、領域次之 (新領域的應用、陌生新潮的名詞)</li>
+<li>經驗談一律略過</li>
+<li>中國講者的講題要特別小心，通常多少會誇大不實、工商服務自家產品</li>
+</ul>
+<p>這次確實沒有太多新潮的東西，多了很多經驗談的講題，讓我有點困擾。並不是說它不好，只是就像書店銷售排行榜的職場書一樣，看完會覺得充實滿足，但真的要說「得到什麼」卻又說不出來，他人的經驗是無法只從聽就能吸收內化的，所以我通常不選這類議程。</p>
+<p>此外，看議程簡介很重要，有助於「避免踩雷」，降低遇到令人失望的議程機率。雖然我還需要好好加強啊...（淚），有的議程簡介看起來很奇耙，不過討論的技術名詞沒聽過，想說試試看，沒想到還是中獎哈哈...不過換個角度想，講者準備不夠，對聽眾其實很不尊重，沒有研究透徹就不要在這種場合講，到小型 Meetup 或讀書會分享就好。期許自己要以此為警惕。</p>
+<p>所以下面列出我選的議程以供參考~</p>
+<table>
+<thead>
+<tr><th>Day 1</th><th>Day 2</th></tr>
+</thead>
+<tbody>
+<tr><td>[Keynote] Progressive Deployment &amp; NoDeploy</td><td>[Keynote] 存活 20 年的 10 大抉擇</td></tr>
+<tr><td>[Keynote] 迎接 UI 設計工具的新時代</td><td>[Keynote] The notion of design emergence：Evolving your software</td></tr>
+<tr><td>[Keynote] 報稅系統是如何改善的：UX 使用者體驗與政府溝通的過程與作法</td><td>[Keynote] 經營者需要學的第二火星語 vs 開發者需要學的第二火星語</td></tr>
+<tr><td>We need a better UI component library - Styled System</td><td>從零開始加入自動化資安測試</td></tr>
+<tr><td>Why we replace Typescript with Dart</td><td>GraphQL Best Practice</td></tr>
+<tr><td>前端 3D 渲染技術的應用</td><td>開發現代化的靜態 PWA</td></tr>
+<tr><td>請在網頁中使用 3D</td><td>高併發流量的道與術</td></tr>
+</tbody>
+</table>
+<p>接下來來談我的收穫吧！</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="reward"></a><a href="#reward" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reward</h2>
+<p><img src="" alt="整體獲得知識的心智圖"></p>
+<p>---&gt;</p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="progressive-deployment-nodeploy"></a><a href="#progressive-deployment-nodeploy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Progressive Deployment &amp; NoDeploy</h2>
+<blockquote>
+<p><a href="https://www.slideshare.net/yftzeng/progressive-deployment-nodeploy">簡報</a>、<a href="https://hackmd.io/8sOqiF1bRX6DrCxjxSn4Xw">共筆</a></p>
+</blockquote>
+<p>現今軟體開發雖然普遍實施 DevOps，但隨著不同的公司文化與組織，經常是「<strong>一 DevOps 各表</strong>」的狀況，造成即便導入了 DevOps 卻沒辦法加速的情況。當然問題因素很多，講者僅針對 Deploy 這一塊做探討。此外，還有一些常見的問題像是 staging 沒辦法完全模擬 production、導入 microservices 卻發現開發上無法 test locally 等，講者提出一個想法來解決。</p>
+<p>他提出了一個想法：如何透過<strong>大膽地簡化部署流程的步驟以加速 DevOps</strong>，讓工程師減少學習部署工具成本，同時兼顧常見的維運需求 (SLA, SLI, SLO, No Downtime, 最快的部署時間...)。裡面提到了幾個概念：<strong>Test in Production Only</strong>, <strong>No Staging</strong>, <strong>No QA/CI</strong>, <strong>No Test Locally</strong> ... 等，其實這些都不是最新的，先前有一篇文章 <a href="https://medium.com/@copyconstruct/testing-in-production-the-safe-way-18ca102d0ef1">Testing in Production, the safe way</a> 幾乎就涵蓋了整場議程的內容，講者也有分享另一篇 <a href="https://medium.com/darklang/how-dark-deploys-code-in-50ms-771c6dd60671">How Dark Deploy in 50ms</a>
+介紹 <a href="https://darklang.com/">Dark</a> 是如何將這套理論落地。</p>
+<h3><a class="anchor" aria-hidden="true" id="devops-patterns"></a><a href="#devops-patterns" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>DevOps Patterns</h3>
+<p>開頭先介紹了不同 DevOps 實現的協作方式<del>就是所謂的一 DevOps 各表</del>，包含建議 pattern 與 anti-pattern，這段不是重點就不贅述了。</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-devops-anti.png" alt="DevOps Anti Patterns"></p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-devops-correct.png" alt="DevOps Correct Patterns"></p>
+<h3><a class="anchor" aria-hidden="true" id="nodeploy"></a><a href="#nodeploy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>NoDeploy</h3>
+<p>個人覺得這個詞有點聳動，不過概念就如同 Serverless 並非沒有 server 運行而是「不用察覺、不用關注 server」，NoDelpoy 是指「不用關注 deploy」，不過我更喜歡「No More Deploy」這個解釋。它包含幾個要點：</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-target.png" alt="NoDeploy Key Points"></p>
+<p>實務上經常遇到「環境不一致」的問題，即便採用 Container 搭配 IaaC 盡可能減少人為配置疏失，這個問題一樣會遇到 (至少網路層面一定不同)，更別提採用 Microservices 架構的公司，想在本機測試是很困難的。因此，與其花時間解決各種衍生問題，乾脆大膽地修正前提節省這些工：</p>
+<ol>
+<li>移除多餘的環境、驗證、測試步驟，只留下 Production 環境運行測試、驗收。</li>
+<li>任何新改動直接上 Production，利用 Feature Flags 管理功能開關、運行的版本。</li>
+<li>利用 Progressive Deployment 控制爆炸半徑 (blast radius)，先部署少量機器驗證，沒問題再部署到全部機器</li>
+</ol>
+<p>以 Dark 為例子，發現 Pipeline 大幅縮短了使得部署速度會非常快速，搭配 Feature Flags 與金絲雀部署，增加 code 上去的穩定性。不過針對「維持穩定性」這點，其實還滿抽象的，目前看來還沒有太多實際案例可以討論就是了 (大概還沒人敢把 Production 這樣搞吧)。</p>
+<p><img src="https://miro.medium.com/max/1304/1*Rk8Br7XG7psbwQJNr7pmaA.jpeg" alt="Dark"></p>
+<h3><a class="anchor" aria-hidden="true" id="feature-flags"></a><a href="#feature-flags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Feature Flags</h3>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-featureflag.png" alt="Feature Flags"></p>
+<p>將每個功能加上開關、版本控制，透過一個 Web UI 背後接管理 Configuration 的 Server 去決定這些功能是否啟動、流量多少、是否針對某些使用者生效之類的。如果有功能甚至 Config 本身壞掉，也會先沿用上一次有效的版本搭配 Rollback 機制恢復正常運作。這個 Server 可以自己建，也可以選擇 <a href="https://launchdarkly.com/">LaunchDarkly</a>、<a href="https://www.split.io/">Split</a>、<a href="https://rollout.io/">Rollout</a> 等 SaaS 服務<del>花錢買時間</del>加速建置。有興趣想了解更多概念、Pattern、可用工具服務等，可以從 <a href="https://featureflags.io/">這個網站</a> 查到相關資源，</p>
+<p>其中想提一下 <a href="https://cloud.google.com/blog/products/gcp/cre-life-lessons-what-is-a-dark-launch-and-what-does-it-do-for-me">暗啟動 (Dark Launch, Shadowing, Mirroring, or Dark Traffic Testing)</a>，簡單來說就是「複製使用者的流量來測試尚未 release 的功能」，因此不會對使用者造成任何影響，但可以檢測新功能在真實環境下是否運作正常，是個滿有趣的概念。實作可以透過 <a href="https://istio.io/">Istio</a> 的 <a href="https://istio.io/docs/tasks/traffic-management/mirroring">Mirroring</a> 達成，有興趣的可以參考 <a href="https://developers.redhat.com/blog/2018/04/17/istio-dark-launch-secret-services/">這個教學</a> 嘗試看看。</p>
+<h3><a class="anchor" aria-hidden="true" id="progressive-deployment"></a><a href="#progressive-deployment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Progressive Deployment</h3>
+<p>漸進式部署包含以下幾個要素：</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-progressive-deployment-core.png" alt="Core 概念"></p>
+<p>常見的做法有這幾種：</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/nodeploy-progressive-deployment.png" alt="常見作法"></p>
+<p>其中想提兩個點：Observability、Service Mesh。</p>
+<h4><a class="anchor" aria-hidden="true" id="observability"></a><a href="#observability" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Observability</h4>
+<p>講者有稍微強調 <code>Monitoring !== Observability</code> 這件事，Observability 並非只是埋 log 監控，還要有辦法知道「為什麼會出錯」，讓我聯想到先前的經驗。</p>
+<p>之前專案使用過 <a href="https://rollbar.com/">Rollbar</a> 這個 Error Tracking 服務，當發生任何錯誤時送 request 把 log 紀錄到 server 裡面，搭配 slack bot 能夠即時監控程式運作的健康程度。當時專案性質是沒有 server side render，而且 client side 有複雜的使用者互動，就曾經遇過一個案例：error log 說某相依套件出錯，單看 log 看不出來 root cause 是什麼。後來採用 <a href="https://logrocket.com/">LogRocket</a> 錄下使用者操作 session 重現他們怎麼用這產品，才發現問題出在使用者捲動某一個區塊，瀏覽器實作的 Web API 本身有 bug 導致出錯。因此 error log 是無法完全表達「為什麼出錯」。</p>
+<p>另一個專案經驗是 Node.js server 會將所有 log 送到 <a href="https://www.splunk.com/en_us/software/splunk-enterprise.html">Splunk</a> 紀錄，搭配圖形化的 Dashboard 工具可以即時監控服務健康程度。然而發生過管監控的人發現錯誤率上升，但是他們並不曉得「為什麼會出錯」，因此只能猜測、或是通知所有可能的產品開發團隊下來查問題，相當耗時。</p>
+<p>從上面兩個例子可以看出，的確 <code>Monitoring !== Observability</code>！</p>
+<h4><a class="anchor" aria-hidden="true" id="service-mesh"></a><a href="#service-mesh" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Service Mesh</h4>
+<p><img src="https://philcalcado.com/img/service-mesh/6-b.png" alt=""></p>
+<p>服務網格算是近年討論熱烈的議題之一，它很大程度的解決了 container orchestration 工具不好解決的網路動態配置問題。很粗略來說就是有一個主控中心，透過與每個服務的反向代理 Sidecar 溝通，負責流量管理、監控、服務調度、服務發現、熔斷機制等，比起傳統 Load Balancer 多了更多的功能。代表性的實踐就屬 <a href="https://istio.io/">Istio</a> ，<a href="https://aws.amazon.com/tw/app-mesh/">AWS App Mesh</a> 本身也是使用 Istio 實現的。由於我也還剛開始研究，這邊僅附上一些參考資源囉。</p>
+<ul>
+<li><a href="https://www.inwinstack.com/2018/01/12/service-mesh-istio/">Service Mesh與Istio佈署簡介</a></li>
+<li><a href="https://cloud.google.com/service-mesh/">Google Cloud Service Mesh</a></li>
+<li><a href="https://developers.redhat.com/topics/service-mesh/">Service Mesh &amp; Istio Tutorials | Red Hat Developer</a></li>
+</ul>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="迎接-ui-設計工具的新時代"></a><a href="#迎接-ui-設計工具的新時代" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>迎接 UI 設計工具的新時代</h2>
+<blockquote>
+<p><a href="https://s.itho.me/events/2019/ModernWeb/0928/KEYNOTE/2_%E5%8F%AF%E4%B8%8B%E8%BC%89_1020%20%E8%B6%99%E9%8C%A6%E6%B1%9F-%E8%BF%8E%E6%8E%A5%20UI%20%E8%A8%AD%E8%A8%88%E5%B7%A5%E5%85%B7%E7%9A%84%E6%96%B0%E6%99%82%E4%BB%A3.pdf">簡報</a>、<a href="https://hackmd.io/wJr4u6VqTYyG5yWrjGpDrw">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題"></a><a href="#子主題" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource"></a><a href="#resource" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>--&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="報稅系統是如何改善的-ux-使用者體驗與政府溝通的過程與作法"></a><a href="#報稅系統是如何改善的-ux-使用者體驗與政府溝通的過程與作法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>報稅系統是如何改善的：UX 使用者體驗與政府溝通的過程與作法</h2>
+<blockquote>
+<p><a href="https://hackmd.io/ITtjJ3HHQnGiUU0Eys-gOA">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-1"></a><a href="#子主題-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-1"></a><a href="#resource-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>--&gt;</p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="we-need-a-better-ui-component-library-styled-system"></a><a href="#we-need-a-better-ui-component-library-styled-system" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>We need a better UI component library - Styled System</h2>
+<blockquote>
+<p><a href="https://anna-su.com/tech/styled-system/?fbclid=IwAR3K_mpu582FhP7gnOvEVlXZvB6RR-nKguGf6oTMvPMaaCrQ9z4Jn2lRpGY">簡報</a>、<a href="https://hackmd.io/WdtlWwJnSLmd2ITufn88rA">共筆</a></p>
+</blockquote>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/styled-system-ui-library.png" alt="ui libraries"></p>
+<p>為了加速產品開發，開發者們多少都用過 UI Libraries 避免造輪子。使用前總抱持著「功能齊全又能彈性自訂」的期待，但實際套用時才發現案情並不單純。</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/styled-system-ui-library-cons.png" alt=""></p>
+<p>元件由兩個要素 <strong>功能</strong>、<strong>樣式</strong> 組成，不同需求下兩邊需要自訂的程度不同，但每個元件庫在這兩邊提供的自訂彈性都不同，經常調整起來綁手綁腳的，甚至需要一些 hack 手法 (如：找出 class name 撰寫複雜的 rule 用 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">css specificity</a> 強制蓋過去) 才能調教成自己的形狀 (喂)，提高後續維護成本。最後心一橫：</p>
+<blockquote>
+<p>為何不自己寫個充滿彈性的元件呢？</p>
+</blockquote>
+<p>於是就開始造輪子之路 (下略)。</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/styled-system-problems.png" alt=""></p>
+<p>造元件的過程會遇到一些困擾，因此講者透過 <a href="https://styled-system.com/">Styled System</a> 希望能減輕「樣式」層面的困擾。</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/styled-system-resolve.png" alt=""></p>
+<p>基本上它必須搭配 <a href="https://www.styled-components.com/">styled-components</a> 使用，個人覺得類似 SASS 的 <a href="https://sass-lang.com/documentation/at-rules/mixin">mixin</a>，styled system 提供規範好的 module 來簡化與統一 styled components 樣式的定義、取值。</p>
+<p>簡單的使用範例改寫請直接參考講者投影片，她寫的滿詳細易懂。我打算找一兩個以前寫過的黑歷史來試試 styled system 的水溫。</p>
+<h3><a class="anchor" aria-hidden="true" id="case-1-背景圖遮罩-mask"></a><a href="#case-1-背景圖遮罩-mask" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Case 1: 背景圖遮罩 Mask</h3>
+<p>這是蓋在背景圖上的一層遮罩，目的是希望改善疊在背景圖上方文字看不清楚的問題。它可以傳入兩個 props：<code>maskName</code>、<code>maskAlpha</code>，遮罩的顏色按照 <code>maskName</code> 不同而有所不同，至於遮罩本身的透明度透過<code>maskAlpha</code>可以自由傳任意值調整。它的 styled-components 長這樣：</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-components'</span>;
+
+<span class="hljs-keyword">const</span> Mask = styled.div<span class="hljs-string">`
+    position: absolute;
+    top: 0;
+    z-index: 11;
+    height: 100%;
+    width: 100%;
+    <span class="hljs-subst">${props =&gt; {
+        <span class="hljs-keyword">switch</span> (props.maskName) {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'blackMask'</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-string">`
+                    background: rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>);
+                `</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'whiteMask'</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-string">`
+                    background: rgba(255,255,255,<span class="hljs-subst">${props.maskAlpha}</span>);
+                `</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'blackGradientMask'</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-string">`
+                    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(0,0,0,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(0,0,0,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(0,0,0,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* Chrome10-25,Safari5.1-6 */
+                `</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'WhiteGradientMask'</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-string">`
+                    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(255,255,255,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(255,255,255,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(255,255,255,<span class="hljs-subst">${
+                        props.maskAlpha
+                    }</span>) 100%); /* Chrome10-25,Safari5.1-6 */
+                `</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-string">`
+                    background: rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>);
+                `</span>;
+        }</span>
+    }}
+`</span>;
+</code></pre>
+<p>在 styled-components 裡面寫 switch-case 的確很瘋狂 (汗)，當初沒有仔細看完官方文件硬幹的結果...，這個需求可以使用 styled-components 內建的 <a href="https://www.styled-components.com/docs/advanced#theming">Theming</a> 達成，針對瀏覽器相容性加上的 prefix 也是多餘的，styled-components 會幫你做掉這塊。改寫後變成這樣：</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-components'</span>;
+
+<span class="hljs-keyword">const</span> theme = {
+    <span class="hljs-attr">blackMask</span>: <span class="hljs-string">`rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>`</span>, <span class="hljs-comment">// default</span>
+    whiteMask: <span class="hljs-string">`rgba(255,255,255,<span class="hljs-subst">${props.maskAlpha}</span>)`</span>,
+    <span class="hljs-attr">blackGradientMask</span>: <span class="hljs-string">`linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>) 100%)`</span>,
+    <span class="hljs-attr">WhiteGradientMask</span>: <span class="hljs-string">`linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(255,255,255,<span class="hljs-subst">${props.maskAlpha}</span>) 100%)`</span>
+};
+
+<span class="hljs-keyword">const</span> Mask = styled.div<span class="hljs-string">`
+    position: absolute;
+    top: 0;
+    z-index: 11;
+    height: 100%;
+    width: 100%;
+    background: `</span>${({ maskName, theme }) =&gt; theme[maskName] || theme.blackMask}<span class="hljs-string">`;
+`</span>;
+</code></pre>
+<p>如果搭配使用 styled system，可以用 <a href="https://styled-system.com/variants">variants</a> 改寫成這樣：</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-components'</span>;
+<span class="hljs-keyword">import</span> { variant } <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-system'</span>;
+
+<span class="hljs-keyword">const</span> theme = {
+    <span class="hljs-attr">variants</span>: {
+        <span class="hljs-attr">blackMask</span>: {
+            <span class="hljs-attr">background</span>: <span class="hljs-string">`rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>`</span>
+        },
+        <span class="hljs-attr">whiteMask</span>: {
+            <span class="hljs-attr">background</span>: <span class="hljs-string">`rgba(255,255,255,<span class="hljs-subst">${props.maskAlpha}</span>)`</span>
+        },
+        <span class="hljs-attr">blackGradientMask</span>: {
+            <span class="hljs-attr">background</span>: <span class="hljs-string">`linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(0,0,0,<span class="hljs-subst">${props.maskAlpha}</span>) 100%)`</span>
+        },
+        <span class="hljs-attr">WhiteGradientMask</span>: {
+            <span class="hljs-attr">background</span>: <span class="hljs-string">`linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(255,255,255,<span class="hljs-subst">${props.maskAlpha}</span>) 100%)`</span>
+        }
+    }
+};
+
+<span class="hljs-keyword">const</span> Mask = styled.div<span class="hljs-string">`
+    position: absolute;
+    top: 0;
+    z-index: 11;
+    height: 100%;
+    width: 100%;
+    <span class="hljs-subst">${variant(theme)}</span>
+`</span>;
+
+Mask.defaultProps = {
+    <span class="hljs-attr">variant</span>: <span class="hljs-string">'blackMask'</span>
+};
+</code></pre>
+<p>在這個例子不明顯，不過與 styled-components 的 Theming 相比，styled system 的 variants 可以分別帶入不同數量的 css style 而 Theming 不行，彈性相對高了許多。</p>
+<h3><a class="anchor" aria-hidden="true" id="case-2-不同位置-button"></a><a href="#case-2-不同位置-button" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Case 2: 不同位置 Button</h3>
+<p>這個例子會比較明顯一點。這是一個按鈕，props 可以傳入 <code>position</code>、<code>vertical</code> 來決定不同位置時對應的顯示樣式，原始碼如下：</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-components'</span>;
+
+<span class="hljs-keyword">const</span> Button = styled.div<span class="hljs-string">`
+    cursor: pointer;
+    padding: 0;
+    vertical-align: middle;
+    width: 45px;
+    text-align: center;
+    display: <span class="hljs-subst">${props =&gt; (props.vertical ? <span class="hljs-string">'block'</span> : <span class="hljs-string">'inline-block'</span>)}</span>;
+    border-right: <span class="hljs-subst">${props =&gt; !props.vertical &amp;&amp; props.position !== <span class="hljs-string">'last'</span> ? <span class="hljs-string">'1px solid #eaeaea'</span> : <span class="hljs-string">'0'</span>}</span>;
+
+    &amp;::after {
+        <span class="hljs-subst">${props =&gt; props.vertical &amp;&amp; props.position !== <span class="hljs-string">'last'</span> ? <span class="hljs-string">`content: '';`</span> : <span class="hljs-string">''</span>}</span>;
+        <span class="hljs-subst">${props =&gt; props.vertical &amp;&amp; props.position !== <span class="hljs-string">'last'</span> ? <span class="hljs-string">`background-color: #B9B9B9;`</span> : <span class="hljs-string">''</span>}</span>;
+        width: 0px;
+        height: 0px;
+        display: none;
+        margin: 8px auto 4px auto;
+        position: absolute;
+        left: calc((45px / 2) - 8px);
+    }
+
+    :hover {
+        .icon-icon_touch_app::before,
+        .icon-icon_hibe::before,
+        .icon-icon_quick_tools::before,
+        i {
+            opacity: 0.7;
+        }
+    }
+
+    /* Custom Icon Style */
+    [class^='icon-'],
+    [class^='icon-']::before,
+    span {
+        color: #484848 !important;
+        font-size: 18px;
+    }
+    .icon-icon_touch_app::before {
+        font-size: 32px;
+    }
+    .icon-icon_hibe::before {
+        font-size: 32px;
+    }
+    .icon-icon_quick_tools::before {
+        font-size: 32px;
+    }
+`</span>;
+</code></pre>
+<p>同樣用上方 variants 改寫，可以得到明顯的改善，不同狀態的 style 也一目了然：</p>
+<pre><code class="hljs css language-jsx"><span class="hljs-keyword">import</span> styled <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-components'</span>;
+<span class="hljs-keyword">import</span> { variant } <span class="hljs-keyword">from</span> <span class="hljs-string">'styled-system'</span>;
+
+<span class="hljs-keyword">const</span> theme = {
+    <span class="hljs-attr">variants</span>: {
+        <span class="hljs-attr">horizontal</span>: {
+            <span class="hljs-attr">display</span>: <span class="hljs-string">"inline-block"</span>,
+            <span class="hljs-attr">borderRight</span>: <span class="hljs-string">"1px solid #eaeaea"</span>,
+        },
+        <span class="hljs-attr">horizontalLastItem</span>: {
+            <span class="hljs-attr">display</span>: <span class="hljs-string">"inline-block"</span>,
+            <span class="hljs-attr">borderRight</span>: <span class="hljs-number">0</span>,
+        },
+        <span class="hljs-attr">vartical</span>: {
+            <span class="hljs-attr">display</span>: <span class="hljs-string">"block"</span>,
+            <span class="hljs-attr">borderRight</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-string">"&amp;::after"</span>: {
+                <span class="hljs-attr">content</span>: <span class="hljs-string">""</span>,
+                <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">"#B9B9B9"</span>
+            }
+        },
+        <span class="hljs-attr">varticalLastItem</span>: {
+            <span class="hljs-attr">display</span>: <span class="hljs-string">"block"</span>,
+            <span class="hljs-attr">borderRight</span>: <span class="hljs-number">0</span>,
+        },
+    }
+};
+
+<span class="hljs-keyword">const</span> Button = styled.div<span class="hljs-string">`
+    cursor: pointer;
+    padding: 0;
+    vertical-align: middle;
+    width: 45px;
+    text-align: center;
+    
+    &amp;::after {
+        width: 0px;
+        height: 0px;
+        display: none;
+        margin: 8px auto 4px auto;
+        position: absolute;
+        left: calc((45px / 2) - 8px);
+    }
+    
+    <span class="hljs-subst">${variants(theme)}</span>
+    
+    /* Custom Icon Style */
+    :hover {
+        .icon-icon_touch_app::before,
+        .icon-icon_hibe::before,
+        .icon-icon_quick_tools::before,
+        i {
+            opacity: 0.7;
+        }
+    }
+    [class^='icon-'],
+    [class^='icon-']::before,
+    span {
+        color: #484848 !important;
+        font-size: 18px;
+    }
+    .icon-icon_touch_app::before {
+        font-size: 32px;
+    }
+    .icon-icon_hibe::before {
+        font-size: 32px;
+    }
+    .icon-icon_quick_tools::before {
+        font-size: 32px;
+    }
+`</span>;
+
+Button.defaultProps = {
+    <span class="hljs-attr">variant</span>: <span class="hljs-string">"horizontal"</span>
+};
+</code></pre>
+<p>不過這個例子也可以看出，畢竟 styled system 是搭配 styled-components 使用，並且只處理「樣式」層級，它只適用於「自己建客製化元件」的情境，除此之外幫助並不大，該覆寫的 class 少不了、功能實作還是得自己刻。最後，最重要的部分是實作前需要有一份 Style Guide ，才能使用 styled system 的 <a href="https://styled-system.com/guides/theming">Theming</a> 發揮它的好用之處。如果未來可以不用綁定 styled-components 我相信它會更有發展潛力。</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="why-we-replace-typescript-with-dart"></a><a href="#why-we-replace-typescript-with-dart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Why we replace Typescript with Dart</h2>
+<blockquote>
+<p><a href="https://s.itho.me/events/2019/ModernWeb/0928/101AB/5_%E5%8F%AF%E4%B8%8B%E8%BC%89_1435%20%E9%99%B3%E5%A8%81%E4%BA%A8Jumper_Why%20we%20replace%20Typescript%20with%20Dart.pptx">簡報</a>、<a href="https://hackmd.io/@ModernWeb/SkxfFQt4H">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-2"></a><a href="#子主題-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-2"></a><a href="#resource-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>--&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="前端-3d-渲染技術的應用"></a><a href="#前端-3d-渲染技術的應用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前端 3D 渲染技術的應用</h2>
+<blockquote>
+<p><a href="https://hackmd.io/@ModernWeb/H1-gtXK4r">共筆</a></p>
+</blockquote>
+<p>這次有兩場 3D 相關議程，看起來講者之間事先有講好，彼此的內容是沒有重疊的。首先這場個人覺得是「火力展示」+「淺談製作 3D 所具備的理論」。除了介紹基本理論以外，還帶到一些實務上遇到的挑戰與眉角，當然還是很抽象啦<del>細節就是商業機密了</del>，整體聽完就是知道幾個關鍵字、大概有模糊的方向可以試著找資料這樣。</p>
+<p>講題內容待補充... 需要補齊 3D 相關的知識</p>
+<p>---&gt;</p>
+<!--
+<h2><a class="anchor" aria-hidden="true" id="請在網頁中使用-3d"></a><a href="#請在網頁中使用-3d" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>請在網頁中使用 3D</h2>
+<blockquote>
+<p><a href="https://hackmd.io/@ModernWeb/ByvxYXtVS">共筆</a></p>
+</blockquote>
+<p>這是第二場關於 3D 的議程，這場明顯就傾向「推坑」+「生態系工具介紹」。首先展示了一些範例說明 Web 3D 可以玩到什麼程度，再來講有哪些工具可以使用、彼此怎麼搭配。</p>
+<p>講題內容待補充...</p>
+<p>--&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="存活-20-年的-10-大抉擇"></a><a href="#存活-20-年的-10-大抉擇" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>存活 20 年的 10 大抉擇</h2>
+<blockquote>
+<p><a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FrJqXF7F4r">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-3"></a><a href="#子主題-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-3"></a><a href="#resource-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>---&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="the-notion-of-design-emergence-evolving-your-software"></a><a href="#the-notion-of-design-emergence-evolving-your-software" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The notion of design emergence：Evolving your software</h2>
+<blockquote>
+<p><a href="https://s.itho.me/events/2019/ModernWeb/0929/Keynote/2_%E5%8F%AF%E4%B8%8B%E8%BC%89_Evolving_your_software-The_notion_of_design_emergence.pdf">簡報</a>、<a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FS1FEt7K4H">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-4"></a><a href="#子主題-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-4"></a><a href="#resource-4" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>---&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="經營者需要學的第二火星語-vs-開發者需要學的第二火星語"></a><a href="#經營者需要學的第二火星語-vs-開發者需要學的第二火星語" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>經營者需要學的第二火星語 vs 開發者需要學的第二火星語</h2>
+<blockquote>
+<p><a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FH1oEF7FVr">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<p>補上一些會計知識</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-5"></a><a href="#子主題-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-5"></a><a href="#resource-5" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>---&gt;</p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="從零開始加入自動化資安測試"></a><a href="#從零開始加入自動化資安測試" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>從零開始加入自動化資安測試</h2>
+<blockquote>
+<p><a href="https://s.itho.me/events/2019/ModernWeb/0929/103/1330%20YSc-2019-modern-web-devsecops.pdf">簡報</a>、<a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FS12MY7KEr">共筆</a></p>
+</blockquote>
+<p>我覺得這場議程滿有價值的，其實從年初就聽到 DevSecOps 這個詞彙，但在不同 conference 聽了幾場議程下來，大多只告訴你「概念是 DevOps 要導入資安，然後資安是每個人的責任」，沒有幾個是深入探討，並告訴你具體該怎麼做。因此聽到這場「真槍實彈、誠意滿滿」的講題，滿令人感動的哈哈！</p>
+<p>我滿建議先閱讀 <a href="https://secview.io/posts/6-devsecops/">DevSecOps 方法論與理念</a>、<a href="https://secview.io/posts/9-ci-cd/">DevSecOps － CI/CD 如何加入資安？</a> 這兩篇文章，會對於 DevSecOps 有更深的認識。</p>
+<h3><a class="anchor" aria-hidden="true" id="威脅模型"></a><a href="#威脅模型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>威脅模型</h3>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/devsecops-threat-model.png" alt="Threat Modeling"></p>
+<p>開始動手前先冷靜一下，我們先來定義產品的 <strong><a href="https://www.owasp.org/index.php/Application_Threat_Modeling">威脅模型</a></strong> 是如何。中間會有許多要考慮的部分，但最重要的部分是 <strong>What</strong>，<strong>哪些東西是一旦壞掉或外洩所有人都會賠不起的</strong>，像是絕對不能外洩的機密資料、絕對不能壞的核心賺錢功能...等，因為導入過程中會掃到大大小小的漏洞、Security Linter 也會有些誤報的狀況，但是透過威脅模型，我們可以掌握到「哪些風險是最優先處理，哪些風險是可以接受的」，花對力氣做到最有效的資安保護。</p>
+<p>常見應用方法論有 <a href="https://www.owasp.org/images/a/aa/AppSecEU2012_PASTA.pdf">PASTA</a>、<a href="https://users.encs.concordia.ca/~clark/courses/1601-6150/scribe/L04c.pdf">STRIDE</a>，協助我們定義出最需要保護的部分。</p>
+<h3><a class="anchor" aria-hidden="true" id="量化風險"></a><a href="#量化風險" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>量化風險</h3>
+<p>既然要評估風險，有沒有什麼量化的方法呢? 事實上，有幾個東西可以作為參考：</p>
+<ul>
+<li>資安測試
+<ul>
+<li><a href="https://secview.io/posts/3-owasp-testing-guide/">OWASP Testing Guide V4</a>：這份指南包含了常見的漏洞、攻擊手法、測試方法等</li>
+<li><a href="https://www.owasp.org/index.php/Category:OWASP_Application_Security_Verification_Standard_Project">OWASP Application Security Verification Standard (ASVS)</a></li>
+</ul></li>
+<li>弱點評估
+<ul>
+<li><a href="https://www.first.org/cvss/">嚴重性評估量化標準 Common Vulnerability Scoring System (CVSS)</a></li>
+</ul></li>
+</ul>
+<p>透過參考這些文件，幫助我們有一致的標準定義出「哪些風險嚴重程度較高需優先處理」。</p>
+<h3><a class="anchor" aria-hidden="true" id="ci-cd-導入資安測試"></a><a href="#ci-cd-導入資安測試" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CI/CD 導入資安測試</h3>
+<p>完整版的 DevSecOps 大約長這樣</p>
+<p><img src="https://secview.io/images/ci-cd.png" alt="Full DevSecOps"></p>
+<p>由於資源有限，不是每一項都需要導入，比較建議從這三個方便自動化的部分優先著手：</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/devsecops-integration.png" alt="Simplify DevSecOps"></p>
+<p>這些是對應可使用的工具、服務：</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/devsecops-integration-tools.png" alt="Simplify DevSecOps Tools"></p>
+<p>透過這些工具幫助我們找出大多數的漏洞風險，接著就是對這些風險進行過濾、管控。</p>
+<h3><a class="anchor" aria-hidden="true" id="漏洞管理"></a><a href="#漏洞管理" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>漏洞管理</h3>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/modern-web-2019/devsecops-defect-management.png" alt="Defect Mamagement"></p>
+<p>到了這步，就能明白為什麼先定義威脅模型相當重要了吧！當你在做過濾取捨時，就是透過威脅模型、CVSS 作為依據下決策。常見的管理工具有 <a href="https://www.defectdojo.org/">Defectdojo</a>、<a href="https://github.com/archerysec/archerysec">Archery</a> 等。</p>
+<h3><a class="anchor" aria-hidden="true" id="關於-owasp"></a><a href="#關於-owasp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>關於 OWASP</h3>
+<p>最後來補充一點 OWASP 的資訊吧！全名叫做 <a href="https://www.owasp.org/index.php/Main_Page">Open Web Application Security Project</a>，是一個創立於 2001 年非營利的基金會，為了促進 Web Security 發展而生，其中具代表性的 project 就屬 <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">OWASP Top 10</a>，列出當前 Web 最常見的十大漏洞與攻擊、防禦手法，簡單來說，和網站安全有關的內容找這邊就對了！</p>
+<p>除此之外，OWASP 也有提供 <a href="https://www.owasp.org/index.php/OWASP_Juice_Shop_Project">OWASP Juice Shop</a> 、<a href="https://github.com/OWASP/NodeGoat">OWASP NodeGoat</a> 等練習用的專案，內含一個有 Top 10 漏洞的網站，讓你練習怎麼攻陷它，附上教學說明 (?)，藉此知道「網站功能絕對不要這樣寫」的反面教材 XDD</p>
+<p>當然除了 OWASP 之外，也有其他網站提供這種「反面教材」的練習，我就列在這邊：</p>
+<ul>
+<li><a href="http://www.dvwa.co.uk/">Damn Vulnerable Web Application</a></li>
+<li><a href="http://flaws.cloud/">flAWS Challenge</a></li>
+<li><a href="https://www.owasp.org/index.php/OWASP_Hackademic_Challenges_Project">OWASP Hackademic Challenges</a></li>
+</ul>
+<p>如果想關注最新的資安消息，可以多多關注 <a href="https://www.devseccon.com/">DevSecCon</a> 喔！</p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="graphql-best-practice"></a><a href="#graphql-best-practice" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GraphQL Best Practice</h2>
+<blockquote>
+<p><a href="https://drive.google.com/file/d/1KrkbeUaLXjqcvn1mcxoRetOMgw_oqODq/view?fbclid=IwAR3m0UIMq457LOxK__lGfzBCeRYrMMTR5eEyPDIHsgOqzY9qb6JvBfZn8oE">簡報</a>、<a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FBkf-KXFNH">共筆</a></p>
+</blockquote>
+<p>這場議程受眾是針對有架設 GraphQL Server 經驗的聽眾，不過只要有 GraphQL 串接經驗與先備知識，其實就能聽懂在幹嘛。個人覺得這場收穫滿多的，談到一些正確使用 GraphQL 的姿勢，當然作為串接方可能感受沒那麼深刻，但有時候遇到 Schema 設計很詭異的 API 時，就會回想起 <a href="https://graphql.org/learn/best-practices/">Best Practice</a> 的重要性了。</p>
+<h3><a class="anchor" aria-hidden="true" id="前情提要-簡介-graphql-及生態系"></a><a href="#前情提要-簡介-graphql-及生態系" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前情提要：簡介 GraphQL 及生態系</h3>
+<p>初踏入 GraphQL 世界時，我一開始查到許多關鍵字：Apollo, Relay, GraphiQL... 等關鍵字，找了其中一個 Apollo 官網來看，當下只覺得眼花撩亂：工具好多種，我該從哪邊下手?</p>
+<p>首先，先簡單提一下 Facade Pattern (外觀模式)。Facade Pattern 經常用來提供單一對外的介面，所有使用者只能操作此介面上定義的方法、資料，目的是為了讓底層實作與介面解耦合便於使用及後續維護。</p>
+<p><img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2015/10/1445024592facades-1024x549.jpg" alt="Facade Pattern">
+<a href="https://www.sitepoint.com/how-laravel-facades-work-and-how-to-use-them-elsewhere/">[Source] How Laravel Facades Work and How to Use Them Elsewhere</a></p>
+<p>個人覺得 GraphQL 算是 Facade Pattern 的一種實現，它除了提供單一入口以外，也提供一個靈活的資料取用、組裝介面，方便前後端解耦合 (尤其是在資料格式部分相比 REST API 更彈性)。</p>
+<p><img src="https://i.imgur.com/IwLf8Jb.png" alt="GraphQL Ecosystem Breakdown">
+<a href="https://youtu.be/1YYj5IzC0wc?t=654">[source] GraphQL Toronto July 2018 - The GraphQL Ecosystem: Ecosystem Breakdown</a></p>
+<p>這是 GraphQL 生態系的基本架構，由四個部分組成，相關的工具服務都可被歸類其中一部份：</p>
+<h4><a class="anchor" aria-hidden="true" id="graphql-client"></a><a href="#graphql-client" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GraphQL Client</h4>
+<blockquote>
+<p>負責 Query 解析、Data Fetching、錯誤處理、建置時間優化、快取等</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="graphql-gateway"></a><a href="#graphql-gateway" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GraphQL Gateway</h4>
+<blockquote>
+<p>負責監控、Log、Routing、Cache 等</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="graphql-server"></a><a href="#graphql-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>GraphQL Server</h4>
+<blockquote>
+<p>負責提供 API 介面，實際解析 Query、Mutation 向上游取資料並組裝的地方。包含了 Schema Definition、Resolver Functions、Engine、Network Layer 等。</p>
+</blockquote>
+<h4><a class="anchor" aria-hidden="true" id="database-to-graphql-server"></a><a href="#database-to-graphql-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Database-to-GraphQL Server</h4>
+<blockquote>
+<p>負責 GraphQL Server 與 Database 之間的溝通，或者可以解析 Database 資料自動轉換成 GraphQL API...等</p>
+</blockquote>
+<p>更詳細的可以看 <a href="https://ithelp.ithome.com.tw/articles/10202144">GraphQL 入門：生態圈 X 工具 X 選擇</a> 這篇介紹喔！</p>
+<h3><a class="anchor" aria-hidden="true" id="apollo-ecosystem"></a><a href="#apollo-ecosystem" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Apollo Ecosystem</h3>
+<p><img src="https://www.apollographql.com/docs/9f76c95ca7dea9f8d3f63b8d37b1ce0f/platform-diagram.png" alt="Apollo Ecosystem"></p>
+<p>我們接著只挑 Apollo 來一窺它的生態系。目前提供的套件、服務大致有上面這些，有的是 Open Source 、有的是收費的 Cloud Service。我們取最核心的幾個來看：</p>
+<p><img src="https://www.apollographql.com/docs/c91b402c49986fd9100c3fbaa29b4d19/graph-manager-architecture.png" alt="Apollo Core"></p>
+<ul>
+<li><a href="https://www.apollographql.com/docs/react/">Apollo Client</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/">Apollo Server</a></li>
+<li><a href="https://www.apollographql.com/docs/platform/graph-manager-overview/">Apollo Graph Manager</a></li>
+<li><a href="https://www.apollographql.com/docs/apollo-server/federation/introduction/">Apollo Federation</a></li>
+</ul>
+<p>接下來的各種最佳實踐，建議還是參考簡報比較快，我這邊就簡單提每個點在做什麼。</p>
+<h3><a class="anchor" aria-hidden="true" id="schema-design"></a><a href="#schema-design" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Schema Design</h3>
+<ul>
+<li><p>Identification：兩個 Type 有關聯時，不要只定義 ID 而是直接定義 Type</p>
+<pre><code class="hljs">type<span class="hljs-built_in"> User </span>{
+  id: String!
+  name: String
+}
+<span class="hljs-built_in">
+type </span>Post {
+  id: String!
+  title: String
+  description: String
+  author: User!  # 直接帶 User，不要使用 String! 填入<span class="hljs-built_in"> User </span>的 id
+}
+</code></pre></li>
+<li><p>Non-null：只在 <strong>必要的欄位</strong> 加上 non-null</p>
+<blockquote>
+<p>所有欄位預設 nullable，可以透過 <code>!</code> 設為 non-null。但是 non-null 只要有其中一個取值失敗，會拿不到剩下資料並且吐 Error</p>
+</blockquote></li>
+<li><p>Mutation Schema Design</p>
+<ul>
+<li>使用 <a href="https://graphql.org/learn/schema/#input-types">Input Object Type</a> 簡化參數過長的Mutation</li>
+<li>將 Output 再多包一層 <a href="https://graphql.org/learn/schema/#object-types-and-fields">Output Payload Type</a> 方便組合 Result 和 Error 資料又不污染原本的 Type</li>
+</ul></li>
+<li><p>Cross Services Schema Design：使用 extend 來增加原本 Type 欄位</p>
+<blockquote>
+<p>Apollo Federation 的進階功能 <a href="https://www.apollographql.com/docs/apollo-server/federation/advanced-features/"><code>@key</code></a></p>
+</blockquote></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="performance-optimization"></a><a href="#performance-optimization" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Performance Optimization</h3>
+<ul>
+<li>GraphQL Fields
+<ul>
+<li>Early return when only query ID</li>
+<li>實作時盡可能減少 Resovlver 呼叫 API 次數</li>
+</ul></li>
+<li>Dataloader
+<ul>
+<li>通常在 Query 資料量大時效果較明顯</li>
+<li>透過 Cache 減少 Nested Query 實際 I/O 次數</li>
+</ul></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="error-handling"></a><a href="#error-handling" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Error Handling</h3>
+<ul>
+<li>Define Error and Results
+<blockquote>
+<p>定義好 Error 是什麼，如果定調 Error 為「拿不到資料」，像是 Block User 這種就算是 Result。</p>
+</blockquote></li>
+<li>Union Types：使用 Union 決定回傳 Result 還是 Error Type，也方便使用端針對不同 Error 做處理
+<pre><code class="hljs"><span class="hljs-comment"># 定義 Result 和 Error Types</span>
+union UserResult =<span class="hljs-built_in"> User </span>| IsBlock | Suspend
+<span class="hljs-built_in">
+type User </span>{
+  <span class="hljs-built_in">..</span>.
+}
+<span class="hljs-built_in">
+type </span>IsBlock {
+  <span class="hljs-built_in">..</span>.
+}
+<span class="hljs-built_in">
+type </span>Suspend {
+  <span class="hljs-built_in">..</span>.
+}
+
+<span class="hljs-comment"># 使用端 Query</span>
+{
+  userResult(username: <span class="hljs-string">"test"</span>) {
+    __typename
+    <span class="hljs-built_in">..</span>. on<span class="hljs-built_in"> User </span>{
+      id
+      name
+    }
+    
+    <span class="hljs-built_in">..</span>. on IsBlock {
+      message
+    }
+    
+    <span class="hljs-built_in">..</span>. on Suspend {
+      reason
+    }
+  }
+}
+</code></pre></li>
+</ul>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="開發現代化的靜態-pwa"></a><a href="#開發現代化的靜態-pwa" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>開發現代化的靜態 PWA</h2>
+<blockquote>
+<p><a href="https://slides.com/hinx/gatsby">簡報</a>、<a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FrJCeF7t4r">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-6"></a><a href="#子主題-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-6"></a><a href="#resource-6" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>--&gt;</p>
+<!---
+<h2><a class="anchor" aria-hidden="true" id="高併發流量的道與術"></a><a href="#高併發流量的道與術" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>高併發流量的道與術</h2>
+<blockquote>
+<p><a href="https://www.slideshare.net/taientw/modernweb2019-taien-167720096">簡報</a>、<a href="https://hackmd.io/@ModernWeb/2019/%2F%40ModernWeb%2FS1AGYmKVr">共筆</a></p>
+</blockquote>
+<p>敘述講解重點 &amp; 議程心得</p>
+<h3><a class="anchor" aria-hidden="true" id="子主題-7"></a><a href="#子主題-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>子主題</h3>
+<h3><a class="anchor" aria-hidden="true" id="resource-7"></a><a href="#resource-7" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resource</h3>
+<p>---&gt;</p>
+<h2><a class="anchor" aria-hidden="true" id="whats-next"></a><a href="#whats-next" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's next?</h2>
+<p>這次挑了幾個議程來聊，還有一些我覺得很有趣但尚未開始整理的主題，會另開一篇文章來討論，預計包含這些：</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_on_the_web/Basic_theory">Basic 3D Theory</a></li>
+<li><a href="https://hackmd.io/@ModernWeb/ByvxYXtVS">Web 3D Ecosystems</a></li>
+<li><a href="https://s.itho.me/events/2019/ModernWeb/0928/103/1435%20%E5%BE%90%E6%84%B7-Multi-tenant%20in%20React.pdf">Multi-tenant in React</a></li>
+<li><a href="http://spritejs.org/">SpriteJS</a></li>
+<li><a href="https://s.itho.me/events/2019/ModernWeb/0929/101CD/1620%20%E8%B6%99%E9%8C%A6%E6%B1%9F-%E6%8C%96%E6%8E%98%E9%8D%B5%E7%9B%A4%E7%9A%84%E6%BD%9B%E8%83%BD.pdf">Keyboard</a></li>
+</ul>
+<p>先這樣~下次再繼續！</p>
+<h6><a class="anchor" aria-hidden="true" id="tags-文章"></a><a href="#tags-文章" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>tags: <code>文章</code></h6>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#議程">議程</a><ul class="toc-headings"><li><a href="#如何選擇議程">如何選擇議程</a></li></ul></li><li><a href="#reward">Reward</a></li><li><a href="#progressive-deployment-nodeploy">Progressive Deployment &amp; NoDeploy</a><ul class="toc-headings"><li><a href="#devops-patterns">DevOps Patterns</a></li><li><a href="#nodeploy">NoDeploy</a></li><li><a href="#feature-flags">Feature Flags</a></li><li><a href="#progressive-deployment">Progressive Deployment</a></li></ul></li><li><a href="#迎接-ui-設計工具的新時代">迎接 UI 設計工具的新時代</a><ul class="toc-headings"><li><a href="#子主題">子主題</a></li><li><a href="#resource">Resource</a></li></ul></li><li><a href="#報稅系統是如何改善的-ux-使用者體驗與政府溝通的過程與作法">報稅系統是如何改善的：UX 使用者體驗與政府溝通的過程與作法</a><ul class="toc-headings"><li><a href="#子主題-1">子主題</a></li><li><a href="#resource-1">Resource</a></li></ul></li><li><a href="#we-need-a-better-ui-component-library-styled-system">We need a better UI component library - Styled System</a><ul class="toc-headings"><li><a href="#case-1-背景圖遮罩-mask">Case 1: 背景圖遮罩 Mask</a></li><li><a href="#case-2-不同位置-button">Case 2: 不同位置 Button</a></li></ul></li><li><a href="#why-we-replace-typescript-with-dart">Why we replace Typescript with Dart</a><ul class="toc-headings"><li><a href="#子主題-2">子主題</a></li><li><a href="#resource-2">Resource</a></li></ul></li><li><a href="#前端-3d-渲染技術的應用">前端 3D 渲染技術的應用</a></li><li><a href="#請在網頁中使用-3d">請在網頁中使用 3D</a></li><li><a href="#存活-20-年的-10-大抉擇">存活 20 年的 10 大抉擇</a><ul class="toc-headings"><li><a href="#子主題-3">子主題</a></li><li><a href="#resource-3">Resource</a></li></ul></li><li><a href="#the-notion-of-design-emergence-evolving-your-software">The notion of design emergence：Evolving your software</a><ul class="toc-headings"><li><a href="#子主題-4">子主題</a></li><li><a href="#resource-4">Resource</a></li></ul></li><li><a href="#經營者需要學的第二火星語-vs-開發者需要學的第二火星語">經營者需要學的第二火星語 vs 開發者需要學的第二火星語</a><ul class="toc-headings"><li><a href="#子主題-5">子主題</a></li><li><a href="#resource-5">Resource</a></li></ul></li><li><a href="#從零開始加入自動化資安測試">從零開始加入自動化資安測試</a><ul class="toc-headings"><li><a href="#威脅模型">威脅模型</a></li><li><a href="#量化風險">量化風險</a></li><li><a href="#ci-cd-導入資安測試">CI/CD 導入資安測試</a></li><li><a href="#漏洞管理">漏洞管理</a></li><li><a href="#關於-owasp">關於 OWASP</a></li></ul></li><li><a href="#graphql-best-practice">GraphQL Best Practice</a><ul class="toc-headings"><li><a href="#前情提要-簡介-graphql-及生態系">前情提要：簡介 GraphQL 及生態系</a></li><li><a href="#apollo-ecosystem">Apollo Ecosystem</a></li><li><a href="#schema-design">Schema Design</a></li><li><a href="#performance-optimization">Performance Optimization</a></li><li><a href="#error-handling">Error Handling</a></li></ul></li><li><a href="#開發現代化的靜態-pwa">開發現代化的靜態 PWA</a><ul class="toc-headings"><li><a href="#子主題-6">子主題</a></li><li><a href="#resource-6">Resource</a></li></ul></li><li><a href="#高併發流量的道與術">高併發流量的道與術</a><ul class="toc-headings"><li><a href="#子主題-7">子主題</a></li><li><a href="#resource-7">Resource</a></li></ul></li><li><a href="#whats-next">What's next?</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div><div class="community__tab"><a href="https://www.linkedin.com/in/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-linkedin fa-3x community__tab-icon"></i><p class="community__tab-name">Linkedin</p></a></div><div class="community__tab"><a href="https://soundcloud.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-soundcloud fa-3x community__tab-icon"></i><p class="community__tab-name">SoundCloud</p></a></div></section><section class="copyright">Copyright © 2019 DazedBear Studio</section></footer></div></body></html>
