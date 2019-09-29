@@ -2,12 +2,24 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.dazedbear.pro/blog</id>
     <title>DazedBear Studio Blog</title>
-    <updated>2019-08-31T06:00:00Z</updated>
+    <updated>2019-09-29T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://www.dazedbear.pro/blog"/>
     <subtitle>The best place to stay up-to-date with the latest DazedBear Studio news and events.</subtitle>
     <logo>https://www.dazedbear.pro/img/favicon.ico</logo>
     <rights>Copyright © 2019 DazedBear Studio</rights>
+    <entry>
+        <title type="html"><![CDATA[京站美食街表演]]></title>
+        <id>https://www.dazedbear.pro/blog/2019/09/29/q-square-perform.html</id>
+        <link href="https://www.dazedbear.pro/blog/2019/09/29/q-square-perform.html">
+        </link>
+        <updated>2019-09-29T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/photo/20190927-1.jpg" alt="文章 Cover"></p>
+<p>這週五 (9/27) 晚上，我跟著鋼琴老師以及她的學生們一起在京站 B3 美食街有一場小型街頭演出，畢業後還能接到表演機會的邀約真的要心存感恩 (淚)，來簡單聊一下我的收穫吧！</p>
+]]></summary>
+        <author>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ModernWeb'19 筆記 (上)]]></title>
         <id>https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html</id>

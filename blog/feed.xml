@@ -4,7 +4,7 @@
         <title>DazedBear Studio Blog</title>
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
-        <lastBuildDate>Sat, 31 Aug 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 29 Sep 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,15 @@
             <link>https://www.dazedbear.pro/blog</link>
         </image>
         <copyright>Copyright © 2019 DazedBear Studio</copyright>
+        <item>
+            <title><![CDATA[京站美食街表演]]></title>
+            <link>https://www.dazedbear.pro/blog/2019/09/29/q-square-perform.html</link>
+            <guid>https://www.dazedbear.pro/blog/2019/09/29/q-square-perform.html</guid>
+            <pubDate>Sun, 29 Sep 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/photo/20190927-1.jpg" alt="文章 Cover"></p>
+<p>這週五 (9/27) 晚上，我跟著鋼琴老師以及她的學生們一起在京站 B3 美食街有一場小型街頭演出，畢業後還能接到表演機會的邀約真的要心存感恩 (淚)，來簡單聊一下我的收穫吧！</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[ModernWeb'19 筆記 (上)]]></title>
             <link>https://www.dazedbear.pro/blog/2019/08/31/modernweb19.html</link>
