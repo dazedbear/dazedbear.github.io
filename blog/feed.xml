@@ -4,15 +4,27 @@
         <title>DazedBear Studio Blog</title>
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
-        <lastBuildDate>Sun, 29 Sep 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 25 Dec 2019 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
-        <generator>Feed for Node.js</generator>
+        <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>DazedBear Studio Blog</title>
             <url>https://www.dazedbear.pro/img/favicon.ico</url>
             <link>https://www.dazedbear.pro/blog</link>
         </image>
         <copyright>Copyright © 2019 DazedBear Studio</copyright>
+        <item>
+            <title><![CDATA[簡介我的採譜工具與流程]]></title>
+            <link>https://www.dazedbear.pro/blog/2019/12/25/transcribe.html</link>
+            <guid>https://www.dazedbear.pro/blog/2019/12/25/transcribe.html</guid>
+            <pubDate>Wed, 25 Dec 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://images.unsplash.com/photo-1453906971074-ce568cccbc63?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=3300&amp;q=80" alt="文章 Cover"></p>
+<blockquote>
+<p>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com/">Unsplash</a></p>
+</blockquote>
+<p>好久沒發文了，趁著今天休假，來簡單介紹我的採譜配備與流程，刷刷存在感~</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[京站美食街表演]]></title>
             <link>https://www.dazedbear.pro/blog/2019/09/29/q-square-perform.html</link>
