@@ -15,7 +15,10 @@ title: 簡介我的採譜工具與流程
 
 先來看一段 [Nice Chord 好和弦](https://www.youtube.com/channel/UCVXstWyJeO6No3jYELxYrjg) 介紹採譜的影片：
 
-{%youtube DA3-sINdvHk %}
+<div style="overflow:hidden;padding-top:56.25%;position:relative;">
+    <iframe src="https://www.youtube.com/embed/DA3-sINdvHk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" style="width:100%; height:100%; position:absolute; top:0; bottom:0; left:0; right:0;" allowfullscreen></iframe>
+</div>
+
 
 我整理一下影片中提到的重點：
 
@@ -86,7 +89,9 @@ title: 簡介我的採譜工具與流程
 
 這邊放一個範例當作參考~
 
-<iframe src="https://sibl.pub/BJe2dkZkI" width="600" height="800" frameborder="0" allowfullscreen></iframe>
+<div style="overflow:hidden;padding-top:100%;position:relative;">
+    <iframe src="https://sibl.pub/BJe2dkZkI" frameborder="0" style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;" allowfullscreen></iframe>
+</div>
 
 ## 小結
 
