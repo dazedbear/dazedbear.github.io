@@ -5,14 +5,14 @@
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
         <lastBuildDate>Wed, 25 Dec 2019 06:00:00 GMT</lastBuildDate>
-        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
             <title>DazedBear Studio Blog</title>
             <url>https://www.dazedbear.pro/img/favicon.ico</url>
             <link>https://www.dazedbear.pro/blog</link>
         </image>
-        <copyright>Copyright © 2019 DazedBear Studio</copyright>
+        <copyright>Copyright © 2020 DazedBear Studio</copyright>
         <item>
             <title><![CDATA[簡介我的採譜工具與流程]]></title>
             <link>https://www.dazedbear.pro/blog/2019/12/25/transcribe.html</link>
