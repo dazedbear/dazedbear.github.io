@@ -2,8 +2,8 @@
 
 .community {
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto 1em;
+  justify-content: space-around;
+  margin: 0 auto;
 }
 
 .community > .community__tab {

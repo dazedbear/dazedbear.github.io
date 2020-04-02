@@ -42,7 +42,7 @@ const siteConfig = {
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     // {page: 'about', label: 'About'},
-    {doc: 'note', label: 'Notes'},
+    // {doc: 'note', label: 'Notes'},
     {doc: 'demo', label: 'Demos'},
     {blog: true, label: 'Articles'},
     // {search: true},
@@ -67,7 +67,7 @@ const siteConfig = {
     primaryColor: '#584F8D',
     secondaryColor: '#8F5881',
     primaryHighlightColor: '#D41D47',
-    secondaryHightlightColor: '#1cd5ff',
+    secondaryHightlightColor: '#fecc4d',
     footerColor: '#36324A',
   },
 
