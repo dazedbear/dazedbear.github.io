@@ -14,6 +14,13 @@ sections:
   label: Demo
   create: all
   match: "**/*"
+- type: directory
+  path: website/draft
+  label: Draft
+  create: all
+  match: "**/*"
+  templates:
+  - article
 upload_dir: website
 public_path: "/website/static"
 front_matter_path: ''
