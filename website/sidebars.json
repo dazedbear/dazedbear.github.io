@@ -1,16 +1,4 @@
 {
-  "note": {
-    "系列筆記": [
-      "note",
-      {
-        "type": "subcategory",
-        "label": "和聲學",
-        "ids": [
-          "note-harmony/ch06"
-        ]
-      }
-    ]
-  },
   "demo": {
     "作品展示": [
       "demo",
@@ -19,9 +7,7 @@
         "label": "程式練習作品",
         "ids": [
           "demo/simple-login",
-          "demo/react-redux-boilerplate",
           "demo/music-player",
-          "demo/volume-meter",
           "demo/apim"
         ]
       },
@@ -41,11 +27,6 @@
         "ids": [
           "demo/scoring-聽見下雨的聲音"
         ]
-      },
-      {
-        "type": "subcategory",
-        "label": "演奏影片",
-        "ids": []
       }
     ]
   }
