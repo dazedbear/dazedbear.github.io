@@ -19,7 +19,6 @@ title: 2020 清華AI樂團音樂會 Frequency 心得
 https://www.nthu.edu.tw/hotNews/content/916
 https://flipedu.parenting.com.tw/article/5602
 
-
 ## 演出作品探討
 
 ### 演奏 AI 編寫的作品
@@ -42,17 +41,15 @@ AVIAAI 編曲：管弦樂（聲部曲式蠻單一的，ABA，有人為修正過�
 
 ### 安可曲
 
-- 樂團演出傳統曲目布拉姆斯 g minor dance 好似脫韁的野馬，解脫了一般
-- 
+* 樂團演出傳統曲目布拉姆斯 g minor dance 好似脫韁的野馬，解脫了一般
+* 
 
 預判、演奏默契、常用 patternAI 缺乏對作品的情感
-
 
 ## 技術探討
 
 https://www.aiva.ai/
 
 VSCode + Max or Ableton Live 開發自動跟譜
-
 
 ## Reference
