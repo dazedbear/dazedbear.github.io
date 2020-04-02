@@ -12,9 +12,10 @@
 
 ## Tech Stack
 
-- [facebook/docusaurus](https://docusaurus.io/en/)
-- [travis ci](https://travis-ci.org/)
-- [unsplash photo](https://unsplash.com/)
+- [facebook/docusaurus](https://docusaurus.io/en/) - Static document site generator
+- [Travis CI](https://travis-ci.org/) - CI/CD service
+- [Forestry](https://forestry.io/) - Static Git-based CMS service
+- [unsplash photo](https://unsplash.com/) - Free and High Quality Picture Source
 
 ## Develop
 

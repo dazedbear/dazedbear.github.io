@@ -11,7 +11,7 @@ branches:
   only:
     - develop
 if:
-  - commit_message !~ /Forestry configuration/
+  - commit_message !~ /(Forestry configuration|readme)/
 cache:
   yarn: true
 script:
