@@ -1,7 +1,7 @@
 ---
 label: Article
 hide_body: false
-display_field: status
+display_field: title
 fields:
 - type: text
   name: title
@@ -14,23 +14,6 @@ fields:
   description: show/hide this published article
   default: true
   label: Hide this article?
-- name: status
-  type: select
-  default: Idea
-  config:
-    required: true
-    options:
-    - Published
-    - Draft
-    - In Progress
-    - Idea
-    source:
-      type: simple
-      section: ''
-      file: 
-      path: 
-  label: Current Status
-  description: The current status of this article
 pages:
 - website/blog/2020-04-03-frequency-concert.md
 - website/blog/2020-04-03-headless-cms-forestry.md
