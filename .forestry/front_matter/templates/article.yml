@@ -15,5 +15,9 @@ fields:
     date_format: 
     time_format: 
     display_utc: false
+- name: unlisted
+  type: boolean
+  label: unlisted
+  description: show/hide this published article
 pages:
 - website/draft/temp.md
