@@ -1,12 +1,17 @@
 ---
 label: Article
 hide_body: false
+display_field: title
 fields:
 - type: text
   name: title
   label: title
-- name: content
-  type: text
+- name: time
+  type: datetime
+  label: time
+  description: ''
   config:
     required: false
-  label: content
+    date_format: 
+    time_format: 
+    display_utc: false
