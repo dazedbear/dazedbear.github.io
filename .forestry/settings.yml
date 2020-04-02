@@ -7,17 +7,21 @@ sections:
 - type: directory
   path: website/blog
   label: Articles
-  create: all
+  create: documents
   match: "**/*"
+  templates:
+  - article
 - type: directory
   path: docs/demo
   label: Demo
-  create: all
+  create: documents
   match: "**/*"
+  templates:
+  - demo
 - type: directory
   path: website/draft
   label: Draft
-  create: all
+  create: documents
   match: "**/*"
   templates:
   - article
