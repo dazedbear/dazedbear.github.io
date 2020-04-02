@@ -10,6 +10,8 @@ before_install:
 branches:
   only:
     - develop
+if:
+  - commit_message !~ /Forestry configuration/
 cache:
   yarn: true
 script:
