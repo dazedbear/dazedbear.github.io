@@ -18,13 +18,6 @@ sections:
   match: "**/*"
   templates:
   - demo
-- type: directory
-  path: website/draft
-  label: Draft
-  create: documents
-  match: "**/*"
-  templates:
-  - article
 upload_dir: website
 public_path: https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website
 front_matter_path: ''
