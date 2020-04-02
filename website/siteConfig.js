@@ -107,8 +107,7 @@ const siteConfig = {
       defer: true,
       integrity: 'sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH',
       crossOrigin: 'anonymous'
-    },
-    'https://static.cdn.prismic.io/prismic.min.js?new=true'
+    }
   ],
 
   // On page navigation for the current documentation page.
