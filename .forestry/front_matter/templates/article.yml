@@ -14,5 +14,5 @@ fields:
   default: true
   label: Hide this article?
 pages:
-- website/blog/2020-04-03-清華ai樂團音樂會-frequency-心得.md
+- website/blog/2020-04-03-frequency-concert.md
 - website/draft/temp.md
