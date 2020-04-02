@@ -1,6 +1,7 @@
 ---
 unlisted: true
 title: ''
+status: Idea
 
 ---
 介紹 blog 串接 CMS 的過程
