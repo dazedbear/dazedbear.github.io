@@ -6,12 +6,13 @@ fields:
   name: title
   label: Title
   config:
-    required: true
+    required: false
+  description: Please LEAVE EMPTY when creating new article first time.
 - type: text
   name: sidebar_label
   label: The label in sidebar.
   config:
-    required: true
+    required: false
 - name: unlisted
   type: boolean
   description: show/hide this published article
