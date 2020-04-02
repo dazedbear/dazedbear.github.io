@@ -4,6 +4,13 @@ title: "[DRAFT] 串接 Headless CMS Forestry 心路歷程"
 status: Idea
 
 ---
+![Cover](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/0DB65523-3BE4-4535-AD17-6E6C0C35038E.png)
+
+趁著連假的慣例來還還技術債，玩一些平常沒時間碰的新東西。本來打算要把 blog 主要的 library docusaurus migrate 到 v2 版本以便擁有更多自訂彈性，但發現它還沒正式 stable 便暫時作罷。
+那就來介紹這次的工事：導入 CMS 優化寫文章的流程。
+
+<!-- truncate -->
+
 介紹 blog 串接 CMS 的過程
 
 1. 簡述需求
