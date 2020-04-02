@@ -26,7 +26,7 @@ sections:
   templates:
   - article
 upload_dir: website
-public_path: ''
+public_path: https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website
 front_matter_path: ''
 use_front_matter_path: 
 file_template: ":filename:"
