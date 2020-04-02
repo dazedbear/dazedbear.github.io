@@ -3,10 +3,16 @@ label: Article
 hide_body: false
 display_field: title
 fields:
+- name: filename
+  type: text
+  config:
+    required: true
+  label: Filename
+  default: YYYY-MM-DD-TITLE
 - type: text
   name: title
   config:
-    required: true
+    required: false
   label: Title
 - name: unlisted
   type: boolean
