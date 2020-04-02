@@ -4,11 +4,16 @@ hide_body: false
 fields:
 - type: text
   name: title
-  label: title
+  label: Title
+  config:
+    required: true
 - type: text
   name: sidebar_label
-  label: sidebar_label
+  label: The label in sidebar.
+  config:
+    required: true
 - name: unlisted
   type: boolean
-  label: unlisted
   description: show/hide this published article
+  label: Hide this article?
+  default: true
