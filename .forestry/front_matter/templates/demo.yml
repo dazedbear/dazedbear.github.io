@@ -8,3 +8,7 @@ fields:
 - type: text
   name: sidebar_label
   label: sidebar_label
+- name: unlisted
+  type: boolean
+  label: unlisted
+  description: show/hide this published article
