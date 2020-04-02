@@ -1,8 +1,10 @@
 ---
-title: AWS Summit 2019 筆記
+title: AWS Summit 2019 筆記 temp
 unlist: true
----
+status: Published
+unlisted: true
 
+---
 大約知道各服務的用途，需要實作時再投入時間讀文件
 
 ## Build in 2019: 建立分佈式、開放式、數據中心的人工智慧數據驅動平台
@@ -1191,7 +1193,3 @@ Security Defense with ML
 - 伙食
 - 小插曲
 - 逛攤位
-
-
-
-
