@@ -44,6 +44,383 @@
 ]]></description>
         </item>
         <item>
+            <title><![CDATA[AWS Summit 2019 筆記]]></title>
+            <link>https://www.dazedbear.pro/blog/2019/06/26/aws-summit.html</link>
+            <guid>https://www.dazedbear.pro/blog/2019/06/26/aws-summit.html</guid>
+            <pubDate>Wed, 26 Jun 2019 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p>大約知道各服務的用途，需要實作時再投入時間讀文件</p>
+<h2><a class="anchor" aria-hidden="true" id="build-in-2019-建立分佈式、開放式、數據中心的人工智慧數據驅動平台"></a><a href="#build-in-2019-建立分佈式、開放式、數據中心的人工智慧數據驅動平台" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build in 2019: 建立分佈式、開放式、數據中心的人工智慧數據驅動平台</h2>
+<ul>
+<li>3D cube art in <a href="https://bit.ly/awscube">https://bit.ly/awscube</a></li>
+<li>AWS ECS orchestration of container</li>
+<li><a href="https://aws.amazon.com/tw/app-mesh/">AWS App Mesh</a>: Application level proxy for serverless</li>
+<li><a href="https://aws.amazon.com/tw/rds/aurora/serverless/">AWS Aurora Serverless</a>: 關聯式資料庫 for serverless</li>
+<li><a href="https://aws.amazon.com/tw/appsync/">AWS AppSync</a>: Facade Pattern in API (單一 API 入口) by GraphQL</li>
+<li>Event Driven Architecture is the future
+<ul>
+<li>Decouple state from code using messaging
+<ul>
+<li>Client to Service
+<ul>
+<li>Connect by API Gateway</li>
+</ul></li>
+<li>Service to Service
+<ul>
+<li>Queues by SQS</li>
+<li>Pub/Sub by SNS</li>
+</ul></li>
+<li>Orchestraction
+<ul>
+<li>Step Function</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Choose the right data store for your microservice
+<ul>
+<li>Relational
+<ul>
+<li>Aurora</li>
+<li>RDS</li>
+</ul></li>
+<li>Key Value
+<ul>
+<li>DynamoDB</li>
+</ul></li>
+<li>Document
+<ul>
+<li>DocumentDB</li>
+</ul></li>
+<li>In-Memory
+<ul>
+<li>ElasticCache</li>
+</ul></li>
+<li>Graph
+<ul>
+<li>Neptune</li>
+</ul></li>
+<li>Time-Series
+<ul>
+<li>Timestream</li>
+</ul></li>
+<li>Ledger
+<ul>
+<li>QLDB</li>
+</ul></li>
+</ul></li>
+<li>Developer Tool for software delivery
+<ul>
+<li>Author: Cloud9 IDE</li>
+<li>Source: CodeCommit</li>
+<li>Build: CodeBuild</li>
+<li>Test: CodeBuild + 3rd party</li>
+<li>Deploy: CodeDeploy</li>
+<li>Monitor: CloudWatch + X-Ray</li>
+<li>CodePipeline: control work flow from Source to Deploy</li>
+</ul></li>
+<li>Broad and deep Iot Services
+<ul>
+<li>Data Services
+<ul>
+<li>IoT Events</li>
+<li>IoT Sitewise</li>
+<li>IoT Analytics</li>
+</ul></li>
+<li>Control Services
+<ul>
+<li>IoT Things Graph</li>
+<li>IoT Device Management</li>
+<li>IoT Core</li>
+</ul></li>
+<li>Device Software
+<ul>
+<li>Iot Greengrass</li>
+<li>FreeRIOTS</li>
+<li>IoT Device SDK</li>
+<li>IoT Device Tester</li>
+</ul></li>
+</ul></li>
+<li><a href="https://aws.amazon.com/tw/robomaker/">AWS RoboMaker</a>: 開發、測試、部署機器人應用程式
+<ul>
+<li>Demo: 開地圖的 Robot</li>
+</ul></li>
+<li>Cloud Data Lakes are the future
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560307582164.jpg" alt="cover"></li>
+<li><a href="https://aws.amazon.com/tw/sumerian/">AWS Sumerian</a>: 快速建立 AR/VR/3D 應用程式
+<ul>
+<li>Photogrammetry: Image-based 3D Modeling, <a href="https://bit.ly/oli-3d">Demo</a></li>
+</ul></li>
+<li>AI/ML 不同層級的服務
+<ul>
+<li>AI Service: Some features used by API call without any ML fundament and experience.</li>
+<li>ML Services: AWS SageMaker to simplify the training model (with ML algorithm built-in)</li>
+<li>Frameworks on AWS: TensorFlow, Apache MXNet, ONNX...</li>
+<li>Infrastructure: Inferentia 晶片、Amazon Elastic Inference GPU 加速功能、動態調整訓練所需的資源以節省費用</li>
+<li>硬體: AWS DeepRacer</li>
+</ul></li>
+<li>ML training model 方法
+<img src="https://cdn-images-1.medium.com/max/1600/1*eVrtdyx711nZUlgRgO5YvA.png" alt="">
+<ul>
+<li><a href="https://www.wikiwand.com/zh-tw/%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92">Supervised learning</a></li>
+<li><a href="https://www.wikiwand.com/zh/%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%AD%B8%E7%BF%92">Unsupervised learning</a></li>
+<li><a href="https://www.wikiwand.com/zh/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0">Reinforcement Learning</a></li>
+<li>Demo with AWS SageMaker RL + Sumerian (Unicorn to find hot dog)</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="客戶分享案例---遠傳擁抱-ai-與雲端的轉型進行式"></a><a href="#客戶分享案例---遠傳擁抱-ai-與雲端的轉型進行式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>客戶分享案例 - 遠傳擁抱 AI 與雲端的轉型進行式</h2>
+<p>沒有重點 (欸)</p>
+<h2><a class="anchor" aria-hidden="true" id="客戶分享案例---傳統企業前進雲端遇到的挑戰與經驗-神腦"></a><a href="#客戶分享案例---傳統企業前進雲端遇到的挑戰與經驗-神腦" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>客戶分享案例 - 傳統企業前進雲端遇到的挑戰與經驗 (神腦)</h2>
+<p>Kanban Driven + Metrics</p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560306115297.jpg" alt="kanban-plus-metric"></p>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560308009798.jpg" alt="架構圖"></p>
+<ul>
+<li>混合雲</li>
+<li><a href="https://aws.amazon.com/tw/kms/">AWS Key Management Service (KMS)</a></li>
+<li>IP 信用評等模式 For dynamic block insecure IPs by WAF</li>
+<li>Chatbot for WAF operation</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="客戶分享案例---91app-如何利用-aws-導入-devops-實戰雙11活動"></a><a href="#客戶分享案例---91app-如何利用-aws-導入-devops-實戰雙11活動" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>客戶分享案例 - 91APP 如何利用 AWS 導入 DevOps 實戰雙11活動</h2>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560306277401.jpg" alt="架構圖"></p>
+<ul>
+<li>算是比較混合雲的傳統架構，包含部分自架機器與雲端服務整合</li>
+<li>戰情室：一整面牆投出所有監控面板 (超帥)</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="dev-day---building-reusable-serverless-apps"></a><a href="#dev-day---building-reusable-serverless-apps" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dev Day - Building Reusable Serverless Apps</h2>
+<ul>
+<li>function 層級共用：<a href="https://docs.aws.amazon.com/zh_tw/lambda/latest/dg/configuration-layers.html">AWS Lambda Layer</a>
+<ul>
+<li>像 packages 一樣跨 application 共用：單獨打包並發佈到 SAR</li>
+<li>Type is AWS::Serverless::LayerVersion</li>
+<li>可以做到 One-click deploy badge in Readme</li>
+<li><a href="https://github.com/aws-samples/aws-lambda-layer-awscli">lambda-layer-awscli</a></li>
+<li>How to build layer.zip
+<ul>
+<li>By docker
+<pre><code class="hljs css language-bash">  <span class="hljs-comment">#!/bin/bash</span>
+  docker build -t awscli:amazonlinux .
+  CONTAINER=<span class="hljs-variable">${docker run -d awscli:amazonlinux false}</span>
+  docker cp <span class="hljs-variable">${CONTAINER}</span>:/layer.zip layer.zip
+  docker cp <span class="hljs-variable">${CONTAINER}</span>:/AWSCLI_VERSION AWSCLI_VERSION .
+  <span class="hljs-built_in">exit</span> 0
+</code></pre></li>
+<li>By Makefile</li>
+</ul></li>
+</ul></li>
+<li>service 層級共用：<a href="https://github.com/awslabs/serverless-application-model">Serverless Application Model (SAM)</a>
+<ul>
+<li>用來簡化設定 cloudformation 的模板，想成是 serverless resource package</li>
+</ul></li>
+<li>託管庫：<a href="https://aws.amazon.com/tw/serverless/serverlessrepo/">Serverless Application Repository (SAR)</a></li>
+<li>Serverless Stack as Code by SAM
+<ul>
+<li>Parameter Override</li>
+<li>Zero Code required by ApplicationId</li>
+<li>Reuse in public/private</li>
+<li>No server and container</li>
+<li>Recipes: Wait for another resouce estsblish by property !GetAttr ...output</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="dev-day---essential-capabilities-behind-microservices"></a><a href="#dev-day---essential-capabilities-behind-microservices" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dev Day - Essential capabilities behind Microservices</h2>
+<p><a href="https://microservices.io/">https://microservices.io/</a></p>
+<ul>
+<li>Microservices + Domain Driven Design
+<ul>
+<li>回歸商業本身：使用 Domain Driven Design 定義與規劃你的商模和業務
+<ul>
+<li>如何劃分業務範疇：Command、Aggrigate、Bussiness Event</li>
+<li>多組 CAE 會產生 boundary context</li>
+</ul></li>
+<li>適合 migrate 舊系統成 microservices 的時機
+<ul>
+<li>自我檢查量表: <a href="https://github.com/humank/microservices">https://github.com/humank/microservices</a></li>
+</ul></li>
+<li>可能挑戰
+<ul>
+<li>敏捷性被破壞 (一年時間全力完成 migration)</li>
+<li>不知道確切的 boundary</li>
+<li>如何分而治之</li>
+<li>資源分配</li>
+<li>外部依賴 (CRM, ERP)</li>
+</ul></li>
+<li>策略 for Legacy System Migration (refer to <a href="https://dev.to/asarnaout/the-anti-corruption-layer-pattern-pcd">https://dev.to/asarnaout/the-anti-corruption-layer-pattern-pcd</a>)
+<ul>
+<li>Bubble Context: 建立新的服務 (存在舊系統中)，並建立 Anti-Corruption Layer 與 Legacy System 溝通</li>
+<li>Autonomous Bubble: 建立新服務 (獨立於舊系統)，需要建立 Anti-Corruption Layer 處理資料，但同樣的資料舊系統也會處理一次</li>
+<li>Open Host Services in Published Language: 將舊系統資料 expose 成一個 host service，並使用 Anti-Corruption Layer 將資料轉換成新系統可以用的方式</li>
+<li>Event Streams: 系統間使用 event 溝通，Anti-Corruption Layer 負責資料轉換外，也負責 monitor 其他系統的狀態</li>
+</ul></li>
+<li>最佳實踐
+<ul>
+<li><a href="https://microservices.io/index.html">https://microservices.io/index.html</a></li>
+<li>微服務的資料一致性：有些交易是會跨服務的，舉例像是刷 debit 卡會需要很注意額度問題
+<ul>
+<li>常見思維：2 Phase Commit (<a href="https://www.wikiwand.com/zh-tw/%E4%BA%8C%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4">二階段提交</a>)，一個投票表決者，會造成阻塞、成員節點資源浪費</li>
+<li>使用 saga pattern 取代它
+<ul>
+<li>Choreography-based: event bus 發出事件到公用渠道，每個服務自己關注要關注的事件
+<img src="https://microservices.io/i/data/Saga_Choreography_Flow.001.jpeg" alt=""></li>
+<li>Orchestration-based: 一個協調者負責處理流程，告訴哪些服務該開工囉
+<img src="https://microservices.io/i/data/Saga_Orchestration_Flow.001.jpeg" alt=""></li>
+<li>AWS Step Function</li>
+<li>demo: <a href="https://github.com/humank/lambda-saga-pattern">https://github.com/humank/lambda-saga-pattern</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Recap
+<ul>
+<li>Do we need microservices</li>
+<li>Value driven</li>
+<li>State Machine to Do Transaction Compensate</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="dev-day---building-modern-distributed-applications"></a><a href="#dev-day---building-modern-distributed-applications" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dev Day - Building Modern Distributed Applications</h2>
+<ul>
+<li>根據需求選擇 container 服務：AWS Container Landscape</li>
+</ul>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560324257253.png" alt=""></p>
+<ul>
+<li>微服務之間的溝通彈性：proxy
+<ul>
+<li>AWS App Mesh
+<ul>
+<li>內部是使用 <a href="https://www.envoyproxy.io/">https://www.envoyproxy.io/</a></li>
+<li>可以做到單一服務層級的 load balancer 、 藍綠部署、canary deploy</li>
+<li>可以搭配 AWS CloudWatch 監控 log、AWS X-Ray 監控流量走向</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>Monolithic Deploy Pipeline is terrible and will block by one person</p>
+</blockquote></li>
+<li>另一種 IaC 工具：<a href="https://docs.aws.amazon.com/cdk/api/latest/">AWS CDK</a>
+<ul>
+<li><a href="https://github.com/enghwa/chat-websocket-fargate">Demo</a></li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="dev-day---building-event-driven-serverless-apps-with-aws-event-fork-pipelines"></a><a href="#dev-day---building-event-driven-serverless-apps-with-aws-event-fork-pipelines" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dev Day - Building Event-Driven Serverless Apps with AWS Event Fork Pipelines</h2>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/image-1560326986304.png" alt=""></p>
+<ul>
+<li><p>concept</p>
+<ul>
+<li>Producer</li>
+<li>Consumer</li>
+<li>使用 Pipeline / Buffer 連結 Producer 與 Consumer
+<ul>
+<li>SNS</li>
+<li>SQS</li>
+<li>Kinesis Data Streams (事件不會被取走，可以被多個關注)</li>
+<li><a href="https://aws.amazon.com/tw/kinesis/?nc2=type_a">Kinesis 串流服務生態系</a></li>
+<li>好處：允許部分壞掉、隨時要 scale 都很方便</li>
+<li>只要該服務可以觸發 Lambda 就能被加入 serverless 架構</li>
+</ul></li>
+</ul></li>
+<li><p>AWS Event Fork Pipelines
+<img src="https://github.com/aws-samples/aws-serverless-event-fork-pipelines/raw/master/images/aws-event-fork-pipelines-architecture.png" alt=""></p>
+<ul>
+<li><a href="https://github.com/aws-samples/aws-serverless-event-fork-pipelines">https://github.com/aws-samples/aws-serverless-event-fork-pipelines</a></li>
+<li>幾條 pipeline 隨你自訂，這邊是舉常見的 4 種應用</li>
+<li>透過 AWS SNS subscription filter policy 讓每一條 pipeline 各自關注自己需要的事件</li>
+<li>各自介紹每一條的實作
+<ul>
+<li>fork-event-storage-backup-pipeline
+<ul>
+<li>for audit / compliance requirement</li>
+<li>可搭配 <a href="https://aws.amazon.com/tw/kinesis/data-firehose/">AWS Kinesis Data Firehose</a> invoke in place Lambda 讓它去除敏感資料</li>
+</ul></li>
+<li>fork-event-search-analytics-pipeline
+<ul>
+<li>建 search index (搭配 AWS Elasticsearch Domain)</li>
+<li>i13n track 或數據分析</li>
+</ul></li>
+<li>fork-event-replay-pipeline
+<ul>
+<li>算是保留歷史 input 資料，但是 lambda 不 enable ，以便在任何災難性錯誤時有機會 enable lambda 讓一切重來</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>前端再接這種後端是 serverless 該怎麼做</p>
+<ul>
+<li>全部異步處理打 restful 觸發處理任務 (API Gateway REST API)</li>
+<li>用 websocket 頁面去等待結果 (API Gateway Websocket API)
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/20190612_163122.png" alt=""></li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="場邊"></a><a href="#場邊" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>場邊</h2>
+<ul>
+<li><a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>: 建構在 AWS 上的 SaaS</li>
+<li><a href="https://www.darktrace.com/en/">Darktrace</a>: 使用 ML 協助華信航空資安團隊</li>
+</ul>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="尖峰學堂支援容器的服務和實現方式"></a><a href="#尖峰學堂支援容器的服務和實現方式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>尖峰學堂:支援容器的服務和實現方式</h2>
+<ul>
+<li>系統架構的演進
+<ul>
+<li>Monolithic</li>
+<li>SOA 架構 （Service-oriented architecture with bus）</li>
+<li>Container</li>
+<li>當 Container 數量達到百萬千萬級：需要一套管理、編排這些容器的方法</li>
+</ul></li>
+<li>AWS ECS
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/yyy.png" alt="">
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/ttt.png" alt="">
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/test.png" alt=""></li>
+<li>K8S
+<ul>
+<li>大規模容器編排</li>
+<li>跨 3 個 AZ 拓展，直接使用 kubectl</li>
+<li>使用 kubectl cli 做操作，AWS console 只會顯示機器最少資訊</li>
+<li>GUI 介面：<a href="https://www.realvnc.com/en/connect/download/viewer/">VNC viewer</a> (localhost:8001)</li>
+</ul></li>
+<li>服務發現
+<ul>
+<li><a href="https://istio.io/">istio</a></li>
+<li><a href="https://aws.amazon.com/tw/cloud-map/">AWS Cloud Map</a></li>
+<li><a href="https://aws.amazon.com/tw/xray/">AWS X-Ray to trace service map </a></li>
+</ul></li>
+<li>ServiceMesh
+<ul>
+<li><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/kyky.png" alt=""></li>
+<li><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/fgfg.png" alt=""></li>
+<li>早期需要部署 sdk 到 container，現在只要加上一層 proxy 以便容器間溝通</li>
+<li>講解：<a href="https://www.inwinstack.com/2018/01/12/service-mesh-istio/">https://www.inwinstack.com/2018/01/12/service-mesh-istio/</a></li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="keynote-innovation-at-scale-at-aws-雲端創新應用規模化"></a><a href="#keynote-innovation-at-scale-at-aws-雲端創新應用規模化" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Keynote: Innovation at scale at AWS 雲端創新應用規模化</h2>
+<ul>
+<li><a href="https://aws.amazon.com/tw/outposts/">AWS Outposts</a>: 客製化的 infrastructure, 搭配 VMware Cloud on AWS 讓地端與雲端溝通
+<ul>
+<li><ol>
+<li>VMware Cloud on AWS Outposts allows you to use the same VMware control plane and APIs you use to run your infrastructure</li>
+</ol></li>
+<li><ol start="2">
+<li>AWS native variant of AWS Outposts allows you to use the same exact APIs and control plane you use to run in the AWS cloud, but on-premises.</li>
+</ol></li>
+<li><a href="https://aws.amazon.com/tw/vmware/">VMware on AWS</a></li>
+</ul></li>
+</ul>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/ppp.png" alt="">
+<img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/qqq.png" alt=""></p>
+<p>開始出現一些 PaaS, 例如：MongoDB Cloud</p>
+<ul>
+<li><p>blockchain</p>
+<ul>
+<li><a href="https://aws.amazon.com/tw/qldb/">AWS QLDB</a></li>
+<li><a href="https://aws.amazon.com/tw/managed-blockchain/">AWS Managed Blockchain</a></li>
+</ul></li>
+<li><p>IoT</p></li>
+</ul>
+<p><img src="https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/aws-summit-2019/tqa.jpg" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="客戶案例分享---acer-it-digital-transformation"></a><a href="#客戶案例分享---acer-it-digital-transformation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>客戶案例分享 - Acer IT Digital Transformation</h2>
+<h2><a class="anchor" aria-hidden="true" id="客戶案例分享---kkbox-innovation-with-site-reliability-engineering"></a><a href="#客戶案例分享---kkbox-innovation-with-site-reliability-engineering" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>客戶案例分享 - KKBox Innovation with Site Reliability Engineering</h2>
+<h2><a class="anchor" aria-hidden="true" id="輕鬆使用-aws-elemental-媒體服務打造無伺服器-live-streaming-與-vod-平台：ott-業者如何提供百萬用戶流暢的觀影體驗"></a><a href="#輕鬆使用-aws-elemental-媒體服務打造無伺服器-live-streaming-與-vod-平台：ott-業者如何提供百萬用戶流暢的觀影體驗" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>輕鬆使用 AWS Elemental 媒體服務打造無伺服器 Live Streaming 與 VOD 平台：OTT 業者如何提供百萬用戶流暢的觀影體驗</h2>
+<h2><a class="anchor" aria-hidden="true" id="深探-iac-infrastructure-as-code-基礎設施即程式碼--在-aws-上的應用"></a><a href="#深探-iac-infrastructure-as-code-基礎設施即程式碼--在-aws-上的應用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>深探 IaC (Infrastructure as Code, 基礎設施即程式碼 ) 在 AWS 上的應用</h2>
+<h2><a class="anchor" aria-hidden="true" id="在-mongodb-cloud-上構建無服務器化應用"></a><a href="#在-mongodb-cloud-上構建無服務器化應用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>在 MongoDB Cloud 上構建無服務器化應用</h2>
+<h2><a class="anchor" aria-hidden="true" id="去中心化身分識別（decentralized-identifiers-如何改變著未來的網路型態？"></a><a href="#去中心化身分識別（decentralized-identifiers-如何改變著未來的網路型態？" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>去中心化身分識別（Decentralized Identifiers) 如何改變著未來的網路型態？</h2>
+<h2><a class="anchor" aria-hidden="true" id="enabling-an-iot-service---from-a-behind-the-scene-perspective"></a><a href="#enabling-an-iot-service---from-a-behind-the-scene-perspective" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enabling an IoT service - from a behind the scene perspective</h2>
+<p><img src="https://user-images.githubusercontent.com/8896191/59561283-20e2dc80-9051-11e9-904a-ae18aeff1561.jpg" alt="Cover"></p>
+<p>今年按照慣例參與了 <a href="https://aws.amazon.com/tw/summits/taipei/">2019 AWS Summit Taipei</a> ，比照往年是自己請特休去聽的，畢竟我是寫前端工作上真的碰到 Cloud 的機會很少，不太容易申請到公假。之前因為參與新產品開發跑 scrum 實行跨技能團隊 (Cross-Functional Team)，才有機會同時寫前端和架 pipeline 與 AWS 環境，現在則是根本碰不到，但是每個人都要有 DevOps 能力以便在 pipeline 除錯 (然後叫別人修)。</p>
+]]></description>
+        </item>
+        <item>
             <title><![CDATA[電影觀後感：帕爾曼的音樂遍歷]]></title>
             <link>https://www.dazedbear.pro/blog/2019/06/24/Itzhak.html</link>
             <guid>https://www.dazedbear.pro/blog/2019/06/24/Itzhak.html</guid>
@@ -77,6 +454,16 @@
             <pubDate>Tue, 27 Nov 2018 06:00:00 GMT</pubDate>
             <description><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/2400/1*yRKwjf8lH9S1_gavi5rxLw.png" alt="main"></p>
 <p>今年的主題是「整合」，但其實議程絕大多數集中在以太坊，特別是針對 Web3.js ，再來就是一些初階推廣向的主題，像是 Reactive Programming 、無痛轉移到 Vue.js 等，整體來說覺得有點可惜，議題不夠廣也不夠深入(對於以太坊的共鳴實在不高...)，我們對於 JavaScript 的想像可能還太過狹隘片面了。</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[2018 台北音樂設計節 TMDF]]></title>
+            <link>https://www.dazedbear.pro/blog/2018/09/10/tmdf.html</link>
+            <guid>https://www.dazedbear.pro/blog/2018/09/10/tmdf.html</guid>
+            <pubDate>Mon, 10 Sep 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://cdn-images-1.medium.com/max/1600/1*sx4Hk1Fnj4rphyP7Z42TlA.jpeg" alt="cover"></p>
+<p><a href="https://www.tmdf.info">台北音樂設計節</a>是由加點音樂舉辦的 Conference，涵蓋音樂、影視、設計等領域，去年參加過覺得還不錯，今年一收到活動消息立馬買了早鳥票 (NTD 2000)。雖然講次比起去年較少只分成三軌，行銷設計的場次也銳減(去年還有講 A&amp;R 的說)，今年更 Focus 在配樂、錄混音的部分 (畢竟多數會眾都是這兩種從業人員)。此外，多了幾場「雙講師」的講次，有配樂 x 混音、企劃 x 配樂、律師 x 配樂、導演 x 歌手...，找了曾合作的不同角色同台，分享合作、溝通的經驗，從不同視角看事情，這是相當難得的！希望明年續辦的話，還能有這類型的講次。</p>
+<p>活動議程在此，我就簡單紀錄聽過的場次吧！</p>
 ]]></description>
         </item>
         <item>
