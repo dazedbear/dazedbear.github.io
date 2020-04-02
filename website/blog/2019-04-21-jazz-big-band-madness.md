@@ -2,7 +2,7 @@
 title: 談爵士春唱 & 我的音樂歷程回顧
 ---
 
-![main](https://scontent.ftpe7-3.fna.fbcdn.net/v/t1.0-9/54434681_2310380525847662_6283584544717144064_o.jpg?_nc_cat=102&_nc_ht=scontent.ftpe7-3.fna&oh=3316185f76c9a7823105c23ecf9c7542&oe=5D63271D)
+![main](https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/2019-jazz-bigband.jpg)
 
 今天到花博流行館去聽 [爵士大樂團嘉年華 Big Band Madness](https://www.facebook.com/bigbandmadness/) ，覺得有點感觸想趁新鮮時寫下來。其實前兩年我就知道有這活動，每年約莫三、四月會有爵士樂 Big Band 的接力演出，每一次都決定要去，但最後都被非常臨時且無關緊要的行程綁住而無法成行。今年本來差點重蹈覆轍，好在最後協調好（強硬）把這天都空下來，總算從説說哥畢業，好好地欣賞演出（笑）。
 
