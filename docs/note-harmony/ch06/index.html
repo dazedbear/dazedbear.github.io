@@ -6,7 +6,63 @@
 
               ga('create', 'UA-83233420-3', 'auto');
               ga('send', 'pageview');
-            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/note" target="_self">Notes</a></li><li class=""><a href="/docs/demo" target="_self">Demos</a></li><li class=""><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">I, V, and V7</h1></header><article><div><span><p>今天來談談和聲學中的骨架：I 、V、V7 和弦，參考課本 Harmony and Voice Leading Ch.6，<a href="http://www.musicvalley.com.hk/2016/11/12/%E5%B0%8D%E4%BD%8D%E6%B3%95%E7%B0%A1%E4%BB%8B-%E4%B8%89-%E9%87%8D%E8%A6%81%E7%9A%84%E6%A6%82%E5%BF%B5-Clausulae-%E5%B0%8D%E4%BD%8D%E6%B3%95%E7%9A%84%E7%B5%82%E6%AD%A2%E5%BC%8F-Counter-Point-Cadence-Ultima-Paenultima-Antepaenultima-Sopra.html">筆記的 PDF 在此</a>。由於是學習筆記，內容會相對簡略一點；文章我不會全部都提到，只挑最重要的部分做觀念解說。
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script type="text/javascript" src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" defer="" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/favicon.ico" alt="DazedBear Studio"/><h2 class="headerTitleWithLogo">DazedBear Studio</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/demo" target="_self">Demos</a></li><li class=""><a href="/blog/" target="_self">Articles</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>和聲學</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">系列筆記</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/note">Overview</a></li><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">和聲學</h4><ul><li class="navListItem navListItemActive"><a class="navItem" href="/docs/note-harmony/ch06">CH.06 I, V, and V7</a></li></ul></div></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">I, V, and V7</h1></header><article><div><span><p>今天來談談和聲學中的骨架：I 、V、V7 和弦，參考課本 Harmony and Voice Leading Ch.6，<a href="http://www.musicvalley.com.hk/2016/11/12/%E5%B0%8D%E4%BD%8D%E6%B3%95%E7%B0%A1%E4%BB%8B-%E4%B8%89-%E9%87%8D%E8%A6%81%E7%9A%84%E6%A6%82%E5%BF%B5-Clausulae-%E5%B0%8D%E4%BD%8D%E6%B3%95%E7%9A%84%E7%B5%82%E6%AD%A2%E5%BC%8F-Counter-Point-Cadence-Ultima-Paenultima-Antepaenultima-Sopra.html">筆記的 PDF 在此</a>。由於是學習筆記，內容會相對簡略一點；文章我不會全部都提到，只挑最重要的部分做觀念解說。
 <img src="https://i.imgur.com/jfMUuX5.png" alt="Imgur">
 <h2 id="了解自己：和弦性質">了解自己：和弦性質</h2>
 <h3 id="和弦的穩定性：原位--轉位">和弦的穩定性：原位 &amp; 轉位</h3>
@@ -89,4 +145,4 @@
 </table><h2 id="小結">小結</h2>
 對於和聲學的學習來說，<strong>融會貫通</strong>、<strong>記住聲響</strong> 是非常重要的。這邊簡單地描述一些重要的和聲學基本概念，建議先弄懂觀念、聽過課本譜例後，再去細看和聲規則，學習時才能理解背後的原由，而非照本宣科的背和聲規則。
 雖然我自己也還剛開始努力而已 (聽得不夠多啊~~)
-</span></div></article></div><div class="docLastUpdate"><em>Last updated on 5/18/2019</em></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
+</span></div></article></div><div class="docLastUpdate"><em>Last updated on 5/18/2019</em></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/note"><span class="arrow-prev">← </span><span>Overview</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
