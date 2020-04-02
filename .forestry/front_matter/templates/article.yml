@@ -6,15 +6,6 @@ fields:
 - type: text
   name: title
   label: title
-- name: time
-  type: datetime
-  label: time
-  description: ''
-  config:
-    required: false
-    date_format: 
-    time_format: 
-    display_utc: false
 - name: unlisted
   type: boolean
   label: unlisted
