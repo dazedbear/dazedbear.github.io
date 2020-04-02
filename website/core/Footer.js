@@ -5,6 +5,9 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
     LogRocket.init('dazedbear/dazedbear-studio-site');
+    window.prismic = {
+      endpoint: 'https://dazedbear.cdn.prismic.io/api/v2'
+    };
   }
   
   docUrl(doc, language) {
