@@ -1,6 +1,6 @@
 ---
 unlisted: true
-title: ''
+title: "[DRAFT] 談談玩樂團這檔事"
 
 ---
 剛剛看完 bang dream 第三季的最後一集，覺得有些感觸，來聊一下關於樂團這件事吧！
