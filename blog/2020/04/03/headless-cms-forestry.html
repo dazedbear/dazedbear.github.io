@@ -91,30 +91,46 @@
 <h2><a class="anchor" aria-hidden="true" id="cms-解決方案組合"></a><a href="#cms-解決方案組合" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CMS 解決方案組合</h2>
 <p>現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：</p>
 <ol>
-<li>File-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的雲端空間 (ex:  Dropbox) 或者 VSC (Version Control System)(ex: Github、Gitlab) 中。</li>
+<li>Commit-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的 VSC (Version Control System)(ex: Github、Gitlab) 中。</li>
 <li>Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中。</li>
 <li>All in one CMS：提供 Database、Server、管理後台、擴充功能如 email 等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)</li>
 </ol>
-<p>其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同，需要自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 <a href="https://gohugo.io/">Hugo</a>、 <a href="https://hexo.io/">Hexo</a>、<a href="https://www.gatsbyjs.com/">Gatsby.js</a>、<a href="https://jekyllrb.com/">Jekyll</a>、<a href="https://nextjs.org/">Next.js</a>、<a href="https://nuxtjs.org/">Nuxt.js</a> 等。</p>
+<p>其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 <a href="https://gohugo.io/">Hugo</a>、 <a href="https://hexo.io/">Hexo</a>、<a href="https://www.gatsbyjs.com/">Gatsby.js</a>、<a href="https://jekyllrb.com/">Jekyll</a>、<a href="https://nextjs.org/">Next.js</a>、<a href="https://nuxtjs.org/">Nuxt.js</a> 等。</p>
 <p><img src="https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png" alt=""></p>
-<p>介紹 blog 串接 CMS 的過程</p>
 <ol>
 <li>可用服務選項、特點介紹</li>
-<li>選擇理由 &amp; 串接 Forestry 過程
+<li>服務評比文章：<a href="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd" title="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd">https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd</a></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="新的解決方案"></a><a href="#新的解決方案" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>新的解決方案</h2>
+<h3><a class="anchor" aria-hidden="true" id="選擇-forestry-的理由"></a><a href="#選擇-forestry-的理由" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>選擇 Forestry 的理由</h3>
+<ol>
+<li><p>確認自己的 SSG 是屬於哪種類型 (API or build)</p></li>
+<li><p>支援 Markdown 的編輯器 (WYSIWYG editor)</p></li>
+<li><ul>
+<li>WYSIWYG editor 可以撰寫並預覽 Markdown</li>
+</ul>
+<p>- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)</p>
+<p>- git based，不需要另外再架伺服器</p></li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="串接過程簡介"></a><a href="#串接過程簡介" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>串接過程簡介</h3>
+<h4><a class="anchor" aria-hidden="true" id="基本設定"></a><a href="#基本設定" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>基本設定</h4>
+<h4><a class="anchor" aria-hidden="true" id="front-matter"></a><a href="#front-matter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Front matter</h4>
+<h4><a class="anchor" aria-hidden="true" id="media-上傳設定"></a><a href="#media-上傳設定" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Media 上傳設定</h4>
+<ol>
+<li>串接 AWS S3 上傳 Media Asset</li>
+</ol>
+<h4><a class="anchor" aria-hidden="true" id="避免-trigger-多餘的-ci-build"></a><a href="#避免-trigger-多餘的-ci-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>避免 Trigger 多餘的 CI Build</h4>
+<ol>
+<li><a href="https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions">travis ci condition build</a></li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="踩到的雷"></a><a href="#踩到的雷" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>踩到的雷</h3>
 <ol>
 <li>Front Matter 介紹 &amp; FM title 檔名衝突 (YYYY-_MM-_DD- prefix) 導致 build 不過問題</li>
-<li><a href="https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions">travis ci condition build</a></li>
-<li>串接 AWS S3 上傳 Media Asset</li>
-</ol></li>
 </ol>
-<p>採用 forestry.io，理由如下</p>
-<p>- WYSIWYG editor 可以撰寫並預覽 Markdown</p>
-<p>- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)</p>
-<p>- git based，不需要另外再架伺服器</p>
-<p>補充資料</p>
-<p>服務評比文章：<a href="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd" title="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd">https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd</a></p>
+<h2><a class="anchor" aria-hidden="true" id="小結"></a><a href="#小結" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>小結</h2>
+<h2><a class="anchor" aria-hidden="true" id="補充資料"></a><a href="#補充資料" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>補充資料</h2>
 <p>- <a href="https://app.stackbit.com/dashboard" title="https://app.stackbit.com/dashboard">https://app.stackbit.com/dashboard</a></p>
 <p>- <a href="https://graphcms.com/" title="https://graphcms.com/">https://graphcms.com/</a></p>
 <p>- <a href="https://getcockpit.com/" title="https://getcockpit.com/">https://getcockpit.com/</a></p>
 <p>- <a href="https://strapi.io/" title="https://strapi.io/">https://strapi.io/</a></p>
-</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#舊的解決方案">舊的解決方案</a><ul class="toc-headings"><li><a href="#文章撰寫：hackmdio">文章撰寫：Hackmd.io</a></li><li><a href="#靜態資源：aws-s3">靜態資源：AWS S3</a></li><li><a href="#對-cms-的需求">對 CMS 的需求</a></li></ul></li><li><a href="#cms-解決方案組合">CMS 解決方案組合</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#舊的解決方案">舊的解決方案</a><ul class="toc-headings"><li><a href="#文章撰寫：hackmdio">文章撰寫：Hackmd.io</a></li><li><a href="#靜態資源：aws-s3">靜態資源：AWS S3</a></li><li><a href="#對-cms-的需求">對 CMS 的需求</a></li></ul></li><li><a href="#cms-解決方案組合">CMS 解決方案組合</a></li><li><a href="#新的解決方案">新的解決方案</a><ul class="toc-headings"><li><a href="#選擇-forestry-的理由">選擇 Forestry 的理由</a></li><li><a href="#串接過程簡介">串接過程簡介</a></li><li><a href="#踩到的雷">踩到的雷</a></li></ul></li><li><a href="#小結">小結</a></li><li><a href="#補充資料">補充資料</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
