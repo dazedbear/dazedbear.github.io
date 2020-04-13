@@ -11,7 +11,7 @@ status: Idea
 
 <!-- truncate -->
 
-## 背景需求
+## 舊的解決方案
 
 這次要解決的問題是「文章撰寫流程的優化」，那先介紹之前使用哪些工具服務來寫出這些文章的吧！
 
@@ -35,16 +35,37 @@ status: Idea
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-s3-asset.png)
 
-### 需求
+### 對 CMS 的需求
 
 其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 wordpress 了。
 
 想像中需求會有：
 
-* 上傳、管理全部圖片
-* 可以使用 Markdown 撰寫文章
+* 可以自訂圖片上傳空間、管理全部圖片
+* 可以使用 Markdown 撰寫/預覽文章 (WYSIWYG editor)
 * 文章可以切換草稿/發布的狀態
-* 不需要收費，也不需要管理 server
+* 不需要收費
+* 不需要管理 server
+
+那接下來介紹一下常見的 CMS 解決方案組合吧！
+
+## CMS 解決方案組合
+
+現有的 CMS 相關服務其實很多種，根據我的理解大致可以分成幾個類型：
+
+1. File-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的雲端空間 (ex:  Dropbox) 或者 VSC (Version Control System)(ex: Github、Gitlab) 中。
+2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中。
+3. All in one CMS：提供 Database、Server、管理後台、擴充功能如 email 等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)
+
+其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同，需要自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 Hexo、Gatsby.js、Jekyll 等。
+
+![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
+
+各家服務提供的層級也不同：
+
+* Headless CMS：建立 Article API (RESTful / GraphQL)
+* Static Site Generator + Headless CMS
+* 
 
 介紹 blog 串接 CMS 的過程
 
@@ -65,8 +86,6 @@ status: Idea
 補充資料
 
 服務評比文章：[https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd "https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd")
-
-![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
 
 \- [https://app.stackbit.com/dashboard](https://app.stackbit.com/dashboard "https://app.stackbit.com/dashboard")
 
