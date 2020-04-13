@@ -37,7 +37,7 @@ status: Idea
 
 ### 對 CMS 的需求
 
-其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 wordpress 了。
+其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 Wordpress 了。
 
 想像中需求會有：
 
@@ -51,21 +51,15 @@ status: Idea
 
 ## CMS 解決方案組合
 
-現有的 CMS 相關服務其實很多種，根據我的理解大致可以分成幾個類型：
+現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：
 
 1. File-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的雲端空間 (ex:  Dropbox) 或者 VSC (Version Control System)(ex: Github、Gitlab) 中。
 2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中。
 3. All in one CMS：提供 Database、Server、管理後台、擴充功能如 email 等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)
 
-其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同，需要自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 Hexo、Gatsby.js、Jekyll 等。
+其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同，需要自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 [Hugo](https://gohugo.io/)、 [Hexo](https://hexo.io/)、[Gatsby.js](https://www.gatsbyjs.com/)、[Jekyll](https://jekyllrb.com/)、[Next.js](https://nextjs.org/)、[Nuxt.js](https://nuxtjs.org/) 等。
 
 ![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
-
-各家服務提供的層級也不同：
-
-* Headless CMS：建立 Article API (RESTful / GraphQL)
-* Static Site Generator + Headless CMS
-* 
 
 介紹 blog 串接 CMS 的過程
 
