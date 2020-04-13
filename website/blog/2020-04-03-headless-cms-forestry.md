@@ -53,33 +53,50 @@ status: Idea
 
 現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：
 
-1. File-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的雲端空間 (ex:  Dropbox) 或者 VSC (Version Control System)(ex: Github、Gitlab) 中。
+1. Commit-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的 VSC (Version Control System)(ex: Github、Gitlab) 中。
 2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中。
 3. All in one CMS：提供 Database、Server、管理後台、擴充功能如 email 等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)
 
-其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同，需要自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 [Hugo](https://gohugo.io/)、 [Hexo](https://hexo.io/)、[Gatsby.js](https://www.gatsbyjs.com/)、[Jekyll](https://jekyllrb.com/)、[Next.js](https://nextjs.org/)、[Nuxt.js](https://nuxtjs.org/) 等。
+其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 [Hugo](https://gohugo.io/)、 [Hexo](https://hexo.io/)、[Gatsby.js](https://www.gatsbyjs.com/)、[Jekyll](https://jekyllrb.com/)、[Next.js](https://nextjs.org/)、[Nuxt.js](https://nuxtjs.org/) 等。
 
 ![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
 
-介紹 blog 串接 CMS 的過程
-
 1. 可用服務選項、特點介紹
-2. 選擇理由 & 串接 Forestry 過程
-   1. Front Matter 介紹 & FM title 檔名衝突 (YYYY-_MM-_DD- prefix) 導致 build 不過問題
-   2. [travis ci condition build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions)
-   3. 串接 AWS S3 上傳 Media Asset
+2. 服務評比文章：[https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd "https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd")
 
-採用 forestry.io，理由如下
+## 新的解決方案
 
-\- WYSIWYG editor 可以撰寫並預覽 Markdown
+### 選擇 Forestry 的理由
 
-\- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)
+1. 確認自己的 SSG 是屬於哪種類型 (API or build)
+2. 支援 Markdown 的編輯器 (WYSIWYG editor)
+3. - WYSIWYG editor 可以撰寫並預覽 Markdown
 
-\- git based，不需要另外再架伺服器
+   \- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)
 
-補充資料
+   \- git based，不需要另外再架伺服器
 
-服務評比文章：[https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd "https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd")
+### 串接過程簡介
+
+#### 基本設定
+
+#### Front matter
+
+#### Media 上傳設定
+
+1. 串接 AWS S3 上傳 Media Asset
+
+#### 避免 Trigger 多餘的 CI Build
+
+1. [travis ci condition build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions)
+
+### 踩到的雷
+
+1. Front Matter 介紹 & FM title 檔名衝突 (YYYY-_MM-_DD- prefix) 導致 build 不過問題
+
+## 小結
+
+## 補充資料
 
 \- [https://app.stackbit.com/dashboard](https://app.stackbit.com/dashboard "https://app.stackbit.com/dashboard")
 
