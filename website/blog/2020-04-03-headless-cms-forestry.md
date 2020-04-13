@@ -4,7 +4,6 @@ title: "[DRAFT] 串接 Headless CMS Forestry 心路歷程"
 status: Idea
 
 ---
-
 ![Cover](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/0DB65523-3BE4-4535-AD17-6E6C0C35038E.png)
 
 趁著連假的慣例來還還技術債，玩一些平常沒時間碰的新東西。本來打算要把 blog 主要的 library docusaurus migrate 到 v2 版本以便擁有更多自訂彈性，但發現它還沒正式 stable 便暫時作罷。事不宜遲，那就來介紹這次的工事：導入 CMS 優化寫文章的流程。
@@ -70,13 +69,14 @@ status: Idea
 
 1. 確認自己的 SSG 是屬於哪種類型 (API or build)
 2. 支援 Markdown 的編輯器 (WYSIWYG editor)
-3. - WYSIWYG editor 可以撰寫並預覽 Markdown
+3. 
+   * WYSIWYG editor 可以撰寫並預覽 Markdown
 
    \- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)
 
    \- git based，不需要另外再架伺服器
 
-### 串接過程簡介
+### 串接與功能簡介
 
 #### 基本設定
 
@@ -89,6 +89,8 @@ status: Idea
 #### 避免 Trigger 多餘的 CI Build
 
 1. [travis ci condition build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions)
+
+#### Preview 功能設定
 
 ### 踩到的雷
 
