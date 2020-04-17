@@ -36,22 +36,22 @@ status: Idea
 
 其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統。
 
-## CMS 解決方案
+## CMS 介紹
 
 現有的 CMS 服務其實很多種，根據我的理解大致分成幾個類型：
 
 1. Git-based CMS：僅提供管理後台，設定和文章存在自行設定的 Github Repo 中，適合網站 content 管理。
-2. Headless CMS：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、寄信等豐富的 Extensions/Add-ons。
+2. [Headless CMS](https://www.fansysoft.com/blogs/-/asset_publisher/CWuRKonAWio8/blog/headless-cm-1)：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、寄信等豐富的 Extensions/Add-ons。
 3. Monolithic CMS：提供 Database、Server、管理後台、Extensions/Plugins 等整套服務，文章和設定都存在自己的 Database 當中。(ex: [Wordpress](https://zh-tw.wordpress.com/))。
 
 其中第 1、2 種 CMS 由於只有管理資料，必須自己另外建前台頁面來顯示文章，經常會搭配 Static Site Generator (SSG) 使用。
 
 ### Static Site Generator (SSG)
 
-按照文章資料的取得與 render 方式，大致可分成三種類型：
+產生靜態網站的 Libraries/Services，會解析寫好的文章檔案並打包成包含 JS/CSS/HTML 的靜態 Artifact 方便部署到 CDN。每一款 SSG 支援的文章 render 方式都不同，大致可分成三種類型：
 
-1. 全部打包成靜態 HTML，完全不需要 client side fetch
-2. Single Page Application (SPA)，需要靠 client side fetch 拉資料
+1. 文章資料全部打包進靜態 HTML，完全不需要 client side fetch
+2. Single Page Application (SPA)，需要靠 client side fetch 拉文章資料
 3. 以上都支援
 
 你所選用的 SSG 會影響到可搭配的 CMS 選擇，若該 SSG 只支援第 1 種方式，要使用 Headless CMS 就必須自己會再寫 Javascript fetch 文章並動態加到 HTML 中，這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 Git-based CMS。
@@ -63,22 +63,27 @@ status: Idea
 * [Next.js](https://nextjs.org/)
 * [Nuxt.js](https://nuxtjs.org/)
 
-### CMS Solutions
+### Headless CMS
 
 因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
 
-![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
-
-* [Cosmic JS](https://www.cosmicjs.com/) (server-based) (cloud)
-* [Contentful](https://www.contentful.com/) (server-based) (cloud)
-* [strapi](https://strapi.io/) (server-based) (self-hosted)
-* [Netlify CMS](https://www.netlifycms.org/) (git-based) (support parse existing site)
-* [Forestry](https://forestry.io/)  (git-based) (support parse existing site)
+* [Cosmic JS](https://www.cosmicjs.com/) (cloud)
+* [Contentful](https://www.contentful.com/) (cloud)
+* [strapi](https://strapi.io/) (self-hosted)
 * [DatoCMS](https://www.datocms.com/)
 * [Sanity](https://www.sanity.io/)
-* [Prismic](https://prismic.io/)
+* [Prismic](https://prismic.io/) (cloud)
 * [GraphCMS](https://graphcms.com/)
 * [Cockpit](https://getcockpit.com/)
+
+![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
+
+### Git-based CMS
+
+這類型的 CMS 由於就是在 github repo 加入設定檔而已，通常可以無痛導入現有的網站，適合 deployment 只支援 static HTML build 的 SSG 使用。管理後台入口可以選擇放在自己網站上，或者是服務提供的 console 介面。由於它並不會自動產生 API 介面，有跨裝置管理 content 需求就不適合採用。
+
+* [Netlify CMS](https://www.netlifycms.org/)
+* [Forestry](https://forestry.io/)
 
 ### 同時整合 SSG 和 CMS 的服務
 
@@ -90,36 +95,21 @@ status: Idea
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png)
 
-### ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview-2.png)對 CMS 的需求
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview-2.png)
 
-其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 Wordpress 了。
+## 新的解決方案
 
-想像中需求會有：
+看了各種的 CMS 服務以後，我大概整理了一些需求方便挑選：
 
-* 可以自訂圖片上傳空間、管理全部圖片
+* 可以自訂圖片上傳空間 (AWS S3)、管理全部圖片
 * 可以使用 Markdown 撰寫/預覽文章 (WYSIWYG editor)
 * 文章可以切換草稿/發布的狀態
 * 不需要收費
 * 不需要管理 server
 
-那接下來介紹一下常見的 CMS 解決方案組合吧！
+再加上 Blog 現在使用的 SSG 是 Facebook 開源的技術文件 SSG [Docusaurus](https://docusaurus.io/)，它的 deployment 只支援 build static HTML，因此我只能從 Git-based CMS 裡面的服務來挑。由於 Netlify CMS 設定上似乎看起來比較複雜，我最終挑了 Forestry 來做嘗試。
 
-## 新的解決方案
-
-### 選擇 Forestry 的理由
-
-1. 確認自己的 SSG 是屬於哪種類型 (API or build)
-2. 支援 Markdown 的編輯器 (WYSIWYG editor)
-3. 
-   * WYSIWYG editor 可以撰寫並預覽 Markdown
-
-   \- 可以自訂 media/asset 上傳的地點 (Github or AWS S3...)
-
-   \- git based，不需要另外再架伺服器
-
-### 串接與功能簡介
-
-#### 基本設定
+#### Forestry 基本設定
 
 #### Front matter
 
@@ -138,7 +128,3 @@ status: Idea
 1. Front Matter 介紹 & FM title 檔名衝突 (YYYY-_MM-_DD- prefix) 導致 build 不過問題
 
 ## 小結
-
-## 補充資料
-
-\- [https://getcockpit.com/](https://getcockpit.com/ "https://getcockpit.com/")
