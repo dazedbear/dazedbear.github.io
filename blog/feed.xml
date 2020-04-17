@@ -4,7 +4,7 @@
         <title>DazedBear Studio Blog</title>
         <link>https://www.dazedbear.pro/blog</link>
         <description>The best place to stay up-to-date with the latest DazedBear Studio news and events.</description>
-        <lastBuildDate>Wed, 25 Dec 2019 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 18 Apr 2020 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
@@ -13,6 +13,15 @@
             <link>https://www.dazedbear.pro/blog</link>
         </image>
         <copyright>Copyright © 2020 DazedBear Studio</copyright>
+        <item>
+            <title><![CDATA[Git-based CMS：Forestry 導入過程分享]]></title>
+            <link>https://www.dazedbear.pro/blog/2020/04/18/git-based-cms-forestry.html</link>
+            <guid>https://www.dazedbear.pro/blog/2020/04/18/git-based-cms-forestry.html</guid>
+            <pubDate>Sat, 18 Apr 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/0DB65523-3BE4-4535-AD17-6E6C0C35038E.png" alt="Cover"></p>
+<p>趁著連假的慣例來還還技術債，玩一些平常沒時間碰的新東西。本來打算要把 blog 主要的 library <a href="https://docusaurus.io/">docusaurus</a> migrate 到 v2 版本以便擁有更多自訂彈性，但發現它還沒正式 stable 便暫時作罷。事不宜遲，那就來介紹這次的工事：導入 CMS 優化寫文章的流程。</p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[簡介我的採譜工具與流程]]></title>
             <link>https://www.dazedbear.pro/blog/2019/12/25/transcribe.html</link>
