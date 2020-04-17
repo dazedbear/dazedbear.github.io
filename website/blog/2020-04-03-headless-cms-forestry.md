@@ -113,25 +113,35 @@ status: Idea
 
 安裝其實滿簡單的，照著步驟做就會把 Forestry 設定檔寫到你的 Github Rope 中。
 
-1. 首先選擇你所使用的 SSG。
+1) 首先選擇你所使用的 SSG。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-1.png)
 
-2. 選擇你所使用的版本控制庫 Version Control System 取得 OAuth 授權。
+2) 選擇你所使用的版本控制庫 Version Control System 取得 OAuth 授權。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-2.png)
 
-3. 選擇要導入的 Repo 和未來要用來讀取文章與 commit 的分支。
+3) 選擇要導入的 Repo 和未來要用來讀取文章與 commit 的分支。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-3.png)
 
-4. 稍等一下就進入 Dashboard 完成基本安裝。此時可以回到你的 Github Repo 會看到多了一個放設定檔的 `.forestrty` 的資料夾。
+4) 稍等一下就進入 Dashboard 完成基本安裝。此時可以回到你的 Github Repo 會看到多了一個放設定檔的 `.forestrty` 的資料夾。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-4.png)
 
-5. 下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
+5) 下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-dashboard-finish.png)
+
+### Forestry 功能介紹
+
+1) 文章列表大約長這樣，還算滿清楚，也有搜尋功能，這邊可以調整要顯示的欄位，不過可惜的是不太好用，沒辦法同時顯示文章標題、日期、發布 / 草稿等狀態。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-articles.png)
+
+2) 撰寫文章的編輯器畫面長這樣，左半邊是 Front Matter 設定，也就是一般文章最上面會放的 Yaml 設定，這對 SSG 來說很重要，它們會用這些欄位來做到很多功能，像我自己就只設定兩個欄位：標題、發布/隱藏。右半邊是 WYSIWYG editor，支援 Markdown 撰寫與預覽，比較可惜的是它沒有支援 Table，雖然可以透過新增 Snippet 來達成但效果不太好。另外就是中間的那條分隔線是沒辦法拖動的，因此寫文章的空間就有限。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-editor.png)
 
 #### Front matter
 
