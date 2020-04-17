@@ -41,20 +41,20 @@ status: Idea
 現有的 CMS 服務其實很多種，根據我的理解大致分成幾個類型：
 
 1. Git-based CMS：僅提供管理後台，設定和文章存在自行設定的 Github Repo 中，適合網站 content 管理。
-2. [Headless CMS](https://www.fansysoft.com/blogs/-/asset_publisher/CWuRKonAWio8/blog/headless-cm-1)：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、寄信等豐富的 Extensions/Add-ons。
+2. [Headless CMS](https://www.fansysoft.com/blogs/-/asset_publisher/CWuRKonAWio8/blog/headless-cm-1)：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架的伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、Mail 等豐富的 Extensions/Add-ons。
 3. Monolithic CMS：提供 Database、Server、管理後台、Extensions/Plugins 等整套服務，文章和設定都存在自己的 Database 當中。(ex: [Wordpress](https://zh-tw.wordpress.com/))。
 
 其中第 1、2 種 CMS 由於只有管理資料，必須自己另外建前台頁面來顯示文章，經常會搭配 Static Site Generator (SSG) 使用。
 
 ### Static Site Generator (SSG)
 
-產生靜態網站的 Libraries/Services，會解析寫好的文章檔案並打包成包含 JS/CSS/HTML 的靜態 Artifact 方便部署到 CDN。每一款 SSG 支援的文章 render 方式都不同，大致可分成三種類型：
+產生靜態網站的 Libraries，會解析文章檔案並打包成包含 JS/CSS/HTML 的靜態 Artifact 方便部署到 CDN。每一款 SSG 支援的文章 render 方式都不同，大致可分成三種類型：
 
 1. 文章資料全部打包進靜態 HTML，完全不需要 client side fetch
 2. Single Page Application (SPA)，需要靠 client side fetch 拉文章資料
 3. 以上都支援
 
-你所選用的 SSG 會影響到可搭配的 CMS 選擇，若該 SSG 只支援第 1 種方式，要使用 Headless CMS 就必須自己會再寫 Javascript fetch 文章並動態加到 HTML 中，這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 Git-based CMS。
+你所選用的 SSG 會影響到可搭配的 CMS 選擇，若該 SSG 只支援第 1 種方式，要使用 Headless CMS 就必須自己再寫 Javascript fetch 文章並動態加到 HTML 中，這有點麻煩，這時候能用的就是支援 parse 現有網站 repo 的 Git-based CMS。
 
 * [Hugo](https://gohugo.io/)
 * [Hexo](https://hexo.io/)
@@ -65,7 +65,7 @@ status: Idea
 
 ### Headless CMS
 
-因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
+因為服務真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
 
 * [Cosmic JS](https://www.cosmicjs.com/) (cloud)
 * [Contentful](https://www.contentful.com/) (cloud)
@@ -80,14 +80,14 @@ status: Idea
 
 ### Git-based CMS
 
-這類型的 CMS 由於就是在 github repo 加入設定檔而已，通常可以無痛導入現有的網站，適合 deployment 只支援 static HTML build 的 SSG 使用。管理後台入口可以選擇放在自己網站上，或者是服務提供的 console 介面。由於它並不會自動產生 API 介面，有跨裝置管理 content 需求就不適合採用。
+這類的 CMS 由於是在 github repo 加入設定檔，通常可以無痛導入現有的網站，適合 deployment 只支援 static HTML build 的 SSG 使用。管理後台入口可以選擇放在自己網站上，或者是服務提供的 console 介面。由於它並不會自動產生 API 介面，不適合用在有跨裝置管理 content 的需求。
 
 * [Netlify CMS](https://www.netlifycms.org/)
 * [Forestry](https://forestry.io/)
 
 ### 同時整合 SSG 和 CMS 的服務
 
-有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。這些服務單純只是將各種 stack 整合在一起，實際上要寫文章或者調設定還是得回到各個服務處理。
+有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ...，讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。這些服務單純只是將各種 stack 整合在一起，實際上要寫文章或者調設定還是得回到各個服務處理。
 
 * [Stackbit](https://www.stackbit.com/)
 * [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
@@ -107,11 +107,9 @@ status: Idea
 * 不需要收費
 * 不需要管理 server
 
-再加上 Blog 現在使用的 SSG 是 Facebook 開源的技術文件 SSG [Docusaurus](https://docusaurus.io/)，它的 deployment 只支援 build static HTML，因此我只能從 Git-based CMS 裡面的服務來挑。由於 Netlify CMS 設定上似乎看起來比較複雜，我最終挑了 Forestry 來做嘗試。
+再加上 Blog 現在使用的 SSG 是 Facebook 開源的 [Docusaurus](https://docusaurus.io/)，它的 deployment 只支援 build static HTML，因此我只能從 Git-based CMS 裡面的服務來挑。由於 Netlify CMS 設定上似乎看起來比較複雜，我最終挑了 Forestry 來做嘗試。
 
 ### Forestry 安裝
-
-安裝其實滿簡單的，照著步驟做就會把 Forestry 設定檔寫到你的 Github Rope 中。
 
 Step 1：首先選擇你所使用的 SSG。
 
@@ -129,7 +127,7 @@ Step 4：稍等一下就進入 Dashboard 完成基本安裝。此時可以回到
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-4.png)
 
-Step 5：下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
+Step 5：下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等，完成後的後台長這樣。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-dashboard-finish.png)
 
@@ -151,7 +149,7 @@ Forestry 有提供一個文章預覽的功能，講白點就是起一個 contain
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-preview-setting.png)
 
-設定完畢以後，捲到上方就可以啟動預覽用的 container，沒有特別動它的話會一直跑在那，看起來也不會收取費用。等 container 跑起來後，回到文章編輯器點右上角的眼睛圖示，就能開啟預覽的頁面，方便在你改完文章還沒 save 時就能預覽效果修正 (按下 save 就代表有 commit 喔)。要注意的是，container 是不會有 watch 模式自動重 build 刷新內容的，因此你需要重新點一次眼睛圖示來促使 container 重 build 一次。
+設定完畢以後，捲到上方就可以啟動預覽用的 container，沒有特別動它的話會一直跑在那，看起來也不會收取費用。等 container 跑起來後，回到文章編輯器點右上角的眼睛圖示，就能開啟預覽的頁面，方便在你改完還沒 save 時就能預覽效果修正 (按下 save 就代表有 commit 喔)。要注意的是，container 是不會有 watch 模式自動重 build 刷新內容的，因此你需要重新點一次眼睛圖示來讓 container 重 build。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-preview.png)
 
@@ -164,14 +162,12 @@ Forestry 支援幾種 Media 自訂上傳：
 * Cloudinary
 * Netlify Large Media
 
-設定 AWS S3 其實滿簡單的：
+由於我想放在 AWS S3 中，設定的過程其實滿簡單的。其他設定方式請直接參閱[官方文件](https://forestry.io/docs/media/)。
 
 * S3 新增一個 bucket，開啟 Public Read 權限
 * IAM 新增一個 Forestry 專用的 Headless User
 * 新增一個 Policy 讓 Headless User 只能對你要上傳的 S3 bucket 有權限操作
-* 把 Key 和 Token 貼回 Forestry 後台的設定就完成了
-
-其他詳細設定方式請直接參閱[官方文件](https://forestry.io/docs/media/)。
+* 把 Key ID 和 Secret Key 貼回 Forestry 後台的設定就完成了，它不會被 commit 進版控請放心
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-asset.png)
 
@@ -191,11 +187,11 @@ Forestry 支援幾種 Media 自訂上傳：
 
 > 只有 `develop` 分支有新的 commit，並且「commit 訊息不包含 `Forestry configuration` 或 `readme` 字串」的條件為 true 時才觸發 build
 
-利用簡單的 commit message 來減少 CI build 的觸發頻率，雖然沒有到很精準但還算堪用。
+利用簡單的 commit message 來減少 CI build 的觸發頻率，雖然沒有很精準但還算堪用。
 
 ### 踩到檔名格式的雷
 
-在使用的過程中有遇到一個雷：由於一般 SSG 會要求設定文章的標題 Front Matter，Forestry 在你新建文章的時候，會先去撈 `title` 這個欄位的值當作檔名，如果沒填寫才會跳出視窗請你寫檔名。這看似很合理，但是對於 Docusaurus 來說檔名一定要是這樣的格式：
+使用的過程中有遇到一個雷：由於一般 SSG 會要求設定文章的標題 Front Matter，Forestry 在你新建文章的時候，也會先去撈 `title` 這個欄位的值當作檔名，如果沒填寫才會跳出視窗請你寫檔名。這看似很合理，但是對於 Docusaurus 來說檔名一定要是這樣的格式：
 
     YYYY-MM-DD-your-title.md
 
@@ -203,6 +199,6 @@ Forestry 支援幾種 Media 自訂上傳：
 
 ## 小結
 
-這次介紹了新舊兩種文章撰寫的工具和流程，以及不同種類的 CMS 服務和可用的口袋清單，最後聊到了 Forestry 導入的過程與辛酸 (?) 老實說它雖然功能滿陽春的但還滿堪用，不過下次有機會還是想挑戰導入 Netlify CMS 看看，畢竟它的功能看起來很成熟，說不定也滿好用的就是了\~
+這次介紹了新舊兩種文章撰寫的工具和流程，以及不同種類的 CMS 服務和可用的口袋清單，最後聊到了 Forestry 導入的過程與辛酸 (?) 老實說它雖然功能簡單但還滿堪用的，不過下次有機會還是想挑戰導入 Netlify CMS 看看，畢竟它的功能看起來比較複雜成熟，說不定比較好用也說不定\~
 
-先到這邊了，待留言評論的功能做完之前，有任何問題歡迎到我的 github 發 issue 討論喔\~感謝各位的閱讀，我們下次見！
+先到這邊了，待留言評論的功能做完之前，有任何問題歡迎到我的 github 發 issue 討論喔！感謝各位的閱讀，我們下次見！
