@@ -16,6 +16,6 @@ fields:
   label: Hide this article?
 pages:
 - website/blog/2020-04-03-frequency-concert.md
-- website/blog/2020-04-03-headless-cms-forestry.md
 - website/blog/2020-04-04-music-technology-overview.md
 - website/blog/2020-04-08-about-band.md
+- website/blog/2020-04-18-git-based-cms-forestry.md
