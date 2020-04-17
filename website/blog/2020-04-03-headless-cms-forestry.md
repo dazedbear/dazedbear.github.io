@@ -65,7 +65,7 @@ status: Idea
 1. 全部打包成靜態 HTML，完全不需要 client side fetch
 2. Single Page Application (SPA)，需要靠 client side fetch 拉資料
 
-你所選用的 SSG 類型會影響到接下來可選用的 Headless CMS，因為若是使用第 1 種，搭配上僅提供 API 的這種 CMS，自己會需要再撰寫 Javascript 去 fetch 文章並動態 append 到 HTML 中，而這通常有點小麻煩。這時候能選用的
+你所選用的 SSG 類型會影響到接下來可選用的 Headless CMS，因為若是使用第 1 種，搭配上僅提供 API 的這種 CMS，自己會需要再撰寫 Javascript 去 fetch 文章並動態 append 到 HTML 中，而這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 commit based CMS。
 
 * [Hugo](https://gohugo.io/)
 * [Hexo](https://hexo.io/)
@@ -88,6 +88,8 @@ status: Idea
 * [Forestry](https://forestry.io/)  (commit-based)
 * [Sanity](https://www.sanity.io/)
 * [Prismic](https://prismic.io/)
+* [GraphCMS](https://graphcms.com/)
+* [Cockpit](https://getcockpit.com/)
 
 ### 同時整合 SSG 和 CMS 的服務
 
@@ -138,10 +140,4 @@ status: Idea
 
 ## 補充資料
 
-\- [https://app.stackbit.com/dashboard](https://app.stackbit.com/dashboard "https://app.stackbit.com/dashboard")
-
-\- [https://graphcms.com/](https://graphcms.com/ "https://graphcms.com/")
-
 \- [https://getcockpit.com/](https://getcockpit.com/ "https://getcockpit.com/")
-
-\- [https://strapi.io/](https://strapi.io/ "https://strapi.io/")
