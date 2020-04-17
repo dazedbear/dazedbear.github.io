@@ -34,7 +34,63 @@ status: Idea
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-s3-asset.png)
 
-## 對 CMS 的需求
+其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統。
+
+## CMS 解決方案
+
+現有的 CMS 服務其實很多種，根據我的理解大致分成幾個類型：
+
+1. Git-based CMS：僅提供管理後台，設定和文章存在自行設定的 Github Repo 中，適合網站 content 管理。
+2. Headless CMS：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、寄信等豐富的 Extensions/Add-ons。
+3. Monolithic CMS：提供 Database、Server、管理後台、Extensions/Plugins 等整套服務，文章和設定都存在自己的 Database 當中。(ex: [Wordpress](https://zh-tw.wordpress.com/))。
+
+其中第 1、2 種 CMS 由於只有管理資料，必須自己另外建前台頁面來顯示文章，經常會搭配 Static Site Generator (SSG) 使用。
+
+### Static Site Generator (SSG)
+
+按照文章資料的取得與 render 方式，大致可分成三種類型：
+
+1. 全部打包成靜態 HTML，完全不需要 client side fetch
+2. Single Page Application (SPA)，需要靠 client side fetch 拉資料
+3. 以上都支援
+
+你所選用的 SSG 會影響到可搭配的 CMS 選擇，若該 SSG 只支援第 1 種方式，要使用 Headless CMS 就必須自己會再寫 Javascript fetch 文章並動態加到 HTML 中，這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 Git-based CMS。
+
+* [Hugo](https://gohugo.io/)
+* [Hexo](https://hexo.io/)
+* [Gatsby.js](https://www.gatsbyjs.com/)
+* [Jekyll](https://jekyllrb.com/)
+* [Next.js](https://nextjs.org/)
+* [Nuxt.js](https://nuxtjs.org/)
+
+### CMS Solutions
+
+因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
+
+![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
+
+* [Cosmic JS](https://www.cosmicjs.com/) (server-based) (cloud)
+* [Contentful](https://www.contentful.com/) (server-based) (cloud)
+* [strapi](https://strapi.io/) (server-based) (self-hosted)
+* [Netlify CMS](https://www.netlifycms.org/) (git-based) (support parse existing site)
+* [Forestry](https://forestry.io/)  (git-based) (support parse existing site)
+* [DatoCMS](https://www.datocms.com/)
+* [Sanity](https://www.sanity.io/)
+* [Prismic](https://prismic.io/)
+* [GraphCMS](https://graphcms.com/)
+* [Cockpit](https://getcockpit.com/)
+
+### 同時整合 SSG 和 CMS 的服務
+
+有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。這些服務單純只是將各種 stack 整合在一起，實際上要寫文章或者調設定還是得回到各個服務處理。
+
+* [Stackbit](https://www.stackbit.com/)
+* [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
+* [Netilify](https://www.netlify.com/)
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png)
+
+### ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview-2.png)對 CMS 的需求
 
 其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 Wordpress 了。
 
@@ -47,61 +103,6 @@ status: Idea
 * 不需要管理 server
 
 那接下來介紹一下常見的 CMS 解決方案組合吧！
-
-## CMS 解決方案組合
-
-現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：
-
-1. Commit-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的 VSC (Version Control System)(ex: Github、Gitlab) 中。
-2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中，亦有包含託管文章與設定的服務。
-3. All in one CMS：提供 Database、Server、管理後台、擴充功能等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)。
-
-其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator (SSG)。
-
-### Static Site Generator (SSG)
-
-按照文章資料的取得與 render 方式，大致可分成兩種類型：
-
-1. 全部打包成靜態 HTML，完全不需要 client side fetch
-2. Single Page Application (SPA)，需要靠 client side fetch 拉資料
-
-你所選用的 SSG 類型會影響到接下來可選用的 Headless CMS，因為若是使用第 1 種，搭配上僅提供 API 的這種 CMS，自己會需要再撰寫 Javascript 去 fetch 文章並動態 append 到 HTML 中，而這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 commit based CMS。
-
-* [Hugo](https://gohugo.io/)
-* [Hexo](https://hexo.io/)
-* [Gatsby.js](https://www.gatsbyjs.com/)
-* [Jekyll](https://jekyllrb.com/)
-* [Next.js](https://nextjs.org/)
-* [Nuxt.js](https://nuxtjs.org/)
-
-### Headless CMS
-
-因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
-
-![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
-
-* [Cosmic JS](https://www.cosmicjs.com/) (server) (cloud)
-* [strapi](https://strapi.io/) (server) (self-hosted)
-* [Netlify CMS](https://www.netlifycms.org/) (server) (cloud) (support parse existing site)
-* [Contentful](https://www.contentful.com/) (server) (cloud)
-* [DatoCMS](https://www.datocms.com/)
-* [Forestry](https://forestry.io/)  (commit) (cloud) (support parse existing site)
-* [Sanity](https://www.sanity.io/)
-* [Prismic](https://prismic.io/)
-* [GraphCMS](https://graphcms.com/)
-* [Cockpit](https://getcockpit.com/)
-
-### 同時整合 SSG 和 CMS 的服務
-
-有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。
-
-* [Stackbit](https://www.stackbit.com/)
-* [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
-* [Netilify](https://www.netlify.com/)
-
-![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png)
-
-![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/gatsby-cloud-preview.png)
 
 ## 新的解決方案
 
