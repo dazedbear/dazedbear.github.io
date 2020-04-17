@@ -77,7 +77,55 @@
 <h3><a class="anchor" aria-hidden="true" id="靜態資源：aws-s3"></a><a href="#靜態資源：aws-s3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>靜態資源：AWS S3</h3>
 <p>其實 hackmd 本身有串接 <a href="https://imgur.com/">imgur</a> 的圖床服務，只要把檔案拖拉到編輯區域就能上傳。只是我個人對於這個服務印象不好，再加上除非你有買私有團隊的收費方案，否則檔案會被放在某個公開的空間中，如果想刪掉圖片會滿麻煩的。因此才會自建一個 AWS S3 bucket 存放圖片，每次需要時就得登入 AWS console 手動上傳圖片、修改公開閱覽權限、最後複製連結貼到 hackmd 當中。</p>
 <p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-s3-asset.png" alt=""></p>
-<h2><a class="anchor" aria-hidden="true" id="對-cms-的需求"></a><a href="#對-cms-的需求" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>對 CMS 的需求</h2>
+<p>其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統。</p>
+<h2><a class="anchor" aria-hidden="true" id="cms-解決方案"></a><a href="#cms-解決方案" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CMS 解決方案</h2>
+<p>現有的 CMS 服務其實很多種，根據我的理解大致分成幾個類型：</p>
+<ol>
+<li>Git-based CMS：僅提供管理後台，設定和文章存在自行設定的 Github Repo 中，適合網站 content 管理。</li>
+<li>Headless CMS：提供管理後台、自動產生的 API 介面 (RESTful or GraphQL)，文章和設定託管在服務供應商 (cloud) 或者自架伺服器 (self-hosted)，適合跨裝置/跨媒體的 content 集中管理。有些服務也提供 A/B Test、寄信等豐富的 Extensions/Add-ons。</li>
+<li>Monolithic CMS：提供 Database、Server、管理後台、Extensions/Plugins 等整套服務，文章和設定都存在自己的 Database 當中。(ex: <a href="https://zh-tw.wordpress.com/">Wordpress</a>)。</li>
+</ol>
+<p>其中第 1、2 種 CMS 由於只有管理資料，必須自己另外建前台頁面來顯示文章，經常會搭配 Static Site Generator (SSG) 使用。</p>
+<h3><a class="anchor" aria-hidden="true" id="static-site-generator-ssg"></a><a href="#static-site-generator-ssg" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Static Site Generator (SSG)</h3>
+<p>按照文章資料的取得與 render 方式，大致可分成三種類型：</p>
+<ol>
+<li>全部打包成靜態 HTML，完全不需要 client side fetch</li>
+<li>Single Page Application (SPA)，需要靠 client side fetch 拉資料</li>
+<li>以上都支援</li>
+</ol>
+<p>你所選用的 SSG 會影響到可搭配的 CMS 選擇，若該 SSG 只支援第 1 種方式，要使用 Headless CMS 就必須自己會再寫 Javascript fetch 文章並動態加到 HTML 中，這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 Git-based CMS。</p>
+<ul>
+<li><a href="https://gohugo.io/">Hugo</a></li>
+<li><a href="https://hexo.io/">Hexo</a></li>
+<li><a href="https://www.gatsbyjs.com/">Gatsby.js</a></li>
+<li><a href="https://jekyllrb.com/">Jekyll</a></li>
+<li><a href="https://nextjs.org/">Next.js</a></li>
+<li><a href="https://nuxtjs.org/">Nuxt.js</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="cms-solutions"></a><a href="#cms-solutions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CMS Solutions</h3>
+<p>因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 <a href="https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/">Picking a back-end for GatsbyJS</a> (<a href="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd">中譯</a>) 來了解其他的服務。</p>
+<p><img src="https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png" alt=""></p>
+<ul>
+<li><a href="https://www.cosmicjs.com/">Cosmic JS</a> (server-based) (cloud)</li>
+<li><a href="https://www.contentful.com/">Contentful</a> (server-based) (cloud)</li>
+<li><a href="https://strapi.io/">strapi</a> (server-based) (self-hosted)</li>
+<li><a href="https://www.netlifycms.org/">Netlify CMS</a> (git-based) (support parse existing site)</li>
+<li><a href="https://forestry.io/">Forestry</a>  (git-based) (support parse existing site)</li>
+<li><a href="https://www.datocms.com/">DatoCMS</a></li>
+<li><a href="https://www.sanity.io/">Sanity</a></li>
+<li><a href="https://prismic.io/">Prismic</a></li>
+<li><a href="https://graphcms.com/">GraphCMS</a></li>
+<li><a href="https://getcockpit.com/">Cockpit</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="同時整合-ssg-和-cms-的服務"></a><a href="#同時整合-ssg-和-cms-的服務" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>同時整合 SSG 和 CMS 的服務</h3>
+<p>有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 <a href="https://www.gatsbyjs.org/docs/glossary/jamstack/">JAMStack</a> 精神的網站。這些服務單純只是將各種 stack 整合在一起，實際上要寫文章或者調設定還是得回到各個服務處理。</p>
+<ul>
+<li><a href="https://www.stackbit.com/">Stackbit</a></li>
+<li><a href="https://www.gatsbyjs.com/cloud/">Gastby Cloud</a></li>
+<li><a href="https://www.netlify.com/">Netilify</a></li>
+</ul>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="httpsdazedbear-pro-assetss3-ap-northeast-1amazonawscomwebsitestackbit-preview-2png對-cms-的需求"></a><a href="#httpsdazedbear-pro-assetss3-ap-northeast-1amazonawscomwebsitestackbit-preview-2png對-cms-的需求" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview-2.png" alt="">對 CMS 的需求</h3>
 <p>其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 Wordpress 了。</p>
 <p>想像中需求會有：</p>
 <ul>
@@ -88,53 +136,6 @@
 <li>不需要管理 server</li>
 </ul>
 <p>那接下來介紹一下常見的 CMS 解決方案組合吧！</p>
-<h2><a class="anchor" aria-hidden="true" id="cms-解決方案組合"></a><a href="#cms-解決方案組合" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CMS 解決方案組合</h2>
-<p>現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：</p>
-<ol>
-<li>Commit-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的 VSC (Version Control System)(ex: Github、Gitlab) 中。</li>
-<li>Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中，亦有包含託管文章與設定的服務。</li>
-<li>All in one CMS：提供 Database、Server、管理後台、擴充功能等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)。</li>
-</ol>
-<p>其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator (SSG)。</p>
-<h3><a class="anchor" aria-hidden="true" id="static-site-generator-ssg"></a><a href="#static-site-generator-ssg" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Static Site Generator (SSG)</h3>
-<p>按照文章資料的取得與 render 方式，大致可分成兩種類型：</p>
-<ol>
-<li>全部打包成靜態 HTML，完全不需要 client side fetch</li>
-<li>Single Page Application (SPA)，需要靠 client side fetch 拉資料</li>
-</ol>
-<p>你所選用的 SSG 類型會影響到接下來可選用的 Headless CMS，因為若是使用第 1 種，搭配上僅提供 API 的這種 CMS，自己會需要再撰寫 Javascript 去 fetch 文章並動態 append 到 HTML 中，而這通常有點麻煩，這時候能選用的就是支援 parse 現有網站 repo 的 commit based CMS。</p>
-<ul>
-<li><a href="https://gohugo.io/">Hugo</a></li>
-<li><a href="https://hexo.io/">Hexo</a></li>
-<li><a href="https://www.gatsbyjs.com/">Gatsby.js</a></li>
-<li><a href="https://jekyllrb.com/">Jekyll</a></li>
-<li><a href="https://nextjs.org/">Next.js</a></li>
-<li><a href="https://nuxtjs.org/">Nuxt.js</a></li>
-</ul>
-<h3><a class="anchor" aria-hidden="true" id="headless-cms"></a><a href="#headless-cms" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Headless CMS</h3>
-<p>因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 <a href="https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/">Picking a back-end for GatsbyJS</a> (<a href="https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd">中譯</a>) 來了解其他的服務。</p>
-<p><img src="https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png" alt=""></p>
-<ul>
-<li><a href="https://www.cosmicjs.com/">Cosmic JS</a> (server) (cloud)</li>
-<li><a href="https://strapi.io/">strapi</a> (server) (self-hosted)</li>
-<li><a href="https://www.netlifycms.org/">Netlify CMS</a> (server) (cloud) (support parse existing site)</li>
-<li><a href="https://www.contentful.com/">Contentful</a> (server) (cloud)</li>
-<li><a href="https://www.datocms.com/">DatoCMS</a></li>
-<li><a href="https://forestry.io/">Forestry</a>  (commit) (cloud) (support parse existing site)</li>
-<li><a href="https://www.sanity.io/">Sanity</a></li>
-<li><a href="https://prismic.io/">Prismic</a></li>
-<li><a href="https://graphcms.com/">GraphCMS</a></li>
-<li><a href="https://getcockpit.com/">Cockpit</a></li>
-</ul>
-<h3><a class="anchor" aria-hidden="true" id="同時整合-ssg-和-cms-的服務"></a><a href="#同時整合-ssg-和-cms-的服務" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>同時整合 SSG 和 CMS 的服務</h3>
-<p>有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 <a href="https://www.gatsbyjs.org/docs/glossary/jamstack/">JAMStack</a> 精神的網站。</p>
-<ul>
-<li><a href="https://www.stackbit.com/">Stackbit</a></li>
-<li><a href="https://www.gatsbyjs.com/cloud/">Gastby Cloud</a></li>
-<li><a href="https://www.netlify.com/">Netilify</a></li>
-</ul>
-<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png" alt=""></p>
-<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/gatsby-cloud-preview.png" alt=""></p>
 <h2><a class="anchor" aria-hidden="true" id="新的解決方案"></a><a href="#新的解決方案" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>新的解決方案</h2>
 <h3><a class="anchor" aria-hidden="true" id="選擇-forestry-的理由"></a><a href="#選擇-forestry-的理由" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>選擇 Forestry 的理由</h3>
 <ol>
@@ -165,4 +166,4 @@
 <h2><a class="anchor" aria-hidden="true" id="小結"></a><a href="#小結" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>小結</h2>
 <h2><a class="anchor" aria-hidden="true" id="補充資料"></a><a href="#補充資料" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>補充資料</h2>
 <p>- <a href="https://getcockpit.com/" title="https://getcockpit.com/">https://getcockpit.com/</a></p>
-</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#舊的解決方案">舊的解決方案</a><ul class="toc-headings"><li><a href="#文章撰寫：hackmdio">文章撰寫：Hackmd.io</a></li><li><a href="#靜態資源：aws-s3">靜態資源：AWS S3</a></li></ul></li><li><a href="#對-cms-的需求">對 CMS 的需求</a></li><li><a href="#cms-解決方案組合">CMS 解決方案組合</a><ul class="toc-headings"><li><a href="#static-site-generator-ssg">Static Site Generator (SSG)</a></li><li><a href="#headless-cms">Headless CMS</a></li><li><a href="#同時整合-ssg-和-cms-的服務">同時整合 SSG 和 CMS 的服務</a></li></ul></li><li><a href="#新的解決方案">新的解決方案</a><ul class="toc-headings"><li><a href="#選擇-forestry-的理由">選擇 Forestry 的理由</a></li><li><a href="#串接與功能簡介">串接與功能簡介</a></li><li><a href="#踩到的雷">踩到的雷</a></li></ul></li><li><a href="#小結">小結</a></li><li><a href="#補充資料">補充資料</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#舊的解決方案">舊的解決方案</a><ul class="toc-headings"><li><a href="#文章撰寫：hackmdio">文章撰寫：Hackmd.io</a></li><li><a href="#靜態資源：aws-s3">靜態資源：AWS S3</a></li></ul></li><li><a href="#cms-解決方案">CMS 解決方案</a><ul class="toc-headings"><li><a href="#static-site-generator-ssg">Static Site Generator (SSG)</a></li><li><a href="#cms-solutions">CMS Solutions</a></li><li><a href="#同時整合-ssg-和-cms-的服務">同時整合 SSG 和 CMS 的服務</a></li><li><a href="#httpsdazedbear-pro-assetss3-ap-northeast-1amazonawscomwebsitestackbit-preview-2png對-cms-的需求"><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview-2.png" alt="">對 CMS 的需求</a></li></ul></li><li><a href="#新的解決方案">新的解決方案</a><ul class="toc-headings"><li><a href="#選擇-forestry-的理由">選擇 Forestry 的理由</a></li><li><a href="#串接與功能簡介">串接與功能簡介</a></li><li><a href="#踩到的雷">踩到的雷</a></li></ul></li><li><a href="#小結">小結</a></li><li><a href="#補充資料">補充資料</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
