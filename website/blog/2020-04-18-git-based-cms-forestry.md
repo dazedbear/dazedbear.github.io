@@ -1,5 +1,5 @@
 ---
-unlisted: true
+unlisted: false
 title: Git-based CMS：Forestry 導入過程分享
 status: Idea
 
