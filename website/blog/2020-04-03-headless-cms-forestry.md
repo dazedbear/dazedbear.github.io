@@ -53,12 +53,49 @@ status: Idea
 現有的 CMS 相關服務其實很多種，根據我的理解大致分成幾個類型：
 
 1. Commit-Based Headless CMS：僅提供管理後台，設定和文章存在額外設定的 VSC (Version Control System)(ex: Github、Gitlab) 中。
-2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中。
-3. All in one CMS：提供 Database、Server、管理後台、擴充功能如 email 等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)
+2. Server-Based Headless CMS：提供管理後台、API Server 提供自動產生的 API 介面 (RESTful/GraphQL)，文章和設定存在額外設定的 Database (ex: MongoDB) 或 VCS 中，亦有包含託管文章與設定的服務。
+3. All in one CMS：提供 Database、Server、管理後台、擴充功能等，文章和設定都存在自己的 Database 當中。(ex: Wordpress)。
 
-其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator 如 [Hugo](https://gohugo.io/)、 [Hexo](https://hexo.io/)、[Gatsby.js](https://www.gatsbyjs.com/)、[Jekyll](https://jekyllrb.com/)、[Next.js](https://nextjs.org/)、[Nuxt.js](https://nuxtjs.org/) 等。
+其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator (SSG)。
+
+來稍稍介紹一下有哪些服務吧！
+
+### Static Site Generator (SSG)
+
+* [Hugo](https://gohugo.io/)
+* [Hexo](https://hexo.io/)
+* [Gatsby.js](https://www.gatsbyjs.com/)
+* [Jekyll](https://jekyllrb.com/)
+* [Next.js](https://nextjs.org/)
+* [Nuxt.js](https://nuxtjs.org/)
+
+### Headless CMS (commit-based)
+
+* Forestry
+
+### Headless CMS (server-based)
 
 ![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
+
+* [Cosmic JS](https://www.cosmicjs.com/)
+* [strapi](https://strapi.io/)
+* Netlify CMS
+* Contentful
+* DatoCMS
+* Sanity
+* Prismic
+
+### 同時整合 SSG 和 CMS 的服務
+
+有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。
+
+* [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
+* [Stackbit](https://www.stackbit.com/)
+* [Netilify](https://www.netlify.com/)
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png)
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/截圖 2020-04-18 上午12.03.46.png)
 
 1. 可用服務選項、特點介紹
 2. 服務評比文章：[https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd "https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd")
