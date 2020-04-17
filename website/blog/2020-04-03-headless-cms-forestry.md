@@ -6,7 +6,7 @@ status: Idea
 ---
 ![Cover](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/0DB65523-3BE4-4535-AD17-6E6C0C35038E.png)
 
-趁著連假的慣例來還還技術債，玩一些平常沒時間碰的新東西。本來打算要把 blog 主要的 library docusaurus migrate 到 v2 版本以便擁有更多自訂彈性，但發現它還沒正式 stable 便暫時作罷。事不宜遲，那就來介紹這次的工事：導入 CMS 優化寫文章的流程。
+趁著連假的慣例來還還技術債，玩一些平常沒時間碰的新東西。本來打算要把 blog 主要的 library [docusaurus](https://docusaurus.io/) migrate 到 v2 版本以便擁有更多自訂彈性，但發現它還沒正式 stable 便暫時作罷。事不宜遲，那就來介紹這次的工事：導入 CMS 優化寫文章的流程。
 
 <!-- truncate -->
 
@@ -34,7 +34,7 @@ status: Idea
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-s3-asset.png)
 
-### 對 CMS 的需求
+## 對 CMS 的需求
 
 其實如果你不需要自建圖床的話，使用 hackmd 是相當便利直覺的方案，不需要開 IDE 寫文章再 commit，用它的服務就能一次解決。不過對我來說，這樣反而有點小繁瑣，所以才會考慮：是不是能有一個後台集中管理? 為此我們需要的就是 CMS (Content Management System) 系統，最具代表性的就屬 Wordpress 了。
 
@@ -58,9 +58,14 @@ status: Idea
 
 其中第 1、2 種 CMS 只有提供資料管理，差別在儲存方式不同、是否需要 server，必須自己另外建前台頁面來顯示，常見會搭配 Static Site Generator (SSG)。
 
-來稍稍介紹一下有哪些服務吧！
-
 ### Static Site Generator (SSG)
+
+按照文章資料的取得與 render 方式，大致可分成兩種類型：
+
+1. 全部打包成靜態 HTML，完全不需要 client side fetch
+2. Single Page Application (SPA)，需要靠 client side fetch 拉資料
+
+你所選用的 SSG 類型會影響到接下來可選用的 Headless CMS，因為若是使用第 1 種，搭配上僅提供 API 的這種 CMS，自己會需要再撰寫 Javascript 去 fetch 文章並動態 append 到 HTML 中，而這通常有點小麻煩。這時候能選用的
 
 * [Hugo](https://gohugo.io/)
 * [Hexo](https://hexo.io/)
@@ -69,36 +74,32 @@ status: Idea
 * [Next.js](https://nextjs.org/)
 * [Nuxt.js](https://nuxtjs.org/)
 
-### Headless CMS (commit-based)
+### Headless CMS
 
-* Forestry
-
-### Headless CMS (server-based)
+因為服務種類真的非常多，我這邊就只挑了一兩款有 free plan 的服務試玩看看，有興趣可以參考這篇 [Picking a back-end for GatsbyJS](https://www.gatsbyjs.org/blog/2018-2-6-choosing-a-back-end/) ([中譯](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd)) 來了解其他的服務。
 
 ![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
 
 * [Cosmic JS](https://www.cosmicjs.com/)
 * [strapi](https://strapi.io/)
-* Netlify CMS
-* Contentful
-* DatoCMS
-* Sanity
-* Prismic
+* [Netlify CMS](https://www.netlifycms.org/)
+* [Contentful](https://www.contentful.com/)
+* [DatoCMS](https://www.datocms.com/)
+* [Forestry](https://forestry.io/)  (commit-based)
+* [Sanity](https://www.sanity.io/)
+* [Prismic](https://prismic.io/)
 
 ### 同時整合 SSG 和 CMS 的服務
 
 有些服務像是提供懶人包一樣，幫你一次處理好建站的所有事情包含：新增 git repo、選擇並設定喜歡的模板與 SSG、選擇與設定喜歡的 CMS、內建 CI build 與 webhook、整合 Google Analytics 等 Tracking 服務 ... 等。讓你不需要寫任何一行 code 就能產出符合 [JAMStack](https://www.gatsbyjs.org/docs/glossary/jamstack/) 精神的網站。
 
-* [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
 * [Stackbit](https://www.stackbit.com/)
+* [Gastby Cloud](https://www.gatsbyjs.com/cloud/)
 * [Netilify](https://www.netlify.com/)
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/stackbit-preview.png)
 
-![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/截圖 2020-04-18 上午12.03.46.png)
-
-1. 可用服務選項、特點介紹
-2. 服務評比文章：[https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd](https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd "https://www.twblogs.net/a/5bf88da1bd9eee18cf8acdfd")
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/gatsby-cloud-preview.png)
 
 ## 新的解決方案
 
