@@ -80,12 +80,12 @@ status: Idea
 
 ![](https://user-images.githubusercontent.com/8896191/78230154-89794800-7503-11ea-9a34-3dcf13f2c0b8.png)
 
-* [Cosmic JS](https://www.cosmicjs.com/)
-* [strapi](https://strapi.io/)
-* [Netlify CMS](https://www.netlifycms.org/)
-* [Contentful](https://www.contentful.com/)
+* [Cosmic JS](https://www.cosmicjs.com/) (server) (cloud)
+* [strapi](https://strapi.io/) (server) (self-hosted)
+* [Netlify CMS](https://www.netlifycms.org/) (server) (cloud) (support parse existing site)
+* [Contentful](https://www.contentful.com/) (server) (cloud)
 * [DatoCMS](https://www.datocms.com/)
-* [Forestry](https://forestry.io/)  (commit-based)
+* [Forestry](https://forestry.io/)  (commit) (cloud) (support parse existing site)
 * [Sanity](https://www.sanity.io/)
 * [Prismic](https://prismic.io/)
 * [GraphCMS](https://graphcms.com/)
