@@ -109,7 +109,29 @@ status: Idea
 
 再加上 Blog 現在使用的 SSG 是 Facebook 開源的技術文件 SSG [Docusaurus](https://docusaurus.io/)，它的 deployment 只支援 build static HTML，因此我只能從 Git-based CMS 裡面的服務來挑。由於 Netlify CMS 設定上似乎看起來比較複雜，我最終挑了 Forestry 來做嘗試。
 
-#### Forestry 基本設定
+### Forestry 安裝與基本設定
+
+安裝其實滿簡單的，照著步驟做就會把 Forestry 設定檔寫到你的 Github Rope 中。
+
+1. 首先選擇你所使用的 SSG。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-1.png)
+
+2. 選擇你所使用的版本控制庫 Version Control System 取得 OAuth 授權。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-2.png)
+
+3. 選擇要導入的 Repo 和未來要用來讀取文章與 commit 的分支。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-3.png)
+
+4. 稍等一下就進入 Dashboard 完成基本安裝。此時可以回到你的 Github Repo 會看到多了一個放設定檔的 `.forestrty` 的資料夾。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-4.png)
+
+5. 下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-articles.png)
 
 #### Front matter
 
