@@ -1,6 +1,6 @@
 ---
 unlisted: true
-title: "[DRAFT] 串接 Headless CMS Forestry 心路歷程"
+title: Git-based CMS：Forestry 導入過程分享
 status: Idea
 
 ---
@@ -145,13 +145,17 @@ Step 5：下一步就是進去 Settings 設定後台左側的選單，設定看�
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-editor.png)
 
-### Forestry Preview 功能設定
+### Forestry Preview 文章預覽
+
+Forestry 有提供一個文章預覽的功能，講白點就是起一個 container clone 你的 code，執行 local 開發指令，所以設定上還滿簡單的，唯一要注意的是一定要跑在 8080 port 才行。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-preview-setting.png)
+
+設定完畢以後，捲到上方就可以啟動預覽用的 container，沒有特別動它的話會一直跑在那，看起來也不會收取費用。等 container 跑起來後，回到文章編輯器點右上角的眼睛圖示，就能開啟預覽的頁面，方便在你改完文章還沒 save 時就能預覽效果修正 (按下 save 就代表有 commit 喔)。要注意的是，container 是不會有 watch 模式自動重 build 刷新內容的，因此你需要重新點一次眼睛圖示來促使 container 重 build 一次。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-preview.png)
 
 ### Forestry Media 自訂上傳設定
-
-![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-asset.png)
 
 Forestry 支援幾種 Media 自訂上傳：
 
@@ -169,16 +173,36 @@ Forestry 支援幾種 Media 自訂上傳：
 
 其他詳細設定方式請直接參閱[官方文件](https://forestry.io/docs/media/)。
 
-### 
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-asset.png)
 
-#### 避免 Trigger 多餘的 CI Build
+### 避免頻繁觸發 Travis CI Build
 
-1. [travis ci condition build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions)
+因為 Forestry 是 Git-based CMS，換句話說你的任何設定存擋、文章存擋，都會產生一個 commit，如果沒有特別設定，會一直觸發 CI build 這樣很可怕。所以我使用了 Travis CI 提供的 [Condition Build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions) 設定來避免不必要的 Build。
 
-#### 
+```yaml
+    branches:
+      only:
+        - develop
+    if:
+      - commit_message !~ /(Forestry configuration|readme)/
+```
 
-### 踩到的雷
+[這個設定](https://github.com/dazedbear/dazedbear.github.io/blob/develop/.travis.yml#L10-L14)的意思是：
 
-1. Front Matter 介紹 & FM title 檔名衝突 (YYYY-_MM-_DD- prefix) 導致 build 不過問題
+> 只有 `develop` 分支有新的 commit，並且「commit 訊息不包含 `Forestry configuration` 或 `readme` 字串」的條件為 true 時才觸發 build
+
+利用簡單的 commit message 來減少 CI build 的觸發頻率，雖然沒有到很精準但還算堪用。
+
+### 踩到檔名格式的雷
+
+在使用的過程中有遇到一個雷：由於一般 SSG 會要求設定文章的標題 Front Matter，Forestry 在你新建文章的時候，會先去撈 `title` 這個欄位的值當作檔名，如果沒填寫才會跳出視窗請你寫檔名。這看似很合理，但是對於 Docusaurus 來說檔名一定要是這樣的格式：
+
+    YYYY-MM-DD-your-title.md
+
+所以 Forestry 自作主張拿 `title` 欄位當檔名，會導致 Build Failed 無法部署網站。因此 workaround 方法就是：新增文章時故意不寫 Front Matter 的 `title` 欄位，以便輸入正確格式的檔名，待儲存並新建檔案之後再補上這欄位。有點蠢但沒有更好的方式了... Orz
 
 ## 小結
+
+這次介紹了新舊兩種文章撰寫的工具和流程，以及不同種類的 CMS 服務和可用的口袋清單，最後聊到了 Forestry 導入的過程與辛酸 (?) 老實說它雖然功能滿陽春的但還滿堪用，不過下次有機會還是想挑戰導入 Netlify CMS 看看，畢竟它的功能看起來很成熟，說不定也滿好用的就是了\~
+
+先到這邊了，待留言評論的功能做完之前，有任何問題歡迎到我的 github 發 issue 討論喔\~感謝各位的閱讀，我們下次見！
