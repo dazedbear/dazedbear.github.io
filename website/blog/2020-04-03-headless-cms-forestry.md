@@ -109,51 +109,73 @@ status: Idea
 
 再加上 Blog 現在使用的 SSG 是 Facebook 開源的技術文件 SSG [Docusaurus](https://docusaurus.io/)，它的 deployment 只支援 build static HTML，因此我只能從 Git-based CMS 裡面的服務來挑。由於 Netlify CMS 設定上似乎看起來比較複雜，我最終挑了 Forestry 來做嘗試。
 
-### Forestry 安裝與基本設定
+### Forestry 安裝
 
 安裝其實滿簡單的，照著步驟做就會把 Forestry 設定檔寫到你的 Github Rope 中。
 
-1) 首先選擇你所使用的 SSG。
+Step 1：首先選擇你所使用的 SSG。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-1.png)
 
-2) 選擇你所使用的版本控制庫 Version Control System 取得 OAuth 授權。
+Step 2：選擇你所使用的版本控制庫 Version Control System 取得 OAuth 授權。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-2.png)
 
-3) 選擇要導入的 Repo 和未來要用來讀取文章與 commit 的分支。
+Step 3：選擇要導入的 Repo 和未來要用來讀取文章與 commit 的分支。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-3.png)
 
-1. 稍等一下就進入 Dashboard 完成基本安裝。此時可以回到你的 Github Repo 會看到多了一個放設定檔的 `.forestrty` 的資料夾。
+Step 4：稍等一下就進入 Dashboard 完成基本安裝。此時可以回到你的 Github Repo 會看到多了一個放設定檔的 `.forestrty` 的資料夾。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-step-4.png)
 
-1. 下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
+Step 5：下一步就是進去 Settings 設定後台左側的選單，設定看起來都滿清楚的就不細講了。此外還可以設定 URL、後台 Logo 等。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-dashboard-finish.png)
 
-### Forestry 功能介紹
+### Forestry 文章列表
 
-1. 文章列表大約長這樣，還算滿清楚，也有搜尋功能，這邊可以調整要顯示的欄位，不過可惜的是不太好用，沒辦法同時顯示文章標題、日期、發布 / 草稿等狀態。
+文章列表大約長這樣，還算滿清楚，也有搜尋功能，這邊可以調整要顯示的欄位，不過可惜的是不太好用，沒辦法同時顯示文章標題、日期、發布 / 草稿等狀態。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-articles.png)
 
-1. 撰寫文章的編輯器畫面長這樣，左半邊是 Front Matter 設定，也就是一般文章最上面會放的 Yaml 設定，這對 SSG 來說很重要，它們會用這些欄位來做到很多功能，像我自己就只設定兩個欄位：標題、發布/隱藏。右半邊是 WYSIWYG editor，支援 Markdown 撰寫與預覽，比較可惜的是它沒有支援 Table，雖然可以透過新增 Snippet 來達成但效果不太好。另外就是中間的那條分隔線是沒辦法拖動的，因此寫文章的空間就有限。
+### Forestry 文章編輯器
+
+撰寫文章的編輯器畫面長這樣，左半邊是 Front Matter 設定，也就是一般文章最上面會放的 Yaml 設定，這對 SSG 來說很重要，它們會用這些欄位來做到很多功能，像我自己就只設定兩個欄位：標題、發布/隱藏。右半邊是 WYSIWYG editor，支援 Markdown 撰寫與預覽，比較可惜的是它沒有支援 Table，雖然可以透過新增 Snippet 來達成但效果不太好。另外就是中間的那條分隔線是沒辦法拖動的，因此寫文章的空間就有限。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-editor.png)
 
-#### Front matter
+### Forestry Preview 功能設定
 
-#### Media 上傳設定
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-preview.png)
 
-1. 串接 AWS S3 上傳 Media Asset
+### Forestry Media 自訂上傳設定
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/install-asset.png)
+
+Forestry 支援幾種 Media 自訂上傳：
+
+* 直接存在 Git Repo
+* AWS S3
+* Cloudinary
+* Netlify Large Media
+
+設定 AWS S3 其實滿簡單的：
+
+* S3 新增一個 bucket，開啟 Public Read 權限
+* IAM 新增一個 Forestry 專用的 Headless User
+* 新增一個 Policy 讓 Headless User 只能對你要上傳的 S3 bucket 有權限操作
+* 把 Key 和 Token 貼回 Forestry 後台的設定就完成了
+
+其他詳細設定方式請直接參閱[官方文件](https://forestry.io/docs/media/)。
+
+### 
 
 #### 避免 Trigger 多餘的 CI Build
 
 1. [travis ci condition build](https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#testing-conditions)
 
-#### Preview 功能設定
+#### 
 
 ### 踩到的雷
 
