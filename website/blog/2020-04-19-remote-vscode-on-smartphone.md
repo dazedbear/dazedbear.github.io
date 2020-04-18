@@ -8,18 +8,15 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
 * 起一台 AWS Lightsail VM，1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
 * 安裝 docker [https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script "https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script")
 
-    $ curl -fsSL https://get.docker.com -o get-docker.sh
-    $ sudo sh get-docker.sh
-    $ sudo usermod -aG docker $USER
-
+  $ curl -fsSL https://get.docker.com -o get-docker.sh
+  $ sudo sh get-docker.sh
+  $ sudo usermod -aG docker $USER
 * 重開 SSH session，確認 docker 安裝成功
 
-    $ docker -v
-
+  $ docker -v
 * 安裝核心 library：[cdr/code-server](https://github.com/cdr/code-server)
 
-    docker run -it -p 8080:8080 -v "$PWD:/home/coder/project" -u "$(id -u):$(id -g)" codercom/code-server:latest
-
+  docker run -it -p 8080:8080 -v "$PWD:/home/coder/project" -u "$(id -u):$(id -g)" codercom/code-server:latest
 * 拿到 password 從 public IP 登入，確認運作沒問題
 * 處理 SSL 憑證
   * AWS Route 53 新增 subdomain 指向 lightsail public IP
@@ -28,5 +25,23 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
   * 幫助 debug 工具：[https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&run=toolpage](https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&run=toolpage "https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&run=toolpage")
   * 遇到多筆的 TXT 驗證：route 53 是同一個 domain 新增一行文字
   * Let's encrypt 解析：[https://andyyou.github.io/2019/04/13/how-to-use-certbot/](https://andyyou.github.io/2019/04/13/how-to-use-certbot/ "https://andyyou.github.io/2019/04/13/how-to-use-certbot/")
+* 還需要多一步驟改 bitnami proxy ([SSL docs](https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/))
+
+    $ vi /opt/bitnami/apache2/conf/bitnami/bitnami.conf
+    
+    # in conf file
+    
+    <VirtualHost _default_:443>
+    ...
+    # 新增這段
+    # Proxy for servinf SSL to additional ports
+    ProxyPass /vscode http://localhost:8080
+    ProxyPassReverse /vscode/ http://localhost:8080
+    ...
+    </VirtualHost>
+    
+    # 重新啟動 bitnami
+    $ sudo /opt/bitnami/ctlscript.sh stop
+    $ sudo /opt/bitnami/ctlscript.sh start
 
 <!-- truncate -->
