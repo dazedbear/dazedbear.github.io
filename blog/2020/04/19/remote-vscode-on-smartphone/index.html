@@ -63,47 +63,49 @@
               }
             });
         </script></nav></div><div class="container mainContainer postContainer blogContainer"><div class="wrapper"><div class="lonePost"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle"><a href="/blog/2020/04/19/remote-vscode-on-smartphone">[DRAFT] 在手機上用 VS Code 開發！！</a></h1><p class="post-meta">April 19, 2020</p><div class="authorBlock"></div></header><div><span><p>介紹 mobile 跑 VSCode 的方法</p>
+<!-- truncate -->
+<h3><a class="anchor" aria-hidden="true" id="step-1：起一台-aws-lightsail-vm，1g-ram，價格httpsawsamazoncomtwlightsailpricing"></a><a href="#step-1：起一台-aws-lightsail-vm，1g-ram，價格httpsawsamazoncomtwlightsailpricing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1：起一台 AWS Lightsail VM，1G RAM，<a href="https://aws.amazon.com/tw/lightsail/pricing/">價格</a></h3>
+<h3><a class="anchor" aria-hidden="true" id="step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server"></a><a href="#step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：安裝核心 library：<a href="https://github.com/cdr/code-server">cdr/code-server</a></h3>
+<pre><code class="hljs css language-bash">    $ wget https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-x86_64.tar.gz
+    $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="step-3：處理-dns"></a><a href="#step-3：處理-dns" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：處理 DNS</h3>
+<p>AWS Route 53 新增 subdomain 指向 Lightsail Public IP</p>
+<h3><a class="anchor" aria-hidden="true" id="step-4：處理-ssl-憑證"></a><a href="#step-4：處理-ssl-憑證" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4：處理 SSL 憑證</h3>
+<h4><a class="anchor" aria-hidden="true" id="使用-bitnami-https-configuration-tool"></a><a href="#使用-bitnami-https-configuration-tool" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 bitnami https configuration tool</h4>
+<p>一鍵自動設定 (<a href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/linux-lightsail-ssl-bitnami/">doc</a>)</p>
+<h4><a class="anchor" aria-hidden="true" id="手動設定-lets-encrypt-產生新的憑證"></a><a href="#手動設定-lets-encrypt-產生新的憑證" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>手動設定 Let's Encrypt 產生新的憑證</h4>
+<p>完成 <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-lets-encrypt-certificates-with-wordpress">教學</a> 的 step 1 - 7 即可。</p>
 <ul>
-<li><p>起一台 AWS Lightsail VM，1G RAM，<a href="https://aws.amazon.com/tw/lightsail/pricing/">價格</a></p></li>
-<li><p>安裝 docker <a href="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script" title="https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script">https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script</a></p>
-<p>$ curl -fsSL <a href="https://get.docker.com">https://get.docker.com</a> -o <a href="http://get-docker.sh">get-docker.sh</a>
-$ sudo sh get-docker.sh
-$ sudo usermod -aG docker $USER</p></li>
-<li><p>重開 SSH session，確認 docker 安裝成功</p>
-<p>$ docker -v</p></li>
-<li><p>安裝核心 library：<a href="https://github.com/cdr/code-server">cdr/code-server</a></p>
-<p>docker run -it -p 8080:8080 -v &quot;$PWD:/home/coder/project&quot; -u &quot;$(id -u):$(id -g)&quot; codercom/code-server:latest</p></li>
-<li><p>拿到 password 從 public IP 登入，確認運作沒問題</p></li>
-<li><p>處理 SSL 憑證</p>
-<ul>
-<li>AWS Route 53 新增 subdomain 指向 lightsail public IP</li>
-<li>使用 Let's Encrypt 產生新的憑證，<a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-lets-encrypt-certificates-with-wordpress">教學</a></li>
 <li>可以先用 <code>--dry-run</code> <a href="https://letsencrypt.org/zh-tw/docs/staging-environment/">測試環境</a>測過沒問題，再正式處理，否則一直在 TXT DNS challenge 失敗會碰上<a href="https://letsencrypt.org/zh-tw/docs/rate-limits/"> rate 限制</a> (5次失敗/每小時)</li>
 <li>幫助 debug 工具：<a href="https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&amp;run=toolpage" title="https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&amp;run=toolpage">https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&amp;run=toolpage</a></li>
 <li>遇到多筆的 TXT 驗證：route 53 是同一個 domain 新增一行文字</li>
 <li>Let's encrypt 解析：<a href="https://andyyou.github.io/2019/04/13/how-to-use-certbot/" title="https://andyyou.github.io/2019/04/13/how-to-use-certbot/">https://andyyou.github.io/2019/04/13/how-to-use-certbot/</a></li>
-</ul></li>
-<li><p>還需要多一步驟改 bitnami proxy (<a href="https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/">SSL docs</a>)</p>
-<p>$ vi /opt/bitnami/apache2/conf/bitnami/bitnami.conf</p>
-<h1><a class="anchor" aria-hidden="true" id="in-conf-file"></a><a href="#in-conf-file" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>in conf file</h1>
-<p><VirtualHost _default_:443>
-...</p>
-<h1><a class="anchor" aria-hidden="true" id="新增這段"></a><a href="#新增這段" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>新增這段</h1>
-<h1><a class="anchor" aria-hidden="true" id="proxy-for-servinf-ssl-to-additional-ports"></a><a href="#proxy-for-servinf-ssl-to-additional-ports" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Proxy for servinf SSL to additional ports</h1>
-<p>ProxyPass /vscode <a href="https://localhost:8080">https://localhost:8080</a>
-ProxyPassReverse /vscode/ <a href="https://localhost:8080">https://localhost:8080</a>
-...
-</VirtualHost></p>
-<h1><a class="anchor" aria-hidden="true" id="重新啟動-bitnami"></a><a href="#重新啟動-bitnami" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>重新啟動 bitnami</h1>
-<p>$ sudo /opt/bitnami/ctlscript.sh restart</p></li>
 </ul>
-<!-- truncate -->
-<p>看來我誤會了，根本不用裝 docker 和設定 bitnami</p>
-<ol>
-<li><p>下載 code-server</p></li>
-<li><p>使用 let's encrypt 產憑證</p></li>
-<li><p>憑證裝進 code server，大功告成</p>
-<p>$ wget <a href="https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-arm64.tar.gz">https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-arm64.tar.gz</a>
-$ tar zxvf code-server-3.1.1-linux-arm64.tar.gz</p></li>
-</ol>
+<h3><a class="anchor" aria-hidden="true" id="step-5：處理-bitnami-proxy"></a><a href="#step-5：處理-bitnami-proxy" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 5：處理 bitnami proxy</h3>
+<p>還需要多一步驟改 bitnami proxy (<a href="https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/">SSL docs</a>)</p>
+<pre><code class="hljs css language-bash">$ vi /opt/bitnami/apache2/conf/bitnami/bitnami.conf
+</code></pre>
+<pre><code class="hljs">      &lt;VirtualHost _default_:443&gt;
+      ...
+      # 新增這段
+      # Proxy for servinf SSL to additional ports
+      ProxyPass /vscode http://code.dazedbear.pro:8080
+      ProxyPassReverse /vscode/ http://code.dazedbear.pro:8080
+      ...
+      &lt;/VirtualHost&gt;
+</code></pre>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># 重新啟動 bitnami</span>
+$ sudo /opt/bitnami/ctlscript.sh restart
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="step-6：啟動-code-server-實際檢查一次"></a><a href="#step-6：啟動-code-server-實際檢查一次" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 6：啟動 code-server 實際檢查一次</h3>
+<pre><code class="hljs css language-bash">$ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
+</code></pre>
+<p>拿到 password 從以下的 url 登入，確認是否運作沒問題</p>
+<p><a href="https://code.dazedbear.pro/vscode/">https://code.dazedbear.pro/vscode/</a></p>
+<h3><a class="anchor" aria-hidden="true" id="step-7：改為背景執行-code-server"></a><a href="#step-7：改為背景執行-code-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 7：改為背景執行 code server</h3>
+<p>停掉 server 然後安裝 PM2，再執行以下指令：</p>
+<pre><code class="hljs css language-bash">$ npm intall -g pm2
+$ pm2 start ./code-server --name vscode --no-autorestart -- <span class="hljs-string">"--host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key"</span>
+</code></pre>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
