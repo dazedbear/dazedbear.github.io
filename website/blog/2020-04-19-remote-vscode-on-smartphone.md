@@ -44,3 +44,12 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
     $ sudo /opt/bitnami/ctlscript.sh restart
 
 <!-- truncate -->
+
+看來我誤會了，根本不用裝 docker 和設定 bitnami
+
+1. 下載 code-server
+2. 使用 let's encrypt 產憑證
+3. 憑證裝進 code server，大功告成
+
+    $ wget https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-arm64.tar.gz
+    $ tar zxvf code-server-3.1.1-linux-arm64.tar.gz
