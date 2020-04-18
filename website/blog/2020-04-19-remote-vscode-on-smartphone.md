@@ -35,13 +35,12 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
     ...
     # 新增這段
     # Proxy for servinf SSL to additional ports
-    ProxyPass /vscode http://localhost:8080
-    ProxyPassReverse /vscode/ http://localhost:8080
+    ProxyPass /vscode https://localhost:8080
+    ProxyPassReverse /vscode/ https://localhost:8080
     ...
     </VirtualHost>
     
     # 重新啟動 bitnami
-    $ sudo /opt/bitnami/ctlscript.sh stop
-    $ sudo /opt/bitnami/ctlscript.sh start
+    $ sudo /opt/bitnami/ctlscript.sh restart
 
 <!-- truncate -->
