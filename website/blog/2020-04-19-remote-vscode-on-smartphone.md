@@ -73,5 +73,5 @@ $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.cr
 
 ```bash
 $ npm intall -g pm2
-$ pm2 start sudo --name vscode --no-autorestart -- "./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key"
+$ pm2 start sudo --name vscode --no-autorestart -- ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
 ```
