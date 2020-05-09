@@ -96,9 +96,54 @@ $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal.png)
 
+基本上到這裡就完成安裝了，只要進到資料夾執行這個指令就能運行 code-server。不過我們還有一些設定要處理故先不啟動。
+
+    $ cd code-server-3.1.1-linux-x86_64
+    $ ./code-server
+
 ### Step 3：處理 DNS
 
-AWS Route 53 新增 subdomain 指向 Lightsail Public IP
+接下來要處理網址部分。以我的 case 來說，我希望可以有一組好記憶的網址來使用 VS Code：
+
+    https://code.dazedbear.pro/vscode/
+
+那麼需要調整 DNS 設定，如果你對 DNS 不是很了解，推薦你看這篇 [Lightsail 的 DNS 介紹](https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/understanding-dns-in-amazon-lightsail)。接下來依據你打算用什麼服務管 DNS Record，設定會有所不同。
+
+#### 使用 Lightsail DNS Zone 管理 (optional)
+
+如果你的 Root Domain 是從其他地方註冊的，可以在 Lightsail 新增 DNS Zone 管理你註冊好的 Domain。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-dns-zone.png)
+
+* 先在你的 Domain Register 管理介面新增 NS Record 指到 Lightsail 的 Name servers
+* 再回到 Lightsail console 點選 Networking，點選 create DNS zone，輸入註冊的 Domain ，點選 create
+* 回到剛建好的 DNS zone，點選 Add record 新增一筆 A record 將 `code.dazedbear.pro` 指向你的 instance 就完成了
+
+#### 使用 AWS Route 53 管理
+
+如果你的 Root 是從 AWS Route 53 註冊的，或者你雖然是從別的 Domain Register 註冊但想用 AWS Route 53 管理 DNS，就需要先幫 Lightsail instance 新建一組 Static IP。[詳細的官方教學在此](https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/amazon-lightsail-using-route-53-to-point-a-domain-to-an-instance)。
+
+一般來說，剛建好 instance 就會拿到一組 Public IP，你可以在瀏覽器網址列用這組 IP 連到 instance，然而這組 AWS 分配的 Public IP 是有機會被 AWS 調節改動，AWS 確保一定有一組 Public IP 給每一個 instance，但是不保證 Public IP 永遠不會變，就算變了也不會主動通知使用者。因此我們需要新建一個永遠不變的公開 Static IP，將 instance attach 到這組 Static IP，再建一組 DNS A record 指到這組 Static IP。
+
+回 Lightsail Console，點選 Networking，點選 Create static IP。選擇和你的 instance 一樣的 region。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-static-ip-1.png)
+
+Attach static IP 到你的 instance，再取個名字按 create 就完成了。其中要注意：**Static IP 的收費方式很特別：只要沒有任何 instance attach 到這組 IP 就開始收你錢，如果有 attach 就免費**，確保 IP 資源不會被浪費，所以之後如果清除 instance 別忘了檢查 Static IP 有沒有被清除，否則會被收冤望錢喔 OAO (曾經因為這樣被收過 USD 1x 過...)。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-static-ip-2.png)
+
+回到 AWS Route 53，新增一組 A record 將 `code.dazedbear.pro` 指向 Lightsail Static IP。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-route53-add-record.png)
+
+由於 DNS 改動要 Push 到網路上各台 Name server 需要一點時間，可以點選 Test Record Set 先試試看是否有改對。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-route53-test-record.png)
+
+稍等一段時間以後，直接開瀏覽器輸入網址 http://code.dazedbear.pro，看到 bitnami 歡迎頁面就代表成功了。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-bitnami-index.png)
 
 ### Step 4：處理 SSL 憑證
 
