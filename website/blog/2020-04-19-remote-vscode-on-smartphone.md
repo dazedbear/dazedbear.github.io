@@ -15,23 +15,51 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
 
 ## 簡介 Cloud IDE
 
-其實現在有許多的 online code editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 [Codepen](https://codepen.io/)、[JS Bin](https://jsbin.com/?html,output)，有些支援單種/多種需編譯的語言，像是 [repl.it](https://repl.it/languages)、[CodeChef](https://www.codechef.com/ide) 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。想要使用 git、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。
+### 常見服務
 
-Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，因此普遍都是需要收費的，就看只收 VM 運行費用還是包含其他費用的差別。來看一下有哪些常見的服務：
+其實現在有許多的 Online Code Editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 [Codepen](https://codepen.io/)、[JS Bin](https://jsbin.com/?html,output)，有些支援單種/多種需編譯的語言，像是 [repl.it](https://repl.it/languages)、[CodeChef](https://www.codechef.com/ide) 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。想要使用 git、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。
 
-*  [AWS Cloud9](https://aws.amazon.com/tw/cloud9/)：早年有名的 Cloud IDE 就是 Cloud9，後來在 2016 年被 AWS 收購改名
+Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，因此普遍都是需要收費的。來看一下有哪些常見的服務：
+
+* [AWS Cloud9](https://aws.amazon.com/tw/cloud9/)：早年有名的 Cloud IDE 就是 Cloud9，後來在 2016 年被 AWS 收購改名
 * [Google Cloud Code](https://cloud.google.com/code)：看介紹覺得不太算是 Cloud IDE，它比較像 AWS Lambda 那種 FaaS (function as a service) 的服務，方便你選用熟悉的 IDE 開發 Kubernate
 * [Azure Visual Studio Codespaces](https://visualstudio.microsoft.com/zh-hant/services/visual-studio-codespaces/)：VS Code 雲端版，需綁定 Azure 帳戶使用
 * [CodeSandbox](https://codesandbox.io/index2)：Web 開發常用的服務，可以免費使用，也是以 VS Code 為基礎
 * [Gitpod](https://www.gitpod.io/)：可以免費使用 (有運行時數限制)，也是以 VS Code 為基礎
 
-其中我自己愛用的是 CodeSandbox，不用額外付費就能開發專案，免費版也沒有運行時間的限制。不過它對於 server side 程式開發、連動 git repo 的部分老實說我還用不習慣，雖說有 terminal 但用起來跟原生的差異很大，沒辦法下 ls 之類的指令，只是單純方便你看 log 而已。編輯器使用起來很像 VS Code 但還是不太一樣。基於以上原因，我才開始思考：
+### 不選用 Cloud 服務的原因
 
-> 有沒有可能使用真正的 Cloud VS Code ? 
+其中我自己愛用的是 CodeSandbox，不用額外付費就能開發專案，免費版也沒有運行時間的限制。不過它對於 server side 程式開發、連動 git repo 的部分老實說我還用不習慣，雖說有 terminal 但用起來跟原生的差異很大，沒辦法下 ls 之類的指令，只是單純方便你看 log 而已。編輯器使用起來很像 VS Code 但還是不太一樣。
 
-答案是
+基於以上原因，我才開始思考：
 
-### Step 1：起一台 AWS Lightsail VM，1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
+> 有沒有可能使用真正的 Cloud VS Code ?
+
+起初先看了 Microsoft 官方推出的 Visual Studio Codespaces，試算了一下[價格](https://azure.microsoft.com/zh-tw/pricing/details/visual-studio-online/)：收取 Storage 和 Calculation 費用，如果建了 instance 30 天都 inactive 沒有使用，基本 Storage 就要 NTD 250、如果週末偶爾開發個 4 小時，Calculation 約是 NTD 53。簡單來說，建好 Cloud IDE 環境基本低消就是 NTD 250 (雖然雲端沒有低消這件事，而是用多少算多少錢，這只是比喻)。總覺得為了不一定常用的 Cloud IDE 花得比 Spotify 還多讓我有點掙扎。
+
+> 有沒有可能使用 Cloud VS Code 花費得更少呢?
+
+答案是有的，就是接下來要介紹的重點：[cdr/code-server](https://github.com/cdr/code-server)。
+
+## 建立自己的 Cloud VS Code
+
+[cdr/code-server](https://github.com/cdr/code-server) 是**社群版本**的 VS Code，方便讓你在任何機器建立 VS Code 開發環境。請注意重點：**社群版本**，它並不是官方維護的，雖然使用起來跟一般 VS Code 沒兩樣，最大的差異就是擴充套件：Code Server 另建一個 Community 的 Martketplace，有些原本官方版 VS Code 好用的擴充套件，換到社群版就不一定有 (像是 [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph))。另外像一些進階的 Live Share 即時協作功能在這版也是沒有的。如果你的需求已經到這種地步，直接使用 Visual Studio Codespaces 應該是最適合的。如果是簡單的開發需求，擴充套件也沒有用很兇，那可以考慮這個方案。
+
+### 解決方案
+
+> 起一個不貴的機器，安裝 Code Server，設定一組網址，開始使用
+
+看起來簡單，實際上有些眉眉角角要處理。接下來我們手把手來實作吧！
+
+### Step 1：建立一台 AWS Lightsail Instance
+
+由於我習慣使用 AWS，再加上 AWS 的服務穩定性相較於 GCP 和 Azure 來得高，幾乎沒什麼聽過什麼某資料中心炸裂使客戶服務完全停擺的糾紛，故就以 AWS 的服務為範例，這邊你可以替換成自己熟悉的服務。
+
+說到 AWS 起 Instance，第一個想到是使用 EC2，不過依稀記得以前算過一台 t2.micro 30 天 24 小時都不關的 EC2 Instance 約略要 USD 18，這樣根本就比 Visual Studio Codespaces 還貴嗎!! 按捏姆湯，有沒有更好的辦法?
+
+如果想要起一台便宜的 Instance，事實上可以考慮 AWS Lightsail。
+
+1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
 
 ### Step 2：安裝核心 library：[cdr/code-server](https://github.com/cdr/code-server)
 
