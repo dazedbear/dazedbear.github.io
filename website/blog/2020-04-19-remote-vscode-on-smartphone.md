@@ -1,6 +1,6 @@
 ---
 unlisted: true
-title: "[DRAFT] 在手機上用 VS Code 開發！！"
+title: "[DRAFT] 在手機上用 Remote VS Code 開發吧！"
 
 ---
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/nicholas-santoianni-bgFB2WJSvLA-unsplash.jpg)
@@ -9,7 +9,7 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
 
 還記得幾年前寫過的文章 [ Eee PC 翻身計劃！](https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan) 就有提過，我一直很想要找到一個簡便的行動工作方式。這次將腦筋動到了手機身上，希望可以用來寫文章、開發程式，出門時帶著手機、藍芽滑鼠、以及藍牙鍵盤，就可以隨時隨地的工作，聽起來真是非常美好的事不是嗎?
 
-這次就來介紹如何在手機上使用 IDE 開發程式吧！
+由於我慣用的 IDE 是 VS Code，這次就來介紹如何在手機上使用 Remote VS Code 開發程式吧！
 
 <!-- truncate -->
 
@@ -33,15 +33,15 @@ Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，
 
 基於以上原因，我才開始思考：
 
-> 有沒有可能使用真正的 Cloud VS Code ?
+> 有沒有可能使用真正的 Remote VS Code ?
 
 起初先看了 Microsoft 官方推出的 Visual Studio Codespaces，試算了一下[價格](https://azure.microsoft.com/zh-tw/pricing/details/visual-studio-online/)：收取 Storage 和 Calculation 費用，如果建了 instance 30 天都 inactive 沒有使用，基本 Storage 就要 NTD 250、如果週末偶爾開發個 4 小時，Calculation 約是 NTD 53。簡單來說，建好 Cloud IDE 環境基本低消就是 NTD 250 (雖然雲端沒有低消這件事，而是用多少算多少錢，這只是比喻)。總覺得為了不一定常用的 Cloud IDE 花得比 Spotify 還多讓我有點掙扎。
 
-> 有沒有可能使用 Cloud VS Code 花費得更少呢?
+> 有沒有可能使用 Remote VS Code 花費得更少呢?
 
 答案是有的，就是接下來要介紹的重點：[cdr/code-server](https://github.com/cdr/code-server)。
 
-## 建立自己的 Cloud VS Code
+## 建立自己的 Remote VS Code
 
 > 起一個不貴的機器，安裝 Code Server，設定一組網址，開始使用
 
@@ -219,7 +219,7 @@ $ sudo /opt/bitnami/ctlscript.sh restart
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-firewall.png)
 
-## Step 7：啟動 code-server
+## Step 7：啟動並登入 code-server
 
 終於到了令人興奮的一刻：要啟動 code-server 做最後的驗證了。首先回到 Lightsail console，重新點選 Connect using SSH 連到你的 instance 裡面，進到先前解壓縮的資料夾，執行以下指令啟動 server 並將 SSL 憑證餵進去試跑看看。
 
@@ -251,3 +251,13 @@ $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.cr
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-login.png)
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-editor.png)
+
+## 成果：手機上運行 Remote VS Code
+
+搭配各種配備在手機上實際跑起來長這樣。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-mobile.jpg)
+
+實際上 4.7 吋手機是真的有點小，不過還算可以開發啦哈哈，若是更大一點的平板就非常適合了，操作速度上比起 CodeSandbox 之類的服務快很多，這樣的解決方案一個月收費才 USD 5，比起其他的方案都來得便宜，真的很令人興奮啊啊啊！之後應該會試試官方版本的 Visual Studio Codespaces，更仔細的比較一下兩個版本的差異，應該滿有趣的\~
+
+最近還聽到 [Github 要推出 Built-in IDE](https://www.ithome.com.tw/news/137465) 的消息，看 screenshot 也是使用 VS Code，很期待實際玩起來如何，說不定過一段時間根本不需要這套自架的解決方案，只要開啟 Github 網頁就能直接開發了，真的很令人期待！
