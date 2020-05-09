@@ -213,24 +213,41 @@ $ sudo /opt/bitnami/ctlscript.sh restart
 
 這時候瀏覽 https://code.dazedbear.pro:8080 還打不到任何東西，一方面 code-server 還沒起，而且 Lightsail instance 的 Firewall 也沒有開通這個 port，所以我們需要做調整。
 
-回到 Lightsail，
+回到 Lightsail console，點選 instance 再點選 Networking，往下找到 Firewall Rules，這邊我們要新增一組 Rule 讓外界打的到 8080 port，填完設定點選 create 就完成了。
 
+    custom / TCP protocal / 8080
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-firewall.png)
 
 ## Step 7：啟動 code-server
 
+終於到了令人興奮的一刻：要啟動 code-server 做最後的驗證了。首先回到 Lightsail console，重新點選 Connect using SSH 連到你的 instance 裡面，進到先前解壓縮的資料夾，執行以下指令啟動 server 並將 SSL 憑證餵進去試跑看看。
+
 ```bash
+$ cd code-server-3.1.1-linux-x86_64
 $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
 ```
 
-拿到 password 從以下的 url 登入，確認是否運作沒問題
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal-code-server.png)
 
-[https://code.dazedbear.pro/vscode/](https://code.dazedbear.pro/vscode/)
+這邊你應該會看到 `Using provided certificate and key for HTTPS` 這行字，代表 https 有運作成功。另外還有一行 `Password is xxxxxx` 這是指每次 code-server 啟動時，預設隨機產生一組 password 供你登入使用，請記得妥善保管喔！
 
-改為背景執行 code server
+試跑確認沒問題後，ctrl+c 停掉 code-server，我們來安裝好用的 Process 管理工具 [PM2](https://pm2.keymetrics.io/) 讓 code-server 可以在背景執行，也方便我們管理。
 
-停掉 server 然後安裝 PM2，再執行以下指令：
+    $ npm install -g pm2
+    $ pm2 ls
 
-```bash
-$ npm intall -g pm2
-$ pm2 start sudo --name vscode --no-autorestart -- ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
-```
+改用以下指令啟動 code-server，並查閱 log 拿到這次的 password：
+
+    $ pm2 start sudo --name vscode --no-autorestart -- ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
+    $ pm2 logs vscode
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal-pm2.png)
+
+最後就是到我們辛苦設定好的網址登入，確認一切運作正常就大功告成了！
+
+[https://code.dazedbear.pro/vscode/](https://code.dazedbear.pro/vscode/ "https://code.dazedbear.pro/vscode/")
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-login.png)
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-editor.png)
