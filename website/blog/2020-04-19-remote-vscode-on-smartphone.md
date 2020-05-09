@@ -53,19 +53,33 @@ Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，
 
 ### Step 1：建立一台 AWS Lightsail Instance
 
-由於我習慣使用 AWS，再加上 AWS 的服務穩定性相較於 GCP 和 Azure 來得高，幾乎沒什麼聽過什麼某資料中心炸裂使客戶服務完全停擺的糾紛，故就以 AWS 的服務為範例，這邊你可以替換成自己熟悉的服務。
+由於我習慣使用 AWS，再加上 AWS 的服務穩定性相較於 GCP 和 Azure 來得高，幾乎沒什麼聽過某資料中心炸裂使客戶服務完全停擺的糾紛，故就以 AWS 的服務為範例，這邊你可以替換成自己熟悉的服務。
 
-說到 AWS 起 Instance，第一個想到是使用 EC2，不過依稀記得以前算過一台 t2.micro 30 天 24 小時都不關的 EC2 Instance 約略要 USD 18，這樣根本就比 Visual Studio Codespaces 還貴嗎!! 按捏姆湯，有沒有更好的辦法?
+說到 AWS 起 Instance，第一個想到是使用 EC2，不過 [試算了價格](https://calculator.aws/#/createCalculator)：1 台 t2.micro (1GB RAM, 1 vCPU) 30 天 24 小時都不關的 EC2 Instance 最少要 USD 11，這樣根本就比 Visual Studio Codespaces 還貴嗎!! 按捏姆湯，有沒有更好的辦法?
 
-如果想要起一台便宜的 Instance，事實上可以考慮 AWS Lightsail。
+事實上，如果想要起便宜的 Instance，你可以考慮 [AWS Lightsail](https://aws.amazon.com/tw/lightsail/)。
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-intro.png)
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-dashboard.png)
 
-個人覺得 Lightsail 服務整體的形象很像是早年的網路主機供應商，從精心設計過
+從精心設計過的親切 UI console、簡單少量的設定按鈕，個人覺得 Lightsail 定位很像早年的[ByetHost](https://byet.host/) 之類的虛擬主機供應商，提供給技術背景不深的使用者快速管理一台機器，省去很多建 EC2 要處理的步驟 (機器規格、Policy、設定 VPC 和 AZ ... 等)，完全交由 AWS 託管。[服務的定價](https://aws.amazon.com/tw/lightsail/pricing/) 滿便宜的，最低一個月 USD 3.5 就可以擁有一台機器，當然這邊也是用多少算多少，如果中途刪除了 instance 就不會算滿 USD 3.5 這樣 (inactive 還是照樣計價喔)。
 
-1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-create-1.png)
+
+首先點選 Create instance，開始選擇這台 VM 你要放的 Region 和 AZ。 
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-create-2.png)
+
+再來選擇要裝的 image，我因為未來會拿這台做其他實驗用途，預先裝好 Node.js 可以幫我省下一些環境設定的工，因此選了 Node.js。要注意的是，這邊大多數的 image 都是 bitnami 提供的，所以預設會裝 bitnami 在內，剛起好就有一台 http server 可以瀏覽頁面。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-create-3.png)
+
+再來選擇機器規格 (費率)，這邊都是以 24 小時 30 天一共運行 730 小時來算的價格，以 [code-server 的最低規格要求](https://github.com/cdr/code-server#requirements)，至少要 1GB RAM、1 vCPU、64bit，所以我選 USD 5 的規格。選完規格再幫 instance 取名字，最後捲到最下方點選 Create 就完成了。
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-create-4.png)
+
+點左上角 Logo 回到 Dashboard 首頁，可以看到你新建好的機器，點選機器就可以看見詳細的資訊與相關設定。
 
 ### Step 2：安裝核心 library：[cdr/code-server](https://github.com/cdr/code-server)
 
