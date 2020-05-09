@@ -15,17 +15,21 @@ title: "[DRAFT] 在手機上用 VS Code 開發！！"
 
 ## 簡介 Cloud IDE
 
-其實現在有許多的 online code editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 [Codepen](https://codepen.io/)、[JS Bin](https://jsbin.com/?html,output)，有些支援單種/多種需編譯的語言，像是 [repl.it](https://repl.it/languages)、[CodeChef](https://www.codechef.com/ide) 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。
+其實現在有許多的 online code editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 [Codepen](https://codepen.io/)、[JS Bin](https://jsbin.com/?html,output)，有些支援單種/多種需編譯的語言，像是 [repl.it](https://repl.it/languages)、[CodeChef](https://www.codechef.com/ide) 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。想要使用 git、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。
 
-想要連動使用版控、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。
-
-Cloud IDE 實際上是起一台 VM 或 Containerr 並安裝 IDE 供你開發使用，因此普遍都是需要收費的，就看只收 VM 運行費用還是包含其他費用的差別。來看一下有哪些常見的服務。
+Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，因此普遍都是需要收費的，就看只收 VM 運行費用還是包含其他費用的差別。來看一下有哪些常見的服務：
 
 *  [AWS Cloud9](https://aws.amazon.com/tw/cloud9/)：早年有名的 Cloud IDE 就是 Cloud9，後來在 2016 年被 AWS 收購改名
 * [Google Cloud Code](https://cloud.google.com/code)：看介紹覺得不太算是 Cloud IDE，它比較像 AWS Lambda 那種 FaaS (function as a service) 的服務，方便你選用熟悉的 IDE 開發 Kubernate
 * [Azure Visual Studio Codespaces](https://visualstudio.microsoft.com/zh-hant/services/visual-studio-codespaces/)：VS Code 雲端版，需綁定 Azure 帳戶使用
 * [CodeSandbox](https://codesandbox.io/index2)：Web 開發常用的服務，可以免費使用，也是以 VS Code 為基礎
 * [Gitpod](https://www.gitpod.io/)：可以免費使用 (有運行時數限制)，也是以 VS Code 為基礎
+
+其中我自己愛用的是 CodeSandbox，不用額外付費就能開發專案，免費版也沒有運行時間的限制。不過它對於 server side 程式開發、連動 git repo 的部分老實說我還用不習慣，雖說有 terminal 但用起來跟原生的差異很大，沒辦法下 ls 之類的指令，只是單純方便你看 log 而已。編輯器使用起來很像 VS Code 但還是不太一樣。基於以上原因，我才開始思考：
+
+> 有沒有可能使用真正的 Cloud VS Code ? 
+
+答案是
 
 ### Step 1：起一台 AWS Lightsail VM，1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
 
