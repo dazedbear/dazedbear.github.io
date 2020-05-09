@@ -2,12 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://www.dazedbear.pro/blog</id>
     <title>DazedBear Studio Blog</title>
-    <updated>2020-04-18T06:00:00.000Z</updated>
+    <updated>2020-05-10T06:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://www.dazedbear.pro/blog"/>
     <subtitle>The best place to stay up-to-date with the latest DazedBear Studio news and events.</subtitle>
     <logo>https://www.dazedbear.pro/img/favicon.ico</logo>
     <rights>Copyright © 2020 DazedBear Studio</rights>
+    <entry>
+        <title type="html"><![CDATA[在手機上用 Remote VS Code 開發吧！]]></title>
+        <id>https://www.dazedbear.pro/blog/2020/05/10/remote-vscode-on-smartphone.html</id>
+        <link href="https://www.dazedbear.pro/blog/2020/05/10/remote-vscode-on-smartphone.html"/>
+        <updated>2020-05-10T06:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/nicholas-santoianni-bgFB2WJSvLA-cover.jpg" alt=""></p>
+<blockquote>
+<p>Photo by <a href="https://unsplash.com/@nsantoianni?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Nicholas Santoianni</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+</blockquote>
+<p>還記得幾年前寫過的文章 <a href="https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan"> Eee PC 翻身計劃！</a> 就有提過，我一直很想要找到一個簡便的行動工作方式。這次將腦筋動到了手機身上，希望可以用來寫文章、開發程式，出門時帶著手機、藍芽滑鼠、以及藍牙鍵盤，就可以隨時隨地的工作，聽起來真是非常美好的事不是嗎?</p>
+<p>由於我慣用的 IDE 是 VS Code，這次就來介紹如何在手機上使用 Remote VS Code 開發程式吧！</p>
+]]></summary>
+        <author>
+            <name/>
+            <email/>
+            <uri/>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Git-based CMS：Forestry 導入過程分享]]></title>
         <id>https://www.dazedbear.pro/blog/2020/04/18/git-based-cms-forestry.html</id>
