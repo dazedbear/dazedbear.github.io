@@ -59,6 +59,12 @@ Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，
 
 如果想要起一台便宜的 Instance，事實上可以考慮 AWS Lightsail。
 
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-intro.png)
+
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-dashboard.png)
+
+個人覺得 Lightsail 服務整體的形象很像是早年的網路主機供應商，從精心設計過
+
 1G RAM，[價格](https://aws.amazon.com/tw/lightsail/pricing/)
 
 ### Step 2：安裝核心 library：[cdr/code-server](https://github.com/cdr/code-server)
