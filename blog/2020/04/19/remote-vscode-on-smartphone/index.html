@@ -102,6 +102,9 @@
 <p>由於我習慣使用 AWS，再加上 AWS 的服務穩定性相較於 GCP 和 Azure 來得高，幾乎沒什麼聽過什麼某資料中心炸裂使客戶服務完全停擺的糾紛，故就以 AWS 的服務為範例，這邊你可以替換成自己熟悉的服務。</p>
 <p>說到 AWS 起 Instance，第一個想到是使用 EC2，不過依稀記得以前算過一台 t2.micro 30 天 24 小時都不關的 EC2 Instance 約略要 USD 18，這樣根本就比 Visual Studio Codespaces 還貴嗎!! 按捏姆湯，有沒有更好的辦法?</p>
 <p>如果想要起一台便宜的 Instance，事實上可以考慮 AWS Lightsail。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-intro.png" alt=""></p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-dashboard.png" alt=""></p>
+<p>個人覺得 Lightsail 服務整體的形象很像是早年的網路主機供應商，從精心設計過</p>
 <p>1G RAM，<a href="https://aws.amazon.com/tw/lightsail/pricing/">價格</a></p>
 <h3><a class="anchor" aria-hidden="true" id="step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server"></a><a href="#step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：安裝核心 library：<a href="https://github.com/cdr/code-server">cdr/code-server</a></h3>
 <pre><code class="hljs css language-bash">    $ wget https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-x86_64.tar.gz
