@@ -1,9 +1,9 @@
 ---
-unlisted: true
+unlisted: false
 title: 在手機上用 Remote VS Code 開發吧！
 
 ---
-![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/nicholas-santoianni-bgFB2WJSvLA-unsplash (1).jpg)
+![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/nicholas-santoianni-bgFB2WJSvLA-cover.jpg)
 
 > Photo by [Nicholas Santoianni](https://unsplash.com/@nsantoianni?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
