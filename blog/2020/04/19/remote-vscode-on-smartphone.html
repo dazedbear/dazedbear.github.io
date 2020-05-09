@@ -121,8 +121,36 @@
 $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
 </code></pre>
 <p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal.png" alt=""></p>
+<p>基本上到這裡就完成安裝了，只要進到資料夾執行這個指令就能運行 code-server。不過我們還有一些設定要處理故先不啟動。</p>
+<pre><code class="hljs">$ cd code-server-3.1.1-linux-x86_64
+$ ./code-server
+</code></pre>
 <h3><a class="anchor" aria-hidden="true" id="step-3：處理-dns"></a><a href="#step-3：處理-dns" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3：處理 DNS</h3>
-<p>AWS Route 53 新增 subdomain 指向 Lightsail Public IP</p>
+<p>接下來要處理網址部分。以我的 case 來說，我希望可以有一組好記憶的網址來使用 VS Code：</p>
+<pre><code class="hljs">https://code.dazedbear.pro/vscode/
+</code></pre>
+<p>那麼需要調整 DNS 設定，如果你對 DNS 不是很了解，推薦你看這篇 <a href="https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/understanding-dns-in-amazon-lightsail">Lightsail 的 DNS 介紹</a>。接下來依據你打算用什麼服務管 DNS Record，設定會有所不同。</p>
+<h4><a class="anchor" aria-hidden="true" id="使用-lightsail-dns-zone-管理-optional"></a><a href="#使用-lightsail-dns-zone-管理-optional" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 Lightsail DNS Zone 管理 (optional)</h4>
+<p>如果你的 Root Domain 是從其他地方註冊的，可以在 Lightsail 新增 DNS Zone 管理你註冊好的 Domain。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-dns-zone.png" alt=""></p>
+<ul>
+<li>先在你的 Domain Register 管理介面新增 NS Record 指到 Lightsail 的 Name servers</li>
+<li>再回到 Lightsail console 點選 Networking，點選 create DNS zone，輸入註冊的 Domain ，點選 create</li>
+<li>回到剛建好的 DNS zone，點選 Add record 新增一筆 A record 將 <code>code.dazedbear.pro</code> 指向你的 instance 就完成了</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" id="使用-aws-route-53-管理"></a><a href="#使用-aws-route-53-管理" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 AWS Route 53 管理</h4>
+<p>如果你的 Root 是從 AWS Route 53 註冊的，或者你雖然是從別的 Domain Register 註冊但想用 AWS Route 53 管理 DNS，就需要先幫 Lightsail instance 新建一組 Static IP。<a href="https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/amazon-lightsail-using-route-53-to-point-a-domain-to-an-instance">詳細的官方教學在此</a>。</p>
+<p>一般來說，剛建好 instance 就會拿到一組 Public IP，你可以在瀏覽器網址列用這組 IP 連到 instance，然而這組 AWS 分配的 Public IP 是有機會被 AWS 調節改動，AWS 確保一定有一組 Public IP 給每一個 instance，但是不保證 Public IP 永遠不會變，就算變了也不會主動通知使用者。因此我們需要新建一個永遠不變的公開 Static IP，將 instance attach 到這組 Static IP，再建一組 DNS A record 指到這組 Static IP。</p>
+<p>回 Lightsail Console，點選 Networking，點選 Create static IP。選擇和你的 instance 一樣的 region。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-static-ip-1.png" alt=""></p>
+<p>Attach static IP 到你的 instance，再取個名字按 create 就完成了。其中要注意：<strong>Static IP 的收費方式很特別：只要沒有任何 instance attach 到這組 IP 就開始收你錢，如果有 attach 就免費</strong>，確保 IP 資源不會被浪費，所以之後如果清除 instance 別忘了檢查 Static IP 有沒有被清除，否則會被收冤望錢喔 OAO (曾經因為這樣被收過 USD 1x 過...)。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-static-ip-2.png" alt=""></p>
+<p>回到 AWS Route 53，新增一組 A record 將 <code>code.dazedbear.pro</code> 指向 Lightsail Static IP。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-route53-add-record.png" alt=""></p>
+<p>由於 DNS 改動要 Push 到網路上各台 Name server 需要一點時間，可以點選 Test Record Set 先試試看是否有改對。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-route53-test-record.png" alt=""></p>
+<p>稍等一段時間以後，直接開瀏覽器輸入網址 <a href="http://code.dazedbear.pro">http://code.dazedbear.pro</a>，看到 bitnami 歡迎頁面就代表成功了。</p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-bitnami-index.png" alt=""></p>
 <h3><a class="anchor" aria-hidden="true" id="step-4：處理-ssl-憑證"></a><a href="#step-4：處理-ssl-憑證" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 4：處理 SSL 憑證</h3>
 <h4><a class="anchor" aria-hidden="true" id="使用-bitnami-https-configuration-tool"></a><a href="#使用-bitnami-https-configuration-tool" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 bitnami https configuration tool</h4>
 <p>一鍵自動設定 (<a href="https://aws.amazon.com/tw/premiumsupport/knowledge-center/linux-lightsail-ssl-bitnami/">doc</a>)</p>
