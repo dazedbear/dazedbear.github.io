@@ -70,9 +70,8 @@
 <p>這次就來介紹如何在手機上使用 IDE 開發程式吧！</p>
 <!-- truncate -->
 <h2><a class="anchor" aria-hidden="true" id="簡介-cloud-ide"></a><a href="#簡介-cloud-ide" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>簡介 Cloud IDE</h2>
-<p>其實現在有許多的 online code editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 <a href="https://codepen.io/">Codepen</a>、<a href="https://jsbin.com/?html,output">JS Bin</a>，有些支援單種/多種需編譯的語言，像是 <a href="https://repl.it/languages">repl.it</a>、<a href="https://www.codechef.com/ide">CodeChef</a> 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。</p>
-<p>想要連動使用版控、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。</p>
-<p>Cloud IDE 實際上是起一台 VM 或 Containerr 並安裝 IDE 供你開發使用，因此普遍都是需要收費的，就看只收 VM 運行費用還是包含其他費用的差別。來看一下有哪些常見的服務。</p>
+<p>其實現在有許多的 online code editor 服務，只需打開瀏覽器連到網站就可以使用，對前端來說常見的有 <a href="https://codepen.io/">Codepen</a>、<a href="https://jsbin.com/?html,output">JS Bin</a>，有些支援單種/多種需編譯的語言，像是 <a href="https://repl.it/languages">repl.it</a>、<a href="https://www.codechef.com/ide">CodeChef</a> 等，隨便搜尋一下都非常多。大多數用途是測試語法、練習演算法、社群提問時方便分享程式碼片段等，不太能夠完整開發一個專案。想要使用 git、有 terminal 可以下指令、設置斷點除錯等，這時候你需要的是完整的 Cloud IDE。</p>
+<p>Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，因此普遍都是需要收費的，就看只收 VM 運行費用還是包含其他費用的差別。來看一下有哪些常見的服務：</p>
 <ul>
 <li><a href="https://aws.amazon.com/tw/cloud9/">AWS Cloud9</a>：早年有名的 Cloud IDE 就是 Cloud9，後來在 2016 年被 AWS 收購改名</li>
 <li><a href="https://cloud.google.com/code">Google Cloud Code</a>：看介紹覺得不太算是 Cloud IDE，它比較像 AWS Lambda 那種 FaaS (function as a service) 的服務，方便你選用熟悉的 IDE 開發 Kubernate</li>
@@ -80,6 +79,11 @@
 <li><a href="https://codesandbox.io/index2">CodeSandbox</a>：Web 開發常用的服務，可以免費使用，也是以 VS Code 為基礎</li>
 <li><a href="https://www.gitpod.io/">Gitpod</a>：可以免費使用 (有運行時數限制)，也是以 VS Code 為基礎</li>
 </ul>
+<p>其中我自己愛用的是 CodeSandbox，不用額外付費就能開發專案，免費版也沒有運行時間的限制。不過它對於 server side 程式開發、連動 git repo 的部分老實說我還用不習慣，雖說有 terminal 但用起來跟原生的差異很大，沒辦法下 ls 之類的指令，只是單純方便你看 log 而已。編輯器使用起來很像 VS Code 但還是不太一樣。基於以上原因，我才開始思考：</p>
+<blockquote>
+<p>有沒有可能使用真正的 Cloud VS Code ?</p>
+</blockquote>
+<p>答案是</p>
 <h3><a class="anchor" aria-hidden="true" id="step-1：起一台-aws-lightsail-vm，1g-ram，價格httpsawsamazoncomtwlightsailpricing"></a><a href="#step-1：起一台-aws-lightsail-vm，1g-ram，價格httpsawsamazoncomtwlightsailpricing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1：起一台 AWS Lightsail VM，1G RAM，<a href="https://aws.amazon.com/tw/lightsail/pricing/">價格</a></h3>
 <h3><a class="anchor" aria-hidden="true" id="step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server"></a><a href="#step-2：安裝核心-library：cdrcode-serverhttpsgithubcomcdrcode-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2：安裝核心 library：<a href="https://github.com/cdr/code-server">cdr/code-server</a></h3>
 <pre><code class="hljs css language-bash">    $ wget https://github.com/cdr/code-server/releases/download/3.1.1/code-server-3.1.1-linux-x86_64.tar.gz
