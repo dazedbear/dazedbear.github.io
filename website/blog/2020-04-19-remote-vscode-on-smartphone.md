@@ -176,9 +176,9 @@ Attach static IP 到你的 instance，再取個名字按 create 就完成了。�
 
 我就是在這搞不清楚驗證 string 要怎麼填才會一直失敗踩到限制..(汗。由於前面說過 DNS Record 推到各台 DNS server 需要一點時間，這邊 [有個工具](https://mxtoolbox.com/SuperTool.aspx?action=txt%3a_acme-challenge.dazedbear.pro&run=toolpage) 可以幫助你確認 TXT Record 現在的值是多少，確認字串更新上去以後再繼續進行下一步的 TXT DNS 驗證。
 
-#### Let's Encrypt 運作原理解析
+#### Reference：解析 Certbot (Let's Encrypt) 使用方式
 
-在查資料時偶然查到 [這篇介紹文章](https://andyyou.github.io/2019/04/13/how-to-use-certbot/)，雖然還沒有完全拜讀過，但看起來介紹得滿詳細的，就放在這邊推薦給有興趣的人看看。
+在查資料時偶然查到 [『解析 Certbot (Let's Encrypt) 使用方式』](https://andyyou.github.io/2019/04/13/how-to-use-certbot/) 這篇文章，雖然還沒有完全拜讀過，但看起來介紹得滿詳細的，就放在這邊推薦給有興趣的人看看。
 
 ## Step 5：處理 bitnami proxy
 
