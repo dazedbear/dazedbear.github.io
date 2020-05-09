@@ -105,7 +105,7 @@ $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
 
 接下來要處理網址部分。以我的 case 來說，我希望可以有一組好記憶的網址來使用 VS Code：
 
-    https://code.dazedbear.pro/vscode/
+> [https://code.dazedbear.pro/vscode/](https://code.dazedbear.pro/vscode/ "https://code.dazedbear.pro/vscode/")
 
 那麼需要調整 DNS 設定，如果你對 DNS 不是很了解，推薦你看這篇 [Lightsail 的 DNS 介紹](https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/understanding-dns-in-amazon-lightsail)。接下來依據你打算用什麼服務管 DNS Record，設定會有所不同。
 
