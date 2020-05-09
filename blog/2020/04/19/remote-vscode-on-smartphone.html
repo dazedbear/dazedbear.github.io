@@ -195,15 +195,28 @@ ProxyPassReverse <span class="hljs-string">/vscode/</span> http:<span class="hlj
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="step-6：調整-lightsail-instance-firewall-rules"></a><a href="#step-6：調整-lightsail-instance-firewall-rules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 6：調整 Lightsail instance firewall rules</h2>
 <p>這時候瀏覽 <a href="https://code.dazedbear.pro:8080">https://code.dazedbear.pro:8080</a> 還打不到任何東西，一方面 code-server 還沒起，而且 Lightsail instance 的 Firewall 也沒有開通這個 port，所以我們需要做調整。</p>
-<p>回到 Lightsail，</p>
+<p>回到 Lightsail console，點選 instance 再點選 Networking，往下找到 Firewall Rules，這邊我們要新增一組 Rule 讓外界打的到 8080 port，填完設定點選 create 就完成了。</p>
+<pre><code class="hljs">custom / TCP protocal / 8080
+</code></pre>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-firewall.png" alt=""></p>
 <h2><a class="anchor" aria-hidden="true" id="step-7：啟動-code-server"></a><a href="#step-7：啟動-code-server" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 7：啟動 code-server</h2>
-<pre><code class="hljs css language-bash">$ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
+<p>終於到了令人興奮的一刻：要啟動 code-server 做最後的驗證了。首先回到 Lightsail console，重新點選 Connect using SSH 連到你的 instance 裡面，進到先前解壓縮的資料夾，執行以下指令啟動 server 並將 SSL 憑證餵進去試跑看看。</p>
+<pre><code class="hljs css language-bash">$ <span class="hljs-built_in">cd</span> code-server-3.1.1-linux-x86_64
+$ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
 </code></pre>
-<p>拿到 password 從以下的 url 登入，確認是否運作沒問題</p>
-<p><a href="https://code.dazedbear.pro/vscode/">https://code.dazedbear.pro/vscode/</a></p>
-<p>改為背景執行 code server</p>
-<p>停掉 server 然後安裝 PM2，再執行以下指令：</p>
-<pre><code class="hljs css language-bash">$ npm intall -g pm2
-$ pm2 start sudo --name vscode --no-autorestart -- ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal-code-server.png" alt=""></p>
+<p>這邊你應該會看到 <code>Using provided certificate and key for HTTPS</code> 這行字，代表 https 有運作成功。另外還有一行 <code>Password is xxxxxx</code> 這是指每次 code-server 啟動時，預設隨機產生一組 password 供你登入使用，請記得妥善保管喔！</p>
+<p>試跑確認沒問題後，ctrl+c 停掉 code-server，我們來安裝好用的 Process 管理工具 <a href="https://pm2.keymetrics.io/">PM2</a> 讓 code-server 可以在背景執行，也方便我們管理。</p>
+<pre><code class="hljs">$ npm install -g pm2
+$ pm2 ls
 </code></pre>
+<p>改用以下指令啟動 code-server，並查閱 log 拿到這次的 password：</p>
+<pre><code class="hljs">$ pm2 start sudo --name vscode --no-autorestart -- ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
+$ pm2 logs vscode
+</code></pre>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-terminal-pm2.png" alt=""></p>
+<p>最後就是到我們辛苦設定好的網址登入，確認一切運作正常就大功告成了！</p>
+<p><a href="https://code.dazedbear.pro/vscode/" title="https://code.dazedbear.pro/vscode/">https://code.dazedbear.pro/vscode/</a></p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-login.png" alt=""></p>
+<p><img src="https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/remote-vscode-editor.png" alt=""></p>
 </span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#簡介-cloud-ide">簡介 Cloud IDE</a><ul class="toc-headings"><li><a href="#常見服務">常見服務</a></li><li><a href="#不選用-cloud-ide-服務的原因">不選用 Cloud IDE 服務的原因</a></li></ul></li><li><a href="#建立自己的-cloud-vs-code">建立自己的 Cloud VS Code</a></li><li><a href="#step-1：建立一台-aws-lightsail-instance">Step 1：建立一台 AWS Lightsail Instance</a></li><li><a href="#step-2：安裝核心-library：cdrcode-server">Step 2：安裝核心 library：cdr/code-server</a></li><li><a href="#step-3：處理-dns">Step 3：處理 DNS</a><ul class="toc-headings"><li><a href="#使用-lightsail-dns-zone-管理">使用 Lightsail DNS Zone 管理</a></li><li><a href="#使用-aws-route-53-管理">使用 AWS Route 53 管理</a></li></ul></li><li><a href="#step-4：處理-ssl-憑證">Step 4：處理 SSL 憑證</a><ul class="toc-headings"><li><a href="#使用-bitnami-https-configuration-tool-設定憑證">使用 bitnami https configuration tool 設定憑證</a></li><li><a href="#使用-lets-encrypt-設定憑證">使用 Let's Encrypt 設定憑證</a></li></ul></li><li><a href="#step-5：處理-bitnami-proxy">Step 5：處理 bitnami proxy</a></li><li><a href="#step-6：調整-lightsail-instance-firewall-rules">Step 6：調整 Lightsail instance firewall rules</a></li><li><a href="#step-7：啟動-code-server">Step 7：啟動 code-server</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
