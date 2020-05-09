@@ -43,15 +43,13 @@ Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，
 
 ## 建立自己的 Cloud VS Code
 
-[cdr/code-server](https://github.com/cdr/code-server) 是**社群版本**的 VS Code，方便讓你在任何機器建立 VS Code 開發環境。請注意重點：**社群版本**，它並不是官方維護的，雖然使用起來跟一般 VS Code 沒兩樣，最大的差異就是擴充套件：Code Server 另建一個 Community 的 Martketplace，有些原本官方版 VS Code 好用的擴充套件，換到社群版就不一定有 (像是 [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph))。另外像一些進階的 Live Share 即時協作功能在這版也是沒有的。如果你的需求已經到這種地步，直接使用 Visual Studio Codespaces 應該是最適合的。如果是簡單的開發需求，擴充套件也沒有用很兇，那可以考慮這個方案。
-
-### 解決方案
-
 > 起一個不貴的機器，安裝 Code Server，設定一組網址，開始使用
+
+[cdr/code-server](https://github.com/cdr/code-server) 是**社群版本**的 VS Code，方便讓你在任何機器建立 VS Code 開發環境。請注意重點：**社群版本**，它並不是官方維護的，雖然使用起來跟一般 VS Code 沒兩樣，最大的差異就是擴充套件：Code Server 另建一個 Community 的 Martketplace，有些原本官方版 VS Code 好用的擴充套件，換到社群版就不一定有 (像是 [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph))。另外像一些進階的 Live Share 即時協作功能在這版也是沒有的。如果你的需求已經到這種地步，直接使用 Visual Studio Codespaces 應該是最適合的。如果是簡單的開發需求，擴充套件也沒有用很兇，那可以考慮這個方案。
 
 看起來簡單，實際上有些眉眉角角要處理。接下來我們手把手來實作吧！
 
-### Step 1：建立一台 AWS Lightsail Instance
+## Step 1：建立一台 AWS Lightsail Instance
 
 由於我習慣使用 AWS，再加上 AWS 的服務穩定性相較於 GCP 和 Azure 來得高，幾乎沒什麼聽過某資料中心炸裂使客戶服務完全停擺的糾紛，故就以 AWS 的服務為範例，這邊你可以替換成自己熟悉的服務。
 
@@ -81,7 +79,7 @@ Cloud IDE 實際上是起一台 VM/Container 並安裝 IDE 供你開發使用，
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-create-4.png)
 
-### Step 2：安裝核心 library：cdr/code-server
+## Step 2：安裝核心 library：cdr/code-server
 
 下一步是 SSH 連進 instance 安裝 [cdr/code-server](https://github.com/cdr/code-server)。我們先到 code-server 的 Github repo 去[找最新的 release](https://github.com/cdr/code-server/releases)，我們要找的是 `linux-x86_64.tar.gz` 版本，然後複製連結。
 
@@ -101,7 +99,7 @@ $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
     $ cd code-server-3.1.1-linux-x86_64
     $ ./code-server
 
-### Step 3：處理 DNS
+## Step 3：處理 DNS
 
 接下來要處理網址部分。以我的 case 來說，我希望可以有一組好記憶的網址來使用 VS Code：
 
@@ -109,7 +107,7 @@ $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
 
 那麼需要調整 DNS 設定，如果你對 DNS 不是很了解，推薦你看這篇 [Lightsail 的 DNS 介紹](https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/understanding-dns-in-amazon-lightsail)。接下來依據你打算用什麼服務管 DNS Record，設定會有所不同。
 
-#### 使用 Lightsail DNS Zone 管理 (optional)
+### 使用 Lightsail DNS Zone 管理
 
 如果你的 Root Domain 是從其他地方註冊的，可以在 Lightsail 新增 DNS Zone 管理你註冊好的 Domain。
 
@@ -119,7 +117,7 @@ $ tar zxvf code-server-3.1.1-linux-x86_64.tar.gz
 * 再回到 Lightsail console 點選 Networking，點選 create DNS zone，輸入註冊的 Domain ，點選 create
 * 回到剛建好的 DNS zone，點選 Add record 新增一筆 A record 將 `code.dazedbear.pro` 指向你的 instance 就完成了
 
-#### 使用 AWS Route 53 管理
+### 使用 AWS Route 53 管理
 
 如果你的 Root 是從 AWS Route 53 註冊的，或者你雖然是從別的 Domain Register 註冊但想用 AWS Route 53 管理 DNS，就需要先幫 Lightsail instance 新建一組 Static IP。[詳細的官方教學在此](https://lightsail.aws.amazon.com/ls/docs/zh_tw/articles/amazon-lightsail-using-route-53-to-point-a-domain-to-an-instance)。
 
@@ -145,13 +143,13 @@ Attach static IP 到你的 instance，再取個名字按 create 就完成了。�
 
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/aws-lightsail-bitnami-index.png)
 
-### Step 4：處理 SSL 憑證
+## Step 4：處理 SSL 憑證
 
-#### 使用 bitnami https configuration tool
+### 使用 bitnami https configuration tool
 
 一鍵自動設定 ([doc](https://aws.amazon.com/tw/premiumsupport/knowledge-center/linux-lightsail-ssl-bitnami/))
 
-#### 手動設定 Let's Encrypt 產生新的憑證
+### 手動設定 Let's Encrypt 產生新的憑證
 
 完成 [教學](https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-using-lets-encrypt-certificates-with-wordpress) 的 step 1 - 7 即可。
 
@@ -160,7 +158,7 @@ Attach static IP 到你的 instance，再取個名字按 create 就完成了。�
 * 遇到多筆的 TXT 驗證：route 53 是同一個 domain 新增一行文字
 * Let's encrypt 解析：[https://andyyou.github.io/2019/04/13/how-to-use-certbot/](https://andyyou.github.io/2019/04/13/how-to-use-certbot/ "https://andyyou.github.io/2019/04/13/how-to-use-certbot/")
 
-### Step 5：處理 bitnami proxy
+## Step 5：處理 bitnami proxy
 
 還需要多一步驟改 bitnami proxy ([SSL docs](https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/))
 
@@ -182,7 +180,7 @@ $ vi /opt/bitnami/apache2/conf/bitnami/bitnami.conf
 $ sudo /opt/bitnami/ctlscript.sh restart
 ```
 
-### Step 6：啟動 code-server 實際檢查一次
+## Step 6：啟動 code-server 實際檢查一次
 
 ```bash
 $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.crt --cert-key=/opt/bitnami/apache2/conf/server.key
@@ -192,7 +190,7 @@ $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.cr
 
 [https://code.dazedbear.pro/vscode/](https://code.dazedbear.pro/vscode/)
 
-### Step 7：改為背景執行 code server
+## Step 7：改為背景執行 code server
 
 停掉 server 然後安裝 PM2，再執行以下指令：
 
