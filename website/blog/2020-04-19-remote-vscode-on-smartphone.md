@@ -182,27 +182,39 @@ Attach static IP 到你的 instance，再取個名字按 create 就完成了。�
 
 ## Step 5：處理 bitnami proxy
 
-還需要多一步驟改 bitnami proxy ([SSL docs](https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/))
+完成上個步驟後，如果你瀏覽 https://code.dazedbear.pro 應該會看到 https 正常運作。那麼這一步驟要做的事情是：
+
+> 起在 8080 port 的 code-server 可以吃到 SSL 憑證，並且指到 /vscode 路徑
+
+為此我們需要改 bitnami proxy，詳細資訊可以參考 [這份官方文件](https://docs.bitnami.com/bch/infrastructure/lamp/administration/enable-https-ssl-apache/) ，這邊簡單講解怎麼改它。首先編輯 `bitnamo.conf` 加上這段設定：
 
 ```bash
 $ vi /opt/bitnami/apache2/conf/bitnami/bitnami.conf
 ```
 
-          <VirtualHost _default_:443>
-          ...
-          # 新增這段
-          # Proxy for servinf SSL to additional ports
-          ProxyPass /vscode http://code.dazedbear.pro:8080
-          ProxyPassReverse /vscode/ http://code.dazedbear.pro:8080
-          ...
-          </VirtualHost>
+```vi
+<VirtualHost _default_:443>
+...
+# 新增這段
+# Proxy for servinf SSL to additional ports
+ProxyPass /vscode http://code.dazedbear.pro:8080
+ProxyPassReverse /vscode/ http://code.dazedbear.pro:8080
+...
+</VirtualHost>
+```
+
+儲存以後，重新啟動 bitnami 即可。
 
 ```bash
-# 重新啟動 bitnami
 $ sudo /opt/bitnami/ctlscript.sh restart
 ```
 
 ## Step 6：調整 Lightsail instance firewall rules
+
+這時候瀏覽 https://code.dazedbear.pro:8080 還打不到任何東西，一方面 code-server 還沒起，而且 Lightsail instance 的 Firewall 也沒有開通這個 port，所以我們需要做調整。
+
+回到 Lightsail，
+
 
 ## Step 7：啟動 code-server
 
