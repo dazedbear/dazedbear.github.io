@@ -129,6 +129,10 @@ const siteConfig = {
   // template. For example, if you need your repo's URL...
   //   repoUrl: 'https://github.com/facebook/test-site',
 
+  // facebook comments
+  facebookAppId: '164758098310813',
+  facebookComments: true,
+
   // community setting
   twitter: false,
   twitterUserName: '',

@@ -1,6 +1,6 @@
 # Dazedbear Studio 個人工作室
 
-[![Build Status](https://travis-ci.org/dazedbear/dazedbear.github.io.svg?branch=develop)](https://travis-ci.org/dazedbear/dazedbear.github.io)
+[![Build Status](https://travis-ci.org/dazedbear/dazedbear.github.io.svg?branch=develop)](https://travis-ci.org/dazedbear/dazedbear.github.io) [![](https://img.shields.io/badge/facebook-comments-blue?labelColor=565656&logo=facebook)](https://developers.facebook.com/tools/comments/)
 
 這是 dazedbear 的個人網站，包含學習筆記、作品 demo，主題涵蓋 Web Development、作曲、數位音樂、音樂科技等。
 
@@ -16,6 +16,7 @@
 - [Travis CI](https://travis-ci.org/) - CI/CD service
 - [Forestry](https://forestry.io/) - Static Git-based CMS service
 - [unsplash photo](https://unsplash.com/) - Free and High Quality Picture Source
+- [Shields.io](https://shields.io/) - README badges generator
 
 ## Develop
 
