@@ -64,3 +64,5 @@ title: 談爵士春唱 & 我的音樂歷程回顧
 要能夠兼顧工作、進修與音樂的話，我想找到「對音樂熱情的來源」與「分配時間的方法」是最關鍵的要素。在找到之前應該還會再低潮好一陣子吧！但至少能憑著一股衝動寫下這篇文章，我想至少踏出了一步了。
 
 > The first step is always the hardest.
+
+<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness"></iframe>

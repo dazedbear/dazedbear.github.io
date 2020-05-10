@@ -55,3 +55,11 @@
   font-weight: 700;
   color: $secondaryHightlightColor;
 }
+
+.likecoin {
+  height: 220px;
+  width: 75%;
+  max-width: 450px;
+  margin: 15px auto;
+  display: block;
+}

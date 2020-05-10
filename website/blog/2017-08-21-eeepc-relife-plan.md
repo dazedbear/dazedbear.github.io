@@ -84,3 +84,5 @@ NoobsLab會在每次Ubuntu推新版本後，針對新版本找齊可用的套件
 下一步我打算重灌5年的ASUS筆電，然後申請帶去公司使用。不然上班只能用虛擬桌機也太慘了，捲個chrome的網頁畫面都會破圖....目前筆電送回華碩皇家做維修，預計週五前會回來，原則上大概就是Ubuntu + Macbuntu啦 XDD
 
 再見了Windows，我已經回不去了（揮手帕
+
+<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2017/08/21/eeepc-relife-plan"></iframe>
