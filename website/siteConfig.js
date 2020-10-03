@@ -44,6 +44,7 @@ const siteConfig = {
     // {page: 'about', label: 'About'},
     // {doc: 'note', label: 'Notes'},
     {doc: 'demo', label: 'Demos'},
+    {href: 'https://www.notion.so/dazedbear/DazedBear-Memos-c9bcf1af4c7e43918af8bcebf8f79991', external: true, label: 'Memos'},
     {blog: true, label: 'Articles'},
     // {search: true},
   ],
