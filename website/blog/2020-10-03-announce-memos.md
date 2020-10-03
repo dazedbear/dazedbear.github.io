@@ -1,6 +1,6 @@
 ---
 unlisted: false
-title: 'New feature: DazedBear Memos 發布'
+title: New feature: DazedBear Memos released
 
 ---
 ![](https://dazedbear-pro-assets.s3-ap-northeast-1.amazonaws.com/website/memos-cover.png)
