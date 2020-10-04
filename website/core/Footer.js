@@ -1,11 +1,9 @@
 const React = require("react");
-const LogRocket = require("logrocket");
 const BlogSocialSection = require('./BlogSocialSection');
 
 class Footer extends React.Component {
   constructor(props) {
     super(props);
-    LogRocket.init('dazedbear/dazedbear-studio-site');
   }
   
   docUrl(doc, language) {
