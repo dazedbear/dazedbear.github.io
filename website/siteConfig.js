@@ -130,9 +130,19 @@ const siteConfig = {
   // template. For example, if you need your repo's URL...
   //   repoUrl: 'https://github.com/facebook/test-site',
 
-  // facebook comments
-  facebookAppId: '164758098310813',
-  facebookComments: true,
+  // built-in facebook plugin/SDK has issue with configuration and old API version, so just disable it and use `blogSocialSection` instead
+  // facebookAppId: '164758098310813',
+  // facebookComments: true,
+
+  // extend and customize social sections
+  blogSocialSection: {
+    facebookAppId: '164758098310813',
+    facebookLikeButtons: true,
+    facebookComments: true,
+  
+    // likecoin
+    likecoinId: 'dazedbear',
+  },
 
   // community setting
   twitter: false,
