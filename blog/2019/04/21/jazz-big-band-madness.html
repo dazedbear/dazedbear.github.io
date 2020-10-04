@@ -114,5 +114,66 @@
 <blockquote>
 <p>The first step is always the hardest.</p>
 </blockquote>
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness"></iframe></span></div></div><div class="blogSocialSection"><div class="blogSocialSectionItem"><div class="fb-like" data-href="https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness" data-layout="standard" data-share="true" data-width="225" data-show-faces="false"></div></div><div class="blogSocialSectionItem"><div class="fb-comments" data-href="https://www.dazedbear.pro/blog/2019/04/21/jazz-big-band-madness" data-width="100%" data-numposts="5" data-order-by="time"></div></div></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div><script>window.fbAsyncInit = function() {FB.init({appId:'164758098310813',xfbml:true,version:'v2.7'});};(function(d, s, id){var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) {return;}js = d.createElement(s); js.id = id;js.src = '//connect.facebook.net/en_US/sdk.js';fjs.parentNode.insertBefore(js, fjs);}(document, 'script','facebook-jssdk'));
-                </script></body></html>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog/">近期文章</a></div></div></div><nav class="onPageNav"></nav></div><div id="fb-root"></div><script async="" defer="" crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&amp;autoLogAppEvents=1&amp;version=v8.0&amp;appId=164758098310813" nonce="HR6gUgcD"></script><script>
+        window.BlogSocialSection = {
+          facebookComments: true,
+          facebookLikeButtons: true,
+          likecoin: true
+        };
+      </script><script>
+      (function(d, w, bss){
+        var item, sectionItem, sectionWrapper = d.getElementsByClassName('blogSocialSection')[0];
+        var settings = [
+          {
+            key: 'likecoin',
+            tagName: 'iframe',
+            handler: function(item) {
+              item.setAttribute('class', 'likecoin');
+              item.setAttribute('scrolling', 'no');
+              item.setAttribute('frameborder', '0');
+              item.src = 'https://button.like.co/in/embed/dazedbear/button?referrer=' + w.location.href;
+              return item;
+            }
+          },
+          {
+            key: 'facebookLikeButtons',
+            tagName: 'div',
+            handler: function(item) {
+              item.setAttribute('class', 'fb-like');
+              item.setAttribute('data-href', w.location.href);
+              item.setAttribute('data-layout', 'standard');
+              item.setAttribute('data-share', 'true');
+              item.setAttribute('data-width', '225');
+              item.setAttribute('data-show-faces', 'false');
+              return item;
+            }
+          },
+          {
+            key: 'facebookComments',
+            tagName: 'div',
+            handler: function(item) {
+              item.setAttribute('class', 'fb-comments');
+              item.setAttribute('data-href', w.location.href);
+              item.setAttribute('data-width', '100%');
+              item.setAttribute('data-numposts', '5');
+              item.setAttribute('data-order-by', 'time');
+              return item;
+            }
+          }
+        ];
+
+        if (!bss || !sectionWrapper) {return;}        
+        settings.forEach(function(config){
+          if (!bss[config.key]) {return;}
+
+          sectionItem = d.createElement('div');
+          sectionItem.setAttribute('class', 'blogSocialSectionItem');
+          item = d.createElement(config.tagName);
+          item = config.handler(item);
+
+          sectionItem.appendChild(item);
+          sectionWrapper.appendChild(sectionItem);
+          sectionItem = undefined;
+        });
+      }(document, window, window.BlogSocialSection));
+    </script><footer class="nav-footer" id="footer"><section class="community"><div class="community__tab"><a href="https://github.com/dazedbear" target="_blank" rel="noreferrer noopener" class="community__tab-link"><i class="fab fa-github fa-3x community__tab-icon"></i><p class="community__tab-name">Github</p></a></div></section><section class="copyright">Copyright © 2020 DazedBear Studio</section></footer></div></body></html>
