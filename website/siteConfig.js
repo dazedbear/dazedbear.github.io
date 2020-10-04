@@ -138,7 +138,7 @@ const siteConfig = {
   blogSocialSection: {
     facebookAppId: '164758098310813',
     facebookLikeButtons: true,
-    facebookComments: true,
+    facebookComments: false,
   
     // likecoin
     likecoinId: 'dazedbear',
