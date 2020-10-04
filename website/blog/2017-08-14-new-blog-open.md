@@ -60,5 +60,3 @@ title: 新站開幕啦！
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbMTgwNzg1OTMyMV19
 -->
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2017/08/14/new-blog-open"></iframe>

@@ -202,5 +202,3 @@ Forestry 支援幾種 Media 自訂上傳：
 這次介紹了新舊兩種文章撰寫的工具和流程，以及不同種類的 CMS 服務和可用的口袋清單，最後聊到了 Forestry 導入的過程與辛酸 (?) 老實說它雖然功能簡單但還滿堪用的，不過下次有機會還是想挑戰導入 Netlify CMS 看看，畢竟它的功能看起來比較複雜成熟，說不定比較好用也說不定\~
 
 先到這邊了，待留言評論的功能做完之前，有任何問題歡迎到我的 github 發 issue 討論喔！感謝各位的閱讀，我們下次見！
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2020/04/18/git-based-cms-forestry"></iframe>

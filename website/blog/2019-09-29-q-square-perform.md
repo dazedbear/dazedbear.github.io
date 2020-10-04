@@ -82,5 +82,3 @@ title: 京站美食街表演
 
 
 ![演奏](https://dazedbear-assets.s3-ap-northeast-1.amazonaws.com/photo/20190927-2.jpg)
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2019/09/29/q-square-perform"></iframe>

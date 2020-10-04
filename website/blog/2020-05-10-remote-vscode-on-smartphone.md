@@ -261,5 +261,3 @@ $ sudo ./code-server --host 0.0.0.0 . --cert=/opt/bitnami/apache2/conf/server.cr
 實際上 4.7 吋手機是真的有點小，不過還算可以開發啦哈哈，若是更大一點的平板就非常適合了，操作速度上比起 CodeSandbox 之類的服務快很多，這樣的解決方案一個月收費才 USD 5，比起其他的方案都來得便宜，真的很令人興奮啊啊啊！之後應該會試試官方版本的 Visual Studio Codespaces，更仔細的比較一下兩個版本的差異，應該滿有趣的\~
 
 最近還聽到 [Github 要推出 Built-in IDE](https://www.ithome.com.tw/news/137465) 的消息，看 screenshot 也是使用 VS Code，很期待實際玩起來如何，說不定過一段時間根本不需要這套自架的解決方案，只要開啟 Github 網頁就能直接開發了，真的很令人期待！
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2020/05/10/remote-vscode-on-smartphone"></iframe>

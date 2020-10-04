@@ -97,5 +97,3 @@ title: 簡介我的採譜工具與流程
 
 今天簡單介紹了我的採譜工具與流程，希望對於有類似需求的人能有點幫助。下一個階段我想嘗試用最輕巧的方式採譜：只用一隻智慧手機和耳機，這部分我想是需要自己開發軟體來達成了，希望有朝一日能夠和大家分享這個主題~感謝收看！
 
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2019/12/25/transcribe"></iframe>

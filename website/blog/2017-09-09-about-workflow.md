@@ -124,5 +124,3 @@ __適合自己的方法最好用。__
 ## 小結
 
 今天簡單介紹了工作方法&一些心得，利用這些方法可以多多認識自己，越了解自己的習性、就能工作越有效率，~~然後準時下班走人！~~
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2017/09/09/about-workflow"></iframe>

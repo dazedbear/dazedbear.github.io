@@ -170,5 +170,3 @@ www.dazedbear.pro CNAME dazedbear.github.io
 這次用了一個週末整整兩天的時間，從開新 Repo 到全部做完串完 CI 和 Google Analytics，是真的挺衝動的哈哈哈，不過看到全新的樣貌心情就很好，再加上內容空空的就很想要補上去 XD 希望接下來可以持續充實這裡~
 
 今後也請多多指教噢！
-
-<iframe scrolling="no" frameborder="0" class="likecoin" src="https://button.like.co/in/embed/dazedbear/button?referrer=https://www.dazedbear.pro/blog/2019/05/21/refactor-site"></iframe>
