@@ -23,10 +23,17 @@ class BlogSocialSection extends React.Component {
           facebookLikeButtons: ${!!facebookLikeButtons},
           likecoin: ${!!likecoinId}
         };
+        (function(d){
+          var fbMeta = d.createElement('meta');
+          fbMeta.setAttribute('property', 'fb:app_id');
+          fbMeta.setAttribute('content', '${facebookAppId}');
+          d.head.appendChild(fbMeta);
+        }(document))
       `;
       return (
         <>
           <div id="fb-root" />
+          <script dangerouslySetInnerHTML={{ __html: initBlogSocialSectionScript }} />
           <script
             async
             defer
@@ -34,9 +41,6 @@ class BlogSocialSection extends React.Component {
             src={`https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&autoLogAppEvents=1&version=v8.0&appId=${facebookAppId}`}
             nonce="HR6gUgcD"
           />
-          <script
-            dangerouslySetInnerHTML={{ __html: initBlogSocialSectionScript }}
-          ></script>
         </>
       );
     }
