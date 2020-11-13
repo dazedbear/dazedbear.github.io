@@ -108,7 +108,8 @@ const siteConfig = {
       defer: true,
       integrity: 'sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH',
       crossOrigin: 'anonymous'
-    }
+    },
+    '/js/clarity.js'
   ],
 
   // On page navigation for the current documentation page.
