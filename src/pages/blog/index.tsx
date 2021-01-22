@@ -36,6 +36,10 @@ export async function getStaticProps({ preview }) {
 
   posts.map(post => {
     post.Authors = post.Authors.map(id => users[id].full_name)
+    // since preview only support text now, video and image will be undefined and cause the whole page crash, just filter them
+    if (Array.isArray(post.preview)) {
+      post.preview = post.preview.filter(entity => entity)
+    }
   })
 
   return {
