@@ -1,3 +1,5 @@
+import { get } from 'lodash'
+
 export const getBlogLink = (slug: string) => {
   return `/blog/${slug}`
 }
@@ -27,4 +29,38 @@ export const normalizeSlug = slug => {
     slug = slug.substr(0, slug.length - 1)
   }
   return startingSlash || endingSlash ? normalizeSlug(slug) : slug
+}
+
+/**
+ * { Slug: 'value.schema.QzV^ }
+ * @param collection
+ */
+export const getPropertyPathMap = collection => {
+  const schemaPath = ['value', 'schema']
+  const basePath = ['value', 'properties']
+  const schema = get(collection, schemaPath)
+  if (!schema) {
+    console.error('schema not found in collection.')
+    return
+  }
+  const propertyPathMap = Object.keys(schema).reduce((result, key) => {
+    const propertyName = get(schema, [key, 'name'])
+    result[propertyName] = basePath.concat(key)
+    return result
+  }, {})
+  return propertyPathMap
+}
+
+export const getAllPostSlugs = ({ pageData, postIds, propertyPathMap }) => {
+  if (!pageData || !postIds || !propertyPathMap) {
+    console.error('No pageData or propertyPathMap or postIDs')
+    return []
+  }
+
+  const SLUG_PROPERTY_NAME = 'Slug'
+  const slugPath = propertyPathMap[SLUG_PROPERTY_NAME]
+  return postIds.map(postId => {
+    const slug = get(pageData, ['block', postId, ...slugPath], [[]])[0][0]
+    return { postId, slug }
+  })
 }

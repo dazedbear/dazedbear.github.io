@@ -16,11 +16,12 @@
     "@zeit/react-jsx-parser": "^2.0.0",
     "async-sema": "^3.1.0",
     "github-slugger": "^1.2.1",
-    "katex": "^0.12.0",
     "next": "^10.0.0",
-    "prismjs": "^1.17.1",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "notion-client": "^3.2.6",
+    "notion-utils": "^3.2.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-notion-x": "^3.3.2",
     "tailwindcss": "^2.0.2",
     "uuid": "^8.1.0"
   },
@@ -31,8 +32,9 @@
     "autoprefixer": "^10.2.3",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
+    "notion-types": "^3.1.1",
     "postcss": "^8.2.4",
+    "prettier": "^1.19.1",
     "typescript": "^3.7.4"
   }
 }
