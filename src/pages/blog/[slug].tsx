@@ -28,7 +28,7 @@ export async function getStaticProps({ params: { slug }, preview }) {
         redirect: '/blog',
         preview: false,
       },
-      unstable_revalidate: 5,
+      revalidate: 5,
     }
   }
   const postData = await getPageData(post.id)
@@ -59,12 +59,17 @@ export async function getStaticProps({ params: { slug }, preview }) {
   const { users } = await getNotionUsers(post.Authors || [])
   post.Authors = Object.keys(users).map(id => users[id].full_name)
 
+  // since preview only support text now, video and image will be undefined and cause the whole page crash, just filter them
+  if (Array.isArray(post.preview)) {
+    post.preview = post.preview.filter(entity => entity)
+  }
+
   return {
     props: {
       post,
       preview: preview || false,
     },
-    unstable_revalidate: 10,
+    revalidate: 10,
   }
 }
 
