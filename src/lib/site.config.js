@@ -45,4 +45,42 @@ module.exports = {
     },
     requiredEnv: ['NOTION_TOKEN', 'BLOG_INDEX_ID'],
   },
+  copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
+  communitySettings: {
+    github: {
+      profileBaseUrl: 'https://github.com',
+      userName: 'dazedbear',
+    },
+    linkedin: {
+      profileBaseUrl: 'https://www.linkedin.com/in',
+      userName: 'dazedbear',
+    },
+    facebook: {
+      facebookAppId: '164758098310813',
+    },
+    likecoin: {
+      userId: 'dazedbear',
+    },
+    soundcloud: {
+      profileBaseUrl: 'https://soundcloud.com',
+      userName: 'dazedbear',
+    },
+    youtube: {
+      channelBaseUrl: 'https://www.youtube.com/channel',
+      channelHash: 'UCCOXh5_m0xjy24-rUu98xKg',
+    },
+  },
+  communityFeatures: {
+    siteFooterIcon: {
+      github: true,
+      linkedin: false,
+      soundcloud: false,
+      youtube: false,
+    },
+    articleFooter: {
+      facebookLikeButtons: false,
+      facebookComments: false,
+      likecoin: false,
+    },
+  },
 }

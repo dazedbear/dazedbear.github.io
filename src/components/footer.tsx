@@ -1,23 +1,57 @@
+import classnames from 'classnames'
 import ExtLink from './ext-link'
+import styles from '../styles/footer.module.css'
+import {
+  copyright,
+  communitySettings,
+  communityFeatures,
+} from '../lib/site.config'
 
-export default () => (
-  <>
-    <footer>
-      <span>Deploy your own!</span>
-      <ExtLink href="https://vercel.com/import/git?s=https://github.com/ijjk/notion-blog/tree/master&env=NOTION_TOKEN,BLOG_INDEX_ID&envDescription=Required+env+values+for+deploying&envLink=https://github.com/ijjk/notion-blog%23getting-blog-index-and-token">
-        <img
-          src="https://vercel.com/button"
-          height={46}
-          width={132}
-          alt="deploy to Vercel button"
+const CommunityIcon = ({ name, link }) => {
+  if (!name || !link) {
+    return null
+  }
+  return (
+    <div className={styles['community__tab']}>
+      <ExtLink
+        href={link}
+        target="_blank"
+        className={styles['community__tab-link']}
+      >
+        <i
+          className={classnames(
+            styles['community__tab-icon'],
+            'fab fa-3x',
+            `fa-${name}`
+          )}
         />
+        <p className={styles['community__tab-name']}>{name}</p>
       </ExtLink>
-      <span>
-        or{' '}
-        <ExtLink href="https://github.com/ijjk/notion-blog">
-          view source
-        </ExtLink>
-      </span>
-    </footer>
-  </>
-)
+    </div>
+  )
+}
+
+const Footer = () => {
+  const communityIcons = Object.keys(communityFeatures.siteFooterIcon)
+  return (
+    <>
+      <footer className={styles['nav-footer']} id="footer">
+        <section className={styles.community}>
+          {communityIcons.map(brand => {
+            if (!brand || !communityFeatures.siteFooterIcon[brand]) return
+            let link
+            if (brand === 'youtube') {
+              link = `${communitySettings[brand]?.channelBaseUrl}/${communitySettings[brand]?.channelHash}`
+            } else {
+              link = `${communitySettings[brand]?.profileBaseUrl}/${communitySettings[brand]?.userName}`
+            }
+            return <CommunityIcon key={brand} link={link} name={brand} />
+          })}
+        </section>
+        <section className={styles.copyright}>{copyright}</section>
+      </footer>
+    </>
+  )
+}
+
+export default Footer

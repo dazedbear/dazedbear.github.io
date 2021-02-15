@@ -61,7 +61,7 @@ const RenderPost = ({ recordMap }) => {
 
   return (
     <>
-      <Header titlePre={title} />
+      <Header />
       <NotionRenderer
         recordMap={recordMap}
         fullPage={false}
