@@ -1,6 +1,5 @@
 import Header from '../../components/header'
 import Link from 'next/link'
-import { NotionAPI } from 'notion-client'
 import {
   NotionRenderer,
   Code,
@@ -10,11 +9,11 @@ import {
   Equation,
   Modal,
 } from 'react-notion-x'
-import { BLOG_INDEX_ID, NOTION_TOKEN } from '../../lib/notion/server-constants'
+import { getNotionPosts } from '../../lib/notion'
+import { notion } from '../../lib/site.config'
 
 export async function getStaticProps() {
-  const notion = new NotionAPI({ authToken: NOTION_TOKEN })
-  const recordMap = await notion.getPage(BLOG_INDEX_ID)
+  const recordMap = await getNotionPosts({ pageId: notion.blog.pageId })
   return {
     props: {
       recordMap,

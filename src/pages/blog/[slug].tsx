@@ -1,21 +1,14 @@
 import { useRouter } from 'next/router'
 import Header from '../../components/header'
 import blogStyles from '../../styles/blog.module.css'
-import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
 import { getPageTitle, uuidToId } from 'notion-utils'
-import {
-  BLOG_INDEX_ID,
-  NOTION_TOKEN,
-  COLLECTION_VIEW_NAME,
-} from '../../lib/notion/server-constants'
-
-// you can optionally pass an authToken to access private notion resources
-const notion = new NotionAPI({ authToken: NOTION_TOKEN })
+import { notion } from '../../lib/site.config'
+import { getNotionPosts, getNotionSinglePost } from '../../lib/notion'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug: postId } }) {
-  const recordMap = await notion.getPage(postId)
+  const recordMap = await getNotionSinglePost(postId)
   return {
     props: {
       recordMap,
@@ -26,28 +19,16 @@ export async function getStaticProps({ params: { slug: postId } }) {
 
 // Return our list of blog posts to prerender
 export async function getStaticPaths() {
-  const pageData = await notion.getPage(BLOG_INDEX_ID)
-
-  // TODO: support 1 page has multiple tables
-  const collectionId = Object.keys(pageData.collection)[0]
-  if (!collectionId) {
-    console.error('collectionId not found.')
-    return
-  }
-
-  const collectionViewId = Object.keys(pageData.collection_view).find(
-    id => pageData.collection_view[id]?.value?.name === COLLECTION_VIEW_NAME
+  const postIds = await getNotionPosts(
+    {
+      pageId: notion.blog.pageId,
+      collectionViewName: notion.blog.collectionViewName,
+    },
+    data => {
+      console.log('data', data)
+      return data?.result?.blockIds
+    }
   )
-  if (!collectionViewId) {
-    console.error('collectionViewId not found.')
-    return
-  }
-
-  const collectionData = await notion.getCollectionData(
-    collectionId,
-    collectionViewId
-  )
-  const postIds = collectionData?.result?.blockIds
 
   // TODO: we use postId as slug for now. will support to use readable text as slug later
   // https://github.com/vercel/next.js/discussions/11272
