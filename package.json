@@ -15,8 +15,10 @@
   "dependencies": {
     "@zeit/react-jsx-parser": "^2.0.0",
     "async-sema": "^3.1.0",
+    "classnames": "^2.2.6",
     "github-slugger": "^1.2.1",
     "next": "^10.0.0",
+    "normalize.css": "^8.0.1",
     "notion-client": "^4.2.18",
     "notion-utils": "^4.2.18",
     "react": "^16.12.0",

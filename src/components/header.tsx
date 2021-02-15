@@ -3,43 +3,56 @@ import Head from 'next/head'
 import ExtLink from './ext-link'
 import { useRouter } from 'next/router'
 import styles from '../styles/header.module.css'
-import { navigation as navItems } from '../lib/site.config'
+import { meta, navigation as navItems } from '../lib/site.config'
 
-const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
-
-const Header = ({ titlePre = '' }) => {
+const Header = () => {
   const { pathname } = useRouter()
+  const titlePre = navItems.find(({ page }) => page === pathname)?.label
 
   return (
-    <header className={styles.header}>
-      <Head>
-        <title>{titlePre ? `${titlePre} |` : ''} My Notion Blog</title>
-        <meta
-          name="description"
-          content="An example Next.js site using Notion for the blog"
-        />
-        <meta name="og:title" content="My Notion Blog" />
-        <meta property="og:image" content={ogImageUrl} />
-        <meta name="twitter:site" content="@_ijjk" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={ogImageUrl} />
-      </Head>
-      <ul>
-        {navItems.map(({ label, page, link }) => (
-          <li key={label}>
-            {page ? (
-              <Link href={page}>
-                <a className={pathname === page ? 'active' : undefined}>
-                  {label}
-                </a>
-              </Link>
-            ) : (
-              <ExtLink href={link}>{label}</ExtLink>
-            )}
-          </li>
-        ))}
-      </ul>
-    </header>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <header className={styles.header}>
+          <Head>
+            <title>
+              {titlePre ? `${titlePre} · ${meta.title}` : meta.title}
+            </title>
+            <meta name="description" content={meta.description} />
+            <meta name="og:title" content={meta.title} />
+            <meta property="og:image" content={meta.image} />
+          </Head>
+          <Link href="/">
+            <a>
+              <img src="/favicon.ico" alt={meta.title} />
+              <h2>{meta.title}</h2>
+            </a>
+          </Link>
+          <div className={styles.navigation}>
+            <nav>
+              <ul>
+                {navItems.map(({ label, page, link }) => (
+                  <li key={label}>
+                    {page ? (
+                      <Link href={page}>
+                        <a
+                          className={
+                            pathname === page ? styles.active : undefined
+                          }
+                        >
+                          {label}
+                        </a>
+                      </Link>
+                    ) : (
+                      <ExtLink href={link}>{label}</ExtLink>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </header>
+      </div>
+    </div>
   )
 }
 

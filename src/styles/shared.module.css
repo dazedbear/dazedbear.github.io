@@ -1,3 +1,6 @@
+.layout {
+  padding-top: 100px;
+}
 .layout img {
   margin: auto;
   max-width: 98%;
@@ -8,4 +11,10 @@
 .layout h1,
 .layout h2 {
   text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .layout {
+    padding-top: 75px;
+  }
 }

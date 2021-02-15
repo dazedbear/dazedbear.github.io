@@ -14,11 +14,16 @@ const normalizeId = id => {
 }
 
 module.exports = {
+  meta: {
+    title: 'DazedBear Studio',
+    description: 'Web。Digital Music。Self Development',
+    image: '',
+  },
   navigation: [
     { label: 'Home', page: '/' },
     // { label: 'Demos', page: '/demo' },
     // { label: 'Memos', page: '/memo' },
-    { label: 'Articles', page: '/blog' },
+    { label: 'Blog', page: '/blog' },
   ],
   notion: {
     token: process.env.NOTION_TOKEN,

@@ -1,4 +1,3 @@
-import Header from '../../components/header'
 import Link from 'next/link'
 import {
   NotionRenderer,
@@ -38,7 +37,6 @@ const Index = ({ recordMap }) => {
   }
   return (
     <>
-      <Header titlePre="Blog" />
       <NotionRenderer
         recordMap={recordMap}
         components={components}
