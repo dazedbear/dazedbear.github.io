@@ -6,8 +6,11 @@ import styles from '../styles/header.module.css'
 import { meta, navigation as navItems } from '../lib/site.config'
 
 const Header = () => {
-  const { pathname } = useRouter()
-  const titlePre = navItems.find(({ page }) => page === pathname)?.label
+  const isActive = path => {
+    const { pathname } = useRouter()
+    return path !== '/' && pathname.includes(path)
+  }
+  const titlePre = navItems.find(({ page }) => isActive(page))?.label
 
   return (
     <div className={styles.container}>
@@ -35,9 +38,7 @@ const Header = () => {
                     {page ? (
                       <Link href={page}>
                         <a
-                          className={
-                            pathname === page ? styles.active : undefined
-                          }
+                          className={isActive(page) ? styles.active : undefined}
                         >
                           {label}
                         </a>

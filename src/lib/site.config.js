@@ -20,10 +20,13 @@ module.exports = {
     image: '',
   },
   navigation: [
-    { label: 'Home', page: '/' },
     // { label: 'Demos', page: '/demo' },
-    // { label: 'Memos', page: '/memo' },
-    { label: 'Blog', page: '/blog' },
+    {
+      label: 'Memos',
+      link:
+        'https://www.notion.so/dazedbear/DazedBear-Memos-c9bcf1af4c7e43918af8bcebf8f79991',
+    },
+    { label: 'Articles', page: '/blog' },
   ],
   notion: {
     token: process.env.NOTION_TOKEN,
