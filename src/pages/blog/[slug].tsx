@@ -1,14 +1,21 @@
 import { useRouter } from 'next/router'
-import Header from '../../components/header'
+import Link from 'next/link'
 import blogStyles from '../../styles/blog.module.css'
-import { NotionRenderer } from 'react-notion-x'
-import { getPageTitle, uuidToId } from 'notion-utils'
+import {
+  NotionRenderer,
+  Code,
+  Collection,
+  Pdf,
+  Equation,
+  Modal,
+} from 'react-notion-x'
+import { getPageTitle, uuidToId, idToUuid } from 'notion-utils'
 import { notion } from '../../lib/site.config'
 import { getNotionPosts, getNotionSinglePost } from '../../lib/notion'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug: postId } }) {
-  const recordMap = await getNotionSinglePost(postId)
+  const recordMap = await getNotionSinglePost(idToUuid(postId))
   return {
     props: {
       recordMap,
@@ -25,7 +32,6 @@ export async function getStaticPaths() {
       collectionViewName: notion.blog.collectionViewName,
     },
     data => {
-      console.log('data', data)
       return data?.result?.blockIds
     }
   )
@@ -57,15 +63,29 @@ const RenderPost = ({ recordMap }) => {
     )
   }
 
-  const title = getPageTitle(recordMap)
+  const title = getPageTitle(recordMap) // TODO: find a way to pass page title to header
+  const components = {
+    pageLink: ({ href, ...props }) => (
+      <Link href={`/blog${href}`} {...props}>
+        <a {...props} />
+      </Link>
+    ),
+    code: Code,
+    collection: Collection,
+    collectionRow: () => null, // we don't render property table for each articles
+    modal: Modal,
+    pdf: Pdf,
+    equation: Equation,
+  }
 
   return (
     <>
-      <Header />
       <NotionRenderer
+        components={components}
         recordMap={recordMap}
         fullPage={false}
         darkMode={false}
+        showTableOfContents={false}
         showCollectionViewDropdown={false}
       />
     </>

@@ -52,7 +52,7 @@ export const getNotionSinglePost = async (
     console.error('pageId or collectionViewName not specify.')
     return
   }
-  let result = await notionAPI.getPage(notionConfig.blog.pageId)
+  let result = await notionAPI.getPage(pageId)
 
   // provide callback function to format data
   if (typeof dataFormatter === 'function') {
