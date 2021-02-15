@@ -3,7 +3,7 @@ import Header from '../../components/header'
 import blogStyles from '../../styles/blog.module.css'
 import { NotionAPI } from 'notion-client'
 import { NotionRenderer } from 'react-notion-x'
-import { getPageTitle } from 'notion-utils'
+import { getPageTitle, uuidToId } from 'notion-utils'
 import {
   BLOG_INDEX_ID,
   NOTION_TOKEN,
@@ -51,7 +51,7 @@ export async function getStaticPaths() {
 
   // TODO: we use postId as slug for now. will support to use readable text as slug later
   // https://github.com/vercel/next.js/discussions/11272
-  const paths = postIds.map(postId => ({ params: { slug: postId } }))
+  const paths = postIds.map(postId => ({ params: { slug: uuidToId(postId) } }))
   return { paths, fallback: false }
 }
 
@@ -81,7 +81,12 @@ const RenderPost = ({ recordMap }) => {
   return (
     <>
       <Header titlePre={title} />
-      <NotionRenderer recordMap={recordMap} fullPage={false} darkMode={false} />
+      <NotionRenderer
+        recordMap={recordMap}
+        fullPage={false}
+        darkMode={false}
+        showCollectionViewDropdown={false}
+      />
     </>
   )
 }
