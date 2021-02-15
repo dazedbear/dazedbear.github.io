@@ -7,6 +7,7 @@ import 'rc-dropdown/assets/index.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all'
 import '../styles/notion.css'
+import '../styles/homepage.css' // TODO: refactor css
 import Header from '../components/header'
 import Footer from '../components/footer'
 import sharedStyles from '../styles/shared.module.css'
