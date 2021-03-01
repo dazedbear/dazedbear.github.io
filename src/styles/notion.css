@@ -5,4 +5,16 @@
  * react-notion-x's goal is to match styling as close as possible to Notion,
  * whereas our goal with this site is to adjust Notion's styling in a few key
  * places to add some flare.
+ *
+ * See the all styles defined in react-notion-x.
+ * https://github.com/NotionX/react-notion-x/blob/master/packages/react-notion-x/src/styles.css
+ *
+ * We use tailwind's feature 'extracting components class with @apply' to override the Notion styles.
+ * https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply
  */
+
+@layer components {
+  .notion-collection-header {
+    @apply text-pink-700;
+  }
+}
