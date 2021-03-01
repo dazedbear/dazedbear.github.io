@@ -1,6 +1,4 @@
-import classnames from 'classnames'
 import ExtLink from './ext-link'
-import styles from '../styles/footer.module.css'
 import {
   copyright,
   communitySettings,
@@ -12,20 +10,10 @@ const CommunityIcon = ({ name, link }) => {
     return null
   }
   return (
-    <div className={styles['community__tab']}>
-      <ExtLink
-        href={link}
-        target="_blank"
-        className={styles['community__tab-link']}
-      >
-        <i
-          className={classnames(
-            styles['community__tab-icon'],
-            'fab fa-3x',
-            `fa-${name}`
-          )}
-        />
-        <p className={styles['community__tab-name']}>{name}</p>
+    <div className="w-24 p-0 m-0 text-center">
+      <ExtLink href={link} target="_blank" className="text-gray-500">
+        <i className={`text-gray-300 fab fa-3x fa-${name}`} />
+        <p className="text-gray-300 mt-0.5 capitalize">{name}</p>
       </ExtLink>
     </div>
   )
@@ -35,8 +23,11 @@ const Footer = () => {
   const communityIcons = Object.keys(communityFeatures.siteFooterIcon)
   return (
     <>
-      <footer className={styles['nav-footer']} id="footer">
-        <section className={styles.community}>
+      <footer
+        className="flex-shrink lg:flex-shrink-0 bg-lavender-purple-900 text-current text-base antialiased font-normal leading-6 py-8 relative"
+        id="footer"
+      >
+        <section className="flex justify-around my-0 mx-auto">
           {communityIcons.map(brand => {
             if (!brand || !communityFeatures.siteFooterIcon[brand]) return
             let link
@@ -48,7 +39,9 @@ const Footer = () => {
             return <CommunityIcon key={brand} link={link} name={brand} />
           })}
         </section>
-        <section className={styles.copyright}>{copyright}</section>
+        <section className="text-white text-opacity-40 text-center">
+          {copyright}
+        </section>
       </footer>
     </>
   )
