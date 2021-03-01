@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import blogStyles from '../../styles/blog.module.css'
 import {
   NotionRenderer,
   Code,
@@ -55,7 +54,7 @@ const RenderPost = ({ recordMap }) => {
   // loading one from fallback then  redirect back to the index
   if (!recordMap) {
     return (
-      <div className={blogStyles.post}>
+      <div>
         <p>
           Woops! didn't find that post, redirecting you back to the blog index
         </p>
