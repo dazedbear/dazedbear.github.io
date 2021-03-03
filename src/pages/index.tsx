@@ -2,21 +2,21 @@ import ExtLink from '../components/ext-link'
 import { meta } from '../lib/site.config'
 
 const GridBlock = ({ content, image, title }) => (
-  <div className="blockElement alignCenter imageAlignTop threeByGridBlock">
-    <div className="blockImage">
-      <img src={image} />
+  <div className="box-border text-center md:flex-1-0-26 md:mx-3  blockElement alignCenter imageAlignTop threeByGridBlock">
+    <div className="mb-5 mx-auto max-w-150 min-h-100 md:min-h-150 relative block-image blockImage">
+      <img className="max-w-full inline-block align-middle" src={image} />
     </div>
     <div className="blockContent">
-      <h2>
+      <h2 className="text-center">
         <div>
           <span>
-            <p>{title}</p>
+            <p className="p-0 text-2xl mb-6">{title}</p>
           </span>
         </div>
       </h2>
-      <div>
+      <div className="text-left">
         <span>
-          <p>{content}</p>
+          <p className="mb-4">{content}</p>
         </span>
       </div>
     </div>
@@ -24,9 +24,9 @@ const GridBlock = ({ content, image, title }) => (
 )
 
 const BlockLayout = ({ items = [] }) => (
-  <div className="container feature-topic paddingBottom paddingTop">
-    <div className="wrapper">
-      <div className="gridBlock">
+  <div className="pb-10 pt-5 my-0 mx-auto md:pb-20 md:pt-20 bg-opacity-white-75 rounded-xl container feature-topic paddingBottom paddingTop">
+    <div className="my-0 mx-auto max-w-900 py-0 px-5 text-gray-600 font-semibold wrapper">
+      <div className="p-0 md:flex md:flex-wrap md:flex-row gridBlock">
         {items.map(props => (
           <GridBlock key={props.title} {...props} />
         ))}
@@ -37,13 +37,18 @@ const BlockLayout = ({ items = [] }) => (
 
 const Homepage = () => (
   <>
-    <div className="homeContainer">
-      <div className="homeSplashFade">
-        <div className="wrapper homeWrapper">
+    <div className="text-center homeContainer">
+      <div
+        className="min-h-800 bg-cover bg-50% homeSplashFade"
+        style={{ backgroundImage: "url('/cover.jpg')" }}
+      >
+        <div className="my-0 mx-auto max-w-1100 py-8 px-2.5 wrapper homeWrapper">
           <div>
-            <h2 className="projectTitle">
+            <h2 className="block text-lavender-purple-300 text-4.5xl md:text-5xl font-semibold  mt-2 mb-6 mx-0 projectTitle">
               {meta.title}
-              <small>{meta.description}</small>
+              <small className="block font-normal text-xl md:text-2xl mt-3 mb-5 mx-0">
+                {meta.description}
+              </small>
             </h2>
             <BlockLayout
               items={[
@@ -70,13 +75,22 @@ const Homepage = () => (
                 },
               ]}
             />
-            <p className="unsplash-hint">
+            <p className="my-4 mx-0 text-center text-gray-300 text-sm unsplash-hint">
               Photo by
-              <ExtLink href="https://unsplash.com/photos/ai4lpAIt7EU">
+              <ExtLink
+                className="inline-block my-0 mx-1 font-bold text-yellow-300"
+                href="https://unsplash.com/photos/ai4lpAIt7EU"
+              >
                 The Creative Exchange
               </ExtLink>
               on
-              <ExtLink href="https://unsplash.com/">Unsplash</ExtLink>.
+              <ExtLink
+                className="inline-block my-0 mx-1 font-bold text-yellow-300"
+                href="https://unsplash.com/"
+              >
+                Unsplash
+              </ExtLink>
+              .
             </p>
           </div>
         </div>

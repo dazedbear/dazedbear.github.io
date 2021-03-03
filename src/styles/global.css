@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
+@layer components {
+  .block-image::after {
+    @apply h-full w-0 inline-block align-middle;
+    content: '';
+  }
 }
