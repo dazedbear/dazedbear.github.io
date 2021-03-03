@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { useRouter } from 'next/router'
-import styles from '../styles/header.module.css'
 import { meta, navigation as navItems } from '../lib/site.config'
 
 const Header = () => {
@@ -12,10 +12,18 @@ const Header = () => {
   }
   const titlePre = navItems.find(({ page }) => isActive(page))?.label
 
+  const linkClass =
+    'box-border items-center border-0 border-white text-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 bg-lavender-purple-500 lg:bg-lavender-purple-300 hover:bg-lavender-purple-300 lg:h-8 lg:text-white font-normal lg:hover:text-white lg:py-1.5 lg:px-2.5 lg:text-opacity-white-80'
+  const linkActiveClass =
+    'text-white bg-lavender-purple-300 hover:bg-lavender-purple-300 font-normal'
+
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
-        <header className={styles.header}>
+    <div
+      className="fixed w-full z-9999 bg-lavender-purple-300 text-white min-h-12 py-2 px-0 lg-flex-shrink-0"
+      style={{ transform: 'translateZ(0)' }}
+    >
+      <div className="my-0 mx-auto max-w-1100 py-0 px-5">
+        <header className="flex relative text-left flex-nowrap flex-row">
           <Head>
             <title>
               {titlePre ? `${titlePre} · ${meta.title}` : meta.title}
@@ -25,26 +33,38 @@ const Header = () => {
             <meta property="og:image" content={meta.image} />
           </Head>
           <Link href="/">
-            <a>
-              <img src="/favicon.ico" alt={meta.title} />
-              <h2>{meta.title}</h2>
+            <a className="items-center border-0 border-white flex flex-row flex-nowrap h-9 z-10000">
+              <img
+                className="h-full mr-2.5 box-content max-w-full"
+                src="/favicon.ico"
+                alt={meta.title}
+              />
+              <h2 className="block text-xl m-0 relative z-9999 text-white">
+                {meta.title}
+              </h2>
             </a>
           </Link>
-          <div className={styles.navigation}>
-            <nav>
-              <ul>
+          <div className="lg:h-9 lg:ml-auto lg:relative">
+            <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:bg-none lg:h-auto lg:relative lg:right-auto lg:top-auto lg:w-auto">
+              <ul className="bg-lavender-purple-500 box-border text-white flex flex-nowrap list-none mt-12 p-0 w-full lg:bg-none lg:flex lg:flex-row lg:flex-nowrap lg:m-0 lg:p-0 lg:w-auto">
                 {navItems.map(({ label, page, link }) => (
-                  <li key={label}>
+                  <li
+                    key={label}
+                    className="flex-auto m-0 text-center whitespace-nowrap"
+                  >
                     {page ? (
                       <Link href={page}>
-                        <a
-                          className={isActive(page) ? styles.active : undefined}
-                        >
+                        <a className={classnames(linkClass, linkActiveClass)}>
                           {label}
                         </a>
                       </Link>
                     ) : (
-                      <ExtLink href={link}>{label}</ExtLink>
+                      <ExtLink
+                        className={classnames(linkClass, linkActiveClass)}
+                        href={link}
+                      >
+                        {label}
+                      </ExtLink>
                     )}
                   </li>
                 ))}

@@ -102,11 +102,11 @@ body {
   box-sizing: border-box;
 }
 
-a,
+/* a,
 a:hover {
   color: #584f8d;
   text-decoration: none;
-}
+} */
 
 p {
   margin-bottom: 1em;
