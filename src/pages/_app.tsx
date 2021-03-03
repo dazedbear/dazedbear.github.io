@@ -9,12 +9,11 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import sharedStyles from '../styles/shared.module.css'
 
 const MyApp = ({ Component, pageProps }) => (
   <>
     <Header />
-    <div className={sharedStyles.layout}>
+    <div className="pt-24 lg:pt-12">
       <Component {...pageProps} />
     </div>
     <Footer />
