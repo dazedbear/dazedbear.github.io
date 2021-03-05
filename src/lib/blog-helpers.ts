@@ -1,4 +1,6 @@
 import { get } from 'lodash'
+import { useRouter } from 'next/router'
+import { navigation as navItems } from '../lib/site.config'
 
 export const getBlogLink = (slug: string) => {
   return `/blog/${slug}`
@@ -63,4 +65,10 @@ export const getAllPostSlugs = ({ pageData, postIds, propertyPathMap }) => {
     const slug = get(pageData, ['block', postId, ...slugPath], [[]])[0][0]
     return { postId, slug }
   })
+}
+
+export const getCurrentPageTitle = () => {
+  const { pathname } = useRouter()
+  return navItems.find(({ page }) => page !== '/' && pathname.includes(page))
+    ?.label
 }

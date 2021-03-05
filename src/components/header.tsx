@@ -2,16 +2,11 @@ import Link from 'next/link'
 import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
-import { useRouter } from 'next/router'
 import { meta, navigation as navItems } from '../lib/site.config'
+import { getCurrentPageTitle } from '../lib/blog-helpers'
 
 const Header = () => {
-  const isActive = path => {
-    const { pathname } = useRouter()
-    return path !== '/' && pathname.includes(path)
-  }
-  const titlePre = navItems.find(({ page }) => isActive(page))?.label
-
+  const titlePre = getCurrentPageTitle()
   const linkClass =
     'box-border items-center border-0 border-white text-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 bg-lavender-purple-500 lg:bg-lavender-purple-300 hover:bg-lavender-purple-300 lg:h-8 lg:text-white font-normal lg:hover:text-white lg:py-1.5 lg:px-2.5 lg:text-opacity-white-80'
   const linkActiveClass =
@@ -39,7 +34,7 @@ const Header = () => {
                 src="/favicon.ico"
                 alt={meta.title}
               />
-              <h2 className="block text-xl m-0 relative z-9999 text-white">
+              <h2 className="block text-xl m-0 relative z-9999 text-white font-semibold">
                 {meta.title}
               </h2>
             </a>
