@@ -1,6 +1,7 @@
 module.exports = {
   purge: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
   darkMode: false, // or 'media' or 'class'
+  important: '#app',
   theme: {
     extend: {
       backgroundPosition: {
@@ -23,10 +24,15 @@ module.exports = {
       fontSize: {
         '4.5xl': '2.5rem',
       },
+      height: {
+        '0.5': '0.125rem',
+        '0.75': '0.1875rem',
+      },
       lineHeight: {
         '4.5xl': '2.75rem',
       },
       zIndex: {
+        1000: '1000',
         9999: '9999',
         10000: '1000',
       },

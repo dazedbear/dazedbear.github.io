@@ -14,6 +14,12 @@
  */
 
 @layer components {
+  .notion-full-width {
+    @apply py-10 px-0 m-0 w-0;
+  }
+  .notion-viewport {
+    @apply hidden;
+  }
   .notion-collection-header {
     @apply text-pink-700;
   }

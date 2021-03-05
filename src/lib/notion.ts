@@ -11,7 +11,7 @@ export const getNotionPosts = async (
     console.error('pageId or collectionViewName not specify.')
     return
   }
-  const pageData = await notionAPI.getPage(notionConfig.blog.pageId)
+  const pageData = await notionAPI.getPage(pageId)
   let result = pageData as any
 
   // extract data from specific collection view when provided.
@@ -24,9 +24,7 @@ export const getNotionPosts = async (
     }
 
     const collectionViewId = Object.keys(pageData.collection_view).find(
-      id =>
-        pageData.collection_view[id]?.value?.name ===
-        notionConfig.blog.collectionViewName
+      id => pageData.collection_view[id]?.value?.name === collectionViewName
     )
     if (!collectionViewId) {
       console.error('collectionViewId not found.')
@@ -59,5 +57,22 @@ export const getNotionSinglePost = async (
     result = dataFormatter(result)
   }
 
+  return result
+}
+
+export const getTransformedNotionData = async (
+  apiMethod: string,
+  dataFormatter: any,
+  ...options: any
+) => {
+  if (!apiMethod || !notionAPI[apiMethod]) {
+    console.error('method should be specify.')
+    return
+  }
+  let result = await notionAPI[apiMethod](...options)
+  // provide callback function to format data
+  if (typeof dataFormatter === 'function') {
+    result = dataFormatter(result)
+  }
   return result
 }
