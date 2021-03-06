@@ -116,7 +116,7 @@ const Menu = props => {
 
     window.addEventListener('resize', debouncedHandleResize)
 
-    return _ => {
+    return () => {
       window.removeEventListener('resize', debouncedHandleResize)
     }
   })
