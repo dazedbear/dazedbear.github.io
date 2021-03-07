@@ -82,17 +82,17 @@ const NavigationMenu = ({
             if (isRelativePath) {
               return (
                 <li key={label} className={itemClass}>
-                  <ExtLink href={url || '#'} className={linkClass}>
-                    {label}
-                  </ExtLink>
+                  <Link href={url || '#'}>
+                    <a className={linkClass}>{label}</a>
+                  </Link>
                 </li>
               )
             }
             return (
               <li key={label} className={itemClass}>
-                <Link href={url || '#'}>
-                  <a className={linkClass}>{label}</a>
-                </Link>
+                <ExtLink href={url || '#'} className={linkClass}>
+                  {label}
+                </ExtLink>
               </li>
             )
           })}
