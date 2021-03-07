@@ -14,13 +14,34 @@
  */
 
 @layer components {
-  .notion-full-width {
-    @apply py-10 px-0 m-0 w-0;
+  #app .notion-full-width {
+    @apply pt-14 pb-5 lg:pt-12 px-0 m-0 w-0;
   }
-  .notion-viewport {
+  #app .notion-viewport {
     @apply hidden;
   }
-  .notion-collection-header {
-    @apply text-pink-700;
+  #app .notion-collection-header {
+    @apply hidden;
+  }
+  #app svg.notion-page-icon {
+    @apply hidden;
+  }
+  #app .notion-page-title-text {
+    @apply text-2xl text-lavender-purple-300 whitespace-normal;
+  }
+  #app .notion-gallery-grid {
+    @apply border-0 grid-cols-none block;
+  }
+  #app .notion-collection-card {
+    @apply mb-5 last:mb-0 shadow-none pb-4 border-b last:border-0 border-gray-300;
+  }
+  #app .notion-collection-card-property {
+    @apply text-sm;
+  }
+  #app .notion-collection-card-cover {
+    @apply h-auto border-0;
+  }
+  #app .notion-collection-card-cover > img {
+    @apply rounded-md;
   }
 }

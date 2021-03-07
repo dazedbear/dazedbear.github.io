@@ -37,6 +37,9 @@ module.exports = {
         9999: '9999',
         10000: '1000',
       },
+      maxHeight: {
+        190: '190px',
+      },
       minHeight: {
         12: '3rem',
         800: '800px',
@@ -53,7 +56,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+      margin: ['last'],
+    },
   },
   plugins: [],
 }
