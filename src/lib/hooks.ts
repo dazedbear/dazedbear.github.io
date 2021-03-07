@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+// FIXME: this approach has race condition during build time since some images are already borken before this effect executed.
 export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
   if (!selector) {
     return

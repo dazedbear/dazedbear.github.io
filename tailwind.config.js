@@ -1,5 +1,8 @@
 module.exports = {
-  purge: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
+  purge: {
+    layers: ['base', 'utilities'],
+    content: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
+  },
   darkMode: false, // or 'media' or 'class'
   important: '#app',
   theme: {
