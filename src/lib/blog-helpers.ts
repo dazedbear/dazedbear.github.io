@@ -67,6 +67,11 @@ export const getAllPostSlugs = ({ pageData, postIds, propertyPathMap }) => {
   })
 }
 
+export const isActivePage = page => {
+  const { pathname } = useRouter()
+  return page && page !== '/' && pathname.includes(page)
+}
+
 export const getCurrentPageTitle = () => {
   const { pathname } = useRouter()
   return navItems.find(({ page }) => page !== '/' && pathname.includes(page))

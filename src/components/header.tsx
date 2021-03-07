@@ -3,14 +3,15 @@ import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems } from '../lib/site.config'
-import { getCurrentPageTitle } from '../lib/blog-helpers'
+import { getCurrentPageTitle, isActivePage } from '../lib/blog-helpers'
 
 const Header = () => {
   const titlePre = getCurrentPageTitle()
   const linkClass =
-    'box-border items-center border-0 border-white text-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 bg-lavender-purple-500 lg:bg-lavender-purple-300 hover:bg-lavender-purple-300 lg:h-8 lg:text-white font-normal lg:hover:text-white lg:py-1.5 lg:px-2.5 lg:text-opacity-white-80'
-  const linkActiveClass =
-    'text-white bg-lavender-purple-300 hover:bg-lavender-purple-300 font-normal'
+    'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
+  const liniInActiveClass =
+    'text-white bg-lavender-purple-500 hover:bg-lavender-purple-300 lg:text-opacity-white-80 lg:bg-lavender-purple-300 lg:hover:text-white'
+  const linkActiveClass = 'bg-lavender-purple-300 lg:text-white'
 
   return (
     <div
@@ -42,27 +43,38 @@ const Header = () => {
           <div className="lg:h-9 lg:ml-auto lg:relative">
             <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:bg-none lg:h-auto lg:relative lg:right-auto lg:top-auto lg:w-auto">
               <ul className="bg-lavender-purple-500 box-border text-white flex flex-nowrap list-none mt-12 p-0 w-full lg:bg-none lg:flex lg:flex-row lg:flex-nowrap lg:m-0 lg:p-0 lg:w-auto">
-                {navItems.map(({ label, page, link }) => (
-                  <li
-                    key={label}
-                    className="flex-auto m-0 text-center whitespace-nowrap"
-                  >
-                    {page ? (
-                      <Link href={page}>
-                        <a className={classnames(linkClass, linkActiveClass)}>
+                {navItems.map(({ label, page, link }) => {
+                  const isActive = isActivePage(page)
+                  return (
+                    <li
+                      key={label}
+                      className="flex-auto m-0 text-center whitespace-nowrap"
+                    >
+                      {page ? (
+                        <Link href={page}>
+                          <a
+                            className={classnames(linkClass, {
+                              [linkActiveClass]: isActive,
+                              [liniInActiveClass]: !isActive,
+                            })}
+                          >
+                            {label}
+                          </a>
+                        </Link>
+                      ) : (
+                        <ExtLink
+                          className={classnames(linkClass, {
+                            [linkActiveClass]: isActive,
+                            [liniInActiveClass]: !isActive,
+                          })}
+                          href={link}
+                        >
                           {label}
-                        </a>
-                      </Link>
-                    ) : (
-                      <ExtLink
-                        className={classnames(linkClass, linkActiveClass)}
-                        href={link}
-                      >
-                        {label}
-                      </ExtLink>
-                    )}
-                  </li>
-                ))}
+                        </ExtLink>
+                      )}
+                    </li>
+                  )
+                })}
               </ul>
             </nav>
           </div>
