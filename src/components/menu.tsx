@@ -9,7 +9,12 @@ const Breadcrumb = ({ title, enableNavMenu, setNavMenu }) => {
   const hamburgerLineClass =
     'w-full h-0.75 bg-gray-700 my-1 mx-0 rounded-lg transition duration-300 origin-left'
   return (
-    <section className="fixed w-full left-0 right-0 z-1000 block lg:hidden">
+    <section
+      className={classnames(
+        'fixed w-full left-0 right-0 z-1000 block lg:hidden',
+        { 'border-b border-gray-300': enableNavMenu }
+      )}
+    >
       <div className="max-w-1100 py-2 px-5 my-0 mx-auto relative bg-gray-200 flex flex-row flex-nowrap box-border overflow-hidden">
         {/* hamburger lines */}
         <div className="h-8 w-5 mr-3 relative">
@@ -59,14 +64,19 @@ const NavigationMenu = ({
       className={classnames('lg:mr-12 lg:w-60 lg:pb-10 lg:pt-12 lg:px-0', {
         block: enableNavMenu,
         hidden: !enableNavMenu,
-        'fixed w-full z-1000 bg-white left-0 right-0 mt-12 border-t-1 border-gray-500 h-full pt-5 pb-15 px-5': isMobile,
+        'fixed w-full z-990 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5 overflow-y-scroll': isMobile,
       })}
     >
       <nav>
         {title && (
           <h3 className="text-lg font-medium text-gray-700 mb-2">{title}</h3>
         )}
-        <ul className="px-2 py-0">
+        <ul
+          className={classnames({
+            'px-2 py-0': !isMobile,
+            'p-0': isMobile,
+          })}
+        >
           {items.map(({ url, label }) => {
             const isRelativePath = /^\/.+/g.test(url)
             if (isRelativePath) {
