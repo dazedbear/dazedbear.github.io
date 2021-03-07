@@ -11,6 +11,7 @@ import {
 import { getNotionPosts, getTransformedNotionData } from '../../lib/notion'
 import { getBlockTitle, uuidToId } from 'notion-utils'
 import { notion } from '../../lib/site.config'
+import { useBrokenImageHandler } from '../../lib/hooks'
 import Menu from '../../components/menu'
 
 export async function getStaticProps() {
@@ -63,6 +64,10 @@ const Index = ({ recordMap, menuItems }) => {
     pdf: Pdf,
     equation: Equation,
   }
+  useBrokenImageHandler({
+    selector: '.notion-collection-card-cover img',
+    fallbackImageUrl: '/default-cover.png',
+  })
   return (
     <div className="flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto">
       <Menu title="所有文章" items={menuItems} />
