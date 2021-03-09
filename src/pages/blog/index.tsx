@@ -69,7 +69,10 @@ const Index = ({ recordMap, menuItems }) => {
     fallbackImageUrl: '/default-cover.png',
   })
   return (
-    <div className="flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto">
+    <div
+      id="article-list-page"
+      className="flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
+    >
       <Menu title="所有文章" items={menuItems} />
       <NotionRenderer
         fullPage={false}

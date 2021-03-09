@@ -14,11 +14,12 @@
  */
 
 @layer components {
-  #app .notion-full-width {
-    @apply pt-14 pb-5 lg:pt-12 px-0 m-0 w-0;
+  /* common notion style override */
+  #app .notion-page {
+    @apply pt-14 pb-5 lg:pt-12 px-0 m-0;
   }
   #app .notion-viewport {
-    @apply hidden;
+    @apply invisible; /* It's important for image preview, but it will block the hover behavior of left menu, so just hide it instead of display:none */
   }
   #app .notion-collection-header {
     @apply hidden;
@@ -26,22 +27,24 @@
   #app svg.notion-page-icon {
     @apply hidden;
   }
-  #app .notion-page-title-text {
+
+  /* only for article list page */
+  #app #article-list-page .notion-page-title-text {
     @apply text-2xl text-lavender-purple-300 whitespace-normal;
   }
-  #app .notion-gallery-grid {
+  #app #article-list-page .notion-gallery-grid {
     @apply border-0 grid-cols-none block;
   }
-  #app .notion-collection-card {
+  #app #article-list-page .notion-collection-card {
     @apply mb-5 last:mb-0 shadow-none pb-4 border-b last:border-0 border-gray-300;
   }
-  #app .notion-collection-card-property {
+  #app #article-list-page .notion-collection-card-property {
     @apply text-sm;
   }
-  #app .notion-collection-card-cover {
+  #app #article-list-page .notion-collection-card-cover {
     @apply h-auto border-0;
   }
-  #app .notion-collection-card-cover > img {
+  #app #article-list-page .notion-collection-card-cover > img {
     @apply rounded-md;
   }
 }
