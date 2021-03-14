@@ -30,6 +30,7 @@ module.exports = {
       height: {
         '0.5': '0.125rem',
         '0.75': '0.1875rem',
+        'semi-screen': '50vh',
       },
       lineHeight: {
         '4.5xl': '2.75rem',
@@ -42,12 +43,15 @@ module.exports = {
       },
       maxHeight: {
         190: '190px',
+        'full-viewport': 'calc(100vh - 6.25rem)',
+        'semi-screen': '50vh',
       },
       minHeight: {
         12: '3rem',
         800: '800px',
         100: '100px',
         150: '150px',
+        'semi-screen': '50vh',
       },
       maxWidth: {
         80: '80px',
@@ -55,6 +59,7 @@ module.exports = {
         730: '730px',
         900: '900px',
         1100: '1100px',
+        1400: '1400px',
       },
     },
   },

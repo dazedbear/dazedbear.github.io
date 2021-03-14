@@ -15,10 +15,10 @@ const Header = () => {
 
   return (
     <div
-      className="fixed w-full z-9999 bg-lavender-purple-300 text-white min-h-12 py-2 px-0 lg-flex-shrink-0"
+      className="fixed w-full z-9999 bg-lavender-purple-300 text-white min-h-12 py-2 px-0 lg:flex-shrink-0"
       style={{ transform: 'translateZ(0)' }}
     >
-      <div className="my-0 mx-auto max-w-1100 py-0 px-5">
+      <div className="my-0 mx-auto max-w-1400 py-0 px-5">
         <header className="flex relative text-left flex-nowrap flex-row">
           <Head>
             <title>

@@ -12,7 +12,8 @@ import { getNotionPosts, getTransformedNotionData } from '../../lib/notion'
 import { getBlockTitle, uuidToId } from 'notion-utils'
 import { notion } from '../../lib/site.config'
 import { useBrokenImageHandler } from '../../lib/hooks'
-import Menu from '../../components/menu'
+import Breadcrumb from '../../components/breadcrumb'
+import NavMenu from '../../components/nav-menu'
 
 export async function getStaticProps() {
   const recordMap = await getNotionPosts({ pageId: notion.blog.pageId })
@@ -73,7 +74,8 @@ const Index = ({ recordMap, menuItems }) => {
       id="article-list-page"
       className="flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
     >
-      <Menu title="所有文章" items={menuItems} />
+      <Breadcrumb title={notion.blog.navMenuTitle} />
+      <NavMenu title={notion.blog.navMenuTitle} menuItems={menuItems} />
       <NotionRenderer
         fullPage={false}
         recordMap={recordMap}

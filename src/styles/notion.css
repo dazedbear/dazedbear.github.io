@@ -16,7 +16,7 @@
 @layer components {
   /* common notion style override */
   #app .notion-page {
-    @apply pt-14 pb-5 lg:pt-12 px-0 m-0;
+    @apply pt-14 pb-5 lg:pt-12 lg:pb-10 px-0 m-0;
   }
   #app .notion-viewport {
     @apply invisible; /* It's important for image preview, but it will block the hover behavior of left menu, so just hide it instead of display:none */
@@ -26,6 +26,18 @@
   }
   #app svg.notion-page-icon {
     @apply hidden;
+  }
+  #app .notion-header {
+    @apply hidden;
+  }
+  #app .notion-header-anchor {
+    @apply -top-40 lg:-top-16;
+  }
+  #app .notion-page-cover {
+    @apply h-semi-screen max-h-semi-screen min-h-semi-screen;
+  }
+  #app .notion-title {
+    @apply text-lavender-purple-300;
   }
 
   /* only for article list page */

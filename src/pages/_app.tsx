@@ -9,15 +9,19 @@ import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { withSiteContextProvider } from '../lib/context'
+import { useResizeHandler } from '../lib/hooks'
 
-const MyApp = ({ Component, pageProps }) => (
-  <div id="app">
-    <Header />
-    <div className="pt-24 lg:pt-12">
-      <Component {...pageProps} />
+const App = ({ Component, pageProps }) => {
+  useResizeHandler()
+  return (
+    <div id="app">
+      <Header />
+      <div className="pt-24 lg:pt-12">
+        <Component {...pageProps} />
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-)
+  )
+}
 
 export default withSiteContextProvider(App)
