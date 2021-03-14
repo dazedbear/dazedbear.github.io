@@ -42,7 +42,7 @@ module.exports = {
       },
       maxHeight: {
         190: '190px',
-        'full-viewport': 'calc(100vh - 6.25rem)',
+        'full-viewport': 'calc(100vh - 5rem)',
         unset: 'unset',
       },
       minHeight: {

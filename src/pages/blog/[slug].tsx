@@ -129,7 +129,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
     fallbackImageUrl: '/broken-image.png',
   })
 
-  const { PageTitle, PageCover, LastEditedTime }: any = getPageProperty({
+  const property: any = getPageProperty({
     pageId,
     recordMap,
   })
@@ -140,11 +140,16 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
 
   const pageHeader = (
     <>
-      <div className="notion-title">{PageTitle}</div>
-      <p>{getDateStr(LastEditedTime)}</p>
+      <div className="notion-title">{property.PageTitle}</div>
+      <p>
+        <span>{`${getDateStr(property['Publish Date']['start_date'])}`}</span>
+        <span className="text-xs ml-2">{`(updated: ${getDateStr(
+          property.LastEditedTime
+        )})`}</span>
+      </p>
       <img
         className="notion-page-cover"
-        src={PageCover}
+        src={property.PageCover}
         loading="lazy"
         decoding="async"
       />
