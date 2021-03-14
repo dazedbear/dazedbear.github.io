@@ -8,6 +8,7 @@ import '../styles/global.css'
 import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
+import { withSiteContextProvider } from '../lib/context'
 
 const MyApp = ({ Component, pageProps }) => (
   <div id="app">
@@ -18,4 +19,5 @@ const MyApp = ({ Component, pageProps }) => (
     <Footer />
   </div>
 )
-export default MyApp
+
+export default withSiteContextProvider(App)
