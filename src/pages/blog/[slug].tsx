@@ -25,6 +25,7 @@ import NavMenu from '../../components/nav-menu'
 import TableOfContent from '../../components/toc'
 import { useTOCScrollHandler, useBrokenImageHandler } from '../../lib/hooks'
 import { getPageProperty, getDateStr } from '../../lib/blog-helpers'
+import NotionPageHeader from '../../components/notion-page-header'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug } }) {
@@ -139,21 +140,12 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
   }
 
   const pageHeader = (
-    <>
-      <div className="notion-title">{property.PageTitle}</div>
-      <p>
-        <span>{`${getDateStr(property['Publish Date']['start_date'])}`}</span>
-        <span className="text-xs ml-2">{`(updated: ${getDateStr(
-          property.LastEditedTime
-        )})`}</span>
-      </p>
-      <img
-        className="notion-page-cover"
-        src={property.PageCover}
-        loading="lazy"
-        decoding="async"
-      />
-    </>
+    <NotionPageHeader
+      title={property.PageTitle}
+      publishDate={getDateStr(property['Publish Date']['start_date'])}
+      lastEditedDate={getDateStr(property.LastEditedTime)}
+      cover={property.PageCover}
+    />
   )
 
   return (
