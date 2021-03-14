@@ -115,11 +115,12 @@ export const useTOCScrollHandler = () => {
     }, THROTTLE_MILLIONSECOND)
 
     const container = document.querySelector(NOTION_MAIN_CONTENT_CLASS_NAME)
-    container && container.addEventListener('scroll', actionSectionScrollSpy)
+    container.addEventListener('scroll', actionSectionScrollSpy) // for desktop case
+    window.addEventListener('scroll', actionSectionScrollSpy) // for smartphone case
     actionSectionScrollSpy()
     return () => {
-      container &&
-        container.removeEventListener('scroll', actionSectionScrollSpy)
+      window.removeEventListener('scroll', actionSectionScrollSpy)
+      container.removeEventListener('scroll', actionSectionScrollSpy)
     }
   }, [])
 }
