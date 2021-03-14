@@ -9,7 +9,6 @@ import {
   Modal,
 } from 'react-notion-x'
 import {
-  getPageTitle,
   getBlockTitle,
   uuidToId,
   idToUuid,
@@ -24,7 +23,8 @@ import {
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import TableOfContent from '../../components/toc'
-import { useTOCScrollHandler } from '../../lib/hooks'
+import { useTOCScrollHandler, useBrokenImageHandler } from '../../lib/hooks'
+import { getPageProperty, getDateStr } from '../../lib/blog-helpers'
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug } }) {
@@ -62,6 +62,7 @@ export async function getStaticProps({ params: { slug } }) {
 
   return {
     props: {
+      pageId: currentPostId,
       recordMap,
       menuItems,
       toc,
@@ -88,7 +89,21 @@ export async function getStaticPaths() {
   return { paths, fallback: false }
 }
 
-const RenderPost = ({ recordMap, menuItems = [], toc = [] }) => {
+const NotionComponents = {
+  pageLink: ({ href, ...props }) => (
+    <Link href={`/blog${href}`} {...props}>
+      <a {...props} />
+    </Link>
+  ),
+  code: Code,
+  collection: Collection,
+  collectionRow: () => null, // we don't render property table for each articles
+  modal: Modal,
+  pdf: Pdf,
+  equation: Equation,
+}
+
+const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
   const router = useRouter()
 
   // If the page is not yet generated, this will be displayed
@@ -109,37 +124,47 @@ const RenderPost = ({ recordMap, menuItems = [], toc = [] }) => {
     )
   }
 
-  const title = getPageTitle(recordMap) // TODO: find a way to pass page title to header
-  const components = {
-    pageLink: ({ href, ...props }) => (
-      <Link href={`/blog${href}`} {...props}>
-        <a {...props} />
-      </Link>
-    ),
-    code: Code,
-    collection: Collection,
-    collectionRow: () => null, // we don't render property table for each articles
-    modal: Modal,
-    pdf: Pdf,
-    equation: Equation,
+  useBrokenImageHandler({
+    selector: '.notion img',
+    fallbackImageUrl: '/broken-image.png',
+  })
+
+  const { PageTitle, PageCover, LastEditedTime }: any = getPageProperty({
+    pageId,
+    recordMap,
+  })
+  const enableToc = toc && toc.length > 0
+  if (enableToc) {
+    useTOCScrollHandler()
   }
 
-  useTOCScrollHandler()
-  const enableToc = toc && toc.length > 0
+  const pageHeader = (
+    <>
+      <div className="notion-title">{PageTitle}</div>
+      <p>{getDateStr(LastEditedTime)}</p>
+      <img
+        className="notion-page-cover"
+        src={PageCover}
+        loading="lazy"
+        decoding="async"
+      />
+    </>
+  )
 
   return (
     <div
       id="article-single-page"
-      className="flex flex-row flex-grow flex-nowrap justify-end max-w-1400 py-0 px-5 my-0 mx-auto"
+      className="flex flex-row flex-grow flex-nowrap justify-center max-w-1400 py-0 px-5 my-0 mx-auto"
     >
       <Breadcrumb title={notion.blog.navMenuTitle} enableToc={enableToc} />
       <NavMenu title={notion.blog.navMenuTitle} menuItems={menuItems} />
       <NotionRenderer
-        components={components}
-        className="pt-20 lg:pt-10 overflow-y-scroll lg:max-h-full-viewport"
+        components={NotionComponents}
+        className="pt-20 lg:pt-10 overflow-y-scroll lg:max-h-full-viewport lg:w-3-cols-center"
         recordMap={recordMap}
-        fullPage={true}
+        fullPage={false}
         darkMode={false}
+        pageHeader={pageHeader}
         showTableOfContents={false}
         showCollectionViewDropdown={false}
       />

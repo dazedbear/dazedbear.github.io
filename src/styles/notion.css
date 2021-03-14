@@ -34,7 +34,7 @@
     @apply -top-40 lg:-top-16;
   }
   #app .notion-page-cover {
-    @apply h-semi-screen max-h-semi-screen min-h-semi-screen;
+    @apply max-h-unset min-h-unset h-auto object-center object-contain;
   }
   #app .notion-title {
     @apply text-lavender-purple-300;
