@@ -33,23 +33,23 @@ module.exports = {
     // you can insert any notion index page you need here.
     blog: {
       keyName: 'BLOG_INDEX_ID',
-      pageId: normalizeId(process.env.BLOG_INDEX_ID),
-      collectionViewName: 'Publish',
+      pageId: normalizeId(process.env.BLOG_TABLE_PAGE_ID),
+      collectionViewId: normalizeId(process.env.BLOG_TABLE_VIEW_ID),
       navMenuTitle: '所有文章',
     },
     memo: {
       keyName: 'MEMO_INDEX_ID',
-      pageId: normalizeId(process.env.MEMO_INDEX_ID),
-      collectionViewName: null,
+      pageId: normalizeId(process.env.MEMO_TABLE_PAGE_ID),
+      collectionViewId: normalizeId(process.env.MEMO_TABLE_VIEW_ID),
       navMenuTitle: '所有筆記',
     },
     demo: {
       keyName: 'DEMO_INDEX_ID',
-      pageId: normalizeId(process.env.DEMO_INDEX_ID),
-      collectionViewName: null,
+      pageId: normalizeId(process.env.DEMO_TABLE_PAGE_ID),
+      collectionViewId: normalizeId(process.env.DEMO_TABLE_VIEW_ID),
       navMenuTitle: '所有 Demo',
     },
-    requiredEnv: ['NOTION_TOKEN', 'BLOG_INDEX_ID'],
+    requiredEnv: ['NOTION_TOKEN', 'BLOG_TABLE_PAGE_ID', 'BLOG_TABLE_VIEW_ID'],
   },
   copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
   communitySettings: {

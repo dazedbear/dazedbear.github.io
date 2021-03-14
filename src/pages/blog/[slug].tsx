@@ -15,50 +15,57 @@ import {
   getPageTableOfContents,
 } from 'notion-utils'
 import { notion } from '../../lib/site.config'
-import {
-  getNotionPosts,
-  getNotionSinglePost,
-  getTransformedNotionData,
-} from '../../lib/notion'
+import { getNotionPostsFromTable, getNotionPage } from '../../lib/notion'
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import TableOfContent from '../../components/toc'
 import { useTOCScrollHandler, useBrokenImageHandler } from '../../lib/hooks'
 import { getPageProperty, getDateStr } from '../../lib/blog-helpers'
 import NotionPageHeader from '../../components/notion-page-header'
+import get from 'lodash/get'
+
+// Return our list of blog posts to prerender
+export async function getStaticPaths() {
+  const postIds = await getNotionPostsFromTable(
+    {
+      pageId: notion.blog.pageId,
+      collectionViewId: notion.blog.collectionViewId,
+    },
+    data => data?.result?.blockIds
+  )
+
+  // TODO: we use postId as slug for now. will support to use readable text as slug later
+  // https://github.com/vercel/next.js/discussions/11272
+  const paths = postIds.map(postId => ({ params: { slug: uuidToId(postId) } }))
+  return { paths, fallback: false }
+}
 
 // Get the data for each blog post
 export async function getStaticProps({ params: { slug } }) {
   const currentPostId = idToUuid(slug)
-  const recordMap = await getNotionSinglePost(currentPostId)
-  const postIds = await getNotionPosts(
+  const recordMap = await getNotionPage(currentPostId)
+  const toc = getPageTableOfContents(
+    get(recordMap, ['block', currentPostId, 'value']),
+    recordMap
+  )
+
+  const menuItems = await getNotionPostsFromTable(
     {
       pageId: notion.blog.pageId,
-      collectionViewName: notion.blog.collectionViewName,
+      collectionViewId: notion.blog.collectionViewId,
     },
-    data => data?.result?.blockIds
-  )
-  const postBlocksMap = await getTransformedNotionData(
-    'getBlocks',
-    response => {
-      return response?.recordMap?.block
-    },
-    postIds
-  )
-
-  const menuItems = postIds.map(postId => {
-    const url = `/blog/${uuidToId(postId)}`
-    const block = postBlocksMap[postId]?.value
-    const label = getBlockTitle(block, recordMap)
-    return {
-      label,
-      url,
+    data => {
+      const postIds = get(data, ['result', 'blockIds'])
+      return postIds.map(postId => {
+        const url = `/blog/${uuidToId(postId)}`
+        const block = get(data, ['recordMap', 'block', postId, 'value'])
+        const label = getBlockTitle(block, data.recordMap)
+        return {
+          label,
+          url,
+        }
+      })
     }
-  })
-
-  const toc = getPageTableOfContents(
-    postBlocksMap[currentPostId]?.value,
-    recordMap
   )
 
   return {
@@ -68,26 +75,7 @@ export async function getStaticProps({ params: { slug } }) {
       menuItems,
       toc,
     },
-    revalidate: 10,
   }
-}
-
-// Return our list of blog posts to prerender
-export async function getStaticPaths() {
-  const postIds = await getNotionPosts(
-    {
-      pageId: notion.blog.pageId,
-      collectionViewName: notion.blog.collectionViewName,
-    },
-    data => {
-      return data?.result?.blockIds
-    }
-  )
-
-  // TODO: we use postId as slug for now. will support to use readable text as slug later
-  // https://github.com/vercel/next.js/discussions/11272
-  const paths = postIds.map(postId => ({ params: { slug: uuidToId(postId) } }))
-  return { paths, fallback: false }
 }
 
 const NotionComponents = {
@@ -107,12 +95,14 @@ const NotionComponents = {
 const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
   const router = useRouter()
 
+  // TODO:
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   if (router.isFallback) {
     return <div>Loading...</div>
   }
 
+  // TODO:
   // if you don't have a post at this point, and are not
   // loading one from fallback then  redirect back to the index
   if (!recordMap) {

@@ -17,12 +17,12 @@ const validateRequiredEnv = (envList = []) => {
   })
 }
 
-validateRequiredEnv(siteConfig.notion.requiredEnv)
-
 module.exports = {
   target: 'experimental-serverless-trace',
 
   webpack(cfg, { dev, isServer }) {
+    validateRequiredEnv(siteConfig.notion.requiredEnv)
+
     // only compile build-rss in production server build
     if (dev || !isServer) return cfg
 

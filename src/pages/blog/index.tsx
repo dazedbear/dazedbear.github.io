@@ -8,46 +8,40 @@ import {
   Equation,
   Modal,
 } from 'react-notion-x'
-import { getNotionPosts, getTransformedNotionData } from '../../lib/notion'
+import { getNotionPage, getNotionPostsFromTable } from '../../lib/notion'
 import { getBlockTitle, uuidToId } from 'notion-utils'
 import { notion } from '../../lib/site.config'
 import { useBrokenImageHandler } from '../../lib/hooks'
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
+import get from 'lodash/get'
 
 export async function getStaticProps() {
-  const recordMap = await getNotionPosts({ pageId: notion.blog.pageId })
-  const postIds = await getNotionPosts(
+  const recordMap = await getNotionPage(notion.blog.pageId)
+  const menuItems = await getNotionPostsFromTable(
     {
       pageId: notion.blog.pageId,
-      collectionViewName: notion.blog.collectionViewName,
+      collectionViewId: notion.blog.collectionViewId,
     },
-    data => data?.result?.blockIds
-  )
-  const postBlocksMap = await getTransformedNotionData(
-    'getBlocks',
-    response => {
-      return response?.recordMap?.block
-    },
-    postIds
-  )
-
-  const menuItems = postIds.map(postId => {
-    const url = `/blog/${uuidToId(postId)}`
-    const block = postBlocksMap[postId]?.value
-    const label = getBlockTitle(block, recordMap)
-    return {
-      label,
-      url,
+    data => {
+      const postIds = get(data, ['result', 'blockIds'])
+      return postIds.map(postId => {
+        const url = `/blog/${uuidToId(postId)}`
+        const block = get(data, ['recordMap', 'block', postId, 'value'])
+        const label = getBlockTitle(block, data.recordMap)
+        return {
+          label,
+          url,
+        }
+      })
     }
-  })
+  )
 
   return {
     props: {
       menuItems,
       recordMap,
     },
-    revalidate: 10,
   }
 }
 
