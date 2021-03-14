@@ -125,9 +125,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
     recordMap,
   })
   const enableToc = toc && toc.length > 0
-  if (enableToc) {
-    useTOCScrollHandler()
-  }
+  useTOCScrollHandler()
 
   const pageHeader = (
     <NotionPageHeader
