@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import ExtLink from './ext-link'
 import classnames from 'classnames'
-import { useSiteContext } from '../lib/context'
+import { useSiteContext, SiteContextAction } from '../lib/context'
 
 const NavigationMenu = ({ title, menuItems }) => {
-  const { showNavMenu, device } = useSiteContext()
+  const { showNavMenu, device, dispatch } = useSiteContext()
   const isMobile = device === 'smartphone'
   const itemClass = 'py-1 cursor-pointer'
   const linkClass =
@@ -34,7 +34,14 @@ const NavigationMenu = ({ title, menuItems }) => {
             const isRelativePath = /^\/.+/g.test(url)
             if (isRelativePath) {
               return (
-                <li key={label} className={itemClass}>
+                <li
+                  key={label}
+                  className={itemClass}
+                  onClick={() => {
+                    isMobile &&
+                      dispatch(SiteContextAction('TOGGLE_NAV_MENU', false))
+                  }}
+                >
                   <Link href={url || '#'}>
                     <a className={linkClass}>{label}</a>
                   </Link>
@@ -42,7 +49,14 @@ const NavigationMenu = ({ title, menuItems }) => {
               )
             }
             return (
-              <li key={label} className={itemClass}>
+              <li
+                key={label}
+                className={itemClass}
+                onClick={() => {
+                  isMobile &&
+                    dispatch(SiteContextAction('TOGGLE_NAV_MENU', false))
+                }}
+              >
                 <ExtLink href={url || '#'} className={linkClass}>
                   {label}
                 </ExtLink>
