@@ -10,9 +10,6 @@ const TableOfContent = ({ toc }) => {
     activeSectionId,
   } = useSiteContext()
   const isMobile = device === 'smartphone'
-  if (!showTableOfContent || !Array.isArray(toc) || !toc.length) {
-    return null
-  }
   const tocItemClickHandler = id => {
     dispatch(SiteContextAction('UPDATE_TOC_ACTIVE_SECTION_ID', id))
     isMobile && dispatch(SiteContextAction('TOGGLE_TABLE_OF_CONTENT'))
@@ -28,41 +25,42 @@ const TableOfContent = ({ toc }) => {
         }
       )}
     >
-      <aside className="">
-        <div className="">
-          <nav className="">
-            {toc.map((tocItem, index) => {
-              const id = uuidToId(tocItem.id)
-              const nextTocItem =
-                index + 2 <= toc.length ? toc[index + 1] : null
-              return (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className={classnames('block', {
-                    'mb-2':
-                      nextTocItem &&
-                      nextTocItem.indentLevel < tocItem.indentLevel,
-                  })}
-                  onClick={tocItemClickHandler.bind(this, id)}
-                >
-                  <span
-                    className={classnames(
-                      'inline-block text-xs text-gray-500 font-normal',
-                      {
-                        'text-lavender-purple-300 font-semibold':
-                          activeSectionId === id,
-                      }
-                    )}
-                    style={{
-                      marginLeft: tocItem.indentLevel * 16,
-                    }}
+      <aside>
+        <div>
+          <nav>
+            {Array.isArray(toc) &&
+              toc.map((tocItem, index) => {
+                const id = uuidToId(tocItem.id)
+                const nextTocItem =
+                  index + 2 <= toc.length ? toc[index + 1] : null
+                return (
+                  <a
+                    key={id}
+                    href={`#${id}`}
+                    className={classnames('block', {
+                      'mb-2':
+                        nextTocItem &&
+                        nextTocItem.indentLevel < tocItem.indentLevel,
+                    })}
+                    onClick={tocItemClickHandler.bind(this, id)}
                   >
-                    {tocItem.text}
-                  </span>
-                </a>
-              )
-            })}
+                    <span
+                      className={classnames(
+                        'inline-block text-xs text-gray-500 font-normal',
+                        {
+                          'text-lavender-purple-300 font-semibold':
+                            activeSectionId === id,
+                        }
+                      )}
+                      style={{
+                        marginLeft: tocItem.indentLevel * 16,
+                      }}
+                    >
+                      {tocItem.text}
+                    </span>
+                  </a>
+                )
+              })}
           </nav>
         </div>
       </aside>
