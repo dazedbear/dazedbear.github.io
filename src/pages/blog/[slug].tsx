@@ -15,7 +15,11 @@ import {
   getPageTableOfContents,
 } from 'notion-utils'
 import { notion } from '../../lib/site.config'
-import { getNotionPostsFromTable, getNotionPage } from '../../lib/notion'
+import {
+  getNotionPostsFromTable,
+  getNotionPage,
+  getNotionPreviewImages,
+} from '../../lib/notion'
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import TableOfContent from '../../components/toc'
@@ -49,6 +53,11 @@ export async function getStaticProps({ params: { slug } }) {
     get(recordMap, ['block', currentPostId, 'value']),
     recordMap
   )
+
+  if (notion.previeImages.enable) {
+    const previewImageMap = await getNotionPreviewImages(recordMap)
+    recordMap['preview_images'] = previewImageMap
+  }
 
   const menuItems = await getNotionPostsFromTable(
     {
@@ -153,6 +162,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
         darkMode={false}
         pageHeader={pageHeader}
         pageFooter={pageFooter}
+        previewImages={notion.previeImages.enable}
         showTableOfContents={false}
         showCollectionViewDropdown={false}
       />

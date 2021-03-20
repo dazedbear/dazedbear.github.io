@@ -14,6 +14,7 @@ const normalizeId = id => {
 }
 
 module.exports = {
+  cdnHost: '',
   meta: {
     title: 'DazedBear Studio',
     description: 'Web。Digital Music。Self Development',
@@ -50,6 +51,9 @@ module.exports = {
       navMenuTitle: '所有 Demo',
     },
     requiredEnv: ['NOTION_TOKEN', 'BLOG_TABLE_PAGE_ID', 'BLOG_TABLE_VIEW_ID'],
+    previeImages: {
+      enable: true,
+    },
   },
   copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
   communitySettings: {
