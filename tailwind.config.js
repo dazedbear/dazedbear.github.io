@@ -25,6 +25,7 @@ module.exports = {
         '1-0-26': '1 0 26%',
       },
       fontSize: {
+        'xs+': '0.8125rem',
         '4.5xl': '2.5rem',
       },
       height: {

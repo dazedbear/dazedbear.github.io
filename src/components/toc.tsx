@@ -46,7 +46,7 @@ const TableOfContent = ({ toc }) => {
                   >
                     <span
                       className={classnames(
-                        'inline-block text-xs text-gray-500 font-normal',
+                        'inline-block text-sm text-gray-500 font-normal lg:text-xs+',
                         {
                           'text-lavender-purple-300 font-semibold':
                             activeSectionId === id,
