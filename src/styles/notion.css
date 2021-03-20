@@ -54,9 +54,9 @@
     @apply text-sm;
   }
   #app #article-list-page .notion-collection-card-cover {
-    @apply h-auto border-0;
+    @apply border-0;
   }
-  #app #article-list-page .notion-collection-card-cover > img {
+  #app #article-list-page .notion-collection-card-cover img {
     @apply rounded-md;
   }
 }

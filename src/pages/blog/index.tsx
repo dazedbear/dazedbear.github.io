@@ -8,7 +8,11 @@ import {
   Equation,
   Modal,
 } from 'react-notion-x'
-import { getNotionPage, getNotionPostsFromTable } from '../../lib/notion'
+import {
+  getNotionPage,
+  getNotionPostsFromTable,
+  getNotionPreviewImages,
+} from '../../lib/notion'
 import { getBlockTitle, uuidToId } from 'notion-utils'
 import { notion } from '../../lib/site.config'
 import { useBrokenImageHandler } from '../../lib/hooks'
@@ -18,24 +22,25 @@ import get from 'lodash/get'
 
 export async function getStaticProps() {
   const recordMap = await getNotionPage(notion.blog.pageId)
-  const menuItems = await getNotionPostsFromTable(
-    {
-      pageId: notion.blog.pageId,
-      collectionViewId: notion.blog.collectionViewId,
-    },
-    data => {
-      const postIds = get(data, ['result', 'blockIds'])
-      return postIds.map(postId => {
-        const url = `/blog/${uuidToId(postId)}`
-        const block = get(data, ['recordMap', 'block', postId, 'value'])
-        const label = getBlockTitle(block, data.recordMap)
-        return {
-          label,
-          url,
-        }
-      })
+  const postsData = await getNotionPostsFromTable({
+    pageId: notion.blog.pageId,
+    collectionViewId: notion.blog.collectionViewId,
+  })
+  const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
+    const url = `/blog/${uuidToId(postId)}`
+    const block = get(postsData, ['recordMap', 'block', postId, 'value'])
+    const label = getBlockTitle(block, postsData.recordMap)
+    return {
+      label,
+      url,
     }
-  )
+  })
+
+  if (notion.previeImages.enable) {
+    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
+    const previewImageMap = await getNotionPreviewImages(postsData.recordMap)
+    recordMap['preview_images'] = previewImageMap
+  }
 
   return {
     props: {
@@ -74,6 +79,7 @@ const Index = ({ recordMap, menuItems }) => {
         fullPage={false}
         recordMap={recordMap}
         components={components}
+        previewImages={notion.previeImages.enable}
         showCollectionViewDropdown={false}
       />
     </div>
