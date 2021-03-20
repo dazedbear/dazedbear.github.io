@@ -1,6 +1,7 @@
 import { get } from 'lodash'
 import { useRouter } from 'next/router'
-import { navigation as navItems } from '../lib/site.config'
+import { navigation as navItems, cdnHost } from '../lib/site.config'
+import { Block } from 'notion-types'
 import { getDateValue } from 'notion-utils'
 
 /**
@@ -107,6 +108,12 @@ export const getPageProperty = ({ pageId, recordMap }) => {
     } else {
       property[name] = getPropertyValue(property[name])
     }
+    // reacct-notion-x appends such query params for every images and I still don't know why.
+    // just align to it to fix the lazy load with preview image for page cover.
+    // eg: ?table=block&id=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&cache=v2
+    if (name === 'PageCover') {
+      property[name] = mapNotionImageUrl(property[name], pageBlock.value)
+    }
   }
 
   return property
@@ -151,4 +158,54 @@ export const getCurrentPageTitle = () => {
   const { pathname } = useRouter()
   return navItems.find(({ page }) => page !== '/' && pathname.includes(page))
     ?.label
+}
+
+/**
+ * get notion image url that handles some cache logic
+ * @see https://github.com/transitive-bullshit/nextjs-notion-starter-kit/blob/af8ed575d188021d4676633d17e25e4c59ce0b36/lib/map-image-url.ts
+ * @param {string} url
+ * @param {object} block
+ * @returns {string} final image url
+ */
+export const mapNotionImageUrl = (url: string, block: Block) => {
+  if (!url) {
+    return null
+  }
+
+  if (url.startsWith('data:')) {
+    return url
+  }
+
+  if (cdnHost && url.startsWith(cdnHost)) {
+    return url
+  }
+
+  if (url.startsWith('/images')) {
+    url = `https://www.notion.so${url}`
+  }
+
+  // more recent versions of notion don't proxy unsplash images
+  if (!url.startsWith('https://images.unsplash.com')) {
+    url = `https://www.notion.so${
+      url.startsWith('/image') ? url : `/image/${encodeURIComponent(url)}`
+    }`
+
+    const notionImageUrlV2 = new URL(url)
+    let table = block.parent_table === 'space' ? 'block' : block.parent_table
+    if (table === 'collection') {
+      table = 'block'
+    }
+    notionImageUrlV2.searchParams.set('table', table)
+    notionImageUrlV2.searchParams.set('id', block.id)
+    notionImageUrlV2.searchParams.set('cache', 'v2')
+
+    url = notionImageUrlV2.toString()
+  }
+
+  if (url.startsWith('data:')) {
+    return url
+  }
+
+  // use CDN to cache these image assets
+  return cdnHost ? `${cdnHost}/${encodeURIComponent(url)}` : url
 }

@@ -143,6 +143,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
       publishDate={getDateStr(property['Publish Date']['start_date'])}
       lastEditedDate={getDateStr(property.LastEditedTime)}
       cover={property.PageCover}
+      recordMap={recordMap}
     />
   )
   const pageFooter = <NotionPageFooter />

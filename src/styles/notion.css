@@ -39,6 +39,9 @@
   #app .notion-title {
     @apply text-lavender-purple-300;
   }
+  #app .notion-collection-card-cover .lazy-image-wrapper {
+    @apply rounded-md;
+  }
 
   /* only for article list page */
   #app #article-list-page .notion-page-title-text {
