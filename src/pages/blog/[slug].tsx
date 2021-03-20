@@ -31,13 +31,17 @@ import get from 'lodash/get'
 
 // Return our list of blog posts to prerender
 export async function getStaticPaths() {
-  const postIds = await getNotionPostsFromTable(
-    {
-      pageId: notion.blog.pageId,
-      collectionViewId: notion.blog.collectionViewId,
-    },
-    data => data?.result?.blockIds
-  )
+  const { recordMap, result } = await getNotionPostsFromTable({
+    pageId: notion.blog.pageId,
+    collectionViewId: notion.blog.collectionViewId,
+  })
+
+  const postIds = result.blockIds
+
+  if (notion.previeImages.enable) {
+    // try to fill the cache of all images when generating slugs
+    await getNotionPreviewImages(recordMap)
+  }
 
   // TODO: we use postId as slug for now. will support to use readable text as slug later
   // https://github.com/vercel/next.js/discussions/11272

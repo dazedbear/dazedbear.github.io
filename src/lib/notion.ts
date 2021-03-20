@@ -82,6 +82,7 @@ export const getNotionPostsFromTable = async (
  * @param {object} recordMap
  * @returns {object} previewImageMap
  */
+const previewImageCache = new Map()
 export const getNotionPreviewImages = async recordMap => {
   if (!recordMap) {
     console.error('recordMap not found in getNotionPreviewImages')
@@ -118,16 +119,25 @@ export const getNotionPreviewImages = async recordMap => {
   const results = await pMap(imageUrls, async url => {
     let result
     try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        throw Error(response.error)
+      if (previewImageCache.get(url)) {
+        result = previewImageCache.get(url)
+        console.log('lqip cache', { url, ...result.metadata })
+      } else {
+        const response = await fetch(url)
+        if (!response.ok) {
+          throw Error(response.error)
+        }
+        const imageBuffer = await response.buffer()
+        result = await lqip(imageBuffer)
+        console.log('lqip', { url, ...result.metadata })
+        previewImageCache.set(url, result)
       }
-      const imageBuffer = await response.buffer()
-      result = await lqip(imageBuffer)
-      console.log('lqip', { url, ...result.metadata })
     } catch (err) {
       console.error('lqip error', err)
-      return
+      return {
+        url,
+        error: true,
+      }
     }
 
     const image = {
