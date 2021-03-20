@@ -77,16 +77,37 @@ module.exports = {
     },
   },
   communityFeatures: {
-    siteFooterIcon: {
-      github: true,
-      linkedin: false,
-      soundcloud: false,
-      youtube: false,
-    },
-    articleFooter: {
-      facebookLikeButtons: false,
-      facebookComments: false,
-      likecoin: false,
-    },
+    siteFooterIcon: [
+      {
+        name: 'github',
+        enable: true,
+      },
+      {
+        name: 'linkedin',
+        enable: false,
+      },
+      {
+        name: 'soundcloud',
+        enable: false,
+      },
+      {
+        name: 'youtube',
+        enable: false,
+      },
+    ],
+    articleFooter: [
+      {
+        name: 'facebookLikeButtons',
+        enable: true,
+      },
+      {
+        name: 'likecoin',
+        enable: true,
+      },
+      {
+        name: 'facebookComments',
+        enable: false,
+      },
+    ],
   },
 }

@@ -22,6 +22,7 @@ import TableOfContent from '../../components/toc'
 import { useTOCScrollHandler, useBrokenImageHandler } from '../../lib/hooks'
 import { getPageProperty, getDateStr } from '../../lib/blog-helpers'
 import NotionPageHeader from '../../components/notion-page-header'
+import NotionPageFooter from '../../components/notion-page-footer'
 import get from 'lodash/get'
 
 // Return our list of blog posts to prerender
@@ -135,6 +136,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
       cover={property.PageCover}
     />
   )
+  const pageFooter = <NotionPageFooter />
 
   return (
     <div
@@ -150,6 +152,7 @@ const RenderPost = ({ pageId, recordMap, menuItems = [], toc = [] }) => {
         fullPage={false}
         darkMode={false}
         pageHeader={pageHeader}
+        pageFooter={pageFooter}
         showTableOfContents={false}
         showCollectionViewDropdown={false}
       />

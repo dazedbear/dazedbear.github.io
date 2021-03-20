@@ -20,7 +20,6 @@ const CommunityIcon = ({ name, link }) => {
 }
 
 const Footer = () => {
-  const communityIcons = Object.keys(communityFeatures.siteFooterIcon)
   return (
     <>
       <footer
@@ -28,8 +27,8 @@ const Footer = () => {
         id="footer"
       >
         <section className="flex justify-around my-0 mx-auto">
-          {communityIcons.map(brand => {
-            if (!brand || !communityFeatures.siteFooterIcon[brand]) return
+          {communityFeatures.siteFooterIcon.map(({ name: brand, enable }) => {
+            if (!enable) return
             let link
             if (brand === 'youtube') {
               link = `${communitySettings[brand]?.channelBaseUrl}/${communitySettings[brand]?.channelHash}`
