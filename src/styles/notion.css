@@ -36,6 +36,9 @@
   #app .notion-page-cover {
     @apply max-h-unset min-h-unset h-auto object-center object-contain;
   }
+  #app .notion-page-link {
+    @apply h-auto hover:bg-white;
+  }
   #app .notion-title {
     @apply text-lavender-purple-300;
   }
