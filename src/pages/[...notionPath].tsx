@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import get from 'lodash/get'
 import {
-  NotionComponents as NotionComponentsType,
   NotionRenderer,
   Code,
   Collection,
@@ -34,12 +33,11 @@ import NotionPageFooter from '../components/notion-page-footer'
 const PAGE_TYPE_LIST_PAGE = 'listPage'
 const PAGE_TYPE_SINGLE_PAGE = 'singlePage'
 
-const NotionDefaultComponentMap: NotionComponentsType = {
+const NotionDefaultComponentMap: any = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
   equation: Equation,
-  link: () => null,
   modal: Modal,
   pageLink: () => null,
   pdf: Pdf,

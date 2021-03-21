@@ -47,6 +47,9 @@
   #app .notion-collection-card-cover .lazy-image-wrapper {
     @apply rounded-md;
   }
+  #app .notion-row {
+    @apply overflow-visible;
+  }
 
   /**
    * for common notion list page: #app #notion-list-page ...
