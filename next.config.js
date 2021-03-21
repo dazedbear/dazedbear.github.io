@@ -1,7 +1,7 @@
 const siteConfig = require('./src/lib/site.config')
 
 const validateRequiredEnv = () => {
-  const notionPageConfigs = siteConfig?.notion?.pages || {}
+  const notionPageConfigs = siteConfig.notion.pages || {}
   const envList = Object.values(notionPageConfigs).reduce((list, config) => {
     if (
       config.enable &&
