@@ -27,8 +27,7 @@ module.exports = {
     // },
     {
       label: 'Memos',
-      link:
-        'https://www.notion.so/dazedbear/DazedBear-Memos-c9bcf1af4c7e43918af8bcebf8f79991',
+      page: '/memo',
     },
     {
       label: 'Article',
@@ -48,7 +47,7 @@ module.exports = {
       },
       memo: {
         collectionViewId: normalizeId(process.env.MEMO_TABLE_VIEW_ID),
-        enable: false,
+        enable: true,
         navMenuTitle: 'Memo 雜談',
         pageId: normalizeId(process.env.MEMO_TABLE_PAGE_ID),
         requiredEnv: ['MEMO_TABLE_PAGE_ID', 'MEMO_TABLE_VIEW_ID'],
