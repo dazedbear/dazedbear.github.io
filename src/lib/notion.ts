@@ -116,42 +116,48 @@ export const getNotionPreviewImages = async recordMap => {
     .map(({ block, url }) => mapNotionImageUrl(url, block))
     .filter(Boolean)
 
-  const results = await pMap(imageUrls, async url => {
-    let result
-    try {
-      if (previewImageCache.get(url)) {
-        result = previewImageCache.get(url)
-        console.log('lqip cache', { url, ...result.metadata })
-      } else {
-        const response = await fetch(url)
-        if (!response.ok) {
-          throw Error(response.error)
+  const results = await pMap(
+    imageUrls,
+    async url => {
+      let result
+      try {
+        if (previewImageCache.get(url)) {
+          result = previewImageCache.get(url)
+          console.log('lqip cache', { url, ...result.metadata })
+        } else {
+          const response = await fetch(url)
+          if (!response.ok) {
+            throw Error(response.error)
+          }
+          const imageBuffer = await response.buffer()
+          result = await lqip(imageBuffer)
+          console.log('lqip', { url, ...result.metadata })
+          previewImageCache.set(url, result)
         }
-        const imageBuffer = await response.buffer()
-        result = await lqip(imageBuffer)
-        console.log('lqip', { url, ...result.metadata })
-        previewImageCache.set(url, result)
+      } catch (err) {
+        console.error('lqip error', err)
+        return {
+          url,
+          error: true,
+        }
       }
-    } catch (err) {
-      console.error('lqip error', err)
-      return {
-        url,
-        error: true,
-      }
-    }
 
-    const image = {
-      url,
-      originalWidth: result.metadata.originalWidth,
-      originalHeight: result.metadata.originalHeight,
-      width: result.metadata.width,
-      height: result.metadata.height,
-      type: result.metadata.type,
-      dataURIBase64: result.metadata.dataURIBase64,
-      error: false,
+      const image = {
+        url,
+        originalWidth: result.metadata.originalWidth,
+        originalHeight: result.metadata.originalHeight,
+        width: result.metadata.width,
+        height: result.metadata.height,
+        type: result.metadata.type,
+        dataURIBase64: result.metadata.dataURIBase64,
+        error: false,
+      }
+      return image
+    },
+    {
+      concurrency: 5, // to prevent segmentation fault when build in Vercel.
     }
-    return image
-  })
+  )
 
   return results
     .filter(Boolean)
