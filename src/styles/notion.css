@@ -14,7 +14,9 @@
  */
 
 @layer components {
-  /* common notion style override */
+  /**
+   * for global notion style override: #app ...
+   */
   #app .notion-page {
     @apply pt-14 pb-5 lg:pt-12 lg:pb-10 px-0 m-0;
   }
@@ -46,23 +48,29 @@
     @apply rounded-md;
   }
 
-  /* only for article list page */
-  #app #article-list-page .notion-page-title-text {
+  /**
+   * for common notion list page: #app #notion-list-page ...
+   */
+  #app #notion-list-page .notion-page-title-text {
     @apply text-2xl text-lavender-purple-300 whitespace-normal;
   }
-  #app #article-list-page .notion-gallery-grid {
+  #app #notion-list-page .notion-gallery-grid {
     @apply border-0 grid-cols-none block;
   }
-  #app #article-list-page .notion-collection-card {
+  #app #notion-list-page .notion-collection-card {
     @apply mb-5 last:mb-0 shadow-none pb-4 border-b last:border-0 border-gray-300;
   }
-  #app #article-list-page .notion-collection-card-property {
+  #app #notion-list-page .notion-collection-card-property {
     @apply text-sm;
   }
-  #app #article-list-page .notion-collection-card-cover {
+  #app #notion-list-page .notion-collection-card-cover {
     @apply border-0;
   }
-  #app #article-list-page .notion-collection-card-cover img {
+  #app #notion-list-page .notion-collection-card-cover img {
     @apply rounded-md;
   }
+
+  /**
+   * for common notion list page: #app #notion-single-page ...
+   */
 }

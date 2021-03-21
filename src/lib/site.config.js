@@ -21,36 +21,46 @@ module.exports = {
     image: '',
   },
   navigation: [
-    // { label: 'Demos', page: '/demo' },
+    // {
+    //   label: 'Demo',
+    //   page: '/demo'
+    // },
     {
       label: 'Memos',
       link:
         'https://www.notion.so/dazedbear/DazedBear-Memos-c9bcf1af4c7e43918af8bcebf8f79991',
     },
-    { label: 'Articles', page: '/blog' },
+    {
+      label: 'Article',
+      page: '/article',
+    },
   ],
   notion: {
     token: process.env.NOTION_TOKEN,
     // you can insert any notion index page you need here.
-    blog: {
-      keyName: 'BLOG_INDEX_ID',
-      pageId: normalizeId(process.env.BLOG_TABLE_PAGE_ID),
-      collectionViewId: normalizeId(process.env.BLOG_TABLE_VIEW_ID),
-      navMenuTitle: '所有文章',
+    pages: {
+      article: {
+        collectionViewId: normalizeId(process.env.ARTICLE_TABLE_VIEW_ID),
+        enable: true,
+        navMenuTitle: 'Article 文章',
+        pageId: normalizeId(process.env.ARTICLE_TABLE_PAGE_ID),
+        requiredEnv: ['ARTICLE_TABLE_PAGE_ID', 'ARTICLE_TABLE_VIEW_ID'],
+      },
+      memo: {
+        collectionViewId: normalizeId(process.env.MEMO_TABLE_VIEW_ID),
+        enable: false,
+        navMenuTitle: 'Memo 雜談',
+        pageId: normalizeId(process.env.MEMO_TABLE_PAGE_ID),
+        requiredEnv: ['MEMO_TABLE_PAGE_ID', 'MEMO_TABLE_VIEW_ID'],
+      },
+      demo: {
+        collectionViewId: normalizeId(process.env.DEMO_TABLE_VIEW_ID),
+        enable: false,
+        navMenuTitle: 'Demo 作品展示',
+        pageId: normalizeId(process.env.DEMO_TABLE_PAGE_ID),
+        requiredEnv: ['DEMO_TABLE_PAGE_ID', 'DEMO_TABLE_VIEW_ID'],
+      },
     },
-    memo: {
-      keyName: 'MEMO_INDEX_ID',
-      pageId: normalizeId(process.env.MEMO_TABLE_PAGE_ID),
-      collectionViewId: normalizeId(process.env.MEMO_TABLE_VIEW_ID),
-      navMenuTitle: '所有筆記',
-    },
-    demo: {
-      keyName: 'DEMO_INDEX_ID',
-      pageId: normalizeId(process.env.DEMO_TABLE_PAGE_ID),
-      collectionViewId: normalizeId(process.env.DEMO_TABLE_VIEW_ID),
-      navMenuTitle: '所有 Demo',
-    },
-    requiredEnv: ['NOTION_TOKEN', 'BLOG_TABLE_PAGE_ID', 'BLOG_TABLE_VIEW_ID'],
     previeImages: {
       enable: true,
     },

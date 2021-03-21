@@ -1,15 +1,20 @@
 const siteConfig = require('./src/lib/site.config')
-const warnOrError =
-  process.env.NODE_ENV !== 'production'
-    ? console.warn
-    : msg => {
-        throw new Error(msg)
-      }
 
-const validateRequiredEnv = (envList = []) => {
+const validateRequiredEnv = () => {
+  const notionPageConfigs = siteConfig?.notion?.pages || {}
+  const envList = Object.values(notionPageConfigs).reduce((list, config) => {
+    if (
+      config.enable &&
+      config.requiredEnv &&
+      Array.isArray(config.requiredEnv)
+    ) {
+      return list.concat(config.requiredEnv)
+    }
+    return list
+  }, [])
   envList.forEach(name => {
     if (!process.env[name]) {
-      warnOrError(
+      throw new Error(
         `\n${name} is missing from env, this will result in an error\n` +
           `Make sure to provide one before starting Next.js`
       )
@@ -21,7 +26,7 @@ module.exports = {
   target: 'experimental-serverless-trace',
 
   webpack(cfg, { dev, isServer }) {
-    validateRequiredEnv(siteConfig.notion.requiredEnv)
+    validateRequiredEnv()
 
     // only compile build-rss in production server build
     if (dev || !isServer) return cfg
