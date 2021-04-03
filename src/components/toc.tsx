@@ -1,17 +1,14 @@
 import classnames from 'classnames'
 import { uuidToId } from 'notion-utils'
 import { useSiteContext, SiteContextAction } from '../lib/context'
+import { useTOCScrollHandler } from '../lib/hooks'
 
 const TableOfContent = ({ toc }) => {
-  const {
-    device,
-    dispatch,
-    showTableOfContent,
-    activeSectionId,
-  } = useSiteContext()
+  const { device, dispatch, showTableOfContent } = useSiteContext()
+  const { activeSectionId, updateTocActiveSectionId } = useTOCScrollHandler()
   const isMobile = device === 'smartphone'
   const tocItemClickHandler = id => {
-    dispatch(SiteContextAction('UPDATE_TOC_ACTIVE_SECTION_ID', id))
+    updateTocActiveSectionId(id)
     isMobile && dispatch(SiteContextAction('TOGGLE_TABLE_OF_CONTENT'))
   }
   return (

@@ -1,7 +1,6 @@
 import React, { useReducer, useContext, createContext } from 'react'
 
 interface SiteContext {
-  activeSectionId: string
   showNavMenu: boolean
   showTableOfContent: boolean
   device: 'smartphone' | 'desktop'
@@ -13,7 +12,6 @@ interface SiteContext {
 }
 
 const defaultSiteContext: SiteContext = {
-  activeSectionId: '',
   showNavMenu: false,
   showTableOfContent: false,
   device: 'smartphone',
@@ -51,12 +49,6 @@ const SiteContextReducer = (state, { type, payload }) => {
         return state
       }
       return Object.assign({}, state, { device })
-    }
-    case 'UPDATE_TOC_ACTIVE_SECTION_ID': {
-      if (typeof payload !== 'string' || payload.length !== 32) {
-        return state
-      }
-      return Object.assign({}, state, { activeSectionId: payload })
     }
     default: {
       return state

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { useSiteContext, SiteContextAction } from '../lib/context'
@@ -78,7 +78,7 @@ export const useTOCScrollHandler = () => {
   const SECTION_ID_ARRTIBUTE = 'data-id'
   const NOTION_MAIN_CONTENT_CLASS_NAME = '.notion'
 
-  const { activeSectionId, dispatch } = useSiteContext()
+  const [activeSectionId, updateTocActiveSectionId] = useState('')
 
   useEffect(() => {
     // this scrollspy logic was originally based on
@@ -86,7 +86,7 @@ export const useTOCScrollHandler = () => {
     const actionSectionScrollSpy = throttle(() => {
       const sections = document.getElementsByClassName(SECTION_CLASS_NAME)
       let prevBBox: DOMRect = null
-      let currentSectionId = activeSectionId
+      let currentSectionId: string = activeSectionId
 
       for (let i = 0; i < sections.length; ++i) {
         const section = sections[i]
@@ -109,9 +109,7 @@ export const useTOCScrollHandler = () => {
         // No need to continue loop, if last element has been detected
         break
       }
-      dispatch(
-        SiteContextAction('UPDATE_TOC_ACTIVE_SECTION_ID', currentSectionId)
-      )
+      updateTocActiveSectionId(currentSectionId)
     }, THROTTLE_MILLIONSECOND)
 
     const container = document.querySelector(NOTION_MAIN_CONTENT_CLASS_NAME)
@@ -123,4 +121,8 @@ export const useTOCScrollHandler = () => {
       container.removeEventListener('scroll', actionSectionScrollSpy)
     }
   }, [])
+  return {
+    activeSectionId,
+    updateTocActiveSectionId,
+  }
 }

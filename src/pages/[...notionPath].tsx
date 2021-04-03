@@ -22,7 +22,6 @@ import {
   getNotionPreviewImages,
 } from '../lib/notion'
 import { notion } from '../lib/site.config'
-import { useTOCScrollHandler, useBrokenImageHandler } from '../lib/hooks'
 import { getPageProperty, getDateStr } from '../lib/blog-helpers'
 import Breadcrumb from '../components/breadcrumb'
 import NavMenu from '../components/nav-menu'
@@ -190,15 +189,6 @@ export const getStaticProps: GetStaticProps = async ({
 }
 
 const NotionPage = props => {
-  useTOCScrollHandler()
-  useBrokenImageHandler({
-    selector: '.notion img',
-    fallbackImageUrl:
-      props.pageType === PAGE_TYPE_LIST_PAGE
-        ? '/default-cover.png'
-        : '/broken-image.png',
-  })
-
   switch (props.pageType) {
     case PAGE_TYPE_LIST_PAGE: {
       const { menuItems, notionPath, recordMap } = props
