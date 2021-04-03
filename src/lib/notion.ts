@@ -1,6 +1,7 @@
 import { NotionAPI } from 'notion-client'
 import { notion as notionConfig } from './site.config'
 import { mapNotionImageUrl } from './blog-helpers'
+import cacheClient from './cache'
 import get from 'lodash/get'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
@@ -82,7 +83,6 @@ export const getNotionPostsFromTable = async (
  * @param {object} recordMap
  * @returns {object} previewImageMap
  */
-const previewImageCache = new Map()
 export const getNotionPreviewImages = async recordMap => {
   if (!recordMap) {
     console.error('recordMap not found in getNotionPreviewImages')
@@ -121,8 +121,9 @@ export const getNotionPreviewImages = async recordMap => {
     async url => {
       let result
       try {
-        if (previewImageCache.get(url)) {
-          result = previewImageCache.get(url)
+        const cache = await cacheClient.get(url)
+        if (cache) {
+          result = cache
           console.log('lqip cache', { url, ...result.metadata })
         } else {
           const response = await fetch(url)
@@ -131,8 +132,8 @@ export const getNotionPreviewImages = async recordMap => {
           }
           const imageBuffer = await response.buffer()
           result = await lqip(imageBuffer)
-          console.log('lqip', { url, ...result.metadata })
-          previewImageCache.set(url, result)
+          console.log('lqip fetch', { url, ...result.metadata })
+          await cacheClient.set(url, result)
         }
       } catch (err) {
         console.error('lqip error', err)
