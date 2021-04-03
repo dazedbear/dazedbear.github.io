@@ -146,8 +146,8 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
  * @returns {boolean} current next.js page is active or not
  */
 export const isActivePage = page => {
-  const { pathname } = useRouter()
-  return page && page !== '/' && pathname.includes(page)
+  const { asPath } = useRouter()
+  return page && page !== '/' && asPath.includes(page)
 }
 
 /**
