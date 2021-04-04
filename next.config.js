@@ -1,4 +1,4 @@
-const siteConfig = require('./src/lib/site.config')
+const siteConfig = require('./site.config')
 
 const validateRequiredEnv = () => {
   const notionPageConfigs = siteConfig.notion.pages || {}
