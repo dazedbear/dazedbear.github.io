@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useSiteContext, SiteContextAction } from '../lib/context'
+import { useSiteContext, SiteContextAction } from '../libs/client/context'
 
 const Breadcrumb = ({ title, enableToc = false }) => {
   const { showNavMenu, showTableOfContent, dispatch } = useSiteContext()

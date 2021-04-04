@@ -20,9 +20,9 @@ import {
   getNotionPostsFromTable,
   getNotionPage,
   getNotionPreviewImages,
-} from '../lib/notion'
+} from '../libs/server/notion'
 import { notion } from '../../site.config'
-import { getPageProperty, getDateStr } from '../lib/blog-helpers'
+import { getPageProperty, getDateStr } from '../libs/client/blog-helpers'
 import Breadcrumb from '../components/breadcrumb'
 import NavMenu from '../components/nav-menu'
 import TableOfContent from '../components/toc'

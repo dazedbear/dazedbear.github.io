@@ -8,8 +8,8 @@ import '../styles/global.css'
 import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { withSiteContextProvider } from '../lib/context'
-import { useResizeHandler } from '../lib/hooks'
+import { withSiteContextProvider } from '../libs/client/context'
+import { useResizeHandler } from '../libs/client/hooks'
 
 const App = ({ Component, pageProps }) => {
   useResizeHandler()

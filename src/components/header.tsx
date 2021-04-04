@@ -3,7 +3,7 @@ import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems } from '../../site.config'
-import { getCurrentPageTitle, isActivePage } from '../lib/blog-helpers'
+import { getCurrentPageTitle, isActivePage } from '../libs/client/blog-helpers'
 
 const Header = () => {
   const titlePre = getCurrentPageTitle()

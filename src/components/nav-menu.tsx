@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import ExtLink from './ext-link'
 import classnames from 'classnames'
-import { useSiteContext, SiteContextAction } from '../lib/context'
+import { useSiteContext, SiteContextAction } from '../libs/client/context'
 
 const NavigationMenu = ({ title, menuItems }) => {
   const { showNavMenu, device, dispatch } = useSiteContext()

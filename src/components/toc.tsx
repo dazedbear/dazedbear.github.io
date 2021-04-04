@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { uuidToId } from 'notion-utils'
-import { useSiteContext, SiteContextAction } from '../lib/context'
-import { useTOCScrollHandler } from '../lib/hooks'
+import { useSiteContext, SiteContextAction } from '../libs/client/context'
+import { useTOCScrollHandler } from '../libs/client/hooks'
 
 const TableOfContent = ({ toc }) => {
   const { device, dispatch, showTableOfContent } = useSiteContext()

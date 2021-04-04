@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
-import { useSiteContext, SiteContextAction } from '../lib/context'
+import { useSiteContext, SiteContextAction } from './context'
 
 /**
  * Custom hook to replace broken image with fallback image
