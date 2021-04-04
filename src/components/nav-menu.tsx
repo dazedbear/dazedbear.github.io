@@ -1,10 +1,15 @@
 import Link from 'next/link'
 import ExtLink from './ext-link'
 import classnames from 'classnames'
-import { useSiteContext, SiteContextAction } from '../libs/client/context'
+import { useAppDispatch, useAppSelector } from '../libs/client/hooks'
+import { updateNavMenuViewability } from '../libs/client/slices/layout'
 
 const NavigationMenu = ({ title, menuItems }) => {
-  const { showNavMenu, device, dispatch } = useSiteContext()
+  const dispatch = useAppDispatch()
+  const isNavMenuViewable = useAppSelector(
+    state => state.layout.isNavMenuViewable
+  )
+  const device = useAppSelector(state => state.layout.device)
   const isMobile = device === 'smartphone'
   const itemClass = 'py-1 cursor-pointer'
   const linkClass =
@@ -14,8 +19,8 @@ const NavigationMenu = ({ title, menuItems }) => {
       className={classnames(
         'overflow-y-scroll lg:mr-12 lg:w-60 lg:pb-10 lg:mt-12 lg:px-0 lg:flex-shrink-0 lg:max-h-full-viewport',
         {
-          block: showNavMenu,
-          hidden: !showNavMenu,
+          block: isNavMenuViewable,
+          hidden: !isNavMenuViewable,
           'fixed w-full z-990 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
         }
       )}
@@ -38,8 +43,7 @@ const NavigationMenu = ({ title, menuItems }) => {
                   key={label}
                   className={itemClass}
                   onClick={() => {
-                    isMobile &&
-                      dispatch(SiteContextAction('TOGGLE_NAV_MENU', false))
+                    isMobile && dispatch(updateNavMenuViewability(false))
                   }}
                 >
                   <Link href={url || '#'}>
@@ -53,8 +57,7 @@ const NavigationMenu = ({ title, menuItems }) => {
                 key={label}
                 className={itemClass}
                 onClick={() => {
-                  isMobile &&
-                    dispatch(SiteContextAction('TOGGLE_NAV_MENU', false))
+                  isMobile && dispatch(updateNavMenuViewability(false))
                 }}
               >
                 <ExtLink href={url || '#'} className={linkClass}>

@@ -1,23 +1,31 @@
 import classnames from 'classnames'
 import { uuidToId } from 'notion-utils'
-import { useSiteContext, SiteContextAction } from '../libs/client/context'
-import { useTOCScrollHandler } from '../libs/client/hooks'
+import {
+  useTOCScrollHandler,
+  useAppSelector,
+  useAppDispatch,
+} from '../libs/client/hooks'
+import { updateTableOfContentViewability } from '../libs/client/slices/layout'
 
 const TableOfContent = ({ toc }) => {
-  const { device, dispatch, showTableOfContent } = useSiteContext()
+  const dispatch = useAppDispatch()
+  const device = useAppSelector(state => state.layout.device)
+  const isTableOfContentViewable = useAppSelector(
+    state => state.layout.isTableOfContentViewable
+  )
   const { activeSectionId, updateTocActiveSectionId } = useTOCScrollHandler()
   const isMobile = device === 'smartphone'
   const tocItemClickHandler = id => {
     updateTocActiveSectionId(id)
-    isMobile && dispatch(SiteContextAction('TOGGLE_TABLE_OF_CONTENT'))
+    isMobile && dispatch(updateTableOfContentViewability())
   }
   return (
     <section
       className={classnames(
         'overflow-y-scroll lg:w-60 lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:px-4 lg:flex-shrink-0 lg:flex-grow-0 lg:max-h-full-viewport lg:h-full lg:border-solid lg:border-l',
         {
-          block: showTableOfContent,
-          hidden: !showTableOfContent,
+          block: isTableOfContentViewable,
+          hidden: !isTableOfContentViewable,
           'fixed w-full z-990 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
         }
       )}

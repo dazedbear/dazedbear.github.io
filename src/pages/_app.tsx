@@ -8,8 +8,9 @@ import '../styles/global.css'
 import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { withSiteContextProvider } from '../libs/client/context'
 import { useResizeHandler } from '../libs/client/hooks'
+import { Provider } from 'react-redux'
+import store from '../libs/client/store'
 
 const App = ({ Component, pageProps }) => {
   useResizeHandler()
@@ -24,4 +25,12 @@ const App = ({ Component, pageProps }) => {
   )
 }
 
-export default withSiteContextProvider(App)
+const Root = props => {
+  return (
+    <Provider store={store}>
+      <App {...props} />
+    </Provider>
+  )
+}
+
+export default Root

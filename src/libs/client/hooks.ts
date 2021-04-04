@@ -1,7 +1,22 @@
 import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
-import { useSiteContext, SiteContextAction } from './context'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { RootState, AppDispatch } from './store'
+import {
+  updateDevice,
+  updateNavMenuViewability,
+  updateTableOfContentViewability,
+  updateViewport,
+} from './slices/layout'
+
+/**
+ * Pre-typed useSelector & useAppDispatch for react-redux.
+ * Please use them throughout the app instead of plain `useAppDispatch` and `useSelector`
+ */
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 /**
  * Custom hook to replace broken image with fallback image
@@ -41,7 +56,7 @@ export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
 export const useResizeHandler = () => {
   const DEVICE_BREAK_POINT = 1024
   const DEBOUNCE_MILLIONSECONED = 250
-  const { dispatch } = useSiteContext()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const debouncedHandleResize = debounce(function handleResize() {
@@ -49,17 +64,10 @@ export const useResizeHandler = () => {
       const width = window.innerWidth
       const device = width < DEVICE_BREAK_POINT ? 'smartphone' : 'desktop'
 
-      dispatch(SiteContextAction('UPDATE_DEVICE', { device }))
-      dispatch(SiteContextAction('UPDATE_VIEWPORT', { height, width }))
-      dispatch(
-        SiteContextAction('TOGGLE_NAV_MENU', width >= DEVICE_BREAK_POINT)
-      )
-      dispatch(
-        SiteContextAction(
-          'TOGGLE_TABLE_OF_CONTENT',
-          width >= DEVICE_BREAK_POINT
-        )
-      )
+      dispatch(updateDevice(device))
+      dispatch(updateViewport({ height, width }))
+      dispatch(updateNavMenuViewability(width >= DEVICE_BREAK_POINT))
+      dispatch(updateTableOfContentViewability(width >= DEVICE_BREAK_POINT))
     }, DEBOUNCE_MILLIONSECONED)
     debouncedHandleResize()
     window.addEventListener('resize', debouncedHandleResize)
