@@ -28,6 +28,7 @@ import NavMenu from '../components/nav-menu'
 import TableOfContent from '../components/toc'
 import NotionPageHeader from '../components/notion-page-header'
 import NotionPageFooter from '../components/notion-page-footer'
+import { useRemoveLinks } from '../libs/client/hooks'
 
 const PAGE_TYPE_LIST_PAGE = 'listPage'
 const PAGE_TYPE_SINGLE_PAGE = 'singlePage'
@@ -189,6 +190,12 @@ export const getStaticProps: GetStaticProps = async ({
 }
 
 const NotionPage = props => {
+  // disable links from notion table.
+  useRemoveLinks({
+    selector: '.notion-table a.notion-page-link',
+    condition: () => props.pageType === PAGE_TYPE_SINGLE_PAGE,
+  })
+
   switch (props.pageType) {
     case PAGE_TYPE_LIST_PAGE: {
       const { menuItems, notionPath, recordMap } = props

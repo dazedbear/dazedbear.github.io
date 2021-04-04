@@ -14,7 +14,6 @@ import {
  * Pre-typed useSelector & useAppDispatch for react-redux.
  * Please use them throughout the app instead of plain `useAppDispatch` and `useSelector`
  */
-
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
@@ -47,6 +46,37 @@ export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
         img.removeEventListener('error', loadFallbackImageHandler)
       })
     }
+  })
+}
+
+/**
+ * Disable links when specific condition fulfills. We use this hook to remove links from notion table in single notion page.
+ */
+export const useRemoveLinks = ({ selector, condition }) => {
+  if (!selector) {
+    return
+  }
+
+  let isEnabled = true
+  if (typeof condition === 'function') {
+    isEnabled = condition()
+  }
+
+  if (!isEnabled) {
+    return
+  }
+
+  useEffect(() => {
+    const links = document.querySelectorAll(selector)
+    links.forEach(node => {
+      if (node.hasAttribute('href')) {
+        node.removeAttribute('href')
+      }
+      if (node.hasAttribute('src')) {
+        node.removeAttribute('src')
+      }
+      node.addEventListener('click', e => e.preventDefault()) // disable a redirection
+    })
   })
 }
 
