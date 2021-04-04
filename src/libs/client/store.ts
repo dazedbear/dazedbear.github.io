@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import LogRocket from 'logrocket'
 import rootReducer from './slices'
 
 const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
+  middleware: [...getDefaultMiddleware(), LogRocket.reduxMiddleware()],
   reducer: rootReducer,
 })
 

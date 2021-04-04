@@ -123,4 +123,18 @@ module.exports = {
       },
     ],
   },
+  trackingSettings: {
+    googleAnalytics: {
+      enable: true,
+      id: 'G-J8DQ8XDQ71', // GA4 id: G-J8DQ8XDQ71, current id: UA-83233420-3
+    },
+    microsoftClarity: {
+      enable: true,
+      id: '439pgcc9zo',
+    },
+    logRocket: {
+      enable: true,
+      id: 'dazedbear/dazedbear-studio-site',
+    },
+  },
 }
