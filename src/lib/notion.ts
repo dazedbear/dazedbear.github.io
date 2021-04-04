@@ -1,7 +1,7 @@
 import { NotionAPI } from 'notion-client'
 import { notion as notionConfig } from './site.config'
 import { mapNotionImageUrl } from './blog-helpers'
-import cacheClient from './cache'
+import cacheClient, { CACHE_TTL_ASSETS } from './cache'
 import get from 'lodash/get'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
@@ -14,7 +14,16 @@ export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
     console.error('pageId or collectionViewName not specify.')
     return
   }
-  let result = await notionAPI.getPage(pageId)
+  let result: any
+  const cache = await cacheClient.get(pageId)
+  if (cache) {
+    cacheClient.log('getNotionPage', pageId, true)
+    result = cache
+  } else {
+    cacheClient.log('getNotionPage', pageId)
+    result = await notionAPI.getPage(pageId)
+    await cacheClient.set(pageId, result)
+  }
 
   // provide callback function to format data
   if (typeof dataFormatter === 'function') {
@@ -36,41 +45,56 @@ export const getNotionPostsFromTable = async (
     console.error('pageId or collectionViewId not specify.')
     return
   }
-  const pageData = await notionAPI.getPage(pageId, { fetchCollections: true })
-
-  // Since we put the table page id here, there will be only 1 collection id exist.
-  const collectionId = Object.keys(pageData.collection)[0]
-  const collectionViewQuery = get(pageData, [
-    'collection_view',
+  let result: any
+  const cacheKey = cacheClient.createCacheKeyFromContent({
+    pageId,
     collectionViewId,
-    'value',
-    'query2',
-  ])
+    options,
+  })
+  const cache = await cacheClient.get(cacheKey)
+  if (cache) {
+    cacheClient.log('getNotionPostsFromTable', cacheKey, true)
+    result = cache
+  } else {
+    cacheClient.log('getNotionPostsFromTable', cacheKey)
+    const pageData = await notionAPI.getPage(pageId, { fetchCollections: true })
 
-  if (!collectionId) {
-    console.log(pageId, pageData)
-    console.error('cannot find collectionId.')
-    return
+    // Since we put the table page id here, there will be only 1 collection id exist.
+    const collectionId = Object.keys(pageData.collection)[0]
+    const collectionViewQuery = get(pageData, [
+      'collection_view',
+      collectionViewId,
+      'value',
+      'query2',
+    ])
+
+    if (!collectionId) {
+      console.log(pageId, pageData)
+      console.error('cannot find collectionId.')
+      return
+    }
+
+    let apiOptions = {
+      query: collectionViewQuery, // reuse the filter/sort query from collection view
+      type: 'table',
+      // limit: 20,
+      loadContentCover: true,
+      searchQuery: '',
+      userTimeZone: 'Asia/Taipei',
+    } as any
+
+    if (typeof options === 'object') {
+      apiOptions = Object.assign({}, apiOptions, options)
+    }
+    result = await notionAPI.getCollectionData(
+      collectionId,
+      collectionViewId,
+      apiOptions
+    )
+    await cacheClient.set(cacheKey, result)
   }
 
-  let apiOptions = {
-    query: collectionViewQuery, // reuse the filter/sort query from collection view
-    type: 'table',
-    // limit: 20,
-    loadContentCover: true,
-    searchQuery: '',
-    userTimeZone: 'Asia/Taipei',
-  } as any
-
-  if (typeof options === 'object') {
-    apiOptions = Object.assign({}, apiOptions, options)
-  }
-
-  let result: any = await notionAPI.getCollectionData(
-    collectionId,
-    collectionViewId,
-    apiOptions
-  )
+  // provide callback function to format data
   if (typeof dataFormatter === 'function') {
     result = dataFormatter(result)
   }
@@ -123,8 +147,8 @@ export const getNotionPreviewImages = async recordMap => {
       try {
         const cache = await cacheClient.get(url)
         if (cache) {
+          cacheClient.log('lqip', url, true)
           result = cache
-          console.log('lqip cache', { url, ...result.metadata })
         } else {
           const response = await fetch(url)
           if (!response.ok) {
@@ -132,8 +156,8 @@ export const getNotionPreviewImages = async recordMap => {
           }
           const imageBuffer = await response.buffer()
           result = await lqip(imageBuffer)
-          console.log('lqip fetch', { url, ...result.metadata })
-          await cacheClient.set(url, result)
+          cacheClient.log('lqip', url)
+          await cacheClient.set(url, result, { ttl: CACHE_TTL_ASSETS })
         }
       } catch (err) {
         console.error('lqip error', err)
