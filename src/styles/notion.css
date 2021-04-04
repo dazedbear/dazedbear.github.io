@@ -74,6 +74,15 @@
   }
 
   /**
-   * for common notion list page: #app #notion-single-page ...
+   * for common notion single page: #app #notion-single-page ...
    */
+  #app #notion-single-page .notion-collection {
+    @apply w-full;
+  }
+  #app #notion-single-page .notion-collection .notion-table {
+    width: 100% !important;
+  }
+  #app #notion-single-page .notion-collection .notion-table-view {
+    padding: 20px !important;
+  }
 }
