@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 import { useRouter } from 'next/router'
-import { navigation as navItems, cdnHost } from '../lib/site.config'
+import { navigation as navItems, cdnHost } from '../../site.config'
 import { Block } from 'notion-types'
 import { getDateValue } from 'notion-utils'
 

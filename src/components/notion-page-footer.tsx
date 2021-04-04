@@ -1,4 +1,4 @@
-import { communitySettings, communityFeatures } from '../lib/site.config'
+import { communitySettings, communityFeatures } from '../../site.config'
 import { useState, useEffect } from 'react'
 
 const facebookLikeButtons = ({ url }) =>

@@ -1,5 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { communitySettings } from '../lib/site.config'
+import { communitySettings } from '../../site.config'
 
 class MyDocument extends Document {
   render() {

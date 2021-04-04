@@ -3,7 +3,7 @@ import {
   copyright,
   communitySettings,
   communityFeatures,
-} from '../lib/site.config'
+} from '../../site.config'
 
 const CommunityIcon = ({ name, link }) => {
   if (!name || !link) {

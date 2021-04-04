@@ -21,7 +21,7 @@ import {
   getNotionPage,
   getNotionPreviewImages,
 } from '../lib/notion'
-import { notion } from '../lib/site.config'
+import { notion } from '../../site.config'
 import { getPageProperty, getDateStr } from '../lib/blog-helpers'
 import Breadcrumb from '../components/breadcrumb'
 import NavMenu from '../components/nav-menu'

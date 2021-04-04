@@ -1,5 +1,5 @@
 import ExtLink from '../components/ext-link'
-import { meta } from '../lib/site.config'
+import { meta } from '../../site.config'
 
 const GridBlock = ({ content, image, title }) => (
   <div className="box-border text-center md:flex-1-0-26 md:mx-3  blockElement alignCenter imageAlignTop threeByGridBlock">

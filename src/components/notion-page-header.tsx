@@ -1,6 +1,6 @@
 import { LazyImageFull, ImageState } from 'react-lazy-images'
 import classnames from 'classnames'
-import { notion } from '../lib/site.config'
+import { notion } from '../../site.config'
 
 /**
  * To align the page cover lazy load from react-notion-x

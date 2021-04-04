@@ -1,5 +1,5 @@
 import { NotionAPI } from 'notion-client'
-import { notion as notionConfig } from './site.config'
+import { notion as notionConfig } from '../../site.config'
 import { mapNotionImageUrl } from './blog-helpers'
 import cacheClient, { CACHE_TTL_ASSETS } from './cache'
 import get from 'lodash/get'

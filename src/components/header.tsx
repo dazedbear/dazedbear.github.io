@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
-import { meta, navigation as navItems } from '../lib/site.config'
+import { meta, navigation as navItems } from '../../site.config'
 import { getCurrentPageTitle, isActivePage } from '../lib/blog-helpers'
 
 const Header = () => {
