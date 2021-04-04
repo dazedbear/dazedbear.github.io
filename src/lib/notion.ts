@@ -180,7 +180,7 @@ export const getNotionPreviewImages = async recordMap => {
       return image
     },
     {
-      concurrency: 5, // to prevent segmentation fault when build in Vercel.
+      concurrency: 2, // to prevent segmentation fault when build in Vercel.
     }
   )
 
