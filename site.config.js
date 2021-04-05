@@ -60,7 +60,12 @@ module.exports = {
         requiredEnv: ['DEMO_TABLE_PAGE_ID', 'DEMO_TABLE_VIEW_ID'],
       },
     },
+    pageCacheTTL: {
+      development: 10, // seconds
+      production: 60, // seconds
+    },
     previeImages: {
+      cacheTTL: 86400 * 30, // seconds, 1 year
       enable: true,
     },
   },

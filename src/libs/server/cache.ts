@@ -5,17 +5,10 @@ import chalk from 'chalk'
 
 chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
 
-export const CACHE_TTL_ASSETS = 86400 * 365 // 1 year seconds
-export const CACHE_TTL_DEVELOPMENT = 60 * 5 // 5 min seconds
-export const CACHE_TTL_PRODUCTION = 60 * 60 // 1 hour seconds
-
 // https://github.com/rolandstarke/node-cache-manager-fs-hash/blob/master/src/index.js#L27-L40
 const cacheClient = cacheManager.caching({
   store: fsStore,
-  ttl:
-    process.env.NODE_ENV === 'development'
-      ? CACHE_TTL_DEVELOPMENT
-      : CACHE_TTL_PRODUCTION, // seconds
+  ttl: 60, // seconds, default is 1 min
   path: '.next/cache/application',
 })
 

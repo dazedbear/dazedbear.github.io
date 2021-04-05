@@ -33,6 +33,8 @@ import { useRemoveLinks } from '../libs/client/hooks'
 const PAGE_TYPE_LIST_PAGE = 'listPage'
 const PAGE_TYPE_SINGLE_PAGE = 'singlePage'
 
+const isLocal = process.env.NODE_ENV === 'development'
+
 const NotionDefaultComponentMap: any = {
   code: Code,
   collection: Collection,
@@ -147,6 +149,9 @@ export const getStaticProps: GetStaticProps = async ({
           pageType,
           recordMap,
         },
+        revalidate: isLocal
+          ? notion?.pageCacheTTL?.development
+          : notion?.pageCacheTTL?.production,
       }
     }
     case PAGE_TYPE_SINGLE_PAGE: {
@@ -196,6 +201,9 @@ export const getStaticProps: GetStaticProps = async ({
           recordMap,
           toc,
         },
+        revalidate: isLocal
+          ? notion?.pageCacheTTL?.development
+          : notion?.pageCacheTTL?.production,
       }
     }
     default: {

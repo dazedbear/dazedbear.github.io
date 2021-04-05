@@ -1,13 +1,14 @@
 import { NotionAPI } from 'notion-client'
 import { notion as notionConfig } from '../../../site.config'
 import { mapNotionImageUrl } from '../client/blog-helpers'
-import cacheClient, { CACHE_TTL_ASSETS } from './cache'
+import cacheClient from './cache'
 import get from 'lodash/get'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
 import lqip from 'lqip-modern'
 
 const notionAPI = new NotionAPI({ authToken: notionConfig.token })
+const isLocal = process.env.NODE_ENV === 'development'
 
 export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
   if (!pageId) {
@@ -22,7 +23,11 @@ export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
   } else {
     cacheClient.log('getNotionPage', pageId)
     result = await notionAPI.getPage(pageId)
-    await cacheClient.set(pageId, result)
+    await cacheClient.set(pageId, result, {
+      ttl: isLocal
+        ? notionConfig?.pageCacheTTL?.development
+        : notionConfig?.pageCacheTTL?.production,
+    })
   }
 
   // provide callback function to format data
@@ -91,7 +96,11 @@ export const getNotionPostsFromTable = async (
       collectionViewId,
       apiOptions
     )
-    await cacheClient.set(cacheKey, result)
+    await cacheClient.set(cacheKey, result, {
+      ttl: isLocal
+        ? notionConfig?.pageCacheTTL?.development
+        : notionConfig?.pageCacheTTL?.production,
+    })
   }
 
   // provide callback function to format data
@@ -157,7 +166,9 @@ export const getNotionPreviewImages = async recordMap => {
           const imageBuffer = await response.buffer()
           result = await lqip(imageBuffer)
           cacheClient.log('lqip', url)
-          await cacheClient.set(url, result, { ttl: CACHE_TTL_ASSETS })
+          await cacheClient.set(url, result, {
+            ttl: notionConfig?.previeImages?.cacheTTL,
+          })
         }
       } catch (err) {
         console.error('lqip error', err)
