@@ -7,4 +7,13 @@
     @apply h-full w-0 inline-block align-middle;
     content: '';
   }
+  /* start - to hide scrollbar */
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  /* end - to hide scrollbar */
 }
