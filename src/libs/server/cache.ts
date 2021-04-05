@@ -37,7 +37,7 @@ cacheClient.log = (identifier = '', cacheKey = '', isCached = false) => {
   if (!identifier || !cacheKey) {
     return
   }
-  const message = `[cacheClient] ${
+  const message = `[${new Date().toUTCString()}][cacheClient] ${
     isCached ? 'cache' : 'fetch'
   } | id: ${identifier} | key: ${cacheKey}`
   const logColor = isCached ? chalk.grey : chalk.whiteBright

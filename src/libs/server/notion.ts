@@ -6,6 +6,7 @@ import get from 'lodash/get'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
 import lqip from 'lqip-modern'
+import chalk from 'chalk'
 
 const notionAPI = new NotionAPI({ authToken: notionConfig.token })
 const isLocal = process.env.NODE_ENV === 'development'
@@ -171,7 +172,11 @@ export const getNotionPreviewImages = async recordMap => {
           })
         }
       } catch (err) {
-        console.error(`lqip error: ${url}`, err)
+        console.error(
+          chalk.yellowBright(
+            `[${new Date().toUTCString()}][lqip] generate preview image error | key: ${url}`
+          )
+        )
         return {
           url,
           error: true,
