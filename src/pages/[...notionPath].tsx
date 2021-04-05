@@ -181,7 +181,12 @@ export const getStaticProps: GetStaticProps = async ({
         data => {
           const postIds = get(data, ['result', 'blockIds'])
           return postIds.map(postId => {
-            const url = `/${pageName}/${pagePath}`
+            const postPath = getSinglePagePath({
+              pageName,
+              pageId: postId,
+              recordMap: data.recordMap,
+            })
+            const url = `/${pageName}/${postPath}`
             const block = get(data, ['recordMap', 'block', postId, 'value'])
             const label = getBlockTitle(block, data.recordMap)
             return {
