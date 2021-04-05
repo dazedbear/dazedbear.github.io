@@ -171,7 +171,7 @@ export const getNotionPreviewImages = async recordMap => {
           })
         }
       } catch (err) {
-        console.error('lqip error', err)
+        console.error(`lqip error: ${url}`, err)
         return {
           url,
           error: true,
@@ -191,7 +191,7 @@ export const getNotionPreviewImages = async recordMap => {
       return image
     },
     {
-      concurrency: 2, // to prevent segmentation fault when build in Vercel.
+      concurrency: 5,
     }
   )
 
