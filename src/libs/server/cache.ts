@@ -49,7 +49,10 @@ cacheClient.log = (identifier = '', cacheKey = '', isCached = false) => {
   } | id: ${identifier} | key: ${cacheKey}`
   const logColor = isCached ? chalk.grey : chalk.whiteBright
 
-  console.log(logColor(message))
+  // disable logs only when build time
+  if (process.env.NEXT_BUILD_TIME !== 'true') {
+    console.log(logColor(message))
+  }
 }
 
 export default cacheClient
