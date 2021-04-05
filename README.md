@@ -1,32 +1,34 @@
-# Dazedbear Studio 個人工作室
+# Dazedbear Studio
 
-[![Build Status](https://travis-ci.org/dazedbear/dazedbear.github.io.svg?branch=develop)](https://travis-ci.org/dazedbear/dazedbear.github.io) [![](https://img.shields.io/badge/facebook-comments-blue?labelColor=565656&logo=facebook)](https://developers.facebook.com/tools/comments/)
+![cover](https://user-images.githubusercontent.com/8896191/113566781-f2782c00-963f-11eb-90da-8d3245c536f1.png)
 
-這是 dazedbear 的個人網站，包含學習筆記、作品 demo，主題涵蓋 Web Development、作曲、數位音樂、音樂科技等。
+This is dazedbear's personal website. There are some demo, memos, and articles here that that are related to web development, music composition, digital music, music technology, and so on.
 
-| Repo | Description |
-| -- | -- |
-| [dazedbear.github.io](https://github.com/dazedbear/dazedbear.github.io) | 個人網站，展示 demo、Medium 文章 |
-| [applets](https://github.com/dazedbear/applets) | 開發庫，包含 UI 元件、模組、API 文件 |
-| [apim](https://github.com/dazedbear/apim) | Swagger 展示所有開發的 Back-end API |
+## Screenshot
+
+![screenshot](https://user-images.githubusercontent.com/8896191/113568505-43d5ea80-9643-11eb-973d-166888ed57f4.png)
+![screenshot](https://user-images.githubusercontent.com/8896191/113568636-839cd200-9643-11eb-828d-94a329683172.png)
+![screenshot](https://user-images.githubusercontent.com/8896191/113568615-7bdd2d80-9643-11eb-8bf3-0996ff3b42ed.png)
 
 ## Tech Stack
 
-- [facebook/docusaurus](https://docusaurus.io/en/) - Static document site generator
-- [Travis CI](https://travis-ci.org/) - CI/CD service
-- [Forestry](https://forestry.io/) - Static Git-based CMS service
-- [unsplash photo](https://unsplash.com/) - Free and High Quality Picture Source
-- [Shields.io](https://shields.io/) - README badges generator
-
-## Develop
-
-請在 `develop` 分支開發，會自動 CI 部署到 `master` 分支。
-
-| path | description |
-| -- | -- |
-| `website/blog/` | 放置發佈的文章 |
-| `docs/demo/` | 放置每個作品的介紹頁 |
-| `docs/note-*/` | 放置不同系列筆記文章 |
-| `diagram/` | 放置來自 [draw.io](https://www.draw.io) 的各種圖工作檔 |
-| `website/sidebar.json` | 作品、系列筆記的左側選單設定檔 |
-| `website/siteConfig.js` | 網站的所有設定，包含引用的 js 與 css |
+- [Notion](https://www.notion.so/) - use it as headless CMS inspired by the below tmeplates
+  - [transitive-bullshit/nextjs-notion-starter-kit](https://github.com/transitive-bullshit/nextjs-notion-starter-kit)
+    - [NotionX/react-notion-x](https://github.com/NotionX/react-notion-x) for fetching data from Notion then rendering posts
+    - [preview image](https://github.com/transitive-bullshit/nextjs-notion-starter-kit#preview-images) to generate image placeholder with lqip.
+  - [ijjk/notion-blog](https://github.com/ijjk/notion-blog)
+    - [filesystem cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) idea that we use [cache-manager](https://www.npmjs.com/package/cache-manager) and [node-cache-manager-fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) to implement instead
+- [Next.js](https://nextjs.org/) - React core framework
+  - [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) to serve dynamic data from Notion.
+- [Redux](https://redux.js.org/) - State management
+  - [@reduxjs/toolkit](https://redux-toolkit.js.org/)
+  - [react-redux](https://react-redux.js.org/)
+- [Vercel](https://vercel.com/) - CI/CD service
+- [Tailwind CSS](https://tailwindcss.com/) - utility-first css framework
+- Tracking
+  - [Google Analytics](https://analytics.google.com/analytics/web/#/)
+  - [Microsoft Clarity](https://clarity.microsoft.com/) - Free Heatmaps & Session Recordings
+  - [LogRocket](https://logrocket.com/) - Modern Frontend Monitoring and Product Analytics
+- Community
+  - [Likecoin button](https://liker.land/)
+  - [Facebook like button](https://developers.facebook.com/docs/plugins/like-button)

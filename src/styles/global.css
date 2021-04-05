@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .block-image::after {
+    @apply h-full w-0 inline-block align-middle;
+    content: '';
+  }
+}
