@@ -2,7 +2,7 @@ import { get } from 'lodash'
 import { useRouter } from 'next/router'
 import { navigation as navItems, cdnHost } from '../../../site.config'
 import { Block } from 'notion-types'
-import { getDateValue } from 'notion-utils'
+import { getDateValue, uuidToId } from 'notion-utils'
 
 /**
  * get formatted date string
@@ -208,4 +208,52 @@ export const mapNotionImageUrl = (url: string, block: Block) => {
 
   // use CDN to cache these image assets
   return cdnHost ? `${cdnHost}/${encodeURIComponent(url)}` : url
+}
+
+/**
+ * simple util to combine page id and slug
+ * @param {object} param
+ * @param {string} param.pageName pageName
+ * @param {string} param.pageId pageId
+ * @param {object} param.recordMap recordMap
+ * @returns {string} pagePath, ex: announce-memos-c1510a50f1b44dbc95f3cd8c733dd472
+ */
+export const getSinglePagePath = ({ pageName, pageId, recordMap }) => {
+  if (!pageName || !pageId || !recordMap) {
+    return
+  }
+
+  const property: any = getPageProperty({ pageId, recordMap })
+  const slug = property.Slug || property.Title
+  const pagePath = [encodeURIComponent(slug), uuidToId(pageId)].join('-')
+  return pagePath
+}
+
+/**
+ * extract page id and slug from a pagePath (ex: announce-memos-c1510a50f1b44dbc95f3cd8c733dd472)
+ * @param {string} pagePath
+ * @returns {object} result like {slug: announce-memos, pageId: c1510a50f1b44dbc95f3cd8c733dd472}
+ */
+export const extractSinglePagePath = pagePath => {
+  if (!pagePath) {
+    return {}
+  }
+  const shades = pagePath.split('-')
+  let pageId
+  let slug
+  if (shades.length > 2) {
+    pageId = shades[shades.length - 1]
+    slug = shades.slice(0, shades.length - 2).join('-')
+  } else if (shades.length === 2) {
+    slug = shades[0]
+    pageId = shades[1]
+  } else {
+    console.error('error when extractSinglePagePath: ', pagePath, shades)
+    return
+  }
+
+  return {
+    slug,
+    pageId,
+  }
 }

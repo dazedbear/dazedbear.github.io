@@ -10,19 +10,19 @@ import {
   Equation,
   Modal,
 } from 'react-notion-x'
-import {
-  getBlockTitle,
-  uuidToId,
-  idToUuid,
-  getPageTableOfContents,
-} from 'notion-utils'
+import { getBlockTitle, idToUuid, getPageTableOfContents } from 'notion-utils'
 import {
   getNotionPostsFromTable,
   getNotionPage,
   getNotionPreviewImages,
 } from '../libs/server/notion'
 import { notion } from '../../site.config'
-import { getPageProperty, getDateStr } from '../libs/client/blog-helpers'
+import {
+  getPageProperty,
+  getDateStr,
+  getSinglePagePath,
+  extractSinglePagePath,
+} from '../libs/client/blog-helpers'
 import Breadcrumb from '../components/breadcrumb'
 import NavMenu from '../components/nav-menu'
 import TableOfContent from '../components/toc'
@@ -42,6 +42,12 @@ const NotionDefaultComponentMap: any = {
   pageLink: () => null,
   pdf: Pdf,
   tweet: () => null,
+}
+
+// function to update the page link urls
+const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
+  const pagePath = getSinglePagePath({ pageName, pageId, recordMap })
+  return `/${pageName}/${pagePath}`
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -75,11 +81,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
       })
       const postIds = result.blockIds.filter(Boolean)
 
-      // TODO: we use postId as slug for now. will support to use readable text as slug later
-      // https://github.com/vercel/next.js/discussions/11272
       postIds.forEach(postId => {
+        const pagePath = getSinglePagePath({
+          pageId: postId,
+          pageName,
+          recordMap,
+        })
         paths.push({
-          params: { notionPath: [pageName, uuidToId(postId)] },
+          params: { notionPath: [pageName, pagePath] },
         })
       })
     }
@@ -109,7 +118,12 @@ export const getStaticProps: GetStaticProps = async ({
         collectionViewId: get(notion, ['pages', pageName, 'collectionViewId']),
       })
       const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
-        const url = `/${pageName}/${uuidToId(postId)}`
+        const pagePath = getSinglePagePath({
+          pageName,
+          pageId: postId,
+          recordMap,
+        })
+        const url = `/${pageName}/${pagePath}`
         const block = get(postsData, ['recordMap', 'block', postId, 'value'])
         const label = getBlockTitle(block, postsData.recordMap)
         return {
@@ -136,8 +150,9 @@ export const getStaticProps: GetStaticProps = async ({
       }
     }
     case PAGE_TYPE_SINGLE_PAGE: {
-      const [pageName, slug] = notionPath
-      const currentPostId = idToUuid(slug)
+      const [pageName, pagePath] = notionPath
+      const { pageId: postId, slug } = extractSinglePagePath(pagePath)
+      const currentPostId = idToUuid(postId)
       const recordMap = await getNotionPage(currentPostId)
       const toc = getPageTableOfContents(
         get(recordMap, ['block', currentPostId, 'value']),
@@ -161,7 +176,7 @@ export const getStaticProps: GetStaticProps = async ({
         data => {
           const postIds = get(data, ['result', 'blockIds'])
           return postIds.map(postId => {
-            const url = `/${pageName}/${uuidToId(postId)}`
+            const url = `/${pageName}/${pagePath}`
             const block = get(data, ['recordMap', 'block', postId, 'value'])
             const label = getBlockTitle(block, data.recordMap)
             return {
@@ -201,8 +216,8 @@ const NotionPage = props => {
       const { menuItems, notionPath, recordMap } = props
       const [pageName] = notionPath
       const components = Object.assign({}, NotionDefaultComponentMap, {
-        pageLink: ({ href, ...props }) => (
-          <Link href={`/${pageName}${href}`} {...props}>
+        pageLink: props => (
+          <Link {...props}>
             <a {...props} />
           </Link>
         ),
@@ -225,6 +240,7 @@ const NotionPage = props => {
             fullPage={false}
             recordMap={recordMap}
             components={components}
+            mapPageUrl={NotionMapPageUrl.bind(this, pageName, recordMap)}
             previewImages={get(notion, ['previeImages', 'enable'])}
             showCollectionViewDropdown={false}
           />
@@ -233,12 +249,12 @@ const NotionPage = props => {
     }
     case PAGE_TYPE_SINGLE_PAGE: {
       const { pageId, recordMap, menuItems = [], notionPath, toc = [] } = props
-      const [pageName, slug] = notionPath
+      const [pageName, pagePath] = notionPath
       const property: any = getPageProperty({ pageId, recordMap })
       const enableToc = toc && toc.length > 0
       const components = Object.assign({}, NotionDefaultComponentMap, {
-        pageLink: ({ href, ...props }) => (
-          <Link href={`/${pageName}${href}`} {...props}>
+        pageLink: props => (
+          <Link {...props}>
             <a {...props} />
           </Link>
         ),
@@ -278,6 +294,7 @@ const NotionPage = props => {
             recordMap={recordMap}
             fullPage={false}
             darkMode={false}
+            mapPageUrl={NotionMapPageUrl.bind(this, pageName, recordMap)}
             pageHeader={pageHeader}
             pageFooter={pageFooter}
             previewImages={get(notion, ['previeImages', 'enable'])}
