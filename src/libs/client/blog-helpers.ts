@@ -147,7 +147,10 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
  */
 export const isActivePage = page => {
   const { asPath } = useRouter()
-  return page && page !== '/' && asPath.includes(page)
+  if (page === '/') {
+    return page === asPath
+  }
+  return page && asPath.includes(page)
 }
 
 /**
