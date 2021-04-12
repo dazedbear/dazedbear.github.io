@@ -21,13 +21,9 @@ module.exports = {
     image: '',
   },
   navigation: [
-    // {
-    //   label: 'Demo',
-    //   page: '/demo'
-    // },
     {
-      label: 'Memos',
-      page: '/memo',
+      label: 'Home',
+      page: '/',
     },
     {
       label: 'Article',
@@ -44,20 +40,6 @@ module.exports = {
         navMenuTitle: 'Article 文章',
         pageId: normalizeId(process.env.ARTICLE_TABLE_PAGE_ID),
         requiredEnv: ['ARTICLE_TABLE_PAGE_ID', 'ARTICLE_TABLE_VIEW_ID'],
-      },
-      memo: {
-        collectionViewId: normalizeId(process.env.MEMO_TABLE_VIEW_ID),
-        enable: true,
-        navMenuTitle: 'Memo 雜談',
-        pageId: normalizeId(process.env.MEMO_TABLE_PAGE_ID),
-        requiredEnv: ['MEMO_TABLE_PAGE_ID', 'MEMO_TABLE_VIEW_ID'],
-      },
-      demo: {
-        collectionViewId: normalizeId(process.env.DEMO_TABLE_VIEW_ID),
-        enable: false,
-        navMenuTitle: 'Demo 作品展示',
-        pageId: normalizeId(process.env.DEMO_TABLE_PAGE_ID),
-        requiredEnv: ['DEMO_TABLE_PAGE_ID', 'DEMO_TABLE_VIEW_ID'],
       },
     },
     pageCacheTTL: {
