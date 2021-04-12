@@ -2,15 +2,25 @@ import cacheManager from 'cache-manager'
 import fsStore from 'cache-manager-fs-hash'
 import objectHash from 'object-hash'
 import chalk from 'chalk'
+import { cache } from '../../../site.config'
 
 chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
 
 // https://github.com/rolandstarke/node-cache-manager-fs-hash/blob/master/src/index.js#L27-L40
-const cacheClient = cacheManager.caching({
-  store: fsStore,
-  ttl: 60, // seconds, default is 1 min
-  path: '.next/serverless/cache',
-})
+const cacheClient = cache.enable
+  ? cacheManager.caching({
+      store: fsStore,
+      ttl: 60, // seconds, default is 1 min
+      path: '.next/cache/application',
+    })
+  : {
+      get: () => {},
+      set: () => {},
+    }
+
+if (!cache.enable) {
+  console.log(`[${new Date().toUTCString()}][cacheClient] cache disabled`)
+}
 
 /**
  * simple util to generate cache key from any types of content such as object, string, ...
@@ -34,7 +44,7 @@ cacheClient.createCacheKeyFromContent = (content, prefix = '') => {
  * @returns {undefined}
  */
 cacheClient.log = (identifier = '', cacheKey = '', isCached = false) => {
-  if (!identifier || !cacheKey) {
+  if (!identifier || !cacheKey || !cache.enable) {
     return
   }
   const message = `[${new Date().toUTCString()}][cacheClient] ${
