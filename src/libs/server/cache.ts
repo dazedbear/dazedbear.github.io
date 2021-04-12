@@ -9,7 +9,7 @@ chalk.level = 2 // disable level auto detection to make sure all log has correct
 const cacheClient = cacheManager.caching({
   store: fsStore,
   ttl: 60, // seconds, default is 1 min
-  path: '.next/cache/application',
+  path: '.next/serverless/cache',
 })
 
 /**
