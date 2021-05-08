@@ -19,12 +19,13 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
   - [ijjk/notion-blog](https://github.com/ijjk/notion-blog)
     - [filesystem cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) idea that we use [cache-manager](https://www.npmjs.com/package/cache-manager) and [node-cache-manager-fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) to implement instead
 - [Next.js](https://nextjs.org/) - React core framework
-  - [Incremental Static Regeneration](https://nextjs.org/docs/basic-features/data-fetching#incremental-static-regeneration) to serve dynamic data from Notion.
+  - [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) to serve dynamic data from Notion.
 - [Redux](https://redux.js.org/) - State management
   - [@reduxjs/toolkit](https://redux-toolkit.js.org/)
   - [react-redux](https://react-redux.js.org/)
 - [Vercel](https://vercel.com/) - CI/CD service
 - [Tailwind CSS](https://tailwindcss.com/) - utility-first css framework
+- [Redis Enterprise Cloud](https://redislabs.com/redis-enterprise-cloud/overview/) - Cache
 - Tracking
   - [Google Analytics](https://analytics.google.com/analytics/web/#/)
   - [Microsoft Clarity](https://clarity.microsoft.com/) - Free Heatmaps & Session Recordings
