@@ -6,27 +6,31 @@ import get from 'lodash/get'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
 import lqip from 'lqip-modern'
-import chalk from 'chalk'
+import log from './log'
 
 const notionAPI = new NotionAPI({ authToken: notionConfig.token })
 
 export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
   if (!pageId) {
-    console.error('pageId or collectionViewName not specify.')
+    log({
+      category: 'getNotionPage',
+      message: 'pageId or collectionViewName not specify.',
+      level: 'error',
+    })
     return
   }
-  let result: any
-  const cache = await cacheClient.get(pageId)
-  if (cache) {
-    cacheClient.log('getNotionPage', pageId, true)
-    result = cache
-  } else {
-    cacheClient.log('getNotionPage', pageId)
-    result = await notionAPI.getPage(pageId)
-    await cacheClient.set(pageId, result, {
+
+  let result = await cacheClient.proxy(
+    pageId,
+    'getNotionPage',
+    async () => {
+      const data = await notionAPI.getPage(pageId)
+      return data
+    },
+    {
       ttl: notionConfig?.pageCacheTTL,
-    })
-  }
+    }
+  )
 
   // provide callback function to format data
   if (typeof dataFormatter === 'function') {
@@ -45,59 +49,64 @@ export const getNotionPostsFromTable = async (
   dataFormatter?: any
 ) => {
   if (!pageId || !collectionViewId) {
-    console.error('pageId or collectionViewId not specify.')
+    log({
+      category: 'getNotionPostsFromTable',
+      message: 'pageId or collectionViewId not specify.',
+      level: 'error',
+    })
     return
   }
-  let result: any
   const cacheKey = cacheClient.createCacheKeyFromContent({
     pageId,
     collectionViewId,
     options,
   })
-  const cache = await cacheClient.get(cacheKey)
-  if (cache) {
-    cacheClient.log('getNotionPostsFromTable', cacheKey, true)
-    result = cache
-  } else {
-    cacheClient.log('getNotionPostsFromTable', cacheKey)
-    const pageData = await notionAPI.getPage(pageId, { fetchCollections: true })
 
-    // Since we put the table page id here, there will be only 1 collection id exist.
-    const collectionId = Object.keys(pageData.collection)[0]
-    const collectionViewQuery = get(pageData, [
-      'collection_view',
-      collectionViewId,
-      'value',
-      'query2',
-    ])
+  let result = await cacheClient.proxy(
+    cacheKey,
+    'getNotionPostsFromTable',
+    async () => {
+      const pageData = await notionAPI.getPage(pageId, {
+        fetchCollections: true,
+      })
+      // Since we put the table page id here, there will be only 1 collection id exist.
+      const collectionId = Object.keys(pageData.collection)[0]
+      const collectionViewQuery = get(pageData, [
+        'collection_view',
+        collectionViewId,
+        'value',
+        'query2',
+      ])
+      if (!collectionId) {
+        log({
+          category: 'getNotionPostsFromTable',
+          message: 'cannot find collectionId.',
+          level: 'error',
+        })
+        return
+      }
 
-    if (!collectionId) {
-      console.log(pageId, pageData)
-      console.error('cannot find collectionId.')
-      return
-    }
+      let apiOptions = {
+        query: collectionViewQuery, // reuse the filter/sort query from collection view
+        type: 'table',
+        // limit: 20,
+        loadContentCover: true,
+        searchQuery: '',
+        userTimeZone: 'Asia/Taipei',
+      } as any
 
-    let apiOptions = {
-      query: collectionViewQuery, // reuse the filter/sort query from collection view
-      type: 'table',
-      // limit: 20,
-      loadContentCover: true,
-      searchQuery: '',
-      userTimeZone: 'Asia/Taipei',
-    } as any
-
-    if (typeof options === 'object') {
-      apiOptions = Object.assign({}, apiOptions, options)
-    }
-    result = await notionAPI.getCollectionData(
-      collectionId,
-      collectionViewId,
-      apiOptions
-    )
-    await cacheClient.set(cacheKey, result, {
-      ttl: notionConfig?.pageCacheTTL,
-    })
-  }
+      if (typeof options === 'object') {
+        apiOptions = Object.assign({}, apiOptions, options)
+      }
+      const data = await notionAPI.getCollectionData(
+        collectionId,
+        collectionViewId,
+        apiOptions
+      )
+      return data
+    },
+    { ttl: notionConfig?.pageCacheTTL }
+  )
 
   // provide callback function to format data
   if (typeof dataFormatter === 'function') {
@@ -114,7 +123,11 @@ export const getNotionPostsFromTable = async (
  */
 export const getNotionPreviewImages = async recordMap => {
   if (!recordMap) {
-    console.error('recordMap not found in getNotionPreviewImages')
+    log({
+      category: 'getNotionPreviewImages',
+      message: 'recordMap not found in getNotionPreviewImages',
+      level: 'error',
+    })
     return
   }
   const blockIds = Object.keys(recordMap.block)
@@ -150,28 +163,27 @@ export const getNotionPreviewImages = async recordMap => {
     async url => {
       let result
       try {
-        const cache = await cacheClient.get(url)
-        if (cache) {
-          cacheClient.log('lqip', url, true)
-          result = cache
-        } else {
-          const response = await fetch(url)
-          if (!response.ok) {
-            throw Error(response.error)
-          }
-          const imageBuffer = await response.buffer()
-          result = await lqip(imageBuffer)
-          cacheClient.log('lqip', url)
-          await cacheClient.set(url, result, {
-            ttl: notionConfig?.previeImages?.cacheTTL,
-          })
-        }
-      } catch (err) {
-        console.error(
-          chalk.yellowBright(
-            `[${new Date().toUTCString()}][lqip] generate preview image error | key: ${url}`
-          )
+        result = await cacheClient.proxy(
+          url,
+          'lqip',
+          async () => {
+            const response = await fetch(url)
+            if (!response.ok) {
+              log({ category: 'lqip', message: response.error, level: 'error' })
+              return
+            }
+            const imageBuffer = await response.buffer()
+            const data = await lqip(imageBuffer)
+            return data
+          },
+          { ttl: notionConfig?.previeImages?.cacheTTL }
         )
+      } catch (err) {
+        log({
+          category: 'lqip',
+          message: `generate preview image error | key: ${url}`,
+          level: 'error',
+        })
         return {
           url,
           error: true,

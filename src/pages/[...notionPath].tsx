@@ -1,5 +1,4 @@
 import { GetServerSideProps } from 'next'
-import chalk from 'chalk'
 import Link from 'next/link'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
@@ -31,6 +30,7 @@ import TableOfContent from '../components/toc'
 import NotionPageHeader from '../components/notion-page-header'
 import NotionPageFooter from '../components/notion-page-footer'
 import { useRemoveLinks } from '../libs/client/hooks'
+import log from '../libs/server/log'
 
 const PAGE_TYPE_LIST_PAGE = 'listPage'
 const PAGE_TYPE_SINGLE_PAGE = 'singlePage'
@@ -53,10 +53,8 @@ const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
 }
 
 const showNotFoundPage = (notionPath): any => {
-  const message = `[${new Date().toUTCString()}][page] invalid path | notionPath: /${notionPath.join(
-    '/'
-  )}`
-  console.log(chalk.yellowBright(message))
+  const message = `invalid path | notionPath: /${notionPath.join('/')}`
+  log({ category: 'page', message, level: 'warn' })
   return {
     notFound: true,
   }
@@ -127,7 +125,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           },
         }
       } catch (err) {
-        console.error(err)
+        log({ category: 'page', message: err, level: 'error' })
         return showNotFoundPage(notionPath)
       }
     }
@@ -196,7 +194,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           },
         }
       } catch (err) {
-        console.error(err)
+        log({ category: 'page', message: err, level: 'error' })
         return showNotFoundPage(notionPath)
       }
     }

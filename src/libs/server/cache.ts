@@ -1,60 +1,84 @@
 import cacheManager from 'cache-manager'
 import redisStore from 'cache-manager-redis-store'
 import objectHash from 'object-hash'
-import chalk from 'chalk'
+import log from './log'
 import { cache } from '../../../site.config'
 
-chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
+class CacheClient {
+  client = null
+  defaultTTL = 60
 
-// https://github.com/rolandstarke/node-cache-manager-fs-hash/blob/master/src/index.js#L27-L40
-const cacheClient = cache.enable
-  ? cacheManager.caching({
+  constructor(option) {
+    if (!option || !option.enable) {
+      log({ category: 'cacheClient', message: 'cache disabled' })
+      this.client = null
+      return
+    }
+    this.client = cacheManager.caching({
       store: redisStore,
-      ttl: 60, // seconds, default is 1 min
-      host: cache.host,
-      port: cache.port,
-      auth_pass: cache.token,
+      ttl: this.defaultTTL, // seconds, default is 1 min
+      host: option.host,
+      port: option.port,
+      auth_pass: option.token,
     })
-  : {
-      get: () => {},
-      set: () => {},
+  }
+
+  async proxy(key, message, execFunction, overrideOption = {}) {
+    if (!key || !message || typeof execFunction !== 'function') {
+      return
     }
 
-if (!cache.enable) {
-  console.log(`[${new Date().toUTCString()}][cacheClient] cache disabled`)
-}
+    // cache client disabled
+    if (!this.client) {
+      const data = await execFunction()
+      return data
+    }
 
-/**
- * simple util to generate cache key from any types of content such as object, string, ...
- * @param {any} content any types of content
- * @param {string} prefix optional
- * @returns {string} cache key
- */
-cacheClient.createCacheKeyFromContent = (content, prefix = '') => {
-  if (!content) {
-    console.error('content should not be empty in createCacheKeyFromContent')
-    return
+    // cache client enabled
+    const cacheData = await this.client.get(key)
+    if (cacheData) {
+      log({
+        category: 'cacheClient',
+        message: `cache HIT | ${message} | key: ${key}`,
+        level: 'debug',
+      })
+      return cacheData
+    }
+    log({
+      category: 'cacheClient',
+      message: `cache MISS | ${message} | key: ${key}`,
+    })
+    const data = await execFunction()
+
+    if (data) {
+      await this.client.set(
+        key,
+        data,
+        Object.assign({ ttl: this.defaultTTL }, overrideOption)
+      )
+    }
+    return data
   }
-  return `${prefix}${objectHash(content)}`
-}
 
-/**
- * simple log util to unify cache log format and color
- * @param {string} identifier id or function name
- * @param {string} cacheKey cache key
- * @param {boolean} isCached is it a cache log, or it would be fetch log instead
- * @returns {undefined}
- */
-cacheClient.log = (identifier = '', cacheKey = '', isCached = false) => {
-  if (!identifier || !cacheKey || !cache.enable) {
-    return
+  /**
+   * simple util to generate cache key from any types of content such as object, string, ...
+   * @param {any} content any types of content
+   * @param {string} prefix optional
+   * @returns {string} cache key
+   */
+  createCacheKeyFromContent(content, prefix = '') {
+    if (!content) {
+      log({
+        category: 'cacheClient',
+        message: 'content should not be empty in createCacheKeyFromContent',
+        level: 'error',
+      })
+      return
+    }
+    return `${prefix}${objectHash(content)}`
   }
-  const message = `[${new Date().toUTCString()}][cacheClient] ${
-    isCached ? 'cache' : 'fetch'
-  } | id: ${identifier} | key: ${cacheKey}`
-  const logColor = isCached ? chalk.grey : chalk.whiteBright
-
-  console.log(logColor(message))
 }
+
+const cacheClient = new CacheClient(cache)
 
 export default cacheClient
