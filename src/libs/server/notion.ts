@@ -9,7 +9,6 @@ import lqip from 'lqip-modern'
 import chalk from 'chalk'
 
 const notionAPI = new NotionAPI({ authToken: notionConfig.token })
-const isLocal = process.env.NODE_ENV === 'development'
 
 export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
   if (!pageId) {
@@ -25,9 +24,7 @@ export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
     cacheClient.log('getNotionPage', pageId)
     result = await notionAPI.getPage(pageId)
     await cacheClient.set(pageId, result, {
-      ttl: isLocal
-        ? notionConfig?.pageCacheTTL?.development
-        : notionConfig?.pageCacheTTL?.production,
+      ttl: notionConfig?.pageCacheTTL,
     })
   }
 
@@ -98,9 +95,7 @@ export const getNotionPostsFromTable = async (
       apiOptions
     )
     await cacheClient.set(cacheKey, result, {
-      ttl: isLocal
-        ? notionConfig?.pageCacheTTL?.development
-        : notionConfig?.pageCacheTTL?.production,
+      ttl: notionConfig?.pageCacheTTL,
     })
   }
 

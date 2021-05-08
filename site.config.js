@@ -48,12 +48,9 @@ module.exports = {
         requiredEnv: ['ARTICLE_TABLE_PAGE_ID', 'ARTICLE_TABLE_VIEW_ID'],
       },
     },
-    pageCacheTTL: {
-      development: 10, // seconds
-      production: 60, // seconds
-    },
+    pageCacheTTL: 60, // seconds
     previeImages: {
-      cacheTTL: 86400 * 30, // seconds, 1 year
+      cacheTTL: 86400 * 30, // seconds, 1 month
       enable: true,
     },
   },

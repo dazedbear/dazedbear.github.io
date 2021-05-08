@@ -251,8 +251,10 @@ export const extractSinglePagePath = pagePath => {
     slug = shades[0]
     pageId = shades[1]
   } else {
-    console.error('error when extractSinglePagePath: ', pagePath, shades)
-    return
+    console.error(
+      `error when extractSinglePagePath. pagePath = ${pagePath}, shades = `,
+      shades
+    )
   }
 
   return {

@@ -1,6 +1,8 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
+import chalk from 'chalk'
 import Link from 'next/link'
 import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 import {
   NotionRenderer,
   Code,
@@ -33,8 +35,6 @@ import { useRemoveLinks } from '../libs/client/hooks'
 const PAGE_TYPE_LIST_PAGE = 'listPage'
 const PAGE_TYPE_SINGLE_PAGE = 'singlePage'
 
-const isLocal = process.env.NODE_ENV === 'development'
-
 const NotionDefaultComponentMap: any = {
   code: Code,
   collection: Collection,
@@ -52,54 +52,17 @@ const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
   return `/${pageName}/${pagePath}`
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = []
-  for (let pageName in notion.pages) {
-    if (!notion.pages.hasOwnProperty(pageName)) {
-      continue
-    }
-    if (notion.pages[pageName]?.enable) {
-      // collect path for list page like `/blog`
-      paths.push({
-        params: {
-          notionPath: [pageName],
-        },
-      })
-
-      // collect path for single page like `/blog/xxxxxxx`
-      const pageId = get(notion, ['pages', pageName, 'pageId'])
-      const collectionViewId = get(notion, [
-        'pages',
-        pageName,
-        'collectionViewId',
-      ])
-
-      if (!pageId || !collectionViewId) {
-        continue
-      }
-      const { recordMap, result } = await getNotionPostsFromTable({
-        pageId,
-        collectionViewId,
-      })
-      const postIds = result.blockIds.filter(Boolean)
-
-      postIds.forEach(postId => {
-        const pagePath = getSinglePagePath({
-          pageId: postId,
-          pageName,
-          recordMap,
-        })
-        paths.push({
-          params: { notionPath: [pageName, pagePath] },
-        })
-      })
-    }
+const showNotFoundPage = (notionPath): any => {
+  const message = `[${new Date().toUTCString()}][page] invalid path | notionPath: /${notionPath.join(
+    '/'
+  )}`
+  console.log(chalk.yellowBright(message))
+  return {
+    notFound: true,
   }
-
-  return { paths, fallback: false }
 }
 
-export const getStaticProps: GetStaticProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   params: { notionPath },
 }) => {
   let pageType
@@ -112,107 +75,133 @@ export const getStaticProps: GetStaticProps = async ({
   switch (pageType) {
     case PAGE_TYPE_LIST_PAGE: {
       const [pageName] = notionPath
-      const recordMap = await getNotionPage(
-        get(notion, ['pages', pageName, 'pageId'])
-      )
-      const postsData = await getNotionPostsFromTable({
-        pageId: get(notion, ['pages', pageName, 'pageId']),
-        collectionViewId: get(notion, ['pages', pageName, 'collectionViewId']),
-      })
-      const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
-        const pagePath = getSinglePagePath({
-          pageName,
-          pageId: postId,
-          recordMap,
-        })
-        const url = `/${pageName}/${pagePath}`
-        const block = get(postsData, ['recordMap', 'block', postId, 'value'])
-        const label = getBlockTitle(block, postsData.recordMap)
-        return {
-          label,
-          url,
-        }
-      })
-
-      if (get(notion, ['previeImages', 'enable'])) {
-        // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
-        const previewImageMap = await getNotionPreviewImages(
-          postsData.recordMap
-        )
-        recordMap['preview_images'] = previewImageMap
+      const pageId = get(notion, ['pages', pageName, 'pageId'])
+      const collectionViewId = get(notion, [
+        'pages',
+        pageName,
+        'collectionViewId',
+      ])
+      // 404 when pageName is invalid
+      if (!pageId || !collectionViewId) {
+        return showNotFoundPage(notionPath)
       }
+      try {
+        const recordMap = await getNotionPage(pageId)
+        const postsData = await getNotionPostsFromTable({
+          pageId,
+          collectionViewId,
+        })
+        // 404 when data not found
+        if (isEmpty(recordMap) || !get(postsData, ['result', 'total'])) {
+          return showNotFoundPage(notionPath)
+        }
+        const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
+          const pagePath = getSinglePagePath({
+            pageName,
+            pageId: postId,
+            recordMap,
+          })
+          const url = `/${pageName}/${pagePath}`
+          const block = get(postsData, ['recordMap', 'block', postId, 'value'])
+          const label = getBlockTitle(block, postsData.recordMap)
+          return {
+            label,
+            url,
+          }
+        })
 
-      return {
-        props: {
-          menuItems,
-          notionPath,
-          pageType,
-          recordMap,
-        },
-        revalidate: isLocal
-          ? notion?.pageCacheTTL?.development
-          : notion?.pageCacheTTL?.production,
+        if (get(notion, ['previeImages', 'enable'])) {
+          // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
+          const previewImageMap = await getNotionPreviewImages(
+            postsData.recordMap
+          )
+          recordMap['preview_images'] = previewImageMap
+        }
+
+        return {
+          props: {
+            menuItems,
+            notionPath,
+            pageType,
+            recordMap,
+          },
+        }
+      } catch (err) {
+        console.error(err)
+        return showNotFoundPage(notionPath)
       }
     }
     case PAGE_TYPE_SINGLE_PAGE: {
       const [pageName, pagePath] = notionPath
       const { pageId: postId, slug } = extractSinglePagePath(pagePath)
-      const currentPostId = idToUuid(postId)
-      const recordMap = await getNotionPage(currentPostId)
-      const toc = getPageTableOfContents(
-        get(recordMap, ['block', currentPostId, 'value']),
-        recordMap
-      )
-
-      if (get(notion, ['previeImages', 'enable'])) {
-        const previewImageMap = await getNotionPreviewImages(recordMap)
-        recordMap['preview_images'] = previewImageMap
+      const listPageId = get(notion, ['pages', pageName, 'pageId'])
+      const listCollectionViewId = get(notion, [
+        'pages',
+        pageName,
+        'collectionViewId',
+      ])
+      // 404 when pageName, pageId is invalid
+      if (!listPageId || !listCollectionViewId || !postId) {
+        return showNotFoundPage(notionPath)
       }
-
-      const menuItems = await getNotionPostsFromTable(
-        {
-          pageId: get(notion, ['pages', pageName, 'pageId']),
-          collectionViewId: get(notion, [
-            'pages',
-            pageName,
-            'collectionViewId',
-          ]),
-        },
-        data => {
-          const postIds = get(data, ['result', 'blockIds'])
-          return postIds.map(postId => {
-            const postPath = getSinglePagePath({
-              pageName,
-              pageId: postId,
-              recordMap: data.recordMap,
-            })
-            const url = `/${pageName}/${postPath}`
-            const block = get(data, ['recordMap', 'block', postId, 'value'])
-            const label = getBlockTitle(block, data.recordMap)
-            return {
-              label,
-              url,
-            }
-          })
+      try {
+        const currentPostId = idToUuid(postId)
+        const recordMap = await getNotionPage(currentPostId)
+        // 404 when data not found
+        if (isEmpty(recordMap)) {
+          return showNotFoundPage(notionPath)
         }
-      )
+        const toc = getPageTableOfContents(
+          get(recordMap, ['block', currentPostId, 'value']),
+          recordMap
+        )
 
-      return {
-        props: {
-          menuItems,
-          notionPath,
-          pageId: currentPostId,
-          pageType,
-          recordMap,
-          toc,
-        },
-        revalidate: isLocal
-          ? notion?.pageCacheTTL?.development
-          : notion?.pageCacheTTL?.production,
+        if (get(notion, ['previeImages', 'enable'])) {
+          const previewImageMap = await getNotionPreviewImages(recordMap)
+          recordMap['preview_images'] = previewImageMap
+        }
+
+        const menuItems = await getNotionPostsFromTable(
+          {
+            pageId: listPageId,
+            collectionViewId: listCollectionViewId,
+          },
+          data => {
+            const postIds = get(data, ['result', 'blockIds'])
+            return postIds.map(postId => {
+              const postPath = getSinglePagePath({
+                pageName,
+                pageId: postId,
+                recordMap: data.recordMap,
+              })
+              const url = `/${pageName}/${postPath}`
+              const block = get(data, ['recordMap', 'block', postId, 'value'])
+              const label = getBlockTitle(block, data.recordMap)
+              return {
+                label,
+                url,
+              }
+            })
+          }
+        )
+
+        return {
+          props: {
+            menuItems,
+            notionPath,
+            pageId: currentPostId,
+            pageType,
+            recordMap,
+            toc,
+          },
+        }
+      } catch (err) {
+        console.error(err)
+        return showNotFoundPage(notionPath)
       }
     }
     default: {
-      throw Error(`Invalid notionPath found: ${notionPath}`)
+      return showNotFoundPage(notionPath)
     }
   }
 }
