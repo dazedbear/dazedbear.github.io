@@ -47,6 +47,7 @@ module.exports = {
         unset: 'unset',
       },
       minHeight: {
+        1: '0.25rem',
         12: '3rem',
         800: '800px',
         100: '100px',
@@ -64,6 +65,9 @@ module.exports = {
         900: '900px',
         1100: '1100px',
         1400: '1400px',
+      },
+      inset: {
+        13: '3.25rem',
       },
     },
   },

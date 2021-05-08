@@ -28,6 +28,7 @@
     "next": "10.0.7",
     "notion-client": "^4.2.18",
     "notion-utils": "^4.2.18",
+    "nprogress": "^0.2.0",
     "object-hash": "^2.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

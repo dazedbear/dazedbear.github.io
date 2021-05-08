@@ -16,4 +16,9 @@
     display: none;
   }
   /* end - to hide scrollbar */
+
+  #nprogress .bar,
+  #nprogress .spinner {
+    @apply z-10000 top-24 lg:top-13;
+  }
 }
