@@ -15,12 +15,10 @@ const normalizeId = id => {
 
 module.exports = {
   cache: {
-    // TODO: only enable cache for local and build time since Vercel uses read-only fils system serverless lambda to handle server rendering.
-    // https://vercel.com/support/articles/npm-run-start-not-working
-    // https://vercel.com/docs/next.js/overview?query=server%20side%20render#supported-next.js-features
-    enable:
-      process.env.NODE_ENV === 'development' ||
-      process.env.NEXT_BUILD_TIME === 'true',
+    enable: true,
+    host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
+    port: 18768,
+    token: process.env.REDIS_TOKEN,
   },
   cdnHost: '',
   meta: {

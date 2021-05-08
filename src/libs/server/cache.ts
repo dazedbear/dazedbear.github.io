@@ -1,5 +1,5 @@
 import cacheManager from 'cache-manager'
-import fsStore from 'cache-manager-fs-hash'
+import redisStore from 'cache-manager-redis-store'
 import objectHash from 'object-hash'
 import chalk from 'chalk'
 import { cache } from '../../../site.config'
@@ -9,9 +9,11 @@ chalk.level = 2 // disable level auto detection to make sure all log has correct
 // https://github.com/rolandstarke/node-cache-manager-fs-hash/blob/master/src/index.js#L27-L40
 const cacheClient = cache.enable
   ? cacheManager.caching({
-      store: fsStore,
+      store: redisStore,
       ttl: 60, // seconds, default is 1 min
-      path: '.next/cache/application',
+      host: cache.host,
+      port: cache.port,
+      auth_pass: cache.token,
     })
   : {
       get: () => {},
@@ -52,10 +54,7 @@ cacheClient.log = (identifier = '', cacheKey = '', isCached = false) => {
   } | id: ${identifier} | key: ${cacheKey}`
   const logColor = isCached ? chalk.grey : chalk.whiteBright
 
-  // disable logs only when build time
-  if (process.env.NEXT_BUILD_TIME !== 'true') {
-    console.log(logColor(message))
-  }
+  console.log(logColor(message))
 }
 
 export default cacheClient
