@@ -41,6 +41,9 @@ module.exports = {
         9999: '9999',
         10000: '1000',
       },
+      margin: {
+        13: '3.25rem',
+      },
       maxHeight: {
         190: '190px',
         'full-viewport': 'calc(100vh - 5rem)',
@@ -68,6 +71,7 @@ module.exports = {
       },
       inset: {
         13: '3.25rem',
+        25: '6.25rem',
       },
     },
   },

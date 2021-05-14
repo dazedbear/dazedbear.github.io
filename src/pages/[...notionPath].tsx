@@ -227,7 +227,7 @@ const NotionPage = props => {
         <div
           id="notion-list-page"
           data-namespace={pageName}
-          className="flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
+          className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
         >
           <Breadcrumb
             title={get(notion, ['pages', pageName, 'navMenuTitle'])}
@@ -278,7 +278,7 @@ const NotionPage = props => {
         <div
           id="notion-single-page"
           data-namespace={pageName}
-          className="flex flex-row flex-grow flex-nowrap justify-center max-w-1400 py-0 px-5 my-0 mx-auto"
+          className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap justify-center max-w-1400 py-0 px-5 my-0 mx-auto"
         >
           <Breadcrumb
             title={get(notion, ['pages', pageName, 'navMenuTitle'])}

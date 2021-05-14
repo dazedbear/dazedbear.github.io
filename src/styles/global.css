@@ -19,6 +19,6 @@
 
   #nprogress .bar,
   #nprogress .spinner {
-    @apply z-10000 top-24 lg:top-13;
+    @apply z-10000 top-25 lg:top-13;
   }
 }

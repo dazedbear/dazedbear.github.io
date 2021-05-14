@@ -5,17 +5,47 @@ import ExtLink from './ext-link'
 import { meta, navigation as navItems } from '../../site.config'
 import { getCurrentPageTitle, isActivePage } from '../libs/client/blog-helpers'
 
+const themeClassMap = {
+  original: {
+    header: 'bg-lavender-purple-300 text-white',
+    nav: 'bg-lavender-purple-500 text-white lg:bg-transparent',
+    title: 'text-white',
+    linkInActive: 'text-white lg:text-opacity-white-80 lg:hover:text-white',
+    linkActive: 'bg-lavender-purple-300 lg:text-white lg:bg-transparent',
+  },
+  modern: {
+    header: 'text-white bg-black bg-opacity-90 lg:bg-transparent',
+    nav: 'bg-lavender-purple-500 lg:bg-transparent',
+    title: 'text-white',
+    linkInActive:
+      'text-white focus:bg-lavender-purple-300 lg:text-opacity-white-80 lg:hover:text-white lg:bg-transparent lg:hover:bg-transparent',
+    linkActive: 'bg-lavender-purple-300 lg:bg-transparent',
+  },
+}
+
 const Header = () => {
+  let currentTheme = 'original'
+  navItems.some(({ page, theme }) => {
+    const isActive = isActivePage(page)
+    if (isActive && theme) {
+      currentTheme = theme
+      return true
+    }
+    return false
+  })
+
   const titlePre = getCurrentPageTitle()
   const linkClass =
     'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
-  const liniInActiveClass =
-    'text-white bg-lavender-purple-500 hover:bg-lavender-purple-300 lg:text-opacity-white-80 lg:bg-lavender-purple-300 lg:hover:text-white'
-  const linkActiveClass = 'bg-lavender-purple-300 lg:text-white'
+  const liniInActiveClass = themeClassMap[currentTheme]?.linkInActive || ''
+  const linkActiveClass = themeClassMap[currentTheme]?.linkActive || ''
 
   return (
     <div
-      className="fixed w-full z-9999 bg-lavender-purple-300 text-white min-h-12 py-2 px-0 lg:flex-shrink-0"
+      className={classnames(
+        'fixed w-full z-9999 min-h-12 py-2 px-0 lg:flex-shrink-0',
+        themeClassMap[currentTheme]?.header
+      )}
       style={{ transform: 'translateZ(0)' }}
     >
       <div className="my-0 mx-auto max-w-1400 py-0 px-5">
@@ -35,14 +65,24 @@ const Header = () => {
                 src="/favicon.ico"
                 alt={meta.title}
               />
-              <h2 className="block text-xl m-0 relative z-9999 text-white font-semibold">
+              <h2
+                className={classnames(
+                  'block text-xl m-0 relative z-9999 font-semibold',
+                  themeClassMap[currentTheme]?.title
+                )}
+              >
                 {meta.title}
               </h2>
             </a>
           </Link>
           <div className="lg:h-9 lg:ml-auto lg:relative">
             <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:bg-none lg:h-auto lg:relative lg:right-auto lg:top-auto lg:w-auto">
-              <ul className="bg-lavender-purple-500 box-border text-white flex flex-nowrap list-none mt-12 p-0 w-full lg:bg-none lg:flex lg:flex-row lg:flex-nowrap lg:m-0 lg:p-0 lg:w-auto">
+              <ul
+                className={classnames(
+                  'box-border flex flex-nowrap list-none mt-13 p-0 w-full lg:bg-none lg:flex lg:flex-row lg:flex-nowrap lg:m-0 lg:p-0 lg:w-auto',
+                  themeClassMap[currentTheme]?.nav
+                )}
+              >
                 {navItems.map(({ label, page, link }) => {
                   const isActive = isActivePage(page)
                   return (

@@ -26,7 +26,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <div id="app">
       <Header />
-      <div id="main-content" className="pt-24 lg:pt-12">
+      <div id="main-content">
         <Component {...pageProps} />
       </div>
       <Footer />
