@@ -36,7 +36,7 @@ module.exports = {
       label: 'Music',
       page: '/music',
       theme: 'modern',
-      enabled: false,
+      enabled: true,
     },
     {
       label: 'Article',
