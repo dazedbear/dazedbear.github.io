@@ -37,10 +37,7 @@ const BlockLayout = ({ items = [] }) => (
 
 const Homepage = () => (
   <div className="text-center homeContainer">
-    <div
-      className="min-h-screen pt-24 lg:pt-12 bg-cover bg-50% homeSplashFade"
-      style={{ backgroundImage: "url('/cover.jpg')" }}
-    >
+    <div className="min-h-screen pt-24 lg:pt-12 bg-cover bg-50% bg-index-cover homeSplashFade">
       <div className="my-0 mx-auto max-w-1100 py-8 px-2.5 wrapper homeWrapper">
         <div>
           <h2 className="block text-lavender-purple-300 text-4.5xl md:text-5xl font-semibold  mt-2 mb-6 mx-0 projectTitle">

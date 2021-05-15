@@ -83,7 +83,10 @@ const Header = () => {
                   themeClassMap[currentTheme]?.nav
                 )}
               >
-                {navItems.map(({ label, page, link }) => {
+                {navItems.map(({ label, page, link, enabled }) => {
+                  if (!enabled) {
+                    return null
+                  }
                   const isActive = isActivePage(page)
                   return (
                     <li

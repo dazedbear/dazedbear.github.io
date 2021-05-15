@@ -10,7 +10,30 @@ module.exports = {
       backgroundPosition: {
         '50%': '50%',
       },
+      backgroundImage: theme => ({
+        'index-cover': "url('/cover.jpg')",
+        'music-cover': "url('/music-cover-animate.png')",
+        'gradient-red':
+          'radial-gradient(circle, rgba(218,142,156,1) 0%, rgba(177,63,77,1) 100%)',
+        'gradient-red-spread':
+          'radial-gradient(circle, rgba(254,209,217,1) 0%, rgba(218,142,156,1) 30%, rgba(177,63,77,1) 100%)',
+        'gradient-yellow':
+          'radial-gradient(circle, rgba(255,218,124,1) 0%, rgba(255,172,50,1) 100%)',
+        'gradient-yellow-spread':
+          'radial-gradient(circle, rgba(255,242,208,1) 0%, rgba(255,218,124,1) 30%, rgba(255,172,50,1) 100%)',
+        'gradient-green':
+          'radial-gradient(circle, rgba(162,216,221,1) 0%, rgba(55,163,142,1) 100%)',
+        'gradient-green-spread':
+          'radial-gradient(circle, rgba(218,252,255,1) 0%, rgba(162,216,221,1) 30%, rgba(55,163,142,1) 100%)',
+        'gradient-purple':
+          'radial-gradient(circle, rgba(154,144,190,1) 0%, rgba(54,50,73,1) 100%)',
+        'gradient-purple-spread':
+          'radial-gradient(circle, rgba(234,228,255,1) 0%, rgba(154,144,190,1) 30%, rgba(54,50,73,1) 100%)',
+      }),
       colors: {
+        brown: {
+          300: '#27210a',
+        },
         'lavender-purple': {
           300: '#584f8d',
           500: '#8f5881',
@@ -27,6 +50,26 @@ module.exports = {
       fontSize: {
         'xs+': '0.8125rem',
         '4.5xl': '2.5rem',
+      },
+      gridTemplateRows: {
+        '12': 'repeat(12, minmax(0, 1fr))',
+      },
+      gridTemplateColumns: {
+        '12': 'repeat(12, minmax(0, 1fr))',
+      },
+      gridRowStart: {
+        '8': '8',
+        '9': '9',
+        '10': '10',
+        '11': '11',
+        '12': '12',
+      },
+      gridColumnStart: {
+        '8': '8',
+        '9': '9',
+        '10': '10',
+        '11': '11',
+        '12': '12',
       },
       height: {
         '0.5': '0.125rem',
@@ -64,6 +107,7 @@ module.exports = {
       maxWidth: {
         80: '80px',
         150: '150px',
+        600: '600px',
         730: '730px',
         900: '900px',
         1100: '1100px',
@@ -73,12 +117,17 @@ module.exports = {
         13: '3.25rem',
         25: '6.25rem',
       },
+      padding: {
+        full: '100%',
+      },
     },
   },
   variants: {
     extend: {
+      backgroundImage: ['hover', 'active'],
       borderWidth: ['last'],
       margin: ['last'],
+      scale: ['active'],
     },
   },
   plugins: [],

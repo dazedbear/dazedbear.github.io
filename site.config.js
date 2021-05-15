@@ -30,10 +30,18 @@ module.exports = {
     {
       label: 'Home',
       page: '/',
+      enabled: true,
+    },
+    {
+      label: 'Music',
+      page: '/music',
+      theme: 'modern',
+      enabled: false,
     },
     {
       label: 'Article',
       page: '/article',
+      enabled: true,
     },
   ],
   notion: {
@@ -52,6 +60,34 @@ module.exports = {
     previeImages: {
       cacheTTL: 86400 * 30, // seconds, 1 month
       enable: true,
+    },
+  },
+  pages: {
+    music: {
+      // should always be 4 blocks
+      blocks: [
+        {
+          title: 'Works',
+          description: '音樂作品',
+          link: 'https://streetvoice.com/dazedbear/',
+        },
+        {
+          title: 'Demos',
+          description: '創作片段',
+          link: 'https://splice.com/dazedbear',
+        },
+        {
+          title: 'Videos',
+          description: '演出紀錄、Cover 影片',
+          link: 'https://www.youtube.com/channel/UCvyYCMFjUbcHtZhnC-VGwHw',
+        },
+        {
+          title: 'Scores',
+          description: '電子樂譜',
+          link:
+            'https://www.noteflight.com/profile/9a486122ae3cc1fbf78bb973e280f8cc35f67e27',
+        },
+      ],
     },
   },
   copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
