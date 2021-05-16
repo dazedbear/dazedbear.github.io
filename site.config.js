@@ -67,14 +67,9 @@ module.exports = {
       // should always be 4 blocks
       blocks: [
         {
-          title: 'Works',
-          description: '音樂作品',
-          link: 'https://streetvoice.com/dazedbear/',
-        },
-        {
           title: 'Demos',
-          description: '創作片段',
-          link: 'https://splice.com/dazedbear',
+          description: '音樂編曲、創作片段',
+          link: 'https://soundcloud.com/dazedbear',
         },
         {
           title: 'Videos',
@@ -82,10 +77,15 @@ module.exports = {
           link: 'https://www.youtube.com/channel/UCvyYCMFjUbcHtZhnC-VGwHw',
         },
         {
-          title: 'Scores',
-          description: '電子樂譜',
+          title: 'Sheets',
+          description: '創作、採譜樂譜',
           link:
             'https://www.noteflight.com/profile/9a486122ae3cc1fbf78bb973e280f8cc35f67e27',
+        },
+        {
+          title: '',
+          description: '',
+          link: '',
         },
       ],
     },
