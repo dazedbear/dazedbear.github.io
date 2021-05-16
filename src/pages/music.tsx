@@ -15,7 +15,8 @@ const MusicPage = () => {
     'bg-gradient-red active:bg-gradient-red-spread',
     'bg-gradient-yellow active:bg-gradient-yellow-spread sm:col-start-8',
     'bg-gradient-green active:bg-gradient-green-spread sm:row-start-8',
-    'bg-gradient-purple active:bg-gradient-purple-spread sm:col-start-8 sm:row-start-8',
+    // 'bg-gradient-purple active:bg-gradient-purple-spread sm:col-start-8 sm:row-start-8',
+    'bg-channel-logo bg-cover sm:col-start-8 sm:row-start-8',
   ]
   const blocksData = pageSettings.blocks || []
 
@@ -25,21 +26,24 @@ const MusicPage = () => {
       <div className="w-2/3 lg:w-1/2 max-w-600 mx-auto px-6 py-12 sm:p-12 rounded-md inline-block align-middle ">
         <ul className="sm:grid sm:grid-cols-12 sm:grid-rows-12">
           {blocksData.map(
-            ({ title = '', description = '', link = '' }, index) => (
-              <li
-                key={title}
-                className={classnames(blockClass, blocksClass[index])}
-              >
-                <ExtLink href={link}>
-                  <div className={contentContainerClass}>
-                    {title && <h2 className={contentTitleClass}>{title}</h2>}
-                    {description && (
-                      <p className={contentDescriptionClass}>{description}</p>
-                    )}
-                  </div>
-                </ExtLink>
-              </li>
-            )
+            ({ title = '', description = '', link = '' }, index) => {
+              const Block = (
+                <div className={contentContainerClass}>
+                  {title && <h2 className={contentTitleClass}>{title}</h2>}
+                  {description && (
+                    <p className={contentDescriptionClass}>{description}</p>
+                  )}
+                </div>
+              )
+              return (
+                <li
+                  key={title}
+                  className={classnames(blockClass, blocksClass[index])}
+                >
+                  {link ? <ExtLink href={link}>{Block}</ExtLink> : Block}
+                </li>
+              )
+            }
           )}
         </ul>
       </div>
