@@ -12,8 +12,8 @@ const CommunityIcon = ({ name, link }) => {
   return (
     <div className="w-24 p-0 m-0 text-center">
       <ExtLink href={link} target="_blank" className="text-gray-500">
-        <i className={`text-gray-300 fab fa-3x fa-${name}`} />
-        <p className="text-gray-300 mt-0.5 capitalize">{name}</p>
+        <i className={`text-gray-300 fab fa-2x fa-${name}`} />
+        {/* <p className="text-gray-300 mt-0.5 capitalize">{name}</p> */}
       </ExtLink>
     </div>
   )
@@ -26,7 +26,7 @@ const Footer = () => {
         className="flex-shrink lg:flex-shrink-0 bg-lavender-purple-900 text-current text-base antialiased font-normal leading-6 py-8 relative"
         id="footer"
       >
-        <section className="flex justify-around my-0 mx-auto">
+        <section className="flex justify-center mt-0 mb-5 mx-auto">
           {communityFeatures.siteFooterIcon.map(({ name: brand, enable }) => {
             if (!enable) return
             let link

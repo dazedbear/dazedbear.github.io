@@ -28,14 +28,14 @@ module.exports = {
   },
   navigation: [
     {
-      label: 'Home',
-      page: '/',
-      enabled: true,
-    },
-    {
       label: 'Music',
       page: '/music',
       theme: 'modern',
+      enabled: true,
+    },
+    {
+      label: 'Coding',
+      page: '/coding',
       enabled: true,
     },
     {
@@ -50,10 +50,17 @@ module.exports = {
     pages: {
       article: {
         collectionViewId: normalizeId(process.env.ARTICLE_TABLE_VIEW_ID),
-        enable: true,
+        enabled: true,
         navMenuTitle: 'Article 文章',
         pageId: normalizeId(process.env.ARTICLE_TABLE_PAGE_ID),
         requiredEnv: ['ARTICLE_TABLE_PAGE_ID', 'ARTICLE_TABLE_VIEW_ID'],
+      },
+      coding: {
+        collectionViewId: normalizeId(process.env.CODING_TABLE_VIEW_ID),
+        enabled: true,
+        navMenuTitle: 'Coding 程式',
+        pageId: normalizeId(process.env.CODING_TABLE_PAGE_ID),
+        requiredEnv: ['CODING_TABLE_PAGE_ID', 'CODING_TABLE_VIEW_ID'],
       },
     },
     pageCacheTTL: 60, // seconds
@@ -112,7 +119,7 @@ module.exports = {
     },
     youtube: {
       channelBaseUrl: 'https://www.youtube.com/channel',
-      channelHash: 'UCCOXh5_m0xjy24-rUu98xKg',
+      channelHash: 'UCvyYCMFjUbcHtZhnC-VGwHw',
     },
   },
   communityFeatures: {
@@ -127,11 +134,11 @@ module.exports = {
       },
       {
         name: 'soundcloud',
-        enable: false,
+        enable: true,
       },
       {
         name: 'youtube',
-        enable: false,
+        enable: true,
       },
     ],
     articleFooter: [

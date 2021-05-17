@@ -53,7 +53,7 @@ const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
 }
 
 const showNotFoundPage = (notionPath): any => {
-  const message = `invalid path | notionPath: /${notionPath.join('/')}`
+  const message = `redirect to 404 page | notionPath: /${notionPath.join('/')}`
   log({ category: 'page', message, level: 'warn' })
   return {
     notFound: true,
@@ -79,8 +79,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         pageName,
         'collectionViewId',
       ])
+      const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
       // 404 when pageName is invalid
-      if (!pageId || !collectionViewId) {
+      if (!pageId || !collectionViewId || !pageEnabled) {
+        log({
+          category: PAGE_TYPE_LIST_PAGE,
+          message: `required info are invalid: pageId = ${pageId}, collectionViewId = ${collectionViewId}, pageEnabled = ${pageEnabled}`,
+          level: 'error',
+        })
         return showNotFoundPage(notionPath)
       }
       try {
@@ -91,6 +97,16 @@ export const getServerSideProps: GetServerSideProps = async ({
         })
         // 404 when data not found
         if (isEmpty(recordMap) || !get(postsData, ['result', 'total'])) {
+          log({
+            category: PAGE_TYPE_LIST_PAGE,
+            message: `empty page data: is recordMap empty = ${isEmpty(
+              recordMap
+            )}, collection result total = ${get(postsData, [
+              'result',
+              'total',
+            ])}`,
+            level: 'error',
+          })
           return showNotFoundPage(notionPath)
         }
         const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
@@ -125,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           },
         }
       } catch (err) {
-        log({ category: 'page', message: err, level: 'error' })
+        log({ category: PAGE_TYPE_LIST_PAGE, message: err, level: 'error' })
         return showNotFoundPage(notionPath)
       }
     }
@@ -138,8 +154,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         pageName,
         'collectionViewId',
       ])
+      const listPageEnabled = get(notion, ['pages', pageName, 'enabled'])
       // 404 when pageName, pageId is invalid
-      if (!listPageId || !listCollectionViewId || !postId) {
+      if (!listPageId || !listCollectionViewId || !postId || !listPageEnabled) {
+        log({
+          category: PAGE_TYPE_SINGLE_PAGE,
+          message: `required info are invalid: listPageId = ${listPageId}, listCollectionViewId = ${listCollectionViewId}, listPageEnabled = ${listPageEnabled}, postId = ${postId}`,
+          level: 'error',
+        })
         return showNotFoundPage(notionPath)
       }
       try {
@@ -147,6 +169,13 @@ export const getServerSideProps: GetServerSideProps = async ({
         const recordMap = await getNotionPage(currentPostId)
         // 404 when data not found
         if (isEmpty(recordMap)) {
+          log({
+            category: PAGE_TYPE_SINGLE_PAGE,
+            message: `empty page data: is recordMap empty = ${isEmpty(
+              recordMap
+            )}`,
+            level: 'error',
+          })
           return showNotFoundPage(notionPath)
         }
         const toc = getPageTableOfContents(
@@ -194,11 +223,16 @@ export const getServerSideProps: GetServerSideProps = async ({
           },
         }
       } catch (err) {
-        log({ category: 'page', message: err, level: 'error' })
+        log({ category: PAGE_TYPE_SINGLE_PAGE, message: err, level: 'error' })
         return showNotFoundPage(notionPath)
       }
     }
     default: {
+      log({
+        category: 'page',
+        message: `unknown pageType: ${pageType}`,
+        level: 'error',
+      })
       return showNotFoundPage(notionPath)
     }
   }
