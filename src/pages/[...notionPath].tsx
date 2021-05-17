@@ -79,8 +79,9 @@ export const getServerSideProps: GetServerSideProps = async ({
         pageName,
         'collectionViewId',
       ])
+      const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
       // 404 when pageName is invalid
-      if (!pageId || !collectionViewId) {
+      if (!pageId || !collectionViewId || !pageEnabled) {
         return showNotFoundPage(notionPath)
       }
       try {
@@ -138,8 +139,9 @@ export const getServerSideProps: GetServerSideProps = async ({
         pageName,
         'collectionViewId',
       ])
+      const listPageEnabled = get(notion, ['pages', pageName, 'enabled'])
       // 404 when pageName, pageId is invalid
-      if (!listPageId || !listCollectionViewId || !postId) {
+      if (!listPageId || !listCollectionViewId || !postId || !listPageEnabled) {
         return showNotFoundPage(notionPath)
       }
       try {

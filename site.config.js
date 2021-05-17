@@ -39,6 +39,11 @@ module.exports = {
       enabled: true,
     },
     {
+      label: 'Coding',
+      page: '/coding',
+      enabled: true,
+    },
+    {
       label: 'Article',
       page: '/article',
       enabled: true,
@@ -50,10 +55,17 @@ module.exports = {
     pages: {
       article: {
         collectionViewId: normalizeId(process.env.ARTICLE_TABLE_VIEW_ID),
-        enable: true,
+        enabled: true,
         navMenuTitle: 'Article 文章',
         pageId: normalizeId(process.env.ARTICLE_TABLE_PAGE_ID),
         requiredEnv: ['ARTICLE_TABLE_PAGE_ID', 'ARTICLE_TABLE_VIEW_ID'],
+      },
+      coding: {
+        collectionViewId: normalizeId(process.env.CODING_TABLE_VIEW_ID),
+        enabled: true,
+        navMenuTitle: 'Coding 程式',
+        pageId: normalizeId(process.env.CODING_TABLE_PAGE_ID),
+        requiredEnv: ['CODING_TABLE_PAGE_ID', 'CODING_TABLE_VIEW_ID'],
       },
     },
     pageCacheTTL: 60, // seconds
