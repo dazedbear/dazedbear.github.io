@@ -28,11 +28,6 @@ module.exports = {
   },
   navigation: [
     {
-      label: 'Home',
-      page: '/',
-      enabled: true,
-    },
-    {
       label: 'Music',
       page: '/music',
       theme: 'modern',
@@ -124,7 +119,7 @@ module.exports = {
     },
     youtube: {
       channelBaseUrl: 'https://www.youtube.com/channel',
-      channelHash: 'UCCOXh5_m0xjy24-rUu98xKg',
+      channelHash: 'UCvyYCMFjUbcHtZhnC-VGwHw',
     },
   },
   communityFeatures: {
@@ -139,11 +134,11 @@ module.exports = {
       },
       {
         name: 'soundcloud',
-        enable: false,
+        enable: true,
       },
       {
         name: 'youtube',
-        enable: false,
+        enable: true,
       },
     ],
     articleFooter: [
