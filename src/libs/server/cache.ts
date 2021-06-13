@@ -32,8 +32,8 @@ class CacheClient {
     })
   }
 
-  async proxy(key, message, execFunction, overrideOption = {}) {
-    if (!key || !message || typeof execFunction !== 'function') {
+  async proxy(originKey, message, execFunction, overrideOption = {}) {
+    if (!originKey || !message || typeof execFunction !== 'function') {
       return
     }
 
@@ -42,6 +42,10 @@ class CacheClient {
       const data = await execFunction()
       return data
     }
+
+    // add dev prefix to prevent key collision with production data
+    const key =
+      process.env.NODE_ENV === 'development' ? `DEV_${originKey}` : originKey
 
     // cache client enabled
     const cacheData = await this.client.get(key)
