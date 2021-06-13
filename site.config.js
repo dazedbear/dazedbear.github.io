@@ -63,6 +63,11 @@ module.exports = {
         requiredEnv: ['CODING_TABLE_PAGE_ID', 'CODING_TABLE_VIEW_ID'],
       },
     },
+    pagination: {
+      enabled: true,
+      firstLoadCount: 5,
+      batchLoadCount: 10,
+    },
     pageCacheTTL: 60, // seconds
     previeImages: {
       cacheTTL: 86400 * 30, // seconds, 1 month

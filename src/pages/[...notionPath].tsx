@@ -80,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         'collectionViewId',
       ])
       const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
+      const paginationEnabled = get(notion, ['pagination', 'enabled'])
       // 404 when pageName is invalid
       if (!pageId || !collectionViewId || !pageEnabled) {
         log({
@@ -90,11 +91,13 @@ export const getServerSideProps: GetServerSideProps = async ({
         return showNotFoundPage(notionPath)
       }
       try {
-        const recordMap = await getNotionPage(pageId)
         const postsData = await getNotionPostsFromTable({
           pageId,
           collectionViewId,
+          paginationEnabled,
+          fetchAllPosts: true,
         })
+        const recordMap = postsData.recordMap
         // 404 when data not found
         if (isEmpty(recordMap) || !get(postsData, ['result', 'total'])) {
           log({
@@ -109,15 +112,20 @@ export const getServerSideProps: GetServerSideProps = async ({
           })
           return showNotFoundPage(notionPath)
         }
-        const menuItems = get(postsData, ['result', 'blockIds']).map(postId => {
+        const menuItems = get(postsData, [
+          'allPosts',
+          'result',
+          'blockIds',
+        ]).map(postId => {
+          const recordMap = get(postsData, ['allPosts', 'recordMap'])
           const pagePath = getSinglePagePath({
             pageName,
             pageId: postId,
             recordMap,
           })
           const url = `/${pageName}/${pagePath}`
-          const block = get(postsData, ['recordMap', 'block', postId, 'value'])
-          const label = getBlockTitle(block, postsData.recordMap)
+          const block = get(recordMap, ['block', postId, 'value'])
+          const label = getBlockTitle(block, recordMap)
           return {
             label,
             url,
@@ -126,9 +134,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
         if (get(notion, ['previeImages', 'enable'])) {
           // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
-          const previewImageMap = await getNotionPreviewImages(
-            postsData.recordMap
-          )
+          const previewImageMap = await getNotionPreviewImages(recordMap)
           recordMap['preview_images'] = previewImageMap
         }
 
@@ -192,6 +198,8 @@ export const getServerSideProps: GetServerSideProps = async ({
           {
             pageId: listPageId,
             collectionViewId: listCollectionViewId,
+            paginationEnabled: false,
+            fetchAllPosts: false,
           },
           data => {
             const postIds = get(data, ['result', 'blockIds'])
