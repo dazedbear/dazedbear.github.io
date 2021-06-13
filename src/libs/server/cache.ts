@@ -21,6 +21,15 @@ class CacheClient {
       port: option.port,
       auth_pass: option.token,
     })
+
+    const redisClient = this.client.store.getClient()
+    redisClient.on('error', error => {
+      log({
+        category: 'cacheClient',
+        message: error,
+        level: 'error',
+      })
+    })
   }
 
   async proxy(key, message, execFunction, overrideOption = {}) {
