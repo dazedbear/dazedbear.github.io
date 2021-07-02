@@ -100,7 +100,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     validateRequest(req, { route, methods })
 
     // sitemap cache daily
-    const sitemapXmlKey = `sitemap_${dayjs.utc().format('YYYY-MM-DD_HHMMss')}`
+    const sitemapXmlKey = `sitemap_${dayjs.utc().format('YYYY-MM-DD')}`
     const sitemapXml = await cacheClient.proxy(
       sitemapXmlKey,
       '/api/sitemap',
