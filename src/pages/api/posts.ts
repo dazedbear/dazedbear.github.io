@@ -1,13 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import createError from 'http-errors'
-import Ajv from 'ajv'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import log from '../../libs/server/log'
-import { getNotionPostsFromTable, getNotionPreviewImages } from '../../libs/server/notion'
+import {
+  getNotionPostsFromTable,
+  getNotionPreviewImages,
+} from '../../libs/server/notion'
+import {
+  getCategory,
+  messageWithHeaders,
+  validateRequest,
+} from '../../libs/server/api-util'
 import { notion } from '../../../site.config'
 
-const schema = {
+const route = '/posts'
+const methods = ['GET']
+const querySchema = {
   type: 'object',
   additionalProperties: false,
   properties: {
@@ -26,38 +35,11 @@ const schema = {
   },
   required: ['count', 'index', 'pageName'],
 }
-const ajv = new Ajv()
-const validate = ajv.compile(schema)
-
-const category = 'API route: /api/posts'
-const messageWithHeaders = (req, message = '') =>
-  `${message} \n${JSON.stringify(req.headers)}`
-const isSupportedMethod = req => {
-  const allowMethods = new Set(['GET'])
-  return allowMethods.has(req.method)
-}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (!isSupportedMethod(req)) {
-      log({
-        category,
-        message: messageWithHeaders(req, `unsupport method: ${req.method}`),
-        level: 'warn',
-      })
-      throw createError(400)
-    }
-    if (!validate(req.query)) {
-      log({
-        category,
-        message: messageWithHeaders(
-          req,
-          `invalid query params: ${JSON.stringify(req.query)}`
-        ),
-        level: 'warn',
-      })
-      throw createError(400)
-    }
+    const category = getCategory(route)
+    validateRequest(req, { querySchema, route, methods })
 
     const pageName = req.query?.pageName
     const pageId = get(notion, ['pages', pageName, 'pageId'])
