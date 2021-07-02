@@ -3,6 +3,7 @@ import LogRocket from 'logrocket'
 import { communitySettings, trackingSettings } from '../../site.config'
 
 const isLocal = process.env.NODE_ENV === 'development'
+const isProduction = process.env.NODE_ENV === 'production'
 
 if (!isLocal && trackingSettings?.logRocket?.enable) {
   LogRocket.init(trackingSettings?.logRocket?.id)
@@ -50,6 +51,7 @@ class MyDocument extends Document {
               />
             </>
           )}
+          {!isProduction && <meta name="robots" content="noindex" />}
         </Head>
         <body>
           {communitySettings?.facebook?.facebookAppId && <div id="fb-root" />}
