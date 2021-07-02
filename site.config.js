@@ -20,6 +20,7 @@ module.exports = {
     port: 18768,
     token: process.env.REDIS_TOKEN,
   },
+  sitemapCacheTTL: 86400, // seconds
   cdnHost: '',
   meta: {
     title: 'DazedBear Studio',

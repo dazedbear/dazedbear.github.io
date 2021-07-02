@@ -9,3 +9,6 @@ Allow: /
 # block all crawers by default
 User-agent: *
 Disallow: /
+
+# dynamic sitemap
+Sitemap: https://dazedbear.pro/api/sitemap
