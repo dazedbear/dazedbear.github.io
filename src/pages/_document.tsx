@@ -2,8 +2,8 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import LogRocket from 'logrocket'
 import { communitySettings, trackingSettings } from '../../site.config'
 
-const isLocal = process.env.NODE_ENV === 'development'
-const isProduction = process.env.NODE_ENV === 'production'
+const isLocal = process.env.APP_ENV === 'development'
+const isProduction = process.env.APP_ENV === 'production'
 
 if (!isLocal && trackingSettings?.logRocket?.enable) {
   LogRocket.init(trackingSettings?.logRocket?.id)
