@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "build": "NEXT_BUILD_TIME=true next build",
+    "build": "next build",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
     "release": "standard-version"
   },
