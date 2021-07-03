@@ -19,8 +19,14 @@ module.exports = {
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
     token: process.env.REDIS_TOKEN,
+    ttls: {
+      // seconds
+      default: 60,
+      sitemap: 86400,
+      notionPage: 60,
+      previewImage: 86400 * 30,
+    },
   },
-  sitemapCacheTTL: 86400, // seconds
   cdnHost: '',
   meta: {
     title: 'DazedBear Studio',
@@ -69,9 +75,7 @@ module.exports = {
       firstLoadCount: 5,
       batchLoadCount: 10,
     },
-    pageCacheTTL: 60, // seconds
     previeImages: {
-      cacheTTL: 86400 * 30, // seconds, 1 month
       enable: true,
     },
   },

@@ -2,11 +2,11 @@ import cacheManager from 'cache-manager'
 import redisStore from 'cache-manager-redis-store'
 import objectHash from 'object-hash'
 import log from './log'
-import { cache } from '../../../site.config'
+import { cache as cacheConfig } from '../../../site.config'
 
 class CacheClient {
   client = null
-  defaultTTL = 60
+  option = null
 
   constructor(option) {
     if (!option || !option.enable) {
@@ -14,12 +14,14 @@ class CacheClient {
       this.client = null
       return
     }
+    this.option = option
+
     this.client = cacheManager.caching({
       store: redisStore,
-      ttl: this.defaultTTL, // seconds, default is 1 min
-      host: option.host,
-      port: option.port,
-      auth_pass: option.token,
+      ttl: this.option.ttls.default,
+      host: this.option.host,
+      port: this.option.port,
+      auth_pass: this.option.token,
     })
 
     const redisClient = this.client.store.getClient()
@@ -69,7 +71,7 @@ class CacheClient {
       await this.client.set(
         key,
         data,
-        Object.assign({ ttl: this.defaultTTL }, overrideOption)
+        Object.assign({ ttl: this.option.ttls.default }, overrideOption)
       )
     }
     return data
@@ -94,6 +96,6 @@ class CacheClient {
   }
 }
 
-const cacheClient = new CacheClient(cache)
+const cacheClient = new CacheClient(cacheConfig)
 
 export default cacheClient

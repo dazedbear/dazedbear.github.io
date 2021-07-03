@@ -1,5 +1,8 @@
 import { NotionAPI } from 'notion-client'
-import { notion as notionConfig } from '../../../site.config'
+import {
+  notion as notionConfig,
+  cache as cacheConfig,
+} from '../../../site.config'
 import { mapNotionImageUrl } from '../client/blog-helpers'
 import cacheClient from './cache'
 import get from 'lodash/get'
@@ -29,7 +32,7 @@ export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
       return data
     },
     {
-      ttl: notionConfig?.pageCacheTTL,
+      ttl: cacheConfig.ttls.notionPage,
     }
   )
 
@@ -235,7 +238,7 @@ export const getNotionPreviewImages = async recordMap => {
             const data = await lqip(imageBuffer)
             return data
           },
-          { ttl: notionConfig?.previeImages?.cacheTTL }
+          { ttl: cacheConfig.ttls.previewImage }
         )
       } catch (err) {
         log({

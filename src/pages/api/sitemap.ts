@@ -14,7 +14,7 @@ import utc from 'dayjs/plugin/utc'
 import { getSinglePagePath } from '../../libs/client/blog-helpers'
 import log from '../../libs/server/log'
 import { getNotionPostsFromTable } from '../../libs/server/notion'
-import { navigation, notion, sitemapCacheTTL } from '../../../site.config'
+import { navigation, notion, cache as cacheConfig } from '../../../site.config'
 import cacheClient from '../../libs/server/cache'
 
 const route = '/sitemap'
@@ -105,7 +105,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       sitemapXmlKey,
       '/api/sitemap',
       generateSiteMapXml.bind(this, req),
-      { ttl: sitemapCacheTTL }
+      { ttl: cacheConfig.ttls.sitemap }
     )
     res.writeHead(200, { 'Content-Type': 'application/xml' })
     res.end(sitemapXml)
