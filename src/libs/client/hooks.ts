@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from './store'
+import { AppState, AppDispatch } from './store'
 import {
   updateDevice,
   updateNavMenuViewability,
@@ -15,7 +15,7 @@ import {
  * Please use them throughout the app instead of plain `useAppDispatch` and `useSelector`
  */
 export const useAppDispatch = () => useDispatch<AppDispatch>()
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
 
 /**
  * Custom hook to replace broken image with fallback image

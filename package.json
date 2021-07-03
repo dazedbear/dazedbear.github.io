@@ -30,6 +30,8 @@
     "logrocket": "^1.0.14",
     "lqip-modern": "^1.1.3",
     "next": "10.0.7",
+    "next-redux-cookie-wrapper": "^2.0.1",
+    "next-redux-wrapper": "^7.0.2",
     "notion-client": "^4.2.18",
     "notion-utils": "^4.2.18",
     "nprogress": "^0.2.0",

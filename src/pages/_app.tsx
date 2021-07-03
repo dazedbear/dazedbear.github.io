@@ -10,8 +10,7 @@ import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import { useResizeHandler } from '../libs/client/hooks'
-import { Provider } from 'react-redux'
-import store from '../libs/client/store'
+import wrapper from '../libs/client/store'
 import Router from 'next/router'
 import NProgress from 'nprogress'
 
@@ -34,12 +33,4 @@ const App = ({ Component, pageProps }) => {
   )
 }
 
-const Root = props => {
-  return (
-    <Provider store={store}>
-      <App {...props} />
-    </Provider>
-  )
-}
-
-export default Root
+export default wrapper.withRedux(App)
