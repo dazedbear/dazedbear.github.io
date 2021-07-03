@@ -3,7 +3,7 @@ import LogRocket from 'logrocket'
 import rootReducer from './slices'
 
 const store = configureStore({
-  devTools: process.env.APP_ENV === 'development',
+  devTools: process.env.NEXT_PUBLIC_APP_ENV === 'development',
   middleware: [...getDefaultMiddleware(), LogRocket.reduxMiddleware()],
   reducer: rootReducer,
 })
