@@ -46,10 +46,7 @@ class CacheClient {
     }
 
     // add dev prefix to prevent key collision with production data
-    const key =
-      process.env.NEXT_PUBLIC_APP_ENV !== 'production'
-        ? `DEV_${originKey}`
-        : originKey
+    const key = `${process.env.NEXT_PUBLIC_APP_ENV}_${originKey}`
 
     // cache client enabled
     const cacheData = await this.client.get(key)
