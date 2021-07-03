@@ -23,7 +23,7 @@ module.exports = {
       // seconds
       default: 60,
       sitemap: 86400,
-      notionPage: 60,
+      notionPage: 1800,
       previewImage: 86400 * 30,
     },
   },
