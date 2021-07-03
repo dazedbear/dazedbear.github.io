@@ -33,3 +33,27 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
 - Community
   - [Likecoin button](https://liker.land/)
   - [Facebook like button](https://developers.facebook.com/docs/plugins/like-button)
+
+## Development
+
+```bash
+# install dependency
+$ npm install
+
+# run local server
+$ npm run dev
+
+# run build
+$ npm run build
+```
+
+### setup local development domain
+
+```bash
+$ sudo vim /etc/hosts
+
+# append this line
+127.0.0.1 local.dazedbear.pro
+```
+
+then visit the test site http://local.dazedbear.pro:3000
