@@ -42,6 +42,7 @@
     "react-redux": "^7.2.3",
     "redux": "^4.0.5",
     "sitemap": "^7.0.0",
+    "splunk-logging": "^0.10.1",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
