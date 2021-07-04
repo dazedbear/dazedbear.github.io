@@ -55,16 +55,18 @@ const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
   return `/${pageName}/${pagePath}`
 }
 
-const showNotFoundPage = (notionPath): any => {
-  const message = `redirect to 404 page | notionPath: /${notionPath.join('/')}`
-  log({ category: 'page', message, level: 'warn' })
+const showNotFoundPage = (req, notionPath): any => {
+  const message = `redirect to 404 page | notionPath: /${
+    Array.isArray(notionPath) ? notionPath.join('/') : notionPath
+  }`
+  log({ category: 'page', message, level: 'warn', req })
   return {
     notFound: true,
   }
 }
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { notionPath } }) => {
+  store => async ({ params: { notionPath }, req }) => {
     let pageType
     if (notionPath.length === 1) {
       pageType = PAGE_TYPE_LIST_PAGE
@@ -89,8 +91,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             category: PAGE_TYPE_LIST_PAGE,
             message: `required info are invalid: pageId = ${pageId}, collectionViewId = ${collectionViewId}, pageEnabled = ${pageEnabled}`,
             level: 'error',
+            req,
           })
-          return showNotFoundPage(notionPath)
+          return showNotFoundPage(req, notionPath)
         }
         try {
           const postsData = await getNotionPostsFromTable({
@@ -111,8 +114,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
                 'total',
               ])}`,
               level: 'error',
+              req,
             })
-            return showNotFoundPage(notionPath)
+            return showNotFoundPage(req, notionPath)
           }
           const menuItems = get(postsData, [
             'allPosts',
@@ -152,6 +156,14 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             },
           })
           store.dispatch(action)
+          log({
+            category: 'page',
+            message: `dumpaccess to notionPath: ${
+              Array.isArray(notionPath) ? notionPath.join('/') : notionPath
+            }`,
+            level: 'info',
+            req,
+          })
           return {
             props: {
               menuItems,
@@ -161,8 +173,13 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             },
           }
         } catch (err) {
-          log({ category: PAGE_TYPE_LIST_PAGE, message: err, level: 'error' })
-          return showNotFoundPage(notionPath)
+          log({
+            category: PAGE_TYPE_LIST_PAGE,
+            message: err,
+            level: 'error',
+            req,
+          })
+          return showNotFoundPage(req, notionPath)
         }
       }
       case PAGE_TYPE_SINGLE_PAGE: {
@@ -186,8 +203,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             category: PAGE_TYPE_SINGLE_PAGE,
             message: `required info are invalid: listPageId = ${listPageId}, listCollectionViewId = ${listCollectionViewId}, listPageEnabled = ${listPageEnabled}, postId = ${postId}`,
             level: 'error',
+            req,
           })
-          return showNotFoundPage(notionPath)
+          return showNotFoundPage(req, notionPath)
         }
         try {
           const currentPostId = idToUuid(postId)
@@ -200,8 +218,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
                 recordMap
               )}`,
               level: 'error',
+              req,
             })
-            return showNotFoundPage(notionPath)
+            return showNotFoundPage(req, notionPath)
           }
           const toc = getPageTableOfContents(
             get(recordMap, ['block', currentPostId, 'value']),
@@ -239,6 +258,14 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             }
           )
 
+          log({
+            category: 'page',
+            message: `dumpaccess to notionPath: ${
+              Array.isArray(notionPath) ? notionPath.join('/') : notionPath
+            }`,
+            level: 'info',
+            req,
+          })
           return {
             props: {
               menuItems,
@@ -250,8 +277,13 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             },
           }
         } catch (err) {
-          log({ category: PAGE_TYPE_SINGLE_PAGE, message: err, level: 'error' })
-          return showNotFoundPage(notionPath)
+          log({
+            category: PAGE_TYPE_SINGLE_PAGE,
+            message: err,
+            level: 'error',
+            req,
+          })
+          return showNotFoundPage(req, notionPath)
         }
       }
       default: {
@@ -259,8 +291,9 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           category: 'page',
           message: `unknown pageType: ${pageType}`,
           level: 'error',
+          req,
         })
-        return showNotFoundPage(notionPath)
+        return showNotFoundPage(req, notionPath)
       }
     }
   }
