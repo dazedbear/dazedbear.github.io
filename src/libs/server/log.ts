@@ -52,7 +52,8 @@ const log = ({ category = '', message = '', level = 'info', req = null }) => {
     metadata: {
       host: process.env.HOST,
       source: process.env.HOST,
-      sourcetype: `client_${level === 'error' ? 'error' : 'log'}`, // client_log, client_error
+      // we only send server logs now. expected values: client_log, client_error, server_log, server_error
+      sourcetype: `server_${level === 'error' ? 'error' : 'log'}`,
     },
   } as any
 
@@ -65,9 +66,6 @@ const log = ({ category = '', message = '', level = 'info', req = null }) => {
       query: req.query || null,
       url: req.url,
     }
-    payload.metadata.sourcetype = `server_${
-      level === 'error' ? 'error' : 'log'
-    }` // server_log, server_error
   }
 
   Logger.send(payload, err => {
