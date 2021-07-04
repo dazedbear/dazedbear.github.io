@@ -62,23 +62,6 @@ export const isSupportedMethod = (
 }
 
 /**
- * messageWithHeaders
- * @param {object} req next.js api request object
- * @param {string} message main log message
- * @returns {string} composite log message
- */
-export const messageWithHeaders = (
-  req: NextApiRequest,
-  message = '' as string
-) => {
-  const validate = ajv.compile(schemaMap.message)
-  if (!validate(message)) {
-    throw Error(`Invalid message found in messageWithHeaders: ${message}`)
-  }
-  return `${message} \n${JSON.stringify(req.headers)}`
-}
-
-/**
  * validateRequest
  * @param {object} req next.js api request object
  * @param {object} param param
@@ -113,19 +96,18 @@ export const validateRequest = (
   if (!isSupportedMethod(req, methods)) {
     log({
       category,
-      message: messageWithHeaders(req, `unsupport method: ${req.method}`),
+      message: `unsupport method: ${req.method}`,
       level: 'warn',
+      req,
     })
     throw createError(400)
   }
   if (!validate(req.query)) {
     log({
       category,
-      message: messageWithHeaders(
-        req,
-        `invalid query params: ${JSON.stringify(req.query)}`
-      ),
+      message: `invalid query params: ${JSON.stringify(req.query)}`,
       level: 'warn',
+      req,
     })
     throw createError(400)
   }

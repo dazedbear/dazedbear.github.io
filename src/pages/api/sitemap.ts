@@ -1,9 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import {
-  getCategory,
-  messageWithHeaders,
-  validateRequest,
-} from '../../libs/server/api-util'
+import { getCategory, validateRequest } from '../../libs/server/api-util'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import { SitemapStream, streamToPromise } from 'sitemap'
@@ -53,8 +49,9 @@ const generateSiteMapXml = async req => {
         )}, collection result total = ${get(postsData, ['result', 'total'])}`
         log({
           category,
-          message: messageWithHeaders(req, message),
+          message,
           level: 'warn',
+          req,
         })
         return []
       }

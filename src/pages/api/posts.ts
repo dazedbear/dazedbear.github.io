@@ -7,11 +7,7 @@ import {
   getNotionPostsFromTable,
   getNotionPreviewImages,
 } from '../../libs/server/notion'
-import {
-  getCategory,
-  messageWithHeaders,
-  validateRequest,
-} from '../../libs/server/api-util'
+import { getCategory, validateRequest } from '../../libs/server/api-util'
 import { notion } from '../../../site.config'
 
 const route = '/posts'
@@ -53,26 +49,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (!pageEnabled) {
       log({
         category,
-        message: messageWithHeaders(
-          req,
-          `posts data not found because this page is disabled \nquery params = ${JSON.stringify(
-            req.query
-          )}`
-        ),
+        message: `posts data not found because this page is disabled \nquery params = ${JSON.stringify(
+          req.query
+        )}`,
         level: 'warn',
+        req,
       })
       throw createError(404)
     }
     if (!pageId || !collectionViewId) {
       log({
         category,
-        message: messageWithHeaders(
-          req,
-          `posts data not found because some required configs are missing \nquery params = ${JSON.stringify(
-            req.query
-          )}`
-        ),
+        message: `posts data not found because some required configs are missing \nquery params = ${JSON.stringify(
+          req.query
+        )}`,
         level: 'warn',
+        req,
       })
       throw createError(404)
     }
@@ -83,11 +75,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (isNaN(limit) || !Number.isInteger(limit)) {
       log({
         category,
-        message: messageWithHeaders(
-          req,
-          `invalid index or count, query params: ${JSON.stringify(req.query)}`
-        ),
+        message: `invalid index or count, query params: ${JSON.stringify(
+          req.query
+        )}`,
         level: 'warn',
+        req,
       })
       throw createError(400)
     }
@@ -95,10 +87,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // fetch notion post data
     log({
       category,
-      message: messageWithHeaders(
-        req,
-        `dumpaccess, query params: ${JSON.stringify(req.query)}`
-      ),
+      message: `dumpaccess, query params: ${JSON.stringify(req.query)}`,
+      req,
     })
     const data = await getNotionPostsFromTable({
       pageId,
