@@ -223,10 +223,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             })
             return showNotFoundPage(req, notionPath)
           }
-          const toc = getPageTableOfContents(
-            get(recordMap, ['block', currentPostId, 'value']),
-            recordMap
-          )
+          const toc = getPageTableOfContents(recordMap)
 
           if (get(notion, ['previeImages', 'enable'])) {
             const previewImageMap = await getNotionPreviewImages(recordMap)
