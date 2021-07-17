@@ -39,7 +39,7 @@
     @apply max-h-unset min-h-unset h-auto object-center object-contain;
   }
   #app .notion-page-link {
-    @apply h-auto hover:bg-white;
+    @apply h-auto;
   }
   #app .notion-title {
     @apply text-lavender-purple-300;
