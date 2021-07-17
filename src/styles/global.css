@@ -19,7 +19,7 @@
 
   #nprogress .bar,
   #nprogress.spinner {
-    @apply z-990 top-36 lg:top-13;
+    @apply z-990 top-25 lg:top-13;
     position: fixed !important;
   }
 }
