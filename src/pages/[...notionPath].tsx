@@ -32,7 +32,8 @@ import NavMenu from '../components/nav-menu'
 import TableOfContent from '../components/toc'
 import NotionPageHeader from '../components/notion-page-header'
 import NotionPageFooter from '../components/notion-page-footer'
-import { useRemoveLinks } from '../libs/client/hooks'
+import Placeholder from '../components/placeholder'
+import { useRemoveLinks, useAppSelector } from '../libs/client/hooks'
 import log from '../libs/server/log'
 
 const PAGE_TYPE_LIST_PAGE = 'listPage'
@@ -306,6 +307,7 @@ const NotionPage = props => {
     condition: () => props.pageType === PAGE_TYPE_SINGLE_PAGE,
   })
 
+  const streamState = useAppSelector(state => state.stream)
   switch (props.pageType) {
     case PAGE_TYPE_LIST_PAGE: {
       const { menuItems, notionPath, recordMap } = props
@@ -317,6 +319,17 @@ const NotionPage = props => {
           </Link>
         ),
       })
+
+      const index = get(streamState, [pageName, 'index'], 0)
+      const total = get(streamState, [pageName, 'total'], 0)
+      const isReachToEnd = index > 0 && total > 0 && index + 1 === total
+      const pageFooter =
+        get(notion, ['pagination', 'enabled']) && !isReachToEnd ? (
+          <Placeholder
+            itemCount={get(notion, ['pagination', 'batchLoadCount'])}
+            wrapperClassNames="border-t border-gray-300"
+          />
+        ) : null
 
       return (
         <div
@@ -337,6 +350,7 @@ const NotionPage = props => {
             components={components}
             mapPageUrl={NotionMapPageUrl.bind(this, pageName, recordMap)}
             previewImages={get(notion, ['previeImages', 'enable'])}
+            pageFooter={pageFooter}
             showCollectionViewDropdown={false}
           />
         </div>
