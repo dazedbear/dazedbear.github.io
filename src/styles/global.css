@@ -18,7 +18,8 @@
   /* end - to hide scrollbar */
 
   #nprogress .bar,
-  #nprogress .spinner {
-    @apply z-10000 top-25 lg:top-13;
+  #nprogress.spinner {
+    @apply z-990 top-36 lg:top-13;
+    position: fixed !important;
   }
 }
