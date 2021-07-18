@@ -40,6 +40,7 @@
     "react-dom": "^16.12.0",
     "react-notion-x": "^4.2.18",
     "react-redux": "^7.2.3",
+    "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
     "sitemap": "^7.0.0",
     "splunk-logging": "^0.10.1",

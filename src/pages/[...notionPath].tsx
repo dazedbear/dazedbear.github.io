@@ -13,8 +13,9 @@ import {
   Modal,
 } from 'react-notion-x'
 import { getBlockTitle, idToUuid, getPageTableOfContents } from 'notion-utils'
+import VisibilitySensor from 'react-visibility-sensor'
 import wrapper from '../libs/client/store'
-import { updateStream } from '../libs/client/slices/stream'
+import { updateStream, fetchStreamPosts } from '../libs/client/slices/stream'
 import {
   getNotionPostsFromTable,
   getNotionPage,
@@ -33,7 +34,11 @@ import TableOfContent from '../components/toc'
 import NotionPageHeader from '../components/notion-page-header'
 import NotionPageFooter from '../components/notion-page-footer'
 import Placeholder from '../components/placeholder'
-import { useRemoveLinks, useAppSelector } from '../libs/client/hooks'
+import {
+  useRemoveLinks,
+  useAppSelector,
+  useAppDispatch,
+} from '../libs/client/hooks'
 import log from '../libs/server/log'
 
 const PAGE_TYPE_LIST_PAGE = 'listPage'
@@ -147,13 +152,16 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 
           // save SSR fetch stream article contents to redux store
           const postIds = get(postsData, ['result', 'blockIds'])
+          const total = get(postsData, ['result', 'total'])
+          const hasNext = paginationEnabled && postIds.length < total
           const action = updateStream({
             name: pageName,
             data: {
               content: cloneDeep(recordMap),
+              hasNext,
               ids: postIds,
               index: postIds.length - 1,
-              total: get(postsData, ['result', 'total']),
+              total,
             },
           })
           store.dispatch(action)
@@ -305,9 +313,11 @@ const NotionPage = props => {
   })
 
   const streamState = useAppSelector(state => state.stream)
+  const dispatch = useAppDispatch()
+
   switch (props.pageType) {
     case PAGE_TYPE_LIST_PAGE: {
-      const { menuItems, notionPath, recordMap } = props
+      const { menuItems, notionPath } = props
       const [pageName] = notionPath
       const components = Object.assign({}, NotionDefaultComponentMap, {
         pageLink: props => (
@@ -317,16 +327,70 @@ const NotionPage = props => {
         ),
       })
 
+      const count = get(notion, ['pagination', 'batchLoadCount'])
+      const content = get(streamState, [pageName, 'content'])
+      const error = get(streamState, [pageName, 'error'])
+      const hasNext = get(streamState, [pageName, 'hasNext'])
       const index = get(streamState, [pageName, 'index'], 0)
-      const total = get(streamState, [pageName, 'total'], 0)
-      const isReachToEnd = index > 0 && total > 0 && index + 1 === total
-      const pageFooter =
-        get(notion, ['pagination', 'enabled']) && !isReachToEnd ? (
-          <Placeholder
-            itemCount={get(notion, ['pagination', 'batchLoadCount'])}
-            wrapperClassNames="border-t border-gray-300"
-          />
-        ) : null
+      const isLoading = get(streamState, [pageName, 'isLoading'])
+
+      // hack to temporarily fix "cannot assign type to read-only object" issue in react-notion-x
+      const recordMap = cloneDeep(content)
+
+      const getPageFooter = () => {
+        if (!get(notion, ['pagination', 'enabled'])) {
+          return null
+        }
+
+        if (error) {
+          return isLoading ? (
+            <div className="text-center w-full block m-0 py-4 rounded-md bg-gray-200">
+              <p className="text-gray-700 text-sm text-center inline-block">
+                文章讀取中...
+                <span className="w-4 ml-2 text-center inline-block animate-spin">
+                  <i className="fas fa-circle-notch"></i>
+                </span>
+              </p>
+            </div>
+          ) : (
+            <button
+              className="text-center w-full block m-0 py-4 rounded-md bg-gray-200"
+              onClick={() =>
+                dispatch(fetchStreamPosts({ index, count, pageName }))
+              }
+            >
+              <p className="text-gray-700 text-sm text-center inline-block">
+                文章讀取發生了問題. 請點此再試一次.
+                <span className="w-4 ml-2 text-center inline-block">
+                  <i className="fas fa-redo"></i>
+                </span>
+              </p>
+            </button>
+          )
+        }
+
+        if (hasNext) {
+          const handlePaginationFetch = isVisible => {
+            if (isVisible && !isLoading) {
+              dispatch(fetchStreamPosts({ index, count, pageName }))
+            }
+          }
+          return (
+            <VisibilitySensor
+              key={`placeholder-${index}`}
+              onChange={handlePaginationFetch}
+              partialVisibility={true}
+              minTopValue={250}
+            >
+              <Placeholder
+                itemCount={count}
+                wrapperClassNames="border-t border-gray-300"
+              />
+            </VisibilitySensor>
+          )
+        }
+        return null
+      }
 
       return (
         <div
@@ -347,7 +411,7 @@ const NotionPage = props => {
             components={components}
             mapPageUrl={NotionMapPageUrl.bind(this, pageName, recordMap)}
             previewImages={get(notion, ['previeImages', 'enable'])}
-            pageFooter={pageFooter}
+            pageFooter={getPageFooter()}
             showCollectionViewDropdown={false}
           />
         </div>

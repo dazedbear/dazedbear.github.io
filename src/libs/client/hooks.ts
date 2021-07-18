@@ -14,7 +14,7 @@ import {
  * Pre-typed useSelector & useAppDispatch for react-redux.
  * Please use them throughout the app instead of plain `useAppDispatch` and `useSelector`
  */
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppDispatch = () => useDispatch()
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
 
 /**
