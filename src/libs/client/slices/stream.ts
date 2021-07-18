@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { HYDRATE } from 'next-redux-wrapper'
 import get from 'lodash/get'
+import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
+import isEmpty from 'lodash/isEmpty'
 import { notion } from '../../../../site.config'
 
 interface ContentState {
@@ -88,7 +90,16 @@ const StreamSlice = createSlice({
     },
   },
   extraReducers: {
-    [HYDRATE]: (state, action) => merge(state, action.payload.stream),
+    [HYDRATE]: (state, action) => {
+      const retainState = Object.keys(state).reduce((composite, name) => {
+        const currentState = get(state, [name])
+        if (!isEmpty(currentState.content)) {
+          composite[name] = cloneDeep(currentState)
+        }
+        return composite
+      }, {})
+      merge(state, action.payload.stream, retainState)
+    },
     [fetchStreamPosts.fulfilled as any]: (state, action) => {
       const name = get(action, ['meta', 'arg', 'pageName'])
       const ids = get(action, ['payload', 'result', 'blockIds'])
