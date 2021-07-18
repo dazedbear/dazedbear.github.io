@@ -25,7 +25,12 @@ const Placeholder = ({
       </li>
     ))
   return (
-    <ul className={classnames('placeholder w-full', wrapperClassNames)}>
+    <ul
+      className={classnames(
+        'placeholder w-full animate-pulse',
+        wrapperClassNames
+      )}
+    >
       {items}
     </ul>
   )
