@@ -121,6 +121,10 @@ module.exports = {
       ],
     },
   },
+  reduxCookiePersist: {
+    enabled: false,
+    stateSubTrees: [],
+  },
   copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
   communitySettings: {
     github: {
