@@ -87,10 +87,10 @@ module.exports = {
     pagination: {
       enabled: true,
       firstLoadCount: 5,
-      batchLoadCount: 10,
+      batchLoadCount: 5,
     },
     previeImages: {
-      enable: true,
+      enable: false,
     },
   },
   pages: {
