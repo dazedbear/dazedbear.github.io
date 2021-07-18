@@ -21,7 +21,7 @@ const Breadcrumb = ({ title, enableToc = false }) => {
   return (
     <section
       className={classnames(
-        'fixed w-full left-0 right-0 z-1000 block lg:hidden',
+        'fixed w-full left-0 right-0 z-980 block lg:hidden',
         {
           'border-b border-gray-300':
             isNavMenuViewable || isTableOfContentViewable,
