@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.1.0...v4.2.0) (2021-07-20)
+
+### Features
+
+- add api route for notion list pagination ([901ea21](https://github.com/dazedbear/dazedbear.github.io/commit/901ea218ca0454ef5280a1adb2935130fc299cdd))
+- add api route for sitemap generation ([effd974](https://github.com/dazedbear/dazedbear.github.io/commit/effd9746957c7d286ba31f11c226e53b53f0f07d))
+- add new field to /api/posts ([a1fed64](https://github.com/dazedbear/dazedbear.github.io/commit/a1fed649fae5452ef67f711b0e249997d199b50d))
+- add notion article pagination placeholder ([974a4c8](https://github.com/dazedbear/dazedbear.github.io/commit/974a4c8aa1e9303f26e8684fe3fa556756822e2d))
+- add pagination for notion list page ([9e03d8f](https://github.com/dazedbear/dazedbear.github.io/commit/9e03d8f58623507478f5e000e6dd68fe42ce171f))
+- add redux stream store hydrate support ([4d903bd](https://github.com/dazedbear/dazedbear.github.io/commit/4d903bdef41d70fd44eddf41960c51d0cd0b5f09))
+- add splunk integration ([5151af3](https://github.com/dazedbear/dazedbear.github.io/commit/5151af3c3b3103204f13c67307d16950e13f6784))
+- pagination fetch for notion page ([8ab7ab7](https://github.com/dazedbear/dazedbear.github.io/commit/8ab7ab7bb18488ded2c96c22db6ba51bfd5b2b6a))
+
+### Bug Fixes
+
+- add listener when redis on error ([694aeff](https://github.com/dazedbear/dazedbear.github.io/commit/694aeff0e26b7c1b0b4f797fdc83da8fde2c0ca4))
+- anti-pattern of hook ([27334d1](https://github.com/dazedbear/dazedbear.github.io/commit/27334d15a72d77bb21c4c8f8d318c3ee0eaa99c6))
+- auto prefix redis keys when local development ([7fef379](https://github.com/dazedbear/dazedbear.github.io/commit/7fef379e6864e53a495453292a24a807aff4064c))
+- cacheClient should be server_log ([42a32e5](https://github.com/dazedbear/dazedbear.github.io/commit/42a32e59060ccca1e6beb41cfcdb973bc4294734))
+- getPageTableOfContents function change ([c150149](https://github.com/dazedbear/dazedbear.github.io/commit/c150149177d5246486f14af8928d1991e61de30a))
+- header z-index ([fb291a3](https://github.com/dazedbear/dazedbear.github.io/commit/fb291a39914d65d11034c56ef54bd59e2cd44f8c))
+- retain previous stream client state ([7bd39d3](https://github.com/dazedbear/dazedbear.github.io/commit/7bd39d38dee9c472a9d3979f74251f8cdaa42a64))
+- sitemap won't cache due to key changed ([47e4a7e](https://github.com/dazedbear/dazedbear.github.io/commit/47e4a7e053f43a304af19c3cb8a5e429de11b734))
+
 ## 4.1.0 (2021-05-17)
 
 ### Features
