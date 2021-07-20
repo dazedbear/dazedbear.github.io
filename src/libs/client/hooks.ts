@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from './store'
+import { AppState, AppDispatch } from './store'
 import {
   updateDevice,
   updateNavMenuViewability,
@@ -14,8 +14,8 @@ import {
  * Pre-typed useSelector & useAppDispatch for react-redux.
  * Please use them throughout the app instead of plain `useAppDispatch` and `useSelector`
  */
-export const useAppDispatch = () => useDispatch<AppDispatch>()
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+export const useAppDispatch = () => useDispatch()
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
 
 /**
  * Custom hook to replace broken image with fallback image
@@ -23,10 +23,10 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
  * @param param.fallbackImageUrl url for fallback image
  */
 export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
-  if (!selector) {
-    return
-  }
   useEffect(() => {
+    if (!selector) {
+      return
+    }
     const images = document.querySelectorAll(selector)
     const loadFallbackImageHandler = e => {
       e.target.setAttribute('src', fallbackImageUrl)
@@ -53,20 +53,20 @@ export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
  * Disable links when specific condition fulfills. We use this hook to remove links from notion table in single notion page.
  */
 export const useRemoveLinks = ({ selector, condition }) => {
-  if (!selector) {
-    return
-  }
-
-  let isEnabled = true
-  if (typeof condition === 'function') {
-    isEnabled = condition()
-  }
-
-  if (!isEnabled) {
-    return
-  }
-
   useEffect(() => {
+    if (!selector) {
+      return
+    }
+
+    let isEnabled = true
+    if (typeof condition === 'function') {
+      isEnabled = condition()
+    }
+
+    if (!isEnabled) {
+      return
+    }
+
     const links = document.querySelectorAll(selector)
     links.forEach(node => {
       if (node.hasAttribute('href')) {

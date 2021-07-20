@@ -1,10 +1,10 @@
 {
   "name": "dazedbear.github.io",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "build": "NEXT_BUILD_TIME=true next build",
+    "build": "next build",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
     "release": "standard-version"
   },
@@ -18,15 +18,20 @@
     "@reduxjs/toolkit": "^1.5.1",
     "@types/react-redux": "^7.1.16",
     "@zeit/react-jsx-parser": "^2.0.0",
+    "ajv": "^8.6.0",
+    "ajv-formats": "^2.1.0",
     "async-sema": "^3.1.0",
     "cache-manager": "^3.4.3",
     "cache-manager-redis-store": "^2.0.0",
     "chalk": "^4.1.0",
     "classnames": "^2.2.6",
+    "dayjs": "^1.10.5",
     "github-slugger": "^1.2.1",
     "logrocket": "^1.0.14",
     "lqip-modern": "^1.1.3",
     "next": "10.0.7",
+    "next-redux-cookie-wrapper": "^2.0.1",
+    "next-redux-wrapper": "^7.0.2",
     "notion-client": "^4.2.18",
     "notion-utils": "^4.2.18",
     "nprogress": "^0.2.0",
@@ -35,7 +40,10 @@
     "react-dom": "^16.12.0",
     "react-notion-x": "^4.2.18",
     "react-redux": "^7.2.3",
+    "react-visibility-sensor": "^5.1.1",
     "redux": "^4.0.5",
+    "sitemap": "^7.0.0",
+    "splunk-logging": "^0.10.1",
     "uuid": "^8.1.0"
   },
   "devDependencies": {
@@ -50,6 +58,6 @@
     "prettier": "^1.19.1",
     "standard-version": "^9.3.0",
     "tailwindcss": "^2.0.3",
-    "typescript": "^3.7.4"
+    "typescript": "^4.3.2"
   }
 }

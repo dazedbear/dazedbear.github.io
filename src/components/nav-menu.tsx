@@ -21,7 +21,7 @@ const NavigationMenu = ({ title, menuItems }) => {
         {
           block: isNavMenuViewable,
           hidden: !isNavMenuViewable,
-          'fixed w-full z-990 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
+          'fixed w-full z-970 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
         }
       )}
     >

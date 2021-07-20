@@ -1,0 +1,14 @@
+# allow good crawers
+User-agent: Googlebot
+User-agent: YandexBot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: inoreader.com
+Allow: /
+
+# block all crawers by default
+User-agent: *
+Disallow: /
+
+# dynamic sitemap
+Sitemap: https://dazedbear.pro/api/sitemap

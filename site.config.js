@@ -19,8 +19,29 @@ module.exports = {
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
     token: process.env.REDIS_TOKEN,
+    ttls: {
+      // seconds
+      default: 60,
+      sitemap: 86400,
+      notionPage: 1800,
+      previewImage: 86400 * 30,
+    },
   },
   cdnHost: '',
+  splunk: {
+    enable: false,
+    // https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector_on_Splunk_Cloud
+    // https://github.com/splunk/splunk-javascript-logging/blob/master/splunklogger.js
+    option: {
+      batchInterval: 2500,
+      host: `inputs.${process.env.SPLUNK_HEC_HOST}`,
+      path: '/services/collector',
+      port: 8088,
+      protocol: 'https',
+      maxBatchCount: 25,
+      token: process.env.SPLUNK_HEC_TOKEN,
+    },
+  },
   meta: {
     title: 'DazedBear Studio',
     description: 'Web。Digital Music。Self Development',
@@ -63,9 +84,12 @@ module.exports = {
         requiredEnv: ['CODING_TABLE_PAGE_ID', 'CODING_TABLE_VIEW_ID'],
       },
     },
-    pageCacheTTL: 60, // seconds
+    pagination: {
+      enabled: true,
+      firstLoadCount: 5,
+      batchLoadCount: 5,
+    },
     previeImages: {
-      cacheTTL: 86400 * 30, // seconds, 1 month
       enable: true,
     },
   },
@@ -96,6 +120,10 @@ module.exports = {
         },
       ],
     },
+  },
+  reduxCookiePersist: {
+    enabled: false,
+    stateSubTrees: [],
   },
   copyright: `Copyright © ${new Date().getFullYear()} DazedBear Studio`,
   communitySettings: {

@@ -2,11 +2,11 @@ import cacheManager from 'cache-manager'
 import redisStore from 'cache-manager-redis-store'
 import objectHash from 'object-hash'
 import log from './log'
-import { cache } from '../../../site.config'
+import { cache as cacheConfig } from '../../../site.config'
 
 class CacheClient {
   client = null
-  defaultTTL = 60
+  option = null
 
   constructor(option) {
     if (!option || !option.enable) {
@@ -14,17 +14,28 @@ class CacheClient {
       this.client = null
       return
     }
+    this.option = option
+
     this.client = cacheManager.caching({
       store: redisStore,
-      ttl: this.defaultTTL, // seconds, default is 1 min
-      host: option.host,
-      port: option.port,
-      auth_pass: option.token,
+      ttl: this.option.ttls.default,
+      host: this.option.host,
+      port: this.option.port,
+      auth_pass: this.option.token,
+    })
+
+    const redisClient = this.client.store.getClient()
+    redisClient.on('error', error => {
+      log({
+        category: 'cacheClient',
+        message: error,
+        level: 'error',
+      })
     })
   }
 
-  async proxy(key, message, execFunction, overrideOption = {}) {
-    if (!key || !message || typeof execFunction !== 'function') {
+  async proxy(originKey, message, execFunction, overrideOption = {}) {
+    if (!originKey || !message || typeof execFunction !== 'function') {
       return
     }
 
@@ -33,6 +44,9 @@ class CacheClient {
       const data = await execFunction()
       return data
     }
+
+    // add dev prefix to prevent key collision with production data
+    const key = `${process.env.NEXT_PUBLIC_APP_ENV}_${originKey}`
 
     // cache client enabled
     const cacheData = await this.client.get(key)
@@ -54,7 +68,7 @@ class CacheClient {
       await this.client.set(
         key,
         data,
-        Object.assign({ ttl: this.defaultTTL }, overrideOption)
+        Object.assign({ ttl: this.option.ttls.default }, overrideOption)
       )
     }
     return data
@@ -79,6 +93,6 @@ class CacheClient {
   }
 }
 
-const cacheClient = new CacheClient(cache)
+const cacheClient = new CacheClient(cacheConfig)
 
 export default cacheClient

@@ -1,8 +1,12 @@
 import { NotionAPI } from 'notion-client'
-import { notion as notionConfig } from '../../../site.config'
+import {
+  notion as notionConfig,
+  cache as cacheConfig,
+} from '../../../site.config'
 import { mapNotionImageUrl } from '../client/blog-helpers'
 import cacheClient from './cache'
 import get from 'lodash/get'
+import set from 'lodash/set'
 import pMap from 'p-map'
 import fetch from 'node-fetch'
 import lqip from 'lqip-modern'
@@ -28,7 +32,7 @@ export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
       return data
     },
     {
-      ttl: notionConfig?.pageCacheTTL,
+      ttl: cacheConfig.ttls.notionPage,
     }
   )
 
@@ -45,7 +49,15 @@ export const getNotionPostsFromTable = async (
     pageId,
     collectionViewId,
     options,
-  }: { pageId: string; collectionViewId: string; options?: object },
+    paginationEnabled = false,
+    fetchAllPosts = false,
+  }: {
+    pageId: string
+    collectionViewId: string
+    options?: object
+    paginationEnabled?: boolean
+    fetchAllPosts?: boolean
+  },
   dataFormatter?: any
 ) => {
   if (!pageId || !collectionViewId) {
@@ -56,57 +68,107 @@ export const getNotionPostsFromTable = async (
     })
     return
   }
-  const cacheKey = cacheClient.createCacheKeyFromContent({
-    pageId,
-    collectionViewId,
-    options,
-  })
 
-  let result = await cacheClient.proxy(
-    cacheKey,
-    'getNotionPostsFromTable',
+  const tablePageCacheKey = cacheClient.createCacheKeyFromContent({
+    pageId,
+    name: 'getPage',
+  })
+  const tablePageData = await cacheClient.proxy(
+    tablePageCacheKey,
+    'getNotionPostsFromTable - getPage',
     async () => {
-      const pageData = await notionAPI.getPage(pageId, {
+      const response = await notionAPI.getPage(pageId, {
         fetchCollections: true,
       })
-      // Since we put the table page id here, there will be only 1 collection id exist.
-      const collectionId = Object.keys(pageData.collection)[0]
-      const collectionViewQuery = get(pageData, [
-        'collection_view',
-        collectionViewId,
-        'value',
-        'query2',
-      ])
-      if (!collectionId) {
-        log({
-          category: 'getNotionPostsFromTable',
-          message: 'cannot find collectionId.',
-          level: 'error',
-        })
-        return
-      }
+      return response
+    }
+  )
 
-      let apiOptions = {
-        query: collectionViewQuery, // reuse the filter/sort query from collection view
-        type: 'table',
-        // limit: 20,
-        loadContentCover: true,
-        searchQuery: '',
-        userTimeZone: 'Asia/Taipei',
-      } as any
+  // Since we put the table page id here, there will be only 1 collection id exist.
+  const collectionId = Object.keys(tablePageData?.collection)[0]
+  const collectionQueries = tablePageData?.collection_query || {}
+  const collectionViewQuery = get(tablePageData, [
+    'collection_view',
+    collectionViewId,
+    'value',
+    'query2',
+  ])
+  if (!collectionId) {
+    log({
+      category: 'getNotionPostsFromTable',
+      message: 'cannot find collectionId.',
+      level: 'error',
+    })
+    return
+  }
 
-      if (typeof options === 'object') {
-        apiOptions = Object.assign({}, apiOptions, options)
-      }
-      const data = await notionAPI.getCollectionData(
+  let apiOptions = {
+    query: collectionViewQuery, // reuse the filter/sort query from collection view
+    type: 'table',
+    loadContentCover: true,
+    searchQuery: '',
+    userTimeZone: 'Asia/Taipei',
+  } as any
+
+  // pagination
+  if (paginationEnabled) {
+    apiOptions.limit = notionConfig?.pagination?.firstLoadCount
+  }
+
+  if (typeof options === 'object') {
+    apiOptions = Object.assign({}, apiOptions, options)
+  }
+
+  const queryPostsCacheKey = cacheClient.createCacheKeyFromContent({
+    collectionId,
+    collectionViewId,
+    apiOptions,
+  })
+  const queryPosts = await cacheClient.proxy(
+    queryPostsCacheKey,
+    'getNotionPostsFromTable - queryPosts',
+    async () => {
+      const response = await notionAPI.getCollectionData(
         collectionId,
         collectionViewId,
         apiOptions
       )
-      return data
-    },
-    { ttl: notionConfig?.pageCacheTTL }
+      // hack to fix the missing field of recordMap from notionAPI.getCollectionData so that we can reuse it to reduce duplicated API call
+      set(response, ['recordMap', 'collection_query'], collectionQueries)
+      set(response, ['recordMap', 'signed_urls'], {})
+      return response
+    }
   )
+
+  let result = queryPosts
+
+  // workaround for menu items
+  if (fetchAllPosts) {
+    apiOptions.query = collectionViewQuery
+    apiOptions.limit = undefined // disable pagination to fetch all articles
+    const queryAllPostsCacheKey = cacheClient.createCacheKeyFromContent({
+      name: 'queryAllPosts',
+      collectionId,
+      collectionViewId,
+      apiOptions,
+    })
+    const queryAllPosts = await cacheClient.proxy(
+      queryAllPostsCacheKey,
+      'getNotionPostsFromTable - queryAllPosts',
+      async () => {
+        const response = await notionAPI.getCollectionData(
+          collectionId,
+          collectionViewId,
+          apiOptions
+        )
+        // hack to fix the missing field of recordMap from notionAPI.getCollectionData so that we can reuse it to reduce duplicated API call
+        set(response, ['recordMap', 'collection_query'], collectionQueries)
+        set(response, ['recordMap', 'signed_urls'], {})
+        return response
+      }
+    )
+    result.allPosts = queryAllPosts
+  }
 
   // provide callback function to format data
   if (typeof dataFormatter === 'function') {
@@ -176,7 +238,7 @@ export const getNotionPreviewImages = async recordMap => {
             const data = await lqip(imageBuffer)
             return data
           },
-          { ttl: notionConfig?.previeImages?.cacheTTL }
+          { ttl: cacheConfig.ttls.previewImage }
         )
       } catch (err) {
         log({
