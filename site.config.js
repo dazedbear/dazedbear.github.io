@@ -90,7 +90,7 @@ module.exports = {
       batchLoadCount: 5,
     },
     previeImages: {
-      enable: false,
+      enable: true,
     },
   },
   pages: {
