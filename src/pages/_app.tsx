@@ -9,7 +9,7 @@ import '../styles/global.css'
 import '../styles/notion.css'
 import Header from '../components/header'
 import Footer from '../components/footer'
-import { useResizeHandler } from '../libs/client/hooks'
+import { useResizeHandler, useInitLogRocket } from '../libs/client/hooks'
 import wrapper from '../libs/client/store'
 import Router from 'next/router'
 import NProgress from 'nprogress'
@@ -21,6 +21,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 const App = ({ Component, pageProps }) => {
+  useInitLogRocket()
   useResizeHandler()
   return (
     <div id="app">

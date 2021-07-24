@@ -29,7 +29,7 @@ const store = configureStore({
         })
       )
     }
-    if (siteConfig.trackingSettings.logRocket.enabled) {
+    if (siteConfig.trackingSettings.logRocket.enable) {
       middleware.push(LogRocket.reduxMiddleware())
     }
     return middleware

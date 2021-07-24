@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import LogRocket from 'logrocket'
 import { AppState, AppDispatch } from './store'
 import {
   updateDevice,
@@ -9,6 +10,7 @@ import {
   updateTableOfContentViewability,
   updateViewport,
 } from './slices/layout'
+import { trackingSettings } from '../../../site.config'
 
 /**
  * Pre-typed useSelector & useAppDispatch for react-redux.
@@ -163,4 +165,19 @@ export const useTOCScrollHandler = () => {
     activeSectionId,
     updateTocActiveSectionId,
   }
+}
+
+/**
+ * Custom hook to initialize LogRocket tracking
+ */
+export const useInitLogRocket = () => {
+  const [isInitialized, setInitialized] = useState(false)
+
+  useEffect(() => {
+    const isLocal = process.env.NEXT_PUBLIC_APP_ENV === 'development'
+    if (!isLocal && !isInitialized && trackingSettings?.logRocket?.enable) {
+      LogRocket.init(trackingSettings?.logRocket?.id)
+      setInitialized(true)
+    }
+  })
 }

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.2.0...v4.2.1) (2021-07-24)
+
+### Bug Fixes
+
+- broken logrocket integration ([990d2eb](https://github.com/dazedbear/dazedbear.github.io/commit/990d2eb057c4b6956166df3083d9e9a04600f525))
+
 ## [4.2.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.1.0...v4.2.0) (2021-07-20)
 
 ### Features

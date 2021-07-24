@@ -1,0 +1,11 @@
+name: Daily Schedule Actions
+on:
+  schedule:
+    # every day 6:00 am
+    - cron: '0 6 * * *'
+jobs:
+  sitemap-cache-warmup:
+    name: Sitemap Cache Warm Up
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -L -X GET "https://dazedbear.pro/api/sitemap"
