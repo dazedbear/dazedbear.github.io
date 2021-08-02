@@ -1,8 +1,8 @@
 name: Daily Schedule Actions
 on:
   schedule:
-    # every day 6:00 am
-    - cron: '0 6 * * *'
+    # every day 6:00 am GMT+8
+    - cron: '0 22 * * *'
 jobs:
   sitemap-cache-warmup:
     name: Sitemap Cache Warm Up
