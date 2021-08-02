@@ -15,7 +15,7 @@ const MusicPage = () => {
     'bg-gradient-red active:bg-gradient-red-spread',
     'bg-gradient-yellow active:bg-gradient-yellow-spread sm:col-start-8',
     'bg-gradient-green active:bg-gradient-green-spread sm:row-start-8',
-    // 'bg-gradient-purple active:bg-gradient-purple-spread sm:col-start-8 sm:row-start-8',
+    'bg-gradient-purple active:bg-gradient-purple-spread sm:col-start-8 sm:row-start-8',
     'bg-channel-logo bg-cover sm:col-start-8 sm:row-start-8',
   ]
   const blocksData = pageSettings.blocks || []
@@ -35,12 +35,22 @@ const MusicPage = () => {
                   )}
                 </div>
               )
+              const isRelativePath = /^\/.+/g.test(link)
               return (
                 <li
                   key={title}
                   className={classnames(blockClass, blocksClass[index])}
                 >
-                  {link ? <ExtLink href={link}>{Block}</ExtLink> : Block}
+                  {link ? (
+                    <ExtLink
+                      href={link}
+                      target={isRelativePath ? '_self' : '_blank'}
+                    >
+                      {Block}
+                    </ExtLink>
+                  ) : (
+                    Block
+                  )}
                 </li>
               )
             }
