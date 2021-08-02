@@ -83,6 +83,13 @@ module.exports = {
         pageId: normalizeId(process.env.CODING_TABLE_PAGE_ID),
         requiredEnv: ['CODING_TABLE_PAGE_ID', 'CODING_TABLE_VIEW_ID'],
       },
+      'music-notebook': {
+        collectionViewId: normalizeId(process.env.MUSIC_TABLE_VIEW_ID),
+        enabled: true,
+        navMenuTitle: 'Music Notes 音樂筆記',
+        pageId: normalizeId(process.env.MUSIC_TABLE_PAGE_ID),
+        requiredEnv: ['MUSIC_TABLE_PAGE_ID', 'MUSIC_TABLE_VIEW_ID'],
+      },
     },
     pagination: {
       enabled: true,
@@ -114,9 +121,9 @@ module.exports = {
             'https://www.noteflight.com/profile/9a486122ae3cc1fbf78bb973e280f8cc35f67e27',
         },
         {
-          title: '',
-          description: '',
-          link: '',
+          title: 'Notes',
+          description: '音樂筆記',
+          link: '/music-notebook',
         },
       ],
     },

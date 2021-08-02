@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.2.2...v4.3.0) (2021-08-02)
+
+### Features
+
+- add music note page ([ba648cc](https://github.com/dazedbear/dazedbear.github.io/commit/ba648cc3bcb241b924743803b72ee0c62d5ec184))
+
+### Bug Fixes
+
+- inaccurate isActivePage ([467bb76](https://github.com/dazedbear/dazedbear.github.io/commit/467bb7689f16a8442ff05bc47b5784351956a70d))
+
 ### [4.2.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.2.1...v4.2.2) (2021-07-24)
 
 ### [4.2.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.2.0...v4.2.1) (2021-07-24)

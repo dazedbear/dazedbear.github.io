@@ -21,7 +21,7 @@ const querySchema = {
       pattern: '^[0-9]+$',
     },
     pageName: {
-      enum: ['article', 'coding'], // align to site.config notion page names
+      enum: Object.keys(notion.pages),
       type: 'string',
     },
     count: {
