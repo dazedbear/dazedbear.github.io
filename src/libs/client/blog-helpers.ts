@@ -147,10 +147,11 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
  */
 export const isActivePage = page => {
   const { asPath } = useRouter()
-  if (page === '/') {
-    return page === asPath
+  if (!page) {
+    return false
   }
-  return page && asPath.includes(page)
+  const regex = new RegExp(`${page}(\/.+)+`, 'i')
+  return page === asPath || regex.test(asPath)
 }
 
 /**
