@@ -148,6 +148,10 @@ module.exports = {
     likecoin: {
       userId: 'dazedbear',
     },
+    openprocessing: {
+      profileBaseUrl: 'https://openprocessing.org/user',
+      userName: '277076',
+    },
     soundcloud: {
       profileBaseUrl: 'https://soundcloud.com',
       userName: 'dazedbear',
@@ -165,6 +169,10 @@ module.exports = {
       },
       {
         name: 'linkedin',
+        enable: false,
+      },
+      {
+        name: 'openprocessing',
         enable: false,
       },
       {

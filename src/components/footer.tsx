@@ -6,8 +6,25 @@ import {
 } from '../../site.config'
 
 const CommunityIcon = ({ name, link }) => {
+  const fontAwesomeUnsupportIcons = {
+    openprocessing:
+      'https://openprocessing.org/assets/img/logo/logo_36x30_color@2x.png',
+  }
   if (!name || !link) {
     return null
+  }
+  if (fontAwesomeUnsupportIcons[name]) {
+    return (
+      <div className="w-24 p-0 m-0 text-center">
+        <ExtLink href={link} target="_blank" className="text-gray-500">
+          <img
+            src={fontAwesomeUnsupportIcons[name]}
+            className="h-8 mx-auto my-0 block filter grayscale"
+            alt={name}
+          />
+        </ExtLink>
+      </div>
+    )
   }
   return (
     <div className="w-24 p-0 m-0 text-center">
