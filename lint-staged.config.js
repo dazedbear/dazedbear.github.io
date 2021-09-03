@@ -7,6 +7,7 @@ module.exports = {
       .map(filename => `"${isWin ? filename : escape([filename])}"`)
       .join(' ')
     return [
+      `next lint --fix`,
       `prettier --ignore-path='.gitignore' --write ${escapedFileNames}`,
       `git add ${escapedFileNames}`,
     ]

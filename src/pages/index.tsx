@@ -1,10 +1,19 @@
+import Image from 'next/image'
 import ExtLink from '../components/ext-link'
 import { meta } from '../../site.config'
+import gtdImage from '../../public/gtd.png'
+import sibeliusImage from '../../public/sibelius.png'
+import webImage from '../../public/web.png'
 
 const GridBlock = ({ content, image, title }) => (
   <div className="box-border text-center md:flex-1-0-26 md:mx-3  blockElement alignCenter imageAlignTop threeByGridBlock">
     <div className="mb-5 mx-auto max-w-150 min-h-100 md:min-h-150 relative block-image blockImage">
-      <img className="max-w-full inline-block align-middle" src={image} />
+      <Image
+        className="max-w-full inline-block align-middle"
+        src={image}
+        placeholder="blur"
+        alt={title}
+      />
     </div>
     <div className="blockContent">
       <h2 className="text-center">
@@ -51,21 +60,21 @@ const Homepage = () => (
               {
                 content:
                   '關注前端工程技術與工具、軟體開發方法、團隊協作 ... 等主題，期許使用 JavaScript 在各種裝置上開發產品！',
-                image: `/web.png`,
+                image: webImage,
                 imageAlign: 'top',
                 title: 'Web Development',
               },
               {
                 content:
                   '關注作曲、數位編曲、影視遊戲配樂、聲音合成、音樂科技產品與開發 ... 等主題，科技能夠為音樂創作帶來更多可能性！',
-                image: `/sibelius.png`,
+                image: sibeliusImage,
                 imageAlign: 'top',
                 title: 'Digital Music',
               },
               {
                 content:
                   '關注如何提升工作效率、自主學習方法、時間管理方法、目標追蹤 ... 等主題，在這瞬息萬變的時代更需要掌握這些技能！',
-                image: `/gtd.png`,
+                image: gtdImage,
                 imageAlign: 'top',
                 title: 'Self Development',
               },

@@ -1,13 +1,33 @@
+import Image from 'next/image'
 import ExtLink from './ext-link'
 import {
   copyright,
   communitySettings,
   communityFeatures,
 } from '../../site.config'
+import logoOpenProcessing from '../../public/logo-openprocessing.png'
 
 const CommunityIcon = ({ name, link }) => {
+  const fontAwesomeUnsupportIcons = {
+    openprocessing: logoOpenProcessing,
+  }
   if (!name || !link) {
     return null
+  }
+  if (fontAwesomeUnsupportIcons[name]) {
+    return (
+      <div className="w-24 p-0 m-0 text-center">
+        <ExtLink href={link} target="_blank" className="text-gray-500">
+          <Image
+            src={fontAwesomeUnsupportIcons[name]}
+            className="h-8 mx-auto my-0 block filter grayscale"
+            height="32"
+            width="36"
+            alt={name}
+          />
+        </ExtLink>
+      </div>
+    )
   }
   return (
     <div className="w-24 p-0 m-0 text-center">

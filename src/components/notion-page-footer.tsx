@@ -49,7 +49,7 @@ const NotionPageFooter = () => {
     if (document) {
       setCurrentUrl(`${document.location.origin}${document.location.pathname}`)
     }
-  })
+  }, [setCurrentUrl])
 
   const communityComponents = communityFeatures.articleFooter.map(
     ({ name, enable }) => {

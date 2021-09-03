@@ -265,7 +265,7 @@ export const getNotionPreviewImages = async recordMap => {
       return image
     },
     {
-      concurrency: 5,
+      concurrency: notionConfig.previeImages.concurrency,
     }
   )
 
