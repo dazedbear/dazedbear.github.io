@@ -35,4 +35,9 @@ module.exports = {
     process.env.USE_CACHE = 'true'
     return cfg
   },
+  images: {
+    // domain allowlist for images with absolute urls
+    // instead of embed external image url directly, re-upload to notion is better
+    domains: ['images.unsplash.com', 'www.notion.so', 'dazedbear.notion.site'],
+  },
 }

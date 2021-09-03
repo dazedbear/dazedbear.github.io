@@ -1,9 +1,11 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems } from '../../site.config'
 import { getCurrentPageTitle, isActivePage } from '../libs/client/blog-helpers'
+import faviconIcon from '../../public/favicon.ico'
 
 const themeClassMap = {
   original: {
@@ -60,11 +62,9 @@ const Header = () => {
           </Head>
           <Link href="/">
             <a className="items-center border-0 border-white flex flex-row flex-nowrap h-9 z-10000">
-              <img
-                className="h-full mr-2.5 box-content max-w-full"
-                src="/favicon.ico"
-                alt={meta.title}
-              />
+              <div className="h-9 w-9 mr-2.5 box-content relative">
+                <Image src={faviconIcon} alt={meta.title} layout="fill" />
+              </div>
               <h2
                 className={classnames(
                   'block text-xl m-0 relative z-9999 font-semibold',
