@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.3.0...v4.4.0) (2021-09-03)
+
+### Features
+
+- add next lint ([51a6414](https://github.com/dazedbear/dazedbear.github.io/commit/51a6414bfd8f0f67ee0039e2c11176e84b092e9f))
+- add openprocessing footer icon ([bde6254](https://github.com/dazedbear/dazedbear.github.io/commit/bde62547c587dc304db99d1dcf99d218d45e6d55))
+
+### Bug Fixes
+
+- lint warning ([6eacdac](https://github.com/dazedbear/dazedbear.github.io/commit/6eacdacd1f8bc267df82ddbad6dc2a058bccf13a))
+- revert c150149177d5246486f14af8928d1991e61de30a ([4cbcb90](https://github.com/dazedbear/dazedbear.github.io/commit/4cbcb90c312ff923bc9d41194928af9485ed341d))
+
 ## [4.3.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.2.2...v4.3.0) (2021-08-02)
 
 ### Features
