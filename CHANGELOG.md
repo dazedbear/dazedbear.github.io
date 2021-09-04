@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.0...v4.4.1) (2021-09-04)
+
+### Performance
+
+- unblock preview image concurrency limit ([5a171e8](https://github.com/dazedbear/dazedbear.github.io/commit/5a171e84a2d13a61cf0a598e852f42c76dd01560))
+
+### CI/CD
+
+- limit Semgrep run on PR and main branch ([60c17aa](https://github.com/dazedbear/dazedbear.github.io/commit/60c17aa16b18c374eaf86414830667deb1254893))
+- integrate Semgrep scan ([7ac9250](https://github.com/dazedbear/dazedbear.github.io/commit/7ac92502cdc03762bf9eeddc830b26ad8080f2ef))
+
 ## [4.4.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.3.0...v4.4.0) (2021-09-03)
 
 ### Features
