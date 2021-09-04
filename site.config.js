@@ -97,7 +97,7 @@ module.exports = {
       batchLoadCount: 5,
     },
     previeImages: {
-      concurrency: 100,
+      concurrency: Infinity,
       enable: true,
     },
   },
