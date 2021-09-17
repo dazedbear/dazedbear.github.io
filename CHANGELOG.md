@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.1...v4.4.2) (2021-09-17)
+
+### Others
+
+- adjust release template types ([849d8f9](https://github.com/dazedbear/dazedbear.github.io/commit/849d8f9c13804db8d7cd8f00f27d1877c9c67b33))
+
+### CI/CD
+
+- add lighthouse job ([080bd4e](https://github.com/dazedbear/dazedbear.github.io/commit/080bd4e4d2d1322dfb142778ae5f3d5754cecb16))
+- fix warning from recent action template change ([977d57a](https://github.com/dazedbear/dazedbear.github.io/commit/977d57a73911982ea85525471075c73baf8f5af3))
+- make semgrep scan weekly ([8c5f562](https://github.com/dazedbear/dazedbear.github.io/commit/8c5f5622d16fd8d91f7a39225eb6f01c61bcdf9f))
+- rename cache warmup job ([1f5d0ce](https://github.com/dazedbear/dazedbear.github.io/commit/1f5d0cef6e9750a693c1da36e47e853d2c4e7d78))
+
 ### [4.4.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.0...v4.4.1) (2021-09-04)
 
 ### Performance
