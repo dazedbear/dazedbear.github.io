@@ -1,4 +1,4 @@
-name: Daily Schedule Actions
+name: Cache Warmup
 on:
   schedule:
     # every day 6:00 am GMT+8

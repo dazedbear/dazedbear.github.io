@@ -12,8 +12,8 @@ on:
     # The branches below must be a subset of the branches above
     branches: [main]
   schedule:
-    # every day 6:00 am GMT+8
-    - cron: '0 22 * * *'
+    # Monday 6:00 am GMT+8
+    - cron: '0 22 * * 0'
 
 jobs:
   semgrep:
@@ -27,7 +27,6 @@ jobs:
       - uses: returntocorp/semgrep-action@v1
         with:
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
-          publishDeployment: ${{ secrets.SEMGREP_DEPLOYMENT_ID }}
           generateSarif: '1'
 
       # Upload SARIF file generated in previous step
