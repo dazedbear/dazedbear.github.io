@@ -101,10 +101,27 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       set(data, ['recordMap', 'preview_images'], previewImageMap)
     }
 
-    const currentIndex = get(data, ['result', 'blockIds'], []).length - 1
-    const currentTotal = get(data, ['result', 'total'], 0)
-    set(data, ['result', 'index'], currentIndex)
-    set(data, ['result', 'hasNext'], currentIndex + 1 < currentTotal)
+    const currentIndex =
+      get(
+        data,
+        ['result', 'reducerResults', 'collection_group_results', 'blockIds'],
+        []
+      ).length - 1
+    const currentTotal = get(
+      data,
+      ['result', 'reducerResults', 'collection_group_results', 'total'],
+      0
+    )
+    set(
+      data,
+      ['result', 'reducerResults', 'collection_group_results', 'index'],
+      currentIndex
+    )
+    set(
+      data,
+      ['result', 'reducerResults', 'collection_group_results', 'hasNext'],
+      currentIndex + 1 < currentTotal
+    )
 
     res.status(200).json(data)
   } catch (err) {

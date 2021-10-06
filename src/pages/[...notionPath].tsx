@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
+import Error from 'next/error'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import cloneDeep from 'lodash/cloneDeep'
@@ -62,7 +63,7 @@ const NotionMapPageUrl: any = (pageName = '', recordMap = {}, pageId = '') => {
 }
 
 const showNotFoundPage = (req, notionPath): any => {
-  const message = `redirect to 404 page | notionPath: /${
+  const message = `render 404 page | notionPath: /${
     Array.isArray(notionPath) ? notionPath.join('/') : notionPath
   }`
   log({ category: 'page', message, level: 'warn', req })
@@ -71,8 +72,21 @@ const showNotFoundPage = (req, notionPath): any => {
   }
 }
 
+const showErrorPage = (req, res, notionPath): any => {
+  const message = `render 500 page | notionPath: /${
+    Array.isArray(notionPath) ? notionPath.join('/') : notionPath
+  }`
+  log({ category: 'page', message, level: 'error', req })
+  res.statusCode = 500
+  return {
+    props: {
+      hasError: true,
+    },
+  }
+}
+
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { notionPath }, req }) => {
+  store => async ({ params: { notionPath }, req, res }) => {
     let pageType
     if (notionPath.length === 1) {
       pageType = PAGE_TYPE_LIST_PAGE
@@ -109,24 +123,36 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             fetchAllPosts: true,
           })
           const recordMap = postsData.recordMap
-          // 404 when data not found
-          if (isEmpty(recordMap) || !get(postsData, ['result', 'total'])) {
+          // 500 when data not found
+          if (
+            isEmpty(recordMap) ||
+            !get(postsData, [
+              'result',
+              'reducerResults',
+              'collection_group_results',
+              'total',
+            ])
+          ) {
             log({
               category: PAGE_TYPE_LIST_PAGE,
               message: `empty page data: is recordMap empty = ${isEmpty(
                 recordMap
               )}, collection result total = ${get(postsData, [
                 'result',
+                'reducerResults',
+                'collection_group_results',
                 'total',
               ])}`,
               level: 'error',
               req,
             })
-            return showNotFoundPage(req, notionPath)
+            return showErrorPage(req, res, notionPath)
           }
           const menuItems = get(postsData, [
             'allPosts',
             'result',
+            'reducerResults',
+            'collection_group_results',
             'blockIds',
           ]).map(postId => {
             const recordMap = get(postsData, ['allPosts', 'recordMap'])
@@ -151,8 +177,18 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           }
 
           // save SSR fetch stream article contents to redux store
-          const postIds = get(postsData, ['result', 'blockIds'])
-          const total = get(postsData, ['result', 'total'])
+          const postIds = get(postsData, [
+            'result',
+            'reducerResults',
+            'collection_group_results',
+            'blockIds',
+          ])
+          const total = get(postsData, [
+            'result',
+            'reducerResults',
+            'collection_group_results',
+            'total',
+          ])
           const hasNext = paginationEnabled && postIds.length < total
           const action = updateStream({
             name: pageName,
@@ -188,7 +224,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             level: 'error',
             req,
           })
-          return showNotFoundPage(req, notionPath)
+          return showErrorPage(req, res, notionPath)
         }
       }
       case PAGE_TYPE_SINGLE_PAGE: {
@@ -249,7 +285,12 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
               fetchAllPosts: false,
             },
             data => {
-              const postIds = get(data, ['result', 'blockIds'])
+              const postIds = get(data, [
+                'result',
+                'reducerResults',
+                'collection_group_results',
+                'blockIds',
+              ])
               return postIds.map(postId => {
                 const postPath = getSinglePagePath({
                   pageName,
@@ -292,7 +333,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             level: 'error',
             req,
           })
-          return showNotFoundPage(req, notionPath)
+          return showErrorPage(req, res, notionPath)
         }
       }
       default: {
@@ -317,6 +358,10 @@ const NotionPage = props => {
 
   const streamState = useAppSelector(state => state.stream)
   const dispatch = useAppDispatch()
+
+  if (props.hasError) {
+    return <Error statusCode={500} title="This page is broken" />
+  }
 
   switch (props.pageType) {
     case PAGE_TYPE_LIST_PAGE: {

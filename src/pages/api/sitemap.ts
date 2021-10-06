@@ -42,11 +42,21 @@ const generateSiteMapXml = async req => {
 
       if (
         isEmpty(postsData.recordMap) ||
-        !get(postsData, ['result', 'total'])
+        !get(postsData, [
+          'result',
+          'reducerResults',
+          'collection_group_results',
+          'total',
+        ])
       ) {
         const message = `empty page data: is recordMap empty = ${isEmpty(
           postsData.recordMap
-        )}, collection result total = ${get(postsData, ['result', 'total'])}`
+        )}, collection result total = ${get(postsData, [
+          'result',
+          'reducerResults',
+          'collection_group_results',
+          'total',
+        ])}`
         log({
           category,
           message,
@@ -59,6 +69,8 @@ const generateSiteMapXml = async req => {
       const currentNotionListUrls = get(postsData, [
         'allPosts',
         'result',
+        'reducerResults',
+        'collection_group_results',
         'blockIds',
       ]).map(postId => {
         const recordMap = get(postsData, ['allPosts', 'recordMap'])

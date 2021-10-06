@@ -102,10 +102,34 @@ const StreamSlice = createSlice({
     },
     [fetchStreamPosts.fulfilled as any]: (state, action) => {
       const name = get(action, ['meta', 'arg', 'pageName'])
-      const ids = get(action, ['payload', 'result', 'blockIds'])
-      const total = get(action, ['payload', 'result', 'total'])
-      const index = get(action, ['payload', 'result', 'index'])
-      const hasNext = get(action, ['payload', 'result', 'hasNext'])
+      const ids = get(action, [
+        'payload',
+        'result',
+        'reducerResults',
+        'collection_group_results',
+        'blockIds',
+      ])
+      const total = get(action, [
+        'payload',
+        'result',
+        'reducerResults',
+        'collection_group_results',
+        'total',
+      ])
+      const index = get(action, [
+        'payload',
+        'result',
+        'reducerResults',
+        'collection_group_results',
+        'index',
+      ])
+      const hasNext = get(action, [
+        'payload',
+        'result',
+        'reducerResults',
+        'collection_group_results',
+        'hasNext',
+      ])
       const content = get(action, ['payload', 'recordMap'])
 
       state[name] = {
