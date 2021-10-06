@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.5.0...v4.5.1) (2021-10-06)
+
+### Others
+
+- move template files to correct paths ([d33e62a](https://github.com/dazedbear/dazedbear.github.io/commit/d33e62a1b826c49a7b90c989306a9f5320936d11))
+
 ## [4.5.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.2...v4.5.0) (2021-10-06)
 
 ### Features
