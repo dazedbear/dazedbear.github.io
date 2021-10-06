@@ -110,13 +110,23 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           })
           const recordMap = postsData.recordMap
           // 404 when data not found
-          if (isEmpty(recordMap) || !get(postsData, ['result', 'total'])) {
+          if (
+            isEmpty(recordMap) ||
+            !get(postsData, [
+              'result',
+              'reducerResults',
+              'collection_group_results',
+              'total',
+            ])
+          ) {
             log({
               category: PAGE_TYPE_LIST_PAGE,
               message: `empty page data: is recordMap empty = ${isEmpty(
                 recordMap
               )}, collection result total = ${get(postsData, [
                 'result',
+                'reducerResults',
+                'collection_group_results',
                 'total',
               ])}`,
               level: 'error',
@@ -127,6 +137,8 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           const menuItems = get(postsData, [
             'allPosts',
             'result',
+            'reducerResults',
+            'collection_group_results',
             'blockIds',
           ]).map(postId => {
             const recordMap = get(postsData, ['allPosts', 'recordMap'])
@@ -151,8 +163,18 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           }
 
           // save SSR fetch stream article contents to redux store
-          const postIds = get(postsData, ['result', 'blockIds'])
-          const total = get(postsData, ['result', 'total'])
+          const postIds = get(postsData, [
+            'result',
+            'reducerResults',
+            'collection_group_results',
+            'blockIds',
+          ])
+          const total = get(postsData, [
+            'result',
+            'reducerResults',
+            'collection_group_results',
+            'total',
+          ])
           const hasNext = paginationEnabled && postIds.length < total
           const action = updateStream({
             name: pageName,
@@ -249,7 +271,12 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
               fetchAllPosts: false,
             },
             data => {
-              const postIds = get(data, ['result', 'blockIds'])
+              const postIds = get(data, [
+                'result',
+                'reducerResults',
+                'collection_group_results',
+                'blockIds',
+              ])
               return postIds.map(postId => {
                 const postPath = getSinglePagePath({
                   pageName,
