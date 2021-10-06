@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.2...v4.5.0) (2021-10-06)
+
+### Features
+
+- add 500 error page ([224fad3](https://github.com/dazedbear/dazedbear.github.io/commit/224fad38b2898fde8837e9069d0deb096e321591))
+
+### Bug Fixes
+
+- update path to fix issue from API change ([578b5fd](https://github.com/dazedbear/dazedbear.github.io/commit/578b5fda92cc872e79a6e3041d681adcc707e4ca))
+
+### Build
+
+- bump version to adopt notion-client@4.9.2 fix ([5ea9764](https://github.com/dazedbear/dazedbear.github.io/commit/5ea9764e237c69b87b21fa2683ecf0245b736f0e))
+- **patch:** :fire: use custom notion-client to fix filter and sort ([5d16a63](https://github.com/dazedbear/dazedbear.github.io/commit/5d16a63a808d2088d19a350ca3acf94f75fae7dd))
+
+### Others
+
+- add release and incident template ([7f4672b](https://github.com/dazedbear/dazedbear.github.io/commit/7f4672b785522f99c4fb9bef1ca82ca9e0c75316))
+
 ### [4.4.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.4.1...v4.4.2) (2021-09-17)
 
 ### Others
