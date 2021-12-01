@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.5.1...v4.6.0) (2021-12-01)
+
+### Features
+
+- add maintain page ([f0ba4e6](https://github.com/dazedbear/dazedbear.github.io/commit/f0ba4e6562018b4ac486e1bb2bb41211f7648d27))
+
+### Bug Fixes
+
+- remove react-pdf ([0eb7fc2](https://github.com/dazedbear/dazedbear.github.io/commit/0eb7fc29042210d6c122cffc53d37460a388d6da))
+
+### Hotfix
+
+- enable maintain page for notion pages ([19a9dfa](https://github.com/dazedbear/dazedbear.github.io/commit/19a9dfad43ac8263a997a0600aef83e1a26ad4c4))
+
+### CI/CD
+
+- decrease lighthoust trigger frequency ([ac7ccf6](https://github.com/dazedbear/dazedbear.github.io/commit/ac7ccf6de3219ecce1597264f8af2d758483a47c))
+- disable notion page urls for lighthouse ([197d2e3](https://github.com/dazedbear/dazedbear.github.io/commit/197d2e34e1815454ef8c0c65b0bd22df3b073b2a))
+
+### Others
+
+- add patch release note generation ([3f36f5d](https://github.com/dazedbear/dazedbear.github.io/commit/3f36f5d0b9a50031fca455f2a127ce3f198168b6))
+
 ### [4.5.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.5.0...v4.5.1) (2021-10-06)
 
 ### Others
