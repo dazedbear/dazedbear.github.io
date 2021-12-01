@@ -5,8 +5,8 @@ on:
   push:
     branches: [main]
   schedule:
-    # every day 6:00 am GMT+8
-    - cron: '0 22 * * *'
+    # Monday day 6:00 am GMT+8
+    - cron: '0 22 * * 0'
 
 jobs:
   lighthouse-prod:
