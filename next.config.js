@@ -40,4 +40,14 @@ module.exports = {
     // instead of embed external image url directly, re-upload to notion is better
     domains: ['images.unsplash.com', 'www.notion.so', 'dazedbear.notion.site'],
   },
+
+  async rewrites() {
+    // TODO: temp redirect for maintain page
+    return [
+      {
+        source: '/(article|coding|music-notebook)(.*)',
+        destination: '/maintain',
+      },
+    ]
+  },
 }
