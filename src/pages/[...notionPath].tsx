@@ -9,7 +9,6 @@ import {
   Code,
   Collection,
   CollectionRow,
-  Pdf,
   Equation,
   Modal,
 } from 'react-notion-x'
@@ -52,7 +51,6 @@ const NotionDefaultComponentMap: any = {
   equation: Equation,
   modal: Modal,
   pageLink: () => null,
-  pdf: Pdf,
   tweet: () => null,
 }
 
