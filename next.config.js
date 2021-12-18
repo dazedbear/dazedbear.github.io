@@ -42,12 +42,6 @@ module.exports = {
   },
 
   async rewrites() {
-    // TODO: temp redirect for maintain page
-    return [
-      {
-        source: '/(article|coding|music-notebook)(.*)',
-        destination: '/maintain',
-      },
-    ]
+    return []
   },
 }
