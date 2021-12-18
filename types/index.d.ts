@@ -19,7 +19,7 @@ export interface logOption {
   category: string
   message: string | object
   level?: logLevel
-  req?: null | GetServerSidePropsRequest
+  req?: null | GetServerSidePropsRequest | any
 }
 
 export interface PreviewImagesMap {
