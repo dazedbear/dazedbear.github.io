@@ -1,21 +1,8 @@
 import { get } from 'lodash'
-import { useRouter } from 'next/router'
-import { navigation as navItems, cdnHost } from '../../../site.config'
-import { Block } from 'notion-types'
+import { cdnHost } from '../../site.config'
+import { Block, ExtendedRecordMap } from 'notion-types'
 import { getDateValue, uuidToId } from 'notion-utils'
-
-/**
- * get formatted date string
- * @param {any} date timestamp or date string
- * @returns {string} formatted date string like `January 23, 2021`
- */
-export const getDateStr = date => {
-  return new Date(date).toLocaleString('en-US', {
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  })
-}
+import { NotionPageName } from '../../types'
 
 /**
  * extract property path mapping from a collection
@@ -141,30 +128,6 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
 }
 
 /**
- * detect current next.js page is active or not
- * @param {string} page next.js page pathname
- * @returns {boolean} current next.js page is active or not
- */
-export const isActivePage = page => {
-  const { asPath } = useRouter()
-  if (!page) {
-    return false
-  }
-  const regex = new RegExp(`${page}(\/.+)+`, 'i')
-  return page === asPath || regex.test(asPath)
-}
-
-/**
- * get title of current page from navigation config
- * @returns {string} title of current page
- */
-export const getCurrentPageTitle = () => {
-  const { pathname } = useRouter()
-  return navItems.find(({ page }) => page !== '/' && pathname.includes(page))
-    ?.label
-}
-
-/**
  * get notion image url that handles some cache logic
  * @see https://github.com/transitive-bullshit/nextjs-notion-starter-kit/blob/af8ed575d188021d4676633d17e25e4c59ce0b36/lib/map-image-url.ts
  * @param {string} url
@@ -212,6 +175,22 @@ export const mapNotionImageUrl = (url: string, block: Block) => {
 
   // use CDN to cache these image assets
   return cdnHost ? `${cdnHost}/${encodeURIComponent(url)}` : url
+}
+
+/**
+ * function to update the page link urls
+ * @param {string} pageName
+ * @param {object} recordMap
+ * @param {string} pageId
+ * @returns {string} page relative link
+ */
+export const mapNotionPageLinkUrl = (
+  pageName: NotionPageName = '',
+  recordMap: ExtendedRecordMap,
+  pageId: string = ''
+): string => {
+  const pagePath = getSinglePagePath({ pageName, pageId, recordMap })
+  return `/${pageName}/${pagePath}`
 }
 
 /**

@@ -1,15 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCategory, validateRequest } from '../../libs/server/api-util'
+import { getCategory, validateRequest } from '../../libs/server/api'
 import get from 'lodash/get'
-import isEmpty from 'lodash/isEmpty'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { Readable } from 'stream'
 import pMap from 'p-map'
 import * as dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { getSinglePagePath } from '../../libs/client/blog-helpers'
 import log from '../../libs/server/log'
-import { getNotionPostsFromTable } from '../../libs/server/notion'
+import { fetchArticleStream } from '../../libs/server/page'
+import {
+  transformArticleStream,
+  transformPageUrls,
+} from '../../libs/server/transformer'
 import { navigation, notion, cache as cacheConfig } from '../../../site.config'
 import cacheClient from '../../libs/server/cache'
 
@@ -26,69 +28,31 @@ const generateSiteMapXml = async req => {
     .filter(path => path)
 
   // get all enabled notion list page paths
-  let notionUrls = await pMap(
+  const currentNotionListUrls: string[][] = await pMap(
     Object.keys(notion.pages),
     async pageName => {
-      const { pageId, collectionViewId, paginationEnabled } = notion.pages[
-        pageName
-      ]
-
-      const postsData = await getNotionPostsFromTable({
-        pageId,
-        collectionViewId,
-        paginationEnabled,
-        fetchAllPosts: true,
-      })
-
-      if (
-        isEmpty(postsData.recordMap) ||
-        !get(postsData, [
-          'result',
-          'reducerResults',
-          'collection_group_results',
-          'total',
-        ])
-      ) {
-        const message = `empty page data: is recordMap empty = ${isEmpty(
-          postsData.recordMap
-        )}, collection result total = ${get(postsData, [
-          'result',
-          'reducerResults',
-          'collection_group_results',
-          'total',
-        ])}`
+      const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
+      if (!pageEnabled) {
         log({
           category,
-          message,
-          level: 'warn',
+          message: `skip generate urls since this pageName is disabled | pageName: ${pageName}`,
           req,
         })
         return []
       }
-
-      const currentNotionListUrls = get(postsData, [
-        'allPosts',
-        'result',
-        'reducerResults',
-        'collection_group_results',
-        'blockIds',
-      ]).map(postId => {
-        const recordMap = get(postsData, ['allPosts', 'recordMap'])
-        const pagePath = getSinglePagePath({
-          pageName,
-          pageId: postId,
-          recordMap,
-        })
-        return `/${pageName}/${pagePath}`
+      const response = await fetchArticleStream({
+        req,
+        pageName,
+        category,
       })
-
-      return currentNotionListUrls
+      const articleStream = await transformArticleStream(pageName, response)
+      return transformPageUrls(pageName, articleStream)
     },
     {
       concurrency: 10,
     }
   )
-  notionUrls = notionUrls.reduce(
+  let notionUrls: string[] = currentNotionListUrls.reduce(
     (urls, currnetNotionPageUrls) => urls.concat(currnetNotionPageUrls),
     []
   )

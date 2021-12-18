@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.6.0...v4.7.0) (2021-12-18)
+
+### Features
+
+- support pass error object to log message ([c30d4f5](https://github.com/dazedbear/dazedbear.github.io/commit/c30d4f50194d53f29c5f0ef9bf04517593a26b26))
+
+### Bug Fixes
+
+- fix article list page rendering ([8778957](https://github.com/dazedbear/dazedbear.github.io/commit/8778957e2d7006f6a278b9503c87f445e2abfee2))
+- fix article single page rendering ([1d4085b](https://github.com/dazedbear/dazedbear.github.io/commit/1d4085bac019f1583bdd9256abf1f22c22d5a012))
+- req.body type ([b37d79d](https://github.com/dazedbear/dazedbear.github.io/commit/b37d79dee624e9ba2d96afb50e1c32139604d07e))
+- sitemap api route ([c070a55](https://github.com/dazedbear/dazedbear.github.io/commit/c070a550e7f55647aa43d20e42382bf17473bd7a))
+- stream pagination ([18a1dac](https://github.com/dazedbear/dazedbear.github.io/commit/18a1dac887c4fc9a9837727aca3bd2402987024f))
+- TypeError from preview image ([aeecb6e](https://github.com/dazedbear/dazedbear.github.io/commit/aeecb6eb105c38002390b7332e9bc9a1e1e36edd))
+
+### Build
+
+- use latest notion-client ([ee29e9e](https://github.com/dazedbear/dazedbear.github.io/commit/ee29e9ecae7e992bb9110fc1013811505c8dc006))
+
+### Others
+
+- article list page ([62203ab](https://github.com/dazedbear/dazedbear.github.io/commit/62203ab29b1b40f033c3d1a713929d6a707e1f3b))
+- article single page ([8a907b6](https://github.com/dazedbear/dazedbear.github.io/commit/8a907b614cb9511af738630607c576884468ca8a))
+- remove deprecated notion page ([7f83043](https://github.com/dazedbear/dazedbear.github.io/commit/7f83043d10149c4e27cac0d9e64984d18cab7484))
+- remove maintain page rewrite rules ([2b20233](https://github.com/dazedbear/dazedbear.github.io/commit/2b20233a54a17674728b082008a4ad901c89103f))
+- rename api-util ([00459a9](https://github.com/dazedbear/dazedbear.github.io/commit/00459a98e1b09cde030f3b2c37f3be2c6cfdf20f))
+- split blog-helpers and add page libs ([8dd0e51](https://github.com/dazedbear/dazedbear.github.io/commit/8dd0e51dfe4abe492d8e410d7daa4d2eba66ffab))
+
+### CI/CD
+
+- re-enable lighthouse job for notion pages ([de00295](https://github.com/dazedbear/dazedbear.github.io/commit/de002953aefcb19fb813aa50a6da161aecedd02e))
+
 ## [4.6.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.5.1...v4.6.0) (2021-12-01)
 
 ### Features

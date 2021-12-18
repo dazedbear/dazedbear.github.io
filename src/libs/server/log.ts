@@ -1,12 +1,19 @@
 import chalk from 'chalk'
+import util from 'util'
 import { Logger as SplunkLogger } from 'splunk-logging'
 import { splunk } from '../../../site.config'
+import { logOption } from '../../../types'
 
 chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
 const Logger = splunk.enable ? new SplunkLogger(splunk.option) : null
 
 // level = debug, info, warn, error
-const log = ({ category = '', message = '', level = 'info', req = null }) => {
+const log = ({
+  category = '',
+  message = '',
+  level = 'info',
+  req = null,
+}: logOption) => {
   const levelMap = {
     debug: {
       method: 'log',
@@ -31,7 +38,7 @@ const log = ({ category = '', message = '', level = 'info', req = null }) => {
     msg += `[${category}]`
   }
   if (message) {
-    msg += ` ${message}`
+    msg += ` ${typeof message === 'object' ? util.inspect(message) : message}`
   }
 
   const { method = 'log', color = 'whiteBright' } = levelMap[level]
