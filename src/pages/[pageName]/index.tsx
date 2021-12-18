@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetServerSidePropsResult } from 'next'
+import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
 import get from 'lodash/get'
@@ -30,54 +30,17 @@ import {
 import wrapper from '../../libs/client/store'
 import { updateStream, fetchStreamPosts } from '../../libs/client/slices/stream'
 import { useAppSelector, useAppDispatch } from '../../libs/client/hooks'
-import { getSinglePagePath } from '../../libs/client/blog-helpers'
+import { getSinglePagePath } from '../../libs/notion'
+import { showCommonPage } from '../../libs/server/page'
 import {
   NotionPageName,
-  ErrorPageProps,
   ExtendSearchResults,
   logOption,
   PreviewImagesMap,
   ExtendRecordMap,
   MenuItem,
   GetServerSidePropsRequest,
-  GetServerSidePropsResponse,
 } from '../../../types'
-
-const showNotFoundPage = (
-  req: GetServerSidePropsRequest,
-  pageName: NotionPageName
-): GetServerSidePropsResult<{}> => {
-  const options: logOption = {
-    category: 'page',
-    message: `render 404 page | pageName: /${pageName}`,
-    level: 'warn',
-    req,
-  }
-  log(options)
-  return {
-    notFound: true,
-  }
-}
-
-const showErrorPage = (
-  req: GetServerSidePropsRequest,
-  res: GetServerSidePropsResponse,
-  pageName: NotionPageName
-): GetServerSidePropsResult<ErrorPageProps> => {
-  const options: logOption = {
-    category: 'page',
-    level: 'error',
-    message: `render 500 page | pageName: /${pageName}`,
-    req,
-  }
-  log(options)
-  res.statusCode = 500
-  return {
-    props: {
-      hasError: true,
-    },
-  }
-}
 
 const isValidPageName = (pageName: NotionPageName): boolean => {
   const pageId: string = get(notion, ['pages', pageName, 'pageId'])
@@ -247,7 +210,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         req,
       }
       log(options)
-      return showNotFoundPage(req, pageName)
+      return showCommonPage(req, res, 'notFound', pageName)
     }
 
     try {
@@ -262,7 +225,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           req,
         }
         log(options)
-        return showErrorPage(req, res, pageName)
+        return showCommonPage(req, res, 'error', pageName)
       }
 
       const menuItems = transformMenuItems(pageName, articles)
@@ -293,7 +256,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         req,
       }
       log(options)
-      return showErrorPage(req, res, pageName)
+      return showCommonPage(req, res, 'error', pageName)
     }
   }
 )

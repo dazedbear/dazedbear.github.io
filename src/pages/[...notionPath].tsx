@@ -24,10 +24,10 @@ import {
 import { notion } from '../../site.config'
 import {
   getPageProperty,
-  getDateStr,
   getSinglePagePath,
   extractSinglePagePath,
-} from '../libs/client/blog-helpers'
+} from '../libs/notion'
+import { getDateStr } from '../libs/util'
 import Breadcrumb from '../components/breadcrumb'
 import NavMenu from '../components/nav-menu'
 import TableOfContent from '../components/toc'

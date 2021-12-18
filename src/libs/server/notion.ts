@@ -3,7 +3,7 @@ import {
   notion as notionConfig,
   cache as cacheConfig,
 } from '../../../site.config'
-import { mapNotionImageUrl } from '../client/blog-helpers'
+import { mapNotionImageUrl } from '../notion'
 import cacheClient from './cache'
 import get from 'lodash/get'
 import set from 'lodash/set'

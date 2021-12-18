@@ -13,10 +13,12 @@ export interface ErrorPageProps {
   hasError: true
 }
 
+export type logLevel = 'debug' | 'info' | 'warn' | 'error'
+
 export interface logOption {
   category: string
   message: string
-  level?: 'debug' | 'info' | 'warn' | 'error'
+  level?: logLevel
   req?: null | GetServerSidePropsRequest
 }
 

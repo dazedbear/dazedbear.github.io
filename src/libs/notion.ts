@@ -1,21 +1,7 @@
 import { get } from 'lodash'
-import { useRouter } from 'next/router'
-import { navigation as navItems, cdnHost } from '../../../site.config'
+import { cdnHost } from '../../site.config'
 import { Block } from 'notion-types'
 import { getDateValue, uuidToId } from 'notion-utils'
-
-/**
- * get formatted date string
- * @param {any} date timestamp or date string
- * @returns {string} formatted date string like `January 23, 2021`
- */
-export const getDateStr = date => {
-  return new Date(date).toLocaleString('en-US', {
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  })
-}
 
 /**
  * extract property path mapping from a collection
@@ -138,30 +124,6 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
     const slug = get(recordMap, ['block', postId, ...slugPath], [[]])[0][0]
     return { postId, slug }
   })
-}
-
-/**
- * detect current next.js page is active or not
- * @param {string} page next.js page pathname
- * @returns {boolean} current next.js page is active or not
- */
-export const isActivePage = page => {
-  const { asPath } = useRouter()
-  if (!page) {
-    return false
-  }
-  const regex = new RegExp(`${page}(\/.+)+`, 'i')
-  return page === asPath || regex.test(asPath)
-}
-
-/**
- * get title of current page from navigation config
- * @returns {string} title of current page
- */
-export const getCurrentPageTitle = () => {
-  const { pathname } = useRouter()
-  return navItems.find(({ page }) => page !== '/' && pathname.includes(page))
-    ?.label
 }
 
 /**
