@@ -113,8 +113,9 @@ const StreamSlice = createSlice({
         'payload',
         'result',
         'reducerResults',
-        'collection_group_results',
-        'total',
+        'table:uncategorized:title:count',
+        'aggregationResult',
+        'value',
       ])
       const index = get(action, [
         'payload',
@@ -128,7 +129,7 @@ const StreamSlice = createSlice({
         'result',
         'reducerResults',
         'collection_group_results',
-        'hasNext',
+        'hasMore',
       ])
       const content = get(action, ['payload', 'recordMap'])
 
