@@ -216,6 +216,46 @@ export const transformMenuItems = (
 }
 
 /**
+ * transform article stream to page urls for sitemap
+ * @param {string} pageName
+ * @param {object} articleStream
+ * @returns {array} url array
+ */
+export const transformPageUrls = (
+  pageName: NotionPageName,
+  articleStream: ArticleStream
+): string[] => {
+  const recordMap = articleStream.content
+  const pageUrls: string[] = articleStream.ids.map(pageId => {
+    const pagePath = getSinglePagePath({
+      pageName,
+      pageId,
+      recordMap,
+    })
+    return `/${pageName}/${pagePath}`
+  })
+
+  const schema = {
+    type: 'array',
+    items: {
+      type: 'string',
+    },
+  }
+  const validate = ajv.compile(schema)
+  if (!validate(pageUrls)) {
+    const options: logOption = {
+      category: 'transformPageUrls',
+      message: `${validate.errors}`,
+      level: 'warn',
+    }
+    log(options)
+    throw 'page urls are invalid'
+  }
+
+  return pageUrls
+}
+
+/**
  * transform article stream to updateStream action payload
  * @param {string} pageName
  * @param {object} articleStream
