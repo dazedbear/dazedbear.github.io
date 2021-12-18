@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import { ExtendedRecordMap } from 'notion-types'
-import { getBlockTitle } from 'notion-utils'
+import { getBlockTitle, idToUuid, getPageTableOfContents } from 'notion-utils'
 
 import { notion } from '../../../site.config'
 import log from './log'
@@ -25,6 +25,9 @@ addFormats(ajv)
 
 /**
  * transform Notion API response to article stream
+ * @param {string} pageName
+ * @param {object} data
+ * @returns {object} article stream
  */
 export const transformArticleStream = async (
   pageName: NotionPageName,
@@ -111,7 +114,58 @@ export const transformArticleStream = async (
 }
 
 /**
+ * transform Notion API response to single article
+ * @param {object} data
+ * @returns {object} article stream
+ */
+export const transformSingleArticle = async (
+  data: ExtendedRecordMap
+): Promise<ArticleStream> => {
+  const singleArticle: ArticleStream = {}
+  singleArticle.content = data
+
+  const isPreviewImageGenerationEnabled: boolean = get(notion, [
+    'previeImages',
+    'enable',
+  ])
+
+  if (!isEmpty(singleArticle.content) && isPreviewImageGenerationEnabled) {
+    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
+    const previewImageMap: PreviewImagesMap = await getNotionPreviewImages(
+      singleArticle.content
+    )
+    set(singleArticle, ['content', 'preview_images'], previewImageMap)
+  }
+
+  const schema = {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      content: {
+        type: 'object',
+      },
+    },
+    required: ['content'],
+  }
+  const validate = ajv.compile(schema)
+  if (!validate(singleArticle)) {
+    const options: logOption = {
+      category: 'transformSingleArticle',
+      message: validate.errors,
+      level: 'warn',
+    }
+    log(options)
+    throw 'singleArticle is invalid'
+  }
+
+  return singleArticle
+}
+
+/**
  * transform article stream to menu items
+ * @param {string} pageName
+ * @param {object} articleStream
+ * @returns {array} menu items array
  */
 export const transformMenuItems = (
   pageName: NotionPageName,
@@ -163,6 +217,9 @@ export const transformMenuItems = (
 
 /**
  * transform article stream to updateStream action payload
+ * @param {string} pageName
+ * @param {object} articleStream
+ * @returns {object} stream action payload
  */
 export const transformStreamActionPayload = (
   pageName: NotionPageName,
@@ -178,4 +235,25 @@ export const transformStreamActionPayload = (
       total: articleStream.total,
     },
   }
+}
+
+/**
+ * transform article stream to table of content
+ * @param {object} articleStream
+ * @param {string} articleId
+ * @returns {object} table of content for current page
+ */
+export const transformTableOfContent = (
+  articleStream: ArticleStream,
+  articleId: string
+) => {
+  const recordMap = articleStream.content
+  const currentPostId = idToUuid(articleId)
+  const pageBlock = get(articleStream, [
+    'content',
+    'block',
+    currentPostId,
+    'value',
+  ])
+  return getPageTableOfContents(pageBlock, recordMap as any)
 }

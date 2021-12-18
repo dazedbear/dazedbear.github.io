@@ -21,66 +21,20 @@ import { notion } from '../../../site.config'
 import { PAGE_TYPE_ARTICLE_LIST_PAGE } from '../../libs/constant'
 import { mapNotionPageLinkUrl } from '../../libs/notion'
 import log from '../../libs/server/log'
-import { getNotionPage } from '../../libs/server/notion'
 import wrapper from '../../libs/client/store'
 import { updateStream, fetchStreamPosts } from '../../libs/client/slices/stream'
 import { useAppSelector, useAppDispatch } from '../../libs/client/hooks'
-import { showCommonPage } from '../../libs/server/page'
+import {
+  showCommonPage,
+  fetchArticleStream,
+  isValidPageName,
+} from '../../libs/server/page'
 import {
   transformArticleStream,
   transformMenuItems,
   transformStreamActionPayload,
 } from '../../libs/server/transformer'
-import {
-  NotionPageName,
-  logOption,
-  GetServerSidePropsRequest,
-} from '../../../types'
-
-/**
- * validate input pageName
- * @param {string} pageName
- * @returns {boolean} pageName validation result
- */
-const isValidPageName = (pageName: NotionPageName): boolean => {
-  const pageId: string = get(notion, ['pages', pageName, 'pageId'])
-  const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
-  return pageId && pageEnabled
-}
-
-/**
- * fetch article from upstream API
- * @param {object} req
- * @param {string} pageName
- * @returns {object} raw data from upstream API
- */
-const fetchArticleStream = async (
-  req: GetServerSidePropsRequest,
-  pageName: NotionPageName
-): Promise<ExtendedRecordMap> => {
-  const pageId: string = get(notion, ['pages', pageName, 'pageId'])
-  const collectionId: string = get(notion, ['pages', pageName, 'collectionId'])
-  const collectionViewId: string = get(notion, [
-    'pages',
-    pageName,
-    'collectionViewId',
-  ])
-  const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
-
-  if (!pageId || !collectionId || !collectionViewId || !pageEnabled) {
-    const options: logOption = {
-      category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-      message: `required info are invalid | pageId: ${pageId} | collectionId: ${collectionId} | collectionViewId: ${collectionViewId} | pageEnabled: ${pageEnabled}`,
-      level: 'error',
-      req,
-    }
-    log(options)
-    throw 'Required info are invalid in fetchArticles.'
-  }
-
-  const response = await getNotionPage(pageId)
-  return response
-}
+import { logOption } from '../../../types'
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   store => async ({ params: { pageName }, req, res }) => {
@@ -96,7 +50,11 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     }
 
     try {
-      const response = await fetchArticleStream(req, pageName)
+      const response = await fetchArticleStream({
+        req,
+        pageName,
+        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+      })
       const articleStream = await transformArticleStream(pageName, response)
       const menuItems = transformMenuItems(pageName, articleStream)
 
