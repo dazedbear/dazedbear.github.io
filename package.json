@@ -33,7 +33,7 @@
     "next": "^11.1.2",
     "next-redux-cookie-wrapper": "^2.0.1",
     "next-redux-wrapper": "^7.0.2",
-    "notion-client": "https://static.dazedbear.pro/notion-client-4.9.3-patch.tgz",
+    "notion-client": "^4.11.1",
     "notion-utils": "^4.2.18",
     "nprogress": "^0.2.0",
     "object-hash": "^2.1.1",
