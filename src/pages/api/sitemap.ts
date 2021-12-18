@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCategory, validateRequest } from '../../libs/server/api-util'
+import { getCategory, validateRequest } from '../../libs/server/api'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import { SitemapStream, streamToPromise } from 'sitemap'

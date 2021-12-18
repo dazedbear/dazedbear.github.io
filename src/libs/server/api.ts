@@ -2,7 +2,7 @@ import { NextApiRequest } from 'next'
 import createError from 'http-errors'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
-import log from '../../libs/server/log'
+import log from './log'
 
 const ajv = new Ajv()
 addFormats(ajv)

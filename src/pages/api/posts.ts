@@ -7,7 +7,7 @@ import {
   getNotionPostsFromTable,
   getNotionPreviewImages,
 } from '../../libs/server/notion'
-import { getCategory, validateRequest } from '../../libs/server/api-util'
+import { getCategory, validateRequest } from '../../libs/server/api'
 import { notion } from '../../../site.config'
 
 const route = '/posts'
