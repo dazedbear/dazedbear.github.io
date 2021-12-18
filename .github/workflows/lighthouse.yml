@@ -17,16 +17,12 @@ jobs:
         id: lighthouseci
         uses: treosh/lighthouse-ci-action@v8
         with:
-          # TODO: disable notion pages first
-          # urls: |
-          #   https://www.dazedbear.pro/
-          #   https://www.dazedbear.pro/music
-          #   https://www.dazedbear.pro/music-notebook
-          #   https://www.dazedbear.pro/coding
-          #   https://www.dazedbear.pro/article
           urls: |
             https://www.dazedbear.pro/
             https://www.dazedbear.pro/music
+            https://www.dazedbear.pro/music-notebook
+            https://www.dazedbear.pro/coding
+            https://www.dazedbear.pro/article
           uploadArtifacts: false
           temporaryPublicStorage: false
       - name: Upload Lighthouse Report JSON files to Gist
