@@ -2,12 +2,9 @@ import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
 import get from 'lodash/get'
-import set from 'lodash/set'
-import isEmpty from 'lodash/isEmpty'
 import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
-import { SearchResults } from 'notion-types'
-import { getBlockTitle } from 'notion-utils'
+import { ExtendedRecordMap } from 'notion-types'
 import {
   Code,
   Collection,
@@ -22,68 +19,58 @@ import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
 import { notion } from '../../../site.config'
 import { PAGE_TYPE_ARTICLE_LIST_PAGE } from '../../libs/constant'
+import { mapNotionPageLinkUrl } from '../../libs/notion'
 import log from '../../libs/server/log'
-import {
-  getNotionPostsFromTable,
-  getNotionPreviewImages,
-} from '../../libs/server/notion'
+import { getNotionPage } from '../../libs/server/notion'
 import wrapper from '../../libs/client/store'
 import { updateStream, fetchStreamPosts } from '../../libs/client/slices/stream'
 import { useAppSelector, useAppDispatch } from '../../libs/client/hooks'
-import { getSinglePagePath } from '../../libs/notion'
 import { showCommonPage } from '../../libs/server/page'
 import {
+  transformArticleStream,
+  transformMenuItems,
+  transformStreamActionPayload,
+} from '../../libs/server/transformer'
+import {
   NotionPageName,
-  ExtendSearchResults,
   logOption,
-  PreviewImagesMap,
-  ExtendRecordMap,
-  MenuItem,
   GetServerSidePropsRequest,
 } from '../../../types'
 
+/**
+ * validate input pageName
+ * @param {string} pageName
+ * @returns {boolean} pageName validation result
+ */
 const isValidPageName = (pageName: NotionPageName): boolean => {
   const pageId: string = get(notion, ['pages', pageName, 'pageId'])
   const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
   return pageId && pageEnabled
 }
 
-const isValidResponse = (
-  response: SearchResults | ExtendSearchResults
-): boolean => {
-  return (
-    !isEmpty(response?.recordMap) &&
-    get(response, [
-      'result',
-      'reducerResults',
-      'collection_group_results',
-      'total',
-    ])
-  )
-}
-
-const isValidArticles = (articles: ExtendSearchResults): boolean => {
-  // we pass the raw object from API to renderer for now.
-  return isValidResponse(articles)
-}
-
-const fetchArticles = async (
+/**
+ * fetch article from upstream API
+ * @param {object} req
+ * @param {string} pageName
+ * @returns {object} raw data from upstream API
+ */
+const fetchArticleStream = async (
   req: GetServerSidePropsRequest,
   pageName: NotionPageName
-): Promise<SearchResults | ExtendSearchResults> => {
+): Promise<ExtendedRecordMap> => {
   const pageId: string = get(notion, ['pages', pageName, 'pageId'])
+  const collectionId: string = get(notion, ['pages', pageName, 'collectionId'])
   const collectionViewId: string = get(notion, [
     'pages',
     pageName,
     'collectionViewId',
   ])
   const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
-  const paginationEnabled: boolean = get(notion, ['pagination', 'enabled'])
 
-  if (!pageId || !collectionViewId || !pageEnabled) {
+  if (!pageId || !collectionId || !collectionViewId || !pageEnabled) {
     const options: logOption = {
       category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-      message: `required info are invalid: pageId = ${pageId}, collectionViewId = ${collectionViewId}, pageEnabled = ${pageEnabled}`,
+      message: `required info are invalid | pageId: ${pageId} | collectionId: ${collectionId} | collectionViewId: ${collectionViewId} | pageEnabled: ${pageEnabled}`,
       level: 'error',
       req,
     }
@@ -91,119 +78,14 @@ const fetchArticles = async (
     throw 'Required info are invalid in fetchArticles.'
   }
 
-  const response: SearchResults = await getNotionPostsFromTable({
-    pageId,
-    collectionViewId,
-    paginationEnabled,
-    fetchAllPosts: true,
-  })
-
-  if (!isValidResponse(response)) {
-    const isEmptyRecordMap = isEmpty(response?.recordMap)
-    const totalCount = get(response, [
-      'result',
-      'reducerResults',
-      'collection_group_results',
-      'total',
-    ])
-    const options: logOption = {
-      category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-      message: `invalid response in fetchArticles: is recordMap empty = ${isEmptyRecordMap}, collection result total = ${totalCount}`,
-      level: 'error',
-      req,
-    }
-    log(options)
-    throw 'Invalid response in fetchArticles.'
-  }
+  const response = await getNotionPage(pageId)
   return response
-}
-
-const transformArticles = async (
-  data: SearchResults
-): Promise<ExtendSearchResults> => {
-  const isPreviewImageGenerationEnabled: boolean = get(notion, [
-    'previeImages',
-    'enable',
-  ])
-
-  if (!isEmpty(data?.recordMap) && isPreviewImageGenerationEnabled) {
-    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
-    const previewImageMap: PreviewImagesMap = await getNotionPreviewImages(
-      data?.recordMap
-    )
-    set(data, ['recordMap', 'preview_images'], previewImageMap)
-  }
-  return data
-}
-
-const transformMenuItems = (
-  pageName: NotionPageName,
-  articles: ExtendSearchResults
-): MenuItem[] => {
-  const articleIds: string[] = get(
-    articles,
-    [
-      'allPosts',
-      'result',
-      'reducerResults',
-      'collection_group_results',
-      'blockIds',
-    ],
-    []
-  )
-  const recordMap: ExtendRecordMap = get(articles, ['allPosts', 'recordMap'])
-  const menuItems: MenuItem[] = articleIds.map(pageId => {
-    const pagePath = getSinglePagePath({
-      pageName,
-      pageId,
-      recordMap,
-    })
-    const url = `/${pageName}/${pagePath}`
-    const block = get(recordMap, ['block', pageId, 'value'])
-    const label = getBlockTitle(block, recordMap as any)
-    return {
-      label,
-      url,
-    }
-  })
-  return menuItems
-}
-
-const transformStreamActionPayload = (
-  pageName: NotionPageName,
-  articles: ExtendSearchResults
-) => {
-  const paginationEnabled: boolean = get(notion, ['pagination', 'enabled'])
-  const articleIds: string[] = get(articles, [
-    'result',
-    'reducerResults',
-    'collection_group_results',
-    'blockIds',
-  ])
-  const total: number = get(articles, [
-    'result',
-    'reducerResults',
-    'collection_group_results',
-    'total',
-  ])
-  const hasNext: boolean = paginationEnabled && articleIds.length < total
-
-  return {
-    name: pageName as string,
-    data: {
-      content: cloneDeep(articles?.recordMap),
-      hasNext,
-      ids: articleIds,
-      index: articleIds.length - 1,
-      total,
-    },
-  }
 }
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   store => async ({ params: { pageName }, req, res }) => {
     if (!isValidPageName(pageName)) {
-      const options = {
+      const options: logOption = {
         category: PAGE_TYPE_ARTICLE_LIST_PAGE,
         message: `invalid page | pageName: ${pageName}`,
         level: 'error',
@@ -214,24 +96,12 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     }
 
     try {
-      const response = await fetchArticles(req, pageName)
-      const articles = await transformArticles(response)
-
-      if (!isValidArticles(articles)) {
-        const options: logOption = {
-          category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-          message: `empty page data for pageName" ${pageName}`,
-          level: 'error',
-          req,
-        }
-        log(options)
-        return showCommonPage(req, res, 'error', pageName)
-      }
-
-      const menuItems = transformMenuItems(pageName, articles)
+      const response = await fetchArticleStream(req, pageName)
+      const articleStream = await transformArticleStream(pageName, response)
+      const menuItems = transformMenuItems(pageName, articleStream)
 
       // save SSR fetch stream article contents to redux store
-      const payload = transformStreamActionPayload(pageName, articles)
+      const payload = transformStreamActionPayload(pageName, articleStream)
       const action = updateStream(payload)
       store.dispatch(action)
 
@@ -275,16 +145,6 @@ const NotionComponentMap: object = {
   tweet: () => null,
 }
 
-// function to update the page link urls
-const NotionMapPageUrl = (
-  pageName: NotionPageName = '',
-  recordMap: ExtendRecordMap,
-  pageId: string = ''
-): string => {
-  const pagePath = getSinglePagePath({ pageName, pageId, recordMap })
-  return `/${pageName}/${pagePath}`
-}
-
 const ArticleListPage = ({ hasError, menuItems, pageName }) => {
   const streamState = useAppSelector(state => state.stream)
   const dispatch = useAppDispatch()
@@ -293,8 +153,9 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
     return <Error statusCode={500} title="This page is broken" />
   }
 
+  const blockId: string = get(notion, ['pages', pageName, 'collectionViewId'])
   const count: number = get(notion, ['pagination', 'batchLoadCount'])
-  const content: ExtendRecordMap = get(streamState, [pageName, 'content'])
+  const content: ExtendedRecordMap = get(streamState, [pageName, 'content'])
   const error: boolean = get(streamState, [pageName, 'error'])
   const hasNext: boolean = get(streamState, [pageName, 'hasNext'])
   const index: number = get(streamState, [pageName, 'index'], 0)
@@ -373,10 +234,11 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
         menuItems={menuItems}
       />
       <NotionRenderer
+        blockId={blockId}
         fullPage={false}
         recordMap={recordMap}
         components={NotionComponentMap}
-        mapPageUrl={NotionMapPageUrl.bind(this, pageName, recordMap)}
+        mapPageUrl={mapNotionPageLinkUrl.bind(this, pageName, recordMap)}
         previewImages={previewImagesEnabled}
         pageFooter={NotionPageFooter()}
         showCollectionViewDropdown={false}

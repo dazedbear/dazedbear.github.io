@@ -16,7 +16,7 @@ interface ContentState {
   total?: number
 }
 
-interface ActionPayloadState {
+export interface ActionPayloadState {
   name: string
   data: ContentState
 }

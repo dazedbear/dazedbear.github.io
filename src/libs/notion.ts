@@ -1,7 +1,8 @@
 import { get } from 'lodash'
 import { cdnHost } from '../../site.config'
-import { Block } from 'notion-types'
+import { Block, ExtendedRecordMap } from 'notion-types'
 import { getDateValue, uuidToId } from 'notion-utils'
+import { NotionPageName } from '../../types'
 
 /**
  * extract property path mapping from a collection
@@ -174,6 +175,22 @@ export const mapNotionImageUrl = (url: string, block: Block) => {
 
   // use CDN to cache these image assets
   return cdnHost ? `${cdnHost}/${encodeURIComponent(url)}` : url
+}
+
+/**
+ * function to update the page link urls
+ * @param {string} pageName
+ * @param {object} recordMap
+ * @param {string} pageId
+ * @returns {string} page relative link
+ */
+export const mapNotionPageLinkUrl = (
+  pageName: NotionPageName = '',
+  recordMap: ExtendedRecordMap,
+  pageId: string = ''
+): string => {
+  const pagePath = getSinglePagePath({ pageName, pageId, recordMap })
+  return `/${pageName}/${pagePath}`
 }
 
 /**

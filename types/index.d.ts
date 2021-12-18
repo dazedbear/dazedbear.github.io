@@ -45,3 +45,11 @@ export interface GetServerSidePropsRequest extends IncomingMessage {
 }
 
 export interface GetServerSidePropsResponse extends ServerResponse {}
+
+export interface ArticleStream {
+  content?: object
+  ids?: string[]
+  hasNext?: boolean
+  index?: number
+  total?: number
+}
