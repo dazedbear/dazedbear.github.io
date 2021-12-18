@@ -231,8 +231,12 @@ export const getNotionPreviewImages = async recordMap => {
           async () => {
             const response = await fetch(url)
             if (!response.ok) {
-              log({ category: 'lqip', message: response.error, level: 'error' })
-              return
+              log({
+                category: 'lqip',
+                message: `fetch image url error | status: ${response.status} | statusText: ${response.statusText} | url = ${url}`,
+                level: 'error',
+              })
+              throw Error(`fetch image url error: ${url}`)
             }
             const imageBuffer = await response.buffer()
             const data = await lqip(imageBuffer)
@@ -254,12 +258,12 @@ export const getNotionPreviewImages = async recordMap => {
 
       const image = {
         url,
-        originalWidth: result.metadata.originalWidth,
-        originalHeight: result.metadata.originalHeight,
-        width: result.metadata.width,
-        height: result.metadata.height,
-        type: result.metadata.type,
-        dataURIBase64: result.metadata.dataURIBase64,
+        originalWidth: result?.metadata?.originalWidth,
+        originalHeight: result?.metadata?.originalHeight,
+        width: result?.metadata?.width,
+        height: result?.metadata?.height,
+        type: result?.metadata?.type,
+        dataURIBase64: result?.metadata?.dataURIBase64,
         error: false,
       }
       return image
