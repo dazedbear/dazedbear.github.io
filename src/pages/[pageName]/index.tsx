@@ -108,7 +108,7 @@ const fetchArticles = async (
     ])
     const options: logOption = {
       category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-      message: `empty page data: is recordMap empty = ${isEmptyRecordMap}, collection result total = ${totalCount}`,
+      message: `invalid response in fetchArticles: is recordMap empty = ${isEmptyRecordMap}, collection result total = ${totalCount}`,
       level: 'error',
       req,
     }
@@ -205,7 +205,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
     if (!isValidPageName(pageName)) {
       const options = {
         category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-        message: `invalid pageName: ${pageName}`,
+        message: `invalid page | pageName: ${pageName}`,
         level: 'error',
         req,
       }
