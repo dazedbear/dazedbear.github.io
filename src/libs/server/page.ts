@@ -93,7 +93,7 @@ export const fetchArticleStream = async ({
   pageId,
   category,
 }: {
-  req: GetServerSidePropsRequest
+  req?: GetServerSidePropsRequest
   pageName?: NotionPageName
   pageId?: string
   category?: string

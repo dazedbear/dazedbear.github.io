@@ -61,19 +61,6 @@ export const transformArticleStream = async (
     ? articleStream.ids.length - 1
     : 0
 
-  const isPreviewImageGenerationEnabled: boolean = get(notion, [
-    'previeImages',
-    'enable',
-  ])
-
-  if (!isEmpty(articleStream.content) && isPreviewImageGenerationEnabled) {
-    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
-    const previewImageMap: PreviewImagesMap = await getNotionPreviewImages(
-      articleStream.content
-    )
-    set(articleStream, ['content', 'preview_images'], previewImageMap)
-  }
-
   const schema = {
     type: 'object',
     additionalProperties: false,
@@ -108,6 +95,67 @@ export const transformArticleStream = async (
     }
     log(options)
     throw 'articleStream is invalid'
+  }
+
+  return articleStream
+}
+
+export const transformArticleStreamPreviewImages = async (
+  articleStream: ArticleStream
+): Promise<ArticleStream> => {
+  const isPreviewImageGenerationEnabled: boolean = get(notion, [
+    'previeImages',
+    'enable',
+  ])
+
+  if (!isEmpty(articleStream.content) && isPreviewImageGenerationEnabled) {
+    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
+    const previewImageMap: PreviewImagesMap = await getNotionPreviewImages(
+      articleStream.content
+    )
+    set(articleStream, ['content', 'preview_images'], previewImageMap)
+
+    const schema = {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        content: {
+          type: 'object',
+          properties: {
+            preview_images: {
+              type: 'object',
+            },
+          },
+          required: ['preview_images'],
+        },
+        ids: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+        hasNext: {
+          type: 'boolean',
+        },
+        index: {
+          type: 'integer',
+        },
+        total: {
+          type: 'integer',
+        },
+      },
+      required: ['content', 'ids', 'hasNext', 'index', 'total'],
+    }
+    const validate = ajv.compile(schema)
+    if (!validate(articleStream)) {
+      const options: logOption = {
+        category: 'transformArticleStreamPreviewImages',
+        message: validate.errors,
+        level: 'warn',
+      }
+      log(options)
+      throw 'preview images are missing in articleStream'
+    }
   }
 
   return articleStream

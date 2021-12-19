@@ -31,6 +31,7 @@ import {
 } from '../../libs/server/page'
 import {
   transformArticleStream,
+  transformArticleStreamPreviewImages,
   transformMenuItems,
   transformStreamActionPayload,
 } from '../../libs/server/transformer'
@@ -55,7 +56,8 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         pageName,
         category: PAGE_TYPE_ARTICLE_LIST_PAGE,
       })
-      const articleStream = await transformArticleStream(pageName, response)
+      let articleStream = await transformArticleStream(pageName, response)
+      articleStream = await transformArticleStreamPreviewImages(articleStream)
       const menuItems = transformMenuItems(pageName, articleStream)
 
       // save SSR fetch stream article contents to redux store
