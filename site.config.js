@@ -232,4 +232,21 @@ module.exports = {
       id: 'dazedbear/dazedbear-studio-site',
     },
   },
+  website: {
+    development: {
+      host: `${process.env.HOST}:${process.env.PORT}`,
+      hostname: process.env.HOST,
+      protocol: 'http',
+    },
+    stage: {
+      host: 'stage.dazedbear.pro',
+      hostname: 'stage.dazedbear.pro',
+      protocol: 'https',
+    },
+    production: {
+      host: 'www.dazedbear.pro',
+      hostname: 'www.dazedbear.pro',
+      protocol: 'https',
+    },
+  },
 }

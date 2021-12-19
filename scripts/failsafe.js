@@ -6,7 +6,7 @@ const get = require('lodash/get')
 const pMap = require('p-map')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
-const { aws } = require('../site.config')
+const { aws, website } = require('../site.config')
 const log = require('./log')
 
 const parser = new XMLParser()
@@ -14,13 +14,10 @@ const ajv = new Ajv()
 addFormats(ajv)
 
 const getPageUrls = async () => {
-  const hostMap = {
-    development: 'stage.dazedbear.pro',
-    stage: 'stage.dazedbear.pro',
-    production: 'www.dazedbear.pro',
-  }
-  const host = hostMap[process.env.NEXT_PUBLIC_APP_ENV || 'production']
-  const endpoint = `https://${host}/api/sitemap`
+  const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
+  const host = get(website, [currentEnv, 'host'])
+  const protocal = get(website, [currentEnv, 'protocol'])
+  const endpoint = `${protocal}://${host}/api/sitemap`
   const response = await fetch(endpoint)
   if (!response.ok) {
     throw Error(
@@ -137,6 +134,7 @@ const uploadFailsafeToCDN = async failsafePages => {
     },
     {
       concurrency: 10,
+      stopOnError: false,
     }
   )
   await awsS3Client.destroy()

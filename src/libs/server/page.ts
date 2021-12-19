@@ -45,6 +45,8 @@ export const showCommonPage = (
         hasError: true,
       },
     }
+    // trigger rewrite to failsafe page
+    res.setHeader('x-dazedbear-failsafe', 1)
   }
 
   const options: logOption = {

@@ -12,11 +12,17 @@ import {
   transformArticleStream,
   transformPageUrls,
 } from '../../libs/server/transformer'
-import { navigation, notion, cache as cacheConfig } from '../../../site.config'
+import {
+  navigation,
+  notion,
+  cache as cacheConfig,
+  website,
+} from '../../../site.config'
 import cacheClient from '../../libs/server/cache'
 
 const route = '/sitemap'
 const methods = ['GET']
+const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
 
 dayjs.extend(utc)
 const category = getCategory(route)
@@ -50,6 +56,7 @@ const generateSiteMapXml = async req => {
     },
     {
       concurrency: 10,
+      stopOnError: false,
     }
   )
   let notionUrls: string[] = currentNotionListUrls.reduce(
@@ -61,7 +68,12 @@ const generateSiteMapXml = async req => {
   const urls = ['/'].concat(pageUrls, notionUrls).map(url => ({ url }))
 
   // generate sitemap xml
-  const stream = new SitemapStream({ hostname: `https://${req.headers.host}` })
+  const stream = new SitemapStream({
+    hostname: `${get(website, [currentEnv, 'protocol'])}://${get(website, [
+      currentEnv,
+      'host',
+    ])}`,
+  })
   const sitemapXml = await streamToPromise(
     Readable.from(urls).pipe(stream)
   ).then(data => data.toString())
