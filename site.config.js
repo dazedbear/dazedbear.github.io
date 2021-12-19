@@ -18,7 +18,7 @@ module.exports = {
     s3bucket: process.env.AWS_S3_BUCKET,
   },
   cache: {
-    enable: true,
+    enable: process.env.NEXT_PUBLIC_APP_ENV !== 'development',
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
     token: process.env.REDIS_TOKEN,
@@ -116,7 +116,7 @@ module.exports = {
     },
     previeImages: {
       concurrency: Infinity,
-      enable: true,
+      enable: false,
     },
   },
   pages: {
