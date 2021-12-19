@@ -117,7 +117,7 @@ export const transformArticleStreamPreviewImages = async (
 
     const schema = {
       type: 'object',
-      additionalProperties: false,
+      additionalProperties: true,
       properties: {
         content: {
           type: 'object',
@@ -128,23 +128,8 @@ export const transformArticleStreamPreviewImages = async (
           },
           required: ['preview_images'],
         },
-        ids: {
-          type: 'array',
-          items: {
-            type: 'string',
-          },
-        },
-        hasNext: {
-          type: 'boolean',
-        },
-        index: {
-          type: 'integer',
-        },
-        total: {
-          type: 'integer',
-        },
       },
-      required: ['content', 'ids', 'hasNext', 'index', 'total'],
+      required: ['content'],
     }
     const validate = ajv.compile(schema)
     if (!validate(articleStream)) {
@@ -154,7 +139,6 @@ export const transformArticleStreamPreviewImages = async (
         level: 'warn',
       }
       log(options)
-      throw 'preview images are missing in articleStream'
     }
   }
 
