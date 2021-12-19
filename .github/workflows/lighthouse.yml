@@ -4,6 +4,8 @@ name: Lighthouse Audit
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     # Monday day 6:00 am GMT+8
     - cron: '0 22 * * 0'
