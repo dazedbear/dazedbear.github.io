@@ -14,6 +14,9 @@ const normalizeId = id => {
 }
 
 module.exports = {
+  aws: {
+    s3bucket: process.env.AWS_S3_BUCKET,
+  },
   cache: {
     enable: true,
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
@@ -27,7 +30,7 @@ module.exports = {
       previewImage: 86400 * 30,
     },
   },
-  cdnHost: '',
+  cdnHost: 'static.dazedbear.pro',
   splunk: {
     enable: false,
     // https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector_on_Splunk_Cloud
