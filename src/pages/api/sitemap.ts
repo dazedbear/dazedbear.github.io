@@ -13,7 +13,7 @@ import {
   transformPageUrls,
 } from '../../libs/server/transformer'
 import {
-  navigation,
+  pages,
   notion,
   cache as cacheConfig,
   website,
@@ -29,7 +29,7 @@ const category = getCategory(route)
 
 const generateSiteMapXml = async req => {
   // get all enabled static page paths
-  const pageUrls = navigation
+  const pageUrls = Object.values(pages)
     .map(item => item.enabled && item.page)
     .filter(path => path)
 
@@ -65,7 +65,7 @@ const generateSiteMapXml = async req => {
   )
 
   // all collected urls
-  const urls = ['/'].concat(pageUrls, notionUrls).map(url => ({ url }))
+  const urls = [].concat(pageUrls, notionUrls).map(url => ({ url }))
 
   // generate sitemap xml
   const stream = new SitemapStream({

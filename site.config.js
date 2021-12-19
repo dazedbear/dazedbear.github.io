@@ -120,6 +120,10 @@ module.exports = {
     },
   },
   pages: {
+    index: {
+      enabled: true,
+      page: '/',
+    },
     music: {
       // should always be 4 blocks
       blocks: [
@@ -145,6 +149,12 @@ module.exports = {
           link: '/music-notebook',
         },
       ],
+      enabled: true,
+      page: '/music',
+    },
+    maintain: {
+      enabled: true,
+      page: '/maintain',
     },
   },
   reduxCookiePersist: {

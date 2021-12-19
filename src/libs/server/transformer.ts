@@ -258,7 +258,7 @@ export const transformPageUrls = (
   articleStream: ArticleStream
 ): string[] => {
   const recordMap = articleStream.content
-  const pageUrls: string[] = articleStream.ids.map(pageId => {
+  let pageUrls: string[] = articleStream.ids.map(pageId => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
@@ -266,6 +266,8 @@ export const transformPageUrls = (
     })
     return `/${pageName}/${pagePath}`
   })
+
+  pageUrls.push(`/${pageName}`)
 
   const schema = {
     type: 'array',
