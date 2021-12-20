@@ -32,8 +32,9 @@ module.exports = {
   },
   cdnHost: 'static.dazedbear.pro',
   failsafe: {
-    // https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
-    concurrency: Infinity,
+    // AWS S3 upload limit rate: 3500 per sec, ref: https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
+    // concurrency limit to 30 since redis max connection is fixed to 30 based on the basic plan, ref: https://redis.com/redis-enterprise-cloud/pricing/
+    concurrency: 15,
     host: 'failsafe.dazedbear.pro',
   },
   splunk: {
