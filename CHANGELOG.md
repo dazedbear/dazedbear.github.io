@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.8.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.8.0...v4.8.1) (2021-12-20)
+
+### Bug Fixes
+
+- set failsafe concurrency to fix 504 issue ([b8ccfda](https://github.com/dazedbear/dazedbear.github.io/commit/b8ccfda04a3829e371574c9aaf4135ad662b9494))
+
 ## [4.8.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.7.0...v4.8.0) (2021-12-20)
 
 ### Features
