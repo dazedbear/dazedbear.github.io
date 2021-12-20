@@ -1,7 +1,8 @@
-const siteConfig = require('./site.config')
+const { failsafe, notion, website } = require('./site.config')
+const get = require('lodash/get')
 
 const validateRequiredEnv = () => {
-  const notionPageConfigs = siteConfig.notion.pages || {}
+  const notionPageConfigs = notion.pages || {}
   const envList = Object.values(notionPageConfigs).reduce((list, config) => {
     if (
       config.enable &&
@@ -42,6 +43,57 @@ module.exports = {
   },
 
   async rewrites() {
-    return []
+    const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
+    return {
+      beforeFiles: [
+        // These rewrites are checked after headers/redirects
+        // and before all files including _next/public files which
+        // allows overriding page files
+        {
+          // for failsafe page debug
+          source: '/',
+          destination: `https://${failsafe.host}/${get(website, [
+            currentEnv,
+            'hostname',
+          ])}/index.html`,
+          has: [{ type: 'query', key: 'fs', value: '1' }],
+        },
+        {
+          // for failsafe page debug
+          source: '/:path*',
+          destination: `https://${failsafe.host}/${get(website, [
+            currentEnv,
+            'hostname',
+          ])}/:path*.html`,
+          has: [{ type: 'query', key: 'fs', value: '1' }],
+        },
+      ],
+      afterFiles: [
+        // These rewrites are checked after pages/public files
+        // are checked but before dynamic routes
+      ],
+      fallback: [
+        // These rewrites are checked after both pages/public files
+        // and dynamic routes are checked
+        {
+          // failsafe page
+          source: '/',
+          destination: `https://${failsafe.host}/${get(website, [
+            currentEnv,
+            'hostname',
+          ])}/index.html`,
+          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
+        },
+        {
+          // failsafe page
+          source: '/:path*',
+          destination: `https://${failsafe.host}/${get(website, [
+            currentEnv,
+            'hostname',
+          ])}/:path*.html`,
+          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
+        },
+      ],
+    }
   },
 }

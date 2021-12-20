@@ -173,8 +173,7 @@ export const mapNotionImageUrl = (url: string, block: Block) => {
     return url
   }
 
-  // use CDN to cache these image assets
-  return cdnHost ? `${cdnHost}/${encodeURIComponent(url)}` : url
+  return url
 }
 
 /**

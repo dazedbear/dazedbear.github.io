@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.7.0...v4.8.0) (2021-12-20)
+
+### Features
+
+- add failsafe rewrite mechanism ([1d35d15](https://github.com/dazedbear/dazedbear.github.io/commit/1d35d1560c7028329e9889bf07a5151a48844a89))
+- failsafe page generation script ([e0a6591](https://github.com/dazedbear/dazedbear.github.io/commit/e0a65912d761e7b102c26cda93e5f811118d7443))
+
+### Bug Fixes
+
+- notion list page missing in sitemap ([e47a968](https://github.com/dazedbear/dazedbear.github.io/commit/e47a968befa0e89d54e2902f57ef08305c045de5))
+- preview image error ([8a52700](https://github.com/dazedbear/dazedbear.github.io/commit/8a527003c44d4b660511d26635660a7ea24022d4))
+
+### CI/CD
+
+- add failsafe page generation job ([7064c5c](https://github.com/dazedbear/dazedbear.github.io/commit/7064c5c83ceb53b30f97be707fb5e30331913663))
+- add wait for vercel deployment job ([0c1c45c](https://github.com/dazedbear/dazedbear.github.io/commit/0c1c45c438c9169eab3f2ed7f5749bb997beeaee))
+- adjust trigger ([a616ff4](https://github.com/dazedbear/dazedbear.github.io/commit/a616ff4834ca7f7168d92ee1f5d6a6dd25a733f9))
+- split stage prod failsage generation ([a8502fd](https://github.com/dazedbear/dazedbear.github.io/commit/a8502fd1aa45279b11a39e8df102777fee9c2ceb))
+
+### Others
+
+- disable preview image and cache (local) ([bd322de](https://github.com/dazedbear/dazedbear.github.io/commit/bd322de118199a52a5ca5b32264ee24eb0829e26))
+- move out preview image logic from transformArticleStream ([321ead6](https://github.com/dazedbear/dazedbear.github.io/commit/321ead60fe0c6cea5968e4f09dad1c2e0f949b7c))
+- read failsafe concurrency from site.config ([8adcb5c](https://github.com/dazedbear/dazedbear.github.io/commit/8adcb5c4199a979d9e6f3ef373b8efe04ca34e6f))
+- use failsafeHost for failsafe pages ([ab7e5b7](https://github.com/dazedbear/dazedbear.github.io/commit/ab7e5b731a522455b1c6fa093f651a234fbc9b0e))
+
 ## [4.7.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.6.0...v4.7.0) (2021-12-18)
 
 ### Features

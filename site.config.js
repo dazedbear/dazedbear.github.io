@@ -14,8 +14,11 @@ const normalizeId = id => {
 }
 
 module.exports = {
+  aws: {
+    s3bucket: process.env.AWS_S3_BUCKET,
+  },
   cache: {
-    enable: true,
+    enable: process.env.NEXT_PUBLIC_APP_ENV !== 'development',
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
     token: process.env.REDIS_TOKEN,
@@ -27,7 +30,12 @@ module.exports = {
       previewImage: 86400 * 30,
     },
   },
-  cdnHost: '',
+  cdnHost: 'static.dazedbear.pro',
+  failsafe: {
+    // https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
+    concurrency: Infinity,
+    host: 'failsafe.dazedbear.pro',
+  },
   splunk: {
     enable: false,
     // https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector_on_Splunk_Cloud
@@ -113,10 +121,14 @@ module.exports = {
     },
     previeImages: {
       concurrency: Infinity,
-      enable: true,
+      enable: false,
     },
   },
   pages: {
+    index: {
+      enabled: true,
+      page: '/',
+    },
     music: {
       // should always be 4 blocks
       blocks: [
@@ -142,6 +154,12 @@ module.exports = {
           link: '/music-notebook',
         },
       ],
+      enabled: true,
+      page: '/music',
+    },
+    maintain: {
+      enabled: true,
+      page: '/maintain',
     },
   },
   reduxCookiePersist: {
@@ -227,6 +245,23 @@ module.exports = {
     logRocket: {
       enable: true,
       id: 'dazedbear/dazedbear-studio-site',
+    },
+  },
+  website: {
+    development: {
+      host: `${process.env.HOST}:${process.env.PORT}`,
+      hostname: process.env.HOST,
+      protocol: 'http',
+    },
+    stage: {
+      host: 'stage.dazedbear.pro',
+      hostname: 'stage.dazedbear.pro',
+      protocol: 'https',
+    },
+    production: {
+      host: 'www.dazedbear.pro',
+      hostname: 'www.dazedbear.pro',
+      protocol: 'https',
     },
   },
 }

@@ -9,7 +9,13 @@ on:
     - cron: '0 22 * * 0'
 
 jobs:
-  lighthouse-prod:
+  wait-for-deployment:
+    uses: dazedbear/dazedbear.github.io/.github/workflows/vercel-deployment.yml@main
+    secrets:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+  lighthouse-production:
+    needs: wait-for-deployment
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

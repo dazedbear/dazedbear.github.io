@@ -35,6 +35,7 @@ import {
 } from '../../libs/server/page'
 import {
   transformArticleStream,
+  transformArticleStreamPreviewImages,
   transformSingleArticle,
   transformMenuItems,
   transformStreamActionPayload,
@@ -69,6 +70,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
       })
       articleStream = await transformArticleStream(pageName, response)
+      articleStream = await transformArticleStreamPreviewImages(articleStream)
 
       // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
       const singleArticleResponse = await fetchArticleStream({
@@ -76,7 +78,8 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         pageId: articleId,
         category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
       })
-      const singleArticle = await transformSingleArticle(singleArticleResponse)
+      let singleArticle = await transformSingleArticle(singleArticleResponse)
+      singleArticle = await transformArticleStreamPreviewImages(singleArticle)
       articleStream = merge(articleStream, singleArticle)
 
       const menuItems = transformMenuItems(pageName, articleStream)
