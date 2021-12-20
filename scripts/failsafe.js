@@ -6,7 +6,7 @@ const get = require('lodash/get')
 const pMap = require('p-map')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
-const { aws, website } = require('../site.config')
+const { aws, website, failsafe } = require('../site.config')
 const log = require('./log')
 
 const parser = new XMLParser()
@@ -94,7 +94,7 @@ const generateFailsafePages = async pageUrls => {
       return metadata
     },
     {
-      concurrency: 10,
+      concurrency: failsafe.concurrency,
     }
   )
 
@@ -133,7 +133,7 @@ const uploadFailsafeToCDN = async failsafePages => {
       }
     },
     {
-      concurrency: 10,
+      concurrency: failsafe.concurrency,
       stopOnError: false,
     }
   )

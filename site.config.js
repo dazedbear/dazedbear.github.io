@@ -31,7 +31,11 @@ module.exports = {
     },
   },
   cdnHost: 'static.dazedbear.pro',
-  failsafeHost: 'failsafe.dazedbear.pro',
+  failsafe: {
+    // https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
+    concurrency: Infinity,
+    host: 'failsafe.dazedbear.pro',
+  },
   splunk: {
     enable: false,
     // https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector_on_Splunk_Cloud

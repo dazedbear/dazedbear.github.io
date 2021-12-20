@@ -1,4 +1,4 @@
-const { failsafeHost, notion, website } = require('./site.config')
+const { failsafe, notion, website } = require('./site.config')
 const get = require('lodash/get')
 
 const validateRequiredEnv = () => {
@@ -52,7 +52,7 @@ module.exports = {
         {
           // for failsafe page debug
           source: '/',
-          destination: `https://${failsafeHost}/${get(website, [
+          destination: `https://${failsafe.host}/${get(website, [
             currentEnv,
             'hostname',
           ])}/index.html`,
@@ -61,7 +61,7 @@ module.exports = {
         {
           // for failsafe page debug
           source: '/:path*',
-          destination: `https://${failsafeHost}/${get(website, [
+          destination: `https://${failsafe.host}/${get(website, [
             currentEnv,
             'hostname',
           ])}/:path*.html`,
@@ -78,7 +78,7 @@ module.exports = {
         {
           // failsafe page
           source: '/',
-          destination: `https://${failsafeHost}/${get(website, [
+          destination: `https://${failsafe.host}/${get(website, [
             currentEnv,
             'hostname',
           ])}/index.html`,
@@ -87,7 +87,7 @@ module.exports = {
         {
           // failsafe page
           source: '/:path*',
-          destination: `https://${failsafeHost}/${get(website, [
+          destination: `https://${failsafe.host}/${get(website, [
             currentEnv,
             'hostname',
           ])}/:path*.html`,
