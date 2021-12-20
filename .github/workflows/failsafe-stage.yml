@@ -1,13 +1,10 @@
 name: Failsafe
 on:
   push:
-    branches: [main]
-  schedule:
-    # every day 06:00, 18:00 GMT+8
-    - cron: '0 10,22 * * *'
+    branches: [develop]
 
 jobs:
-  failsafe-generation:
+  failsafe-generation-stage:
     name: Failsafe Page Generation
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +19,7 @@ jobs:
       - name: Run failsafe generation
         run: npm run task:failsafe
         env:
+          NEXT_PUBLIC_APP_ENV: stage
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
