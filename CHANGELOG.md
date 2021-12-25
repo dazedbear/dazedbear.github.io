@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.9.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.8.1...v4.9.0) (2021-12-25)
+
+### Features
+
+- cache and failsafe improvement ([#22](https://github.com/dazedbear/dazedbear.github.io/issues/22)) ([69e8191](https://github.com/dazedbear/dazedbear.github.io/commit/69e81915a92fdb987f08f973f69170c15d5dc8a8))
+
+### Build
+
+- migrate to next.js 12 ([#21](https://github.com/dazedbear/dazedbear.github.io/issues/21)) ([885012a](https://github.com/dazedbear/dazedbear.github.io/commit/885012a0483be1f5d15cc9bb98786be65165d839))
+
 ### [4.8.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.8.0...v4.8.1) (2021-12-20)
 
 ### Bug Fixes
