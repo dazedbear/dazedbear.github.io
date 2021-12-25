@@ -18,7 +18,9 @@ module.exports = {
     s3bucket: process.env.AWS_S3_BUCKET,
   },
   cache: {
-    enable: process.env.NEXT_PUBLIC_APP_ENV !== 'development',
+    enable:
+      process.env.CACHE_CLIENT_ENABLED ||
+      process.env.NEXT_PUBLIC_APP_ENV !== 'development',
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
     token: process.env.REDIS_TOKEN,
@@ -29,6 +31,12 @@ module.exports = {
       notionPage: 1800,
       previewImage: 86400 * 30,
     },
+    connectionRetriesDelay: 50, // redis server connection retries delay (ms)
+    connectionMaxRetries: 1, // redis server connection retries
+    connectionTimeout: 500, // redis server connection timeout (ms)
+    maxRetriesPerCommandRequest: 1, // each redis command connection retries
+    statusCheckDelay: 50, // delay time for each connection status checks (ms)
+    statusCheckTimeout: 1000, // timeout for connection status checks (ms)
   },
   cdnHost: 'static.dazedbear.pro',
   failsafe: {

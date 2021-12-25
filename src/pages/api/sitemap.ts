@@ -56,7 +56,6 @@ const generateSiteMapXml = async req => {
     },
     {
       concurrency: 10,
-      stopOnError: false,
     }
   )
   let notionUrls: string[] = currentNotionListUrls.reduce(

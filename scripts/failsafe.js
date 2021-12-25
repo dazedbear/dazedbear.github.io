@@ -134,7 +134,6 @@ const uploadFailsafeToCDN = async failsafePages => {
     },
     {
       concurrency: failsafe.concurrency,
-      stopOnError: false,
     }
   )
   await awsS3Client.destroy()

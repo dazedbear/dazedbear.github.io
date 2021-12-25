@@ -24,16 +24,10 @@ const validateRequiredEnv = () => {
 }
 
 module.exports = {
-  target: 'experimental-serverless-trace',
+  swcMinify: true,
 
-  webpack(cfg, { dev, isServer }) {
+  webpack(cfg) {
     validateRequiredEnv()
-
-    // only compile build-rss in production server build
-    if (dev || !isServer) return cfg
-
-    // we're in build mode so enable shared caching for Notion data
-    process.env.USE_CACHE = 'true'
     return cfg
   },
   images: {
@@ -75,24 +69,6 @@ module.exports = {
       fallback: [
         // These rewrites are checked after both pages/public files
         // and dynamic routes are checked
-        {
-          // failsafe page
-          source: '/',
-          destination: `https://${failsafe.host}/${get(website, [
-            currentEnv,
-            'hostname',
-          ])}/index.html`,
-          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
-        },
-        {
-          // failsafe page
-          source: '/:path*',
-          destination: `https://${failsafe.host}/${get(website, [
-            currentEnv,
-            'hostname',
-          ])}/:path*.html`,
-          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
-        },
       ],
     }
   },

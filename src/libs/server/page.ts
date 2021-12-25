@@ -1,6 +1,8 @@
 import { GetServerSidePropsResult } from 'next'
 import { ExtendedRecordMap } from 'notion-types'
 import get from 'lodash/get'
+import * as URI from 'uri-js'
+import qs, { ParsedQs } from 'qs'
 import {
   ErrorPageProps,
   NotionPageName,
@@ -38,15 +40,26 @@ export const showCommonPage = (
       notFound: true,
     }
   } else {
+    // append ?fs=1 to destination url
+    const failsafeQuery = { fs: 1 }
+    const urlObj: URI.URIComponents = URI.parse(req.url)
+    const urlQuery: ParsedQs = Object.assign(
+      {},
+      qs.parse(urlObj.query),
+      failsafeQuery
+    )
+    urlObj.query = qs.stringify(urlQuery)
+    const destination: string = URI.serialize(urlObj)
+
     level = 'error'
     statusCode = 500
+    // redirect to trigger rewrite to failsafe page
     pageProps = {
-      props: {
-        hasError: true,
+      redirect: {
+        destination,
+        permanent: false,
       },
     }
-    // trigger rewrite to failsafe page
-    res.setHeader('x-dazedbear-failsafe', 1)
   }
 
   const options: logOption = {
