@@ -53,3 +53,9 @@ export interface ArticleStream {
   index?: number
   total?: number
 }
+
+export type CacheClientServingStatus =
+  | 'default'
+  | 'initializing'
+  | 'running'
+  | 'terminated'
