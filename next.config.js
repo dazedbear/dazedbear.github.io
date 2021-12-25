@@ -69,24 +69,6 @@ module.exports = {
       fallback: [
         // These rewrites are checked after both pages/public files
         // and dynamic routes are checked
-        {
-          // failsafe page
-          source: '/',
-          destination: `https://${failsafe.host}/${get(website, [
-            currentEnv,
-            'hostname',
-          ])}/index.html`,
-          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
-        },
-        {
-          // failsafe page
-          source: '/:path*',
-          destination: `https://${failsafe.host}/${get(website, [
-            currentEnv,
-            'hostname',
-          ])}/:path*.html`,
-          has: [{ type: 'header', key: 'x-dazedbear-failsafe', value: '1' }],
-        },
       ],
     }
   },
