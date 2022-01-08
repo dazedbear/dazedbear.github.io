@@ -21,7 +21,7 @@ const getPageUrls = async () => {
   const response = await fetch(endpoint)
   if (!response.ok) {
     throw Error(
-      `fetch sitemap error | status: ${response.status} | statusText: ${statusText} | url: ${endpoint}`
+      `fetch sitemap error | status: ${response.status} | statusText: ${response.statusText} | url: ${endpoint}`
     )
   }
   const sitemapXml = await response.text()
