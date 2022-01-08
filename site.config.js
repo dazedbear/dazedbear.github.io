@@ -171,6 +171,7 @@ module.exports = {
       page: '/maintain',
     },
   },
+  pageProcessTimeout: 3500,
   reduxCookiePersist: {
     enabled: false,
     stateSubTrees: [],
