@@ -1,4 +1,4 @@
-const { failsafe, notion, website } = require('./site.config')
+const { currentEnv, failsafe, notion, website } = require('./site.config')
 const get = require('lodash/get')
 
 const validateRequiredEnv = () => {
@@ -37,7 +37,6 @@ module.exports = {
   },
 
   async rewrites() {
-    const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
     return {
       beforeFiles: [
         // These rewrites are checked after headers/redirects

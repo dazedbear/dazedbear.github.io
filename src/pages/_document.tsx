@@ -1,8 +1,12 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { communitySettings, trackingSettings } from '../../site.config'
+import {
+  communitySettings,
+  currentEnv,
+  trackingSettings,
+} from '../../site.config'
 
-const isLocal = process.env.NEXT_PUBLIC_APP_ENV === 'development'
-const isProduction = process.env.NEXT_PUBLIC_APP_ENV === 'production'
+const isLocal = currentEnv === 'development'
+const isProduction = currentEnv === 'production'
 
 class MyDocument extends Document {
   render() {

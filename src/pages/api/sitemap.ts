@@ -13,6 +13,7 @@ import {
   transformPageUrls,
 } from '../../libs/server/transformer'
 import {
+  currentEnv,
   pages,
   notion,
   cache as cacheConfig,
@@ -22,7 +23,6 @@ import cacheClient from '../../libs/server/cache'
 
 const route = '/sitemap'
 const methods = ['GET']
-const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
 
 dayjs.extend(utc)
 const category = getCategory(route)

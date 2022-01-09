@@ -1,7 +1,8 @@
 import chalk from 'chalk'
+import get from 'lodash/get'
 import util from 'util'
 import { Logger as SplunkLogger } from 'splunk-logging'
-import { splunk } from '../../../site.config'
+import { currentEnv, splunk, website } from '../../../site.config'
 import { logOption } from '../../../types'
 
 chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
@@ -53,12 +54,12 @@ const log = ({
     message: {
       app: 'dazedbear_studio',
       category,
-      env: process.env.NEXT_PUBLIC_APP_ENV,
+      env: currentEnv,
       message,
     },
     metadata: {
-      host: process.env.HOST,
-      source: process.env.HOST,
+      host: get(website, [currentEnv, 'host']),
+      source: get(website, [currentEnv, 'host']),
       // we only send server logs now. expected values: client_log, client_error, server_log, server_error
       sourcetype: `server_${level === 'error' ? 'error' : 'log'}`,
     },
