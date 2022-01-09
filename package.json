@@ -5,7 +5,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "build": "next build",
+    "build": "CACHE_CLIENT_ENABLED=false next build",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
     "release": "standard-version",
     "task:failsafe": "node scripts/failsafe.js"
