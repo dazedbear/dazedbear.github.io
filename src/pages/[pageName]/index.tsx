@@ -1,18 +1,12 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
+import dynamic from 'next/dynamic'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
 import { ExtendedRecordMap } from 'notion-types'
-import {
-  Code,
-  Collection,
-  CollectionRow,
-  Equation,
-  Modal,
-  NotionRenderer,
-} from 'react-notion-x'
+import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
 
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
@@ -115,8 +109,12 @@ const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
-  equation: Equation,
-  modal: Modal,
+  equation: dynamic(() =>
+    import('react-notion-x').then(notion => notion.Equation)
+  ),
+  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
+    ssr: false,
+  }),
   pageLink: props => (
     <Link {...props}>
       <a {...props} />

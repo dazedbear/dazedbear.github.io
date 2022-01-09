@@ -1,18 +1,13 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
+import dynamic from 'next/dynamic'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 import { ExtendedRecordMap } from 'notion-types'
 import { idToUuid } from 'notion-utils'
-import {
-  Code,
-  Collection,
-  Equation,
-  Modal,
-  NotionRenderer,
-} from 'react-notion-x'
+import { Code, Collection, NotionRenderer } from 'react-notion-x'
 
 import { logOption } from '../../../types'
 import { notion, pageProcessTimeout } from '../../../site.config'
@@ -146,8 +141,12 @@ const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: () => null, // we don't render property table for each articles
-  equation: Equation,
-  modal: Modal,
+  equation: dynamic(() =>
+    import('react-notion-x').then(notion => notion.Equation)
+  ),
+  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
+    ssr: false,
+  }),
   pageLink: props => (
     <Link {...props}>
       <a {...props} />
