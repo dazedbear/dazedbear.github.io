@@ -1,3 +1,5 @@
+const env = require('env-var')
+
 // use commonJS format
 const normalizeId = id => {
   if (!id) return id
@@ -13,17 +15,22 @@ const normalizeId = id => {
   )}-${id.substr(20)}`
 }
 
+const currentEnv = env
+  .get('NEXT_PUBLIC_APP_ENV')
+  .default('production')
+  .asString()
 module.exports = {
   aws: {
-    s3bucket: process.env.AWS_S3_BUCKET,
+    s3bucket: env.get('AWS_S3_BUCKET').asString(),
   },
   cache: {
-    enable:
-      process.env.CACHE_CLIENT_ENABLED ||
-      process.env.NEXT_PUBLIC_APP_ENV !== 'development',
+    enable: env
+      .get('CACHE_CLIENT_ENABLED')
+      .default(`${currentEnv !== 'development'}`)
+      .asBool(),
     host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
     port: 18768,
-    token: process.env.REDIS_TOKEN,
+    token: env.get('REDIS_TOKEN').asString(),
     ttls: {
       // seconds
       default: 60,
@@ -39,6 +46,7 @@ module.exports = {
     statusCheckTimeout: 1000, // timeout for connection status checks (ms)
   },
   cdnHost: 'static.dazedbear.pro',
+  currentEnv,
   failsafe: {
     // AWS S3 upload limit rate: 3500 per sec, ref: https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
     // concurrency limit to 30 since redis max connection is fixed to 30 based on the basic plan, ref: https://redis.com/redis-enterprise-cloud/pricing/
@@ -51,12 +59,12 @@ module.exports = {
     // https://github.com/splunk/splunk-javascript-logging/blob/master/splunklogger.js
     option: {
       batchInterval: 2500,
-      host: `inputs.${process.env.SPLUNK_HEC_HOST}`,
+      host: `inputs.${env.get('SPLUNK_HEC_HOST').asString()}`,
       path: '/services/collector',
       port: 8088,
       protocol: 'https',
       maxBatchCount: 25,
-      token: process.env.SPLUNK_HEC_TOKEN,
+      token: env.get('SPLUNK_HEC_TOKEN').asString(),
     },
   },
   meta: {
@@ -83,15 +91,17 @@ module.exports = {
     },
   ],
   notion: {
-    token: process.env.NOTION_TOKEN,
+    token: env.get('NOTION_TOKEN').asString(),
     // you can insert any notion index page you need here.
     pages: {
       article: {
-        collectionId: normalizeId(process.env.ARTICLE_COLLECTION_ID),
-        collectionViewId: normalizeId(process.env.ARTICLE_COLLECTION_VIEW_ID),
+        collectionId: normalizeId(env.get('ARTICLE_COLLECTION_ID').asString()),
+        collectionViewId: normalizeId(
+          env.get('ARTICLE_COLLECTION_VIEW_ID').asString()
+        ),
         enabled: true,
         navMenuTitle: 'Article 文章',
-        pageId: normalizeId(process.env.ARTICLE_PAGE_ID),
+        pageId: normalizeId(env.get('ARTICLE_PAGE_ID').asString()),
         requiredEnv: [
           'ARTICLE_PAGE_ID',
           'ARTICLE_COLLECTION_ID',
@@ -99,11 +109,13 @@ module.exports = {
         ],
       },
       coding: {
-        collectionId: normalizeId(process.env.CODING_COLLECTION_ID),
-        collectionViewId: normalizeId(process.env.CODING_COLLECTION_VIEW_ID),
+        collectionId: normalizeId(env.get('CODING_COLLECTION_ID').asString()),
+        collectionViewId: normalizeId(
+          env.get('CODING_COLLECTION_VIEW_ID').asString()
+        ),
         enabled: true,
         navMenuTitle: 'Coding 程式',
-        pageId: normalizeId(process.env.CODING_PAGE_ID),
+        pageId: normalizeId(env.get('CODING_PAGE_ID').asString()),
         requiredEnv: [
           'CODING_PAGE_ID',
           'CODING_COLLECTION_ID',
@@ -111,11 +123,13 @@ module.exports = {
         ],
       },
       'music-notebook': {
-        collectionId: normalizeId(process.env.MUSIC_COLLECTION_ID),
-        collectionViewId: normalizeId(process.env.MUSIC_COLLECTION_VIEW_ID),
+        collectionId: normalizeId(env.get('MUSIC_COLLECTION_ID').asString()),
+        collectionViewId: normalizeId(
+          env.get('MUSIC_COLLECTION_VIEW_ID').asString()
+        ),
         enabled: true,
         navMenuTitle: 'Music Notes 音樂筆記',
-        pageId: normalizeId(process.env.MUSIC_PAGE_ID),
+        pageId: normalizeId(env.get('MUSIC_PAGE_ID').asString()),
         requiredEnv: [
           'MUSIC_PAGE_ID',
           'MUSIC_COLLECTION_ID',
@@ -171,6 +185,7 @@ module.exports = {
       page: '/maintain',
     },
   },
+  pageProcessTimeout: 3500,
   reduxCookiePersist: {
     enabled: false,
     stateSubTrees: [],
@@ -258,8 +273,17 @@ module.exports = {
   },
   website: {
     development: {
-      host: `${process.env.HOST}:${process.env.PORT}`,
-      hostname: process.env.HOST,
+      host: `${env
+        .get('HOST')
+        .default('local.dazedbear.pro')
+        .asString()}:${env
+        .get('PORT')
+        .default('3000')
+        .asString()}`,
+      hostname: env
+        .get('HOST')
+        .default('local.dazedbear.pro')
+        .asString(),
       protocol: 'http',
     },
     stage: {

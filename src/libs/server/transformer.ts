@@ -46,12 +46,14 @@ export const transformArticleStream = async (
     'collection_query',
     collectionId,
     collectionViewId,
+    'collection_group_results',
     'blockIds',
   ])
   articleStream.hasNext = get(data, [
     'collection_query',
     collectionId,
     collectionViewId,
+    'collection_group_results',
     'hasMore',
   ])
   articleStream.total = Array.isArray(articleStream.ids)

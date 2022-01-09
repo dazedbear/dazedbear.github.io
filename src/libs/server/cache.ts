@@ -3,7 +3,7 @@ import redisStore from 'cache-manager-ioredis'
 import objectHash from 'object-hash'
 import Redis from 'ioredis'
 import log from './log'
-import { cache as cacheConfig } from '../../../site.config'
+import { currentEnv, cache as cacheConfig } from '../../../site.config'
 import { CacheClientServingStatus } from '../../../types'
 
 class CacheClient {
@@ -134,7 +134,7 @@ class CacheClient {
     }
 
     // add dev prefix to prevent key collision with production data
-    const key = `${process.env.NEXT_PUBLIC_APP_ENV}_${originKey}`
+    const key = `${currentEnv}_${originKey}`
 
     const isClientRunning = await this.isClientRunning()
     if (!isClientRunning) {

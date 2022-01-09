@@ -6,7 +6,7 @@ const get = require('lodash/get')
 const pMap = require('p-map')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
-const { aws, website, failsafe } = require('../site.config')
+const { aws, currentEnv, website, failsafe } = require('../site.config')
 const log = require('./log')
 
 const parser = new XMLParser()
@@ -14,14 +14,13 @@ const ajv = new Ajv()
 addFormats(ajv)
 
 const getPageUrls = async () => {
-  const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
   const host = get(website, [currentEnv, 'host'])
   const protocal = get(website, [currentEnv, 'protocol'])
   const endpoint = `${protocal}://${host}/api/sitemap`
   const response = await fetch(endpoint)
   if (!response.ok) {
     throw Error(
-      `fetch sitemap error | status: ${response.status} | statusText: ${statusText} | url: ${endpoint}`
+      `fetch sitemap error | status: ${response.status} | statusText: ${response.statusText} | url: ${endpoint}`
     )
   }
   const sitemapXml = await response.text()

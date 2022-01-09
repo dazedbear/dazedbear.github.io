@@ -1,23 +1,17 @@
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
+import dynamic from 'next/dynamic'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
 import { ExtendedRecordMap } from 'notion-types'
-import {
-  Code,
-  Collection,
-  CollectionRow,
-  Equation,
-  Modal,
-  NotionRenderer,
-} from 'react-notion-x'
+import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
 
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
-import { notion } from '../../../site.config'
+import { notion, pageProcessTimeout } from '../../../site.config'
 import { PAGE_TYPE_ARTICLE_LIST_PAGE } from '../../libs/constant'
 import { mapNotionPageLinkUrl } from '../../libs/notion'
 import log from '../../libs/server/log'
@@ -28,6 +22,7 @@ import {
   showCommonPage,
   fetchArticleStream,
   isValidPageName,
+  executeFunctionWithTimeout,
 } from '../../libs/server/page'
 import {
   transformArticleStream,
@@ -39,55 +34,74 @@ import { logOption } from '../../../types'
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   store => async ({ params: { pageName }, req, res }) => {
-    if (!isValidPageName(pageName)) {
-      const options: logOption = {
-        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-        message: `invalid page | pageName: ${pageName}`,
-        level: 'error',
-        req,
-      }
-      log(options)
-      return showCommonPage(req, res, 'notFound', pageName)
-    }
+    const props = await executeFunctionWithTimeout(
+      async () => {
+        if (!isValidPageName(pageName)) {
+          const options: logOption = {
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+            message: `invalid page | pageName: ${pageName}`,
+            level: 'error',
+            req,
+          }
+          log(options)
+          return showCommonPage(req, res, 'notFound', pageName)
+        }
 
-    try {
-      const response = await fetchArticleStream({
-        req,
-        pageName,
-        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-      })
-      let articleStream = await transformArticleStream(pageName, response)
-      articleStream = await transformArticleStreamPreviewImages(articleStream)
-      const menuItems = transformMenuItems(pageName, articleStream)
+        try {
+          const response = await fetchArticleStream({
+            req,
+            pageName,
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+          })
+          let articleStream = await transformArticleStream(pageName, response)
+          articleStream = await transformArticleStreamPreviewImages(
+            articleStream
+          )
+          const menuItems = transformMenuItems(pageName, articleStream)
 
-      // save SSR fetch stream article contents to redux store
-      const payload = transformStreamActionPayload(pageName, articleStream)
-      const action = updateStream(payload)
-      store.dispatch(action)
+          // save SSR fetch stream article contents to redux store
+          const payload = transformStreamActionPayload(pageName, articleStream)
+          const action = updateStream(payload)
+          store.dispatch(action)
 
-      const options: logOption = {
-        category: 'page',
-        message: `dumpaccess to /${pageName}`,
-        level: 'info',
-        req,
-      }
-      log(options)
-      return {
-        props: {
-          menuItems,
-          pageName,
-        },
-      }
-    } catch (err) {
-      const options: logOption = {
-        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-        message: err,
-        level: 'error',
-        req,
-      }
-      log(options)
-      return showCommonPage(req, res, 'error', pageName)
-    }
+          const options: logOption = {
+            category: 'page',
+            message: `dumpaccess to /${pageName}`,
+            level: 'info',
+            req,
+          }
+          log(options)
+          return {
+            props: {
+              menuItems,
+              pageName,
+            },
+          }
+        } catch (err) {
+          const options: logOption = {
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+            message: err,
+            level: 'error',
+            req,
+          }
+          log(options)
+          return showCommonPage(req, res, 'error', pageName)
+        }
+      },
+      pageProcessTimeout,
+      duration => {
+        const options: logOption = {
+          category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+          message: `page processing timeout | duration: ${duration} ms`,
+          level: 'warn',
+          req,
+        }
+        log(options)
+        return showCommonPage(req, res, 'error', pageName)
+      },
+      PAGE_TYPE_ARTICLE_LIST_PAGE
+    )
+    return props
   }
 )
 
@@ -95,8 +109,12 @@ const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
-  equation: Equation,
-  modal: Modal,
+  equation: dynamic(() =>
+    import('react-notion-x').then(notion => notion.Equation)
+  ),
+  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
+    ssr: false,
+  }),
   pageLink: props => (
     <Link {...props}>
       <a {...props} />

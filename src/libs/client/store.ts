@@ -7,10 +7,14 @@ import {
 } from 'next-redux-cookie-wrapper'
 import LogRocket from 'logrocket'
 import rootReducer from './slices'
-import siteConfig from '../../../site.config'
+import {
+  currentEnv,
+  reduxCookiePersist,
+  trackingSettings,
+} from '../../../site.config'
 
 const store = configureStore({
-  devTools: process.env.NEXT_PUBLIC_APP_ENV !== 'production',
+  devTools: currentEnv !== 'production',
   middleware: getDefaultMiddleware => {
     let middleware = getDefaultMiddleware({
       serializableCheck: {
@@ -18,18 +22,18 @@ const store = configureStore({
         ignoredActions: [SERVE_COOKIES],
       },
     })
-    if (siteConfig.reduxCookiePersist.enabled) {
+    if (reduxCookiePersist.enabled) {
       middleware.unshift(
         nextReduxCookieMiddleware({
           domain: '.dazedbear.pro',
           maxAge: 86400,
           sameSite: true,
           secure: true,
-          subtrees: siteConfig.reduxCookiePersist.stateSubTrees,
+          subtrees: reduxCookiePersist.stateSubTrees,
         })
       )
     }
-    if (siteConfig.trackingSettings.logRocket.enable) {
+    if (trackingSettings.logRocket.enable) {
       middleware.push(LogRocket.reduxMiddleware())
     }
     return middleware

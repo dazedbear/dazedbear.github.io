@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.10.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.9.0...v4.10.0) (2022-01-09)
+
+### Features
+
+- add page timeout to prevent lambda 504 ([#24](https://github.com/dazedbear/dazedbear.github.io/issues/24)) ([e3de843](https://github.com/dazedbear/dazedbear.github.io/commit/e3de843dc943af1eb982bfe367b9e671c6d5ffff))
+
+### Bug Fixes
+
+- add type casting for env variables ([4e9b6f7](https://github.com/dazedbear/dazedbear.github.io/commit/4e9b6f7c1a39a21704f0c6f3755e944d9bb10845))
+- disable cache client when building ([4c16162](https://github.com/dazedbear/dazedbear.github.io/commit/4c1616241ee44a8e7102be0059bed0a2016bcd67))
+- sitemap 500 due to response change ([0599b33](https://github.com/dazedbear/dazedbear.github.io/commit/0599b33df33a4035c30333d12f52c2a6c67e955b))
+- type error when failsafe generation is failed ([47b2d3b](https://github.com/dazedbear/dazedbear.github.io/commit/47b2d3bd13959fbfb5035d407ee0a2e9539e977e))
+
+### Performance
+
+- dynamic load notion component to reduce bundle size ([353647a](https://github.com/dazedbear/dazedbear.github.io/commit/353647a604537c155208ca8a7c94b1315dc82587))
+
 ## [4.9.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.8.1...v4.9.0) (2021-12-25)
 
 ### Features

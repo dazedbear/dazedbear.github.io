@@ -3,6 +3,7 @@ import { ExtendedRecordMap } from 'notion-types'
 import get from 'lodash/get'
 import * as URI from 'uri-js'
 import qs, { ParsedQs } from 'qs'
+import { performance } from 'perf_hooks'
 import {
   ErrorPageProps,
   NotionPageName,
@@ -179,4 +180,58 @@ export const fetchSingleArticleStream = async (
 
   const response = await getNotionPage(pageId)
   return response
+}
+
+/**
+ * execute function with timeout. If execFn finishes in timeout, will get the result of execFn. If not, will get the result of fallbackFn.
+ * @param {Function | AsyncGeneratorFunction} execFn
+ * @param {Function | AsyncGeneratorFunction} fallbackFn
+ * @param {number} timeout
+ * @param {string} label
+ * @returns {Promise<any>} result of execFn or fallbackFn
+ */
+export const executeFunctionWithTimeout = async (
+  execFn: Function | AsyncGeneratorFunction,
+  timeout: number = 0,
+  fallbackFn?: Function | AsyncGeneratorFunction,
+  label?: string
+): Promise<any> => {
+  const REACH_TIMEOUT = 'function execution exceeds timeout'
+  if (!timeout) {
+    return await execFn()
+  }
+
+  let timerId
+  const timer = new Promise(resolve => {
+    timerId = setTimeout(() => {
+      timerId = undefined
+      resolve(REACH_TIMEOUT)
+    }, timeout)
+  })
+  const execTime = {
+    start: 0,
+    end: 0,
+    duration: 0,
+  }
+  execTime.start = performance.now()
+  let result = await Promise.race([timer, execFn()])
+  execTime.end = performance.now()
+  execTime.duration = Math.round(execTime.end - execTime.start) // ms
+  const options: logOption = {
+    category: label || 'executeFunctionWithTimeout',
+    message: `function processing is done | duration: ${execTime.duration} ms`,
+    level: 'info',
+  }
+  log(options)
+  if (timerId) {
+    clearTimeout(timerId)
+    timerId = undefined
+  }
+  if (result === REACH_TIMEOUT) {
+    result =
+      typeof fallbackFn === 'function'
+        ? await fallbackFn(execTime.duration)
+        : false
+  }
+  return result
 }
