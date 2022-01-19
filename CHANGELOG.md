@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.11.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.10.0...v4.11.0) (2022-01-19)
+
+### Features
+
+- disable page timeout when failsafe generation mode ([ee83dd7](https://github.com/dazedbear/dazedbear.github.io/commit/ee83dd7433eb9e147a2aee686505962065186488))
+
+### Bug Fixes
+
+- prism client side code highlight issue ([33781b5](https://github.com/dazedbear/dazedbear.github.io/commit/33781b5a2d6efa5d4c26e732350f4c5932479b10))
+
+### Others
+
+- change code syntax highlight theme ([4b91bf0](https://github.com/dazedbear/dazedbear.github.io/commit/4b91bf091445d724a2002c363ca0543a44811213))
+- fix code block broken UI when desktop device ([b4e3df0](https://github.com/dazedbear/dazedbear.github.io/commit/b4e3df08742384fdf20e4f4da8bd52cb9c95849e))
+
+### Build
+
+- fix missing dependency ([7c3aa77](https://github.com/dazedbear/dazedbear.github.io/commit/7c3aa7755238ae3a61bf3402c2277458c4836d5e))
+
 ## [4.10.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.9.0...v4.10.0) (2022-01-09)
 
 ### Features
