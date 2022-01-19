@@ -185,7 +185,12 @@ module.exports = {
       page: '/maintain',
     },
   },
-  pageProcessTimeout: 3500,
+  pageProcessTimeout: env
+    .get('DISABLE_PAGE_PROCESS_TIMEOUT')
+    .default('false')
+    .asBool()
+    ? 0
+    : 3500,
   reduxCookiePersist: {
     enabled: false,
     stateSubTrees: [],
