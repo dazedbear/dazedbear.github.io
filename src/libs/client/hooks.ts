@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import prism from 'prismjs'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
@@ -179,5 +180,15 @@ export const useInitLogRocket = () => {
       LogRocket.init(trackingSettings?.logRocket?.id)
       setInitialized(true)
     }
+  })
+}
+
+/**
+ * Custom hook to trigger prism.js code syntax highlight
+ * @see https://mxd.codes/articles/syntax-highlighting-with-prism-and-next-js
+ */
+export const useCodeSyntaxHighlight = () => {
+  useEffect(() => {
+    prism.highlightAll()
   })
 }
