@@ -12,7 +12,10 @@ import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
 import { notion, pageProcessTimeout } from '../../../site.config'
-import { PAGE_TYPE_ARTICLE_LIST_PAGE } from '../../libs/constant'
+import {
+  FAILSAFE_PAGE_GENERATION_QUERY,
+  PAGE_TYPE_ARTICLE_LIST_PAGE,
+} from '../../libs/constant'
 import { mapNotionPageLinkUrl } from '../../libs/notion'
 import log from '../../libs/server/log'
 import wrapper from '../../libs/client/store'
@@ -33,7 +36,10 @@ import {
 import { logOption } from '../../../types'
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName }, req, res }) => {
+  store => async ({ params: { pageName }, query, req, res }) => {
+    // disable page timeout when failsafe generation mode (?fsg=1)
+    const timeout =
+      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
     const props = await executeFunctionWithTimeout(
       async () => {
         if (!isValidPageName(pageName)) {
@@ -88,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           return showCommonPage(req, res, 'error', pageName)
         }
       },
-      pageProcessTimeout,
+      timeout,
       duration => {
         const options: logOption = {
           category: PAGE_TYPE_ARTICLE_LIST_PAGE,

@@ -1,4 +1,5 @@
 const { currentEnv, failsafe, notion, website } = require('./site.config')
+const { FAILSAFE_PAGE_SERVING_QUERY } = require('./src/libs/constant')
 const get = require('lodash/get')
 
 const validateRequiredEnv = () => {
@@ -49,7 +50,9 @@ module.exports = {
             currentEnv,
             'hostname',
           ])}/index.html`,
-          has: [{ type: 'query', key: 'fs', value: '1' }],
+          has: [
+            { type: 'query', key: FAILSAFE_PAGE_SERVING_QUERY, value: '1' },
+          ],
         },
         {
           // for failsafe page debug
@@ -58,7 +61,9 @@ module.exports = {
             currentEnv,
             'hostname',
           ])}/:path*.html`,
-          has: [{ type: 'query', key: 'fs', value: '1' }],
+          has: [
+            { type: 'query', key: FAILSAFE_PAGE_SERVING_QUERY, value: '1' },
+          ],
         },
       ],
       afterFiles: [

@@ -1,0 +1,7 @@
+module.exports = {
+  PAGE_TYPE_ARTICLE_LIST_PAGE: 'ArticleListPage',
+  PAGE_TYPE_ARTICLE_SINGLE_PAGE: 'ArticleSinglePage',
+  PAGE_TYPE_ERROR_PAGE: 'ErrorPage',
+  FAILSAFE_PAGE_GENERATION_QUERY: 'fsg',
+  FAILSAFE_PAGE_SERVING_QUERY: 'fs',
+}

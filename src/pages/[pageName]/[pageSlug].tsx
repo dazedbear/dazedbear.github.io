@@ -11,7 +11,10 @@ import { Code, Collection, NotionRenderer } from 'react-notion-x'
 
 import { logOption } from '../../../types'
 import { notion, pageProcessTimeout } from '../../../site.config'
-import { PAGE_TYPE_ARTICLE_SINGLE_PAGE } from '../../libs/constant'
+import {
+  FAILSAFE_PAGE_GENERATION_QUERY,
+  PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+} from '../../libs/constant'
 import {
   extractSinglePagePath,
   getPageProperty,
@@ -44,7 +47,10 @@ import NotionPageHeader from '../../components/notion-page-header'
 import NotionPageFooter from '../../components/notion-page-footer'
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName, pageSlug }, req, res }) => {
+  store => async ({ params: { pageName, pageSlug }, req, res, query }) => {
+    // disable page timeout when failsafe generation mode (?fsg=1)
+    const timeout =
+      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
     const props = await executeFunctionWithTimeout(
       async () => {
         if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
@@ -120,7 +126,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           return showCommonPage(req, res, 'error', pageName)
         }
       },
-      pageProcessTimeout,
+      timeout,
       duration => {
         const options: logOption = {
           category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,

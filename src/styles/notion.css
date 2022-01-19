@@ -85,4 +85,12 @@
   #app #notion-single-page .notion-collection .notion-table-view {
     padding: 20px !important;
   }
+  #app #notion-single-page .notion-code {
+    overflow: initial;
+  }
+  #app #notion-single-page .notion-code > code {
+    display: block;
+    overflow-x: scroll;
+    overflow-y: visible;
+  }
 }

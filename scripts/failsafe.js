@@ -7,6 +7,7 @@ const pMap = require('p-map')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
 const { aws, currentEnv, website, failsafe } = require('../site.config')
+const { FAILSAFE_PAGE_GENERATION_QUERY } = require('../src/libs/constant')
 const log = require('./log')
 
 const parser = new XMLParser()
@@ -26,7 +27,9 @@ const getPageUrls = async () => {
   const sitemapXml = await response.text()
   const sitemapObj = parser.parse(sitemapXml)
 
-  const pageUrls = get(sitemapObj, ['urlset', 'url'], []).map(({ loc }) => loc)
+  const pageUrls = get(sitemapObj, ['urlset', 'url'], []).map(
+    ({ loc }) => `${loc}?${FAILSAFE_PAGE_GENERATION_QUERY}=1`
+  ) // failsafe generation mode
 
   log({ category: 'getPageUrls', message: pageUrls })
   return pageUrls
