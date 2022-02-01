@@ -292,6 +292,46 @@ export const transformPageUrls = (
 }
 
 /**
+ * transform article stream to page paths for single page
+ * @param {string} pageName
+ * @param {object} articleStream
+ * @returns {array} url array
+ */
+export const transformPagePaths = (
+  pageName: NotionPageName,
+  articleStream: ArticleStream
+): string[] => {
+  const recordMap = articleStream.content
+  let pagePaths: string[] = articleStream.ids.map(pageId => {
+    const pagePath = getSinglePagePath({
+      pageName,
+      pageId,
+      recordMap,
+    })
+    return pagePath
+  })
+
+  const schema = {
+    type: 'array',
+    items: {
+      type: 'string',
+    },
+  }
+  const validate = ajv.compile(schema)
+  if (!validate(pagePaths)) {
+    const options: logOption = {
+      category: 'transformPagePaths',
+      message: `${validate.errors}`,
+      level: 'warn',
+    }
+    log(options)
+    throw 'page path are invalid'
+  }
+
+  return pagePaths
+}
+
+/**
  * transform article stream to updateStream action payload
  * @param {string} pageName
  * @param {object} articleStream

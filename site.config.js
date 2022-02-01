@@ -146,6 +146,7 @@ module.exports = {
       concurrency: Infinity,
       enable: false,
     },
+    revalidate: currentEnv === 'development' ? 30 : 300, // sec
   },
   pages: {
     index: {

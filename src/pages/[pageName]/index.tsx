@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
 import dynamic from 'next/dynamic'
@@ -11,9 +11,9 @@ import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
-import { notion, pageProcessTimeout } from '../../../site.config'
+import { notion } from '../../../site.config'
 import {
-  FAILSAFE_PAGE_GENERATION_QUERY,
+  FAILSAFE_PAGE_SERVING_QUERY,
   PAGE_TYPE_ARTICLE_LIST_PAGE,
 } from '../../libs/constant'
 import { mapNotionPageLinkUrl } from '../../libs/notion'
@@ -21,12 +21,7 @@ import log from '../../libs/server/log'
 import wrapper from '../../libs/client/store'
 import { updateStream, fetchStreamPosts } from '../../libs/client/slices/stream'
 import { useAppSelector, useAppDispatch } from '../../libs/client/hooks'
-import {
-  showCommonPage,
-  fetchArticleStream,
-  isValidPageName,
-  executeFunctionWithTimeout,
-} from '../../libs/server/page'
+import { fetchArticleStream, isValidPageName } from '../../libs/server/page'
 import {
   transformArticleStream,
   transformArticleStreamPreviewImages,
@@ -35,79 +30,75 @@ import {
 } from '../../libs/server/transformer'
 import { logOption } from '../../../types'
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName }, query, req, res }) => {
-    // disable page timeout when failsafe generation mode (?fsg=1)
-    const timeout =
-      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
-    const props = await executeFunctionWithTimeout(
-      async () => {
-        if (!isValidPageName(pageName)) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-            message: `invalid page | pageName: ${pageName}`,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'notFound', pageName)
-        }
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pageNameList = Object.keys(notion.pages) || []
+  const paths = pageNameList.reduce((list, pageName) => {
+    if (isValidPageName(pageName)) {
+      list.push({ params: { pageName } })
+    }
+    return list
+  }, [])
 
-        try {
-          const response = await fetchArticleStream({
-            req,
-            pageName,
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-          })
-          let articleStream = await transformArticleStream(pageName, response)
-          articleStream = await transformArticleStreamPreviewImages(
-            articleStream
-          )
-          const menuItems = transformMenuItems(pageName, articleStream)
+  return {
+    fallback: false, // 404 when pageName is unknown
+    paths,
+  }
+}
 
-          // save SSR fetch stream article contents to redux store
-          const payload = transformStreamActionPayload(pageName, articleStream)
-          const action = updateStream(payload)
-          store.dispatch(action)
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  store => async ({ params: { pageName } }) => {
+    if (!isValidPageName(pageName)) {
+      const options: logOption = {
+        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+        message: `invalid page | pageName: ${pageName}`,
+        level: 'error',
+      }
+      log(options)
+      return {
+        notFound: true,
+      }
+    }
+    try {
+      const response = await fetchArticleStream({
+        pageName,
+        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+      })
+      let articleStream = await transformArticleStream(pageName, response)
+      articleStream = await transformArticleStreamPreviewImages(articleStream)
+      const menuItems = transformMenuItems(pageName, articleStream)
 
-          const options: logOption = {
-            category: 'page',
-            message: `dumpaccess to /${pageName}`,
-            level: 'info',
-            req,
-          }
-          log(options)
-          return {
-            props: {
-              menuItems,
-              pageName,
-            },
-          }
-        } catch (err) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-            message: err,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'error', pageName)
-        }
-      },
-      timeout,
-      duration => {
-        const options: logOption = {
-          category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-          message: `page processing timeout | duration: ${duration} ms`,
-          level: 'warn',
-          req,
-        }
-        log(options)
-        return showCommonPage(req, res, 'error', pageName)
-      },
-      PAGE_TYPE_ARTICLE_LIST_PAGE
-    )
-    return props
+      // save fetch stream article contents to redux store
+      const payload = transformStreamActionPayload(pageName, articleStream)
+      const action = updateStream(payload)
+      store.dispatch(action)
+
+      const options: logOption = {
+        category: 'page',
+        message: `dumpaccess to /${pageName}`,
+        level: 'info',
+      }
+      log(options)
+      return {
+        props: {
+          menuItems,
+          pageName,
+        },
+        revalidate: notion.revalidate,
+      }
+    } catch (err) {
+      const options: logOption = {
+        category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+        message: err,
+        level: 'error',
+      }
+      log(options)
+      return {
+        redirect: {
+          destination: `/${pageName}?${FAILSAFE_PAGE_SERVING_QUERY}=1`,
+          permanent: false,
+        },
+      }
+    }
   }
 )
 

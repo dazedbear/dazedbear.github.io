@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
 import dynamic from 'next/dynamic'
@@ -7,12 +7,13 @@ import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 import { ExtendedRecordMap } from 'notion-types'
 import { idToUuid } from 'notion-utils'
+import pMap from 'p-map'
 import { Code, Collection, NotionRenderer } from 'react-notion-x'
 
 import { logOption } from '../../../types'
-import { notion, pageProcessTimeout } from '../../../site.config'
+import { notion } from '../../../site.config'
 import {
-  FAILSAFE_PAGE_GENERATION_QUERY,
+  FAILSAFE_PAGE_SERVING_QUERY,
   PAGE_TYPE_ARTICLE_SINGLE_PAGE,
 } from '../../libs/constant'
 import {
@@ -26,17 +27,16 @@ import wrapper from '../../libs/client/store'
 import { updateStream } from '../../libs/client/slices/stream'
 import log from '../../libs/server/log'
 import {
-  showCommonPage,
   fetchArticleStream,
   isValidPageSlug,
   isValidPageName,
-  executeFunctionWithTimeout,
 } from '../../libs/server/page'
 import {
   transformArticleStream,
   transformArticleStreamPreviewImages,
   transformSingleArticle,
   transformMenuItems,
+  transformPagePaths,
   transformStreamActionPayload,
   transformTableOfContent,
 } from '../../libs/server/transformer'
@@ -46,100 +46,113 @@ import TableOfContent from '../../components/toc'
 import NotionPageHeader from '../../components/notion-page-header'
 import NotionPageFooter from '../../components/notion-page-footer'
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName, pageSlug }, req, res, query }) => {
-    // disable page timeout when failsafe generation mode (?fsg=1)
-    const timeout =
-      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
-    const props = await executeFunctionWithTimeout(
-      async () => {
-        if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-            message: `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'notFound', pageName)
-        }
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pageNameList = Object.keys(notion.pages).filter(pageName =>
+    isValidPageName(pageName)
+  )
+  // get all enabled notion list page paths
+  const currentNotionListUrls: string[][] = await pMap(
+    pageNameList,
+    async pageName => {
+      const response = await fetchArticleStream({
+        pageName,
+        category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+      })
+      const articleStream = await transformArticleStream(pageName, response)
+      return transformPagePaths(pageName, articleStream)
+    },
+    {
+      concurrency: 10,
+    }
+  )
+  const paths = currentNotionListUrls.reduce(
+    (compositePathsList, pageSlugList, idx) => {
+      const pageName = pageNameList[idx]
+      const pathsList = pageSlugList.map(pageSlug => ({
+        params: { pageName, pageSlug },
+      }))
+      return compositePathsList.concat(pathsList)
+    },
+    [] as any[]
+  )
 
-        const { pageId: articleId } = extractSinglePagePath(pageSlug)
+  return {
+    paths,
+    fallback: 'blocking', // for new publish page ISR.
+  }
+}
 
-        try {
-          let articleStream = {}
-          const response = await fetchArticleStream({
-            req,
-            pageName,
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          })
-          articleStream = await transformArticleStream(pageName, response)
-          articleStream = await transformArticleStreamPreviewImages(
-            articleStream
-          )
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(
+  store => async ({ params: { pageName, pageSlug } }) => {
+    if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
+      const options: logOption = {
+        category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+        message: `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`,
+        level: 'error',
+      }
+      log(options)
+      return {
+        notFound: true,
+      }
+    }
 
-          // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
-          const singleArticleResponse = await fetchArticleStream({
-            req,
-            pageId: articleId,
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          })
-          let singleArticle = await transformSingleArticle(
-            singleArticleResponse
-          )
-          singleArticle = await transformArticleStreamPreviewImages(
-            singleArticle
-          )
-          articleStream = merge(articleStream, singleArticle)
+    const { pageId: articleId } = extractSinglePagePath(pageSlug)
 
-          const menuItems = transformMenuItems(pageName, articleStream)
-          const toc = transformTableOfContent(articleStream, articleId)
+    try {
+      let articleStream = {}
+      const response = await fetchArticleStream({
+        pageName,
+        category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+      })
+      articleStream = await transformArticleStream(pageName, response)
+      articleStream = await transformArticleStreamPreviewImages(articleStream)
 
-          // save SSR fetch stream article contents to redux store
-          const payload = transformStreamActionPayload(pageName, articleStream)
-          const action = updateStream(payload)
-          store.dispatch(action)
+      // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
+      const singleArticleResponse = await fetchArticleStream({
+        pageId: articleId,
+        category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+      })
+      let singleArticle = await transformSingleArticle(singleArticleResponse)
+      singleArticle = await transformArticleStreamPreviewImages(singleArticle)
+      articleStream = merge(articleStream, singleArticle)
 
-          const options: logOption = {
-            category: 'page',
-            message: `dumpaccess to /${pageName}/${pageSlug}`,
-            level: 'info',
-            req,
-          }
-          log(options)
-          return {
-            props: {
-              menuItems,
-              pageId: idToUuid(articleId),
-              pageName,
-              toc,
-            },
-          }
-        } catch (err) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-            message: err,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'error', pageName)
-        }
-      },
-      timeout,
-      duration => {
-        const options: logOption = {
-          category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          message: `page processing timeout | duration: ${duration} ms`,
-          level: 'warn',
-          req,
-        }
-        log(options)
-        return showCommonPage(req, res, 'error', pageName)
-      },
-      PAGE_TYPE_ARTICLE_SINGLE_PAGE
-    )
-    return props
+      const menuItems = transformMenuItems(pageName, articleStream)
+      const toc = transformTableOfContent(articleStream, articleId)
+
+      // save SSR fetch stream article contents to redux store
+      const payload = transformStreamActionPayload(pageName, articleStream)
+      const action = updateStream(payload)
+      store.dispatch(action)
+
+      const options: logOption = {
+        category: 'page',
+        message: `dumpaccess to /${pageName}/${pageSlug}`,
+        level: 'info',
+      }
+      log(options)
+      return {
+        props: {
+          menuItems,
+          pageId: idToUuid(articleId),
+          pageName,
+          toc,
+        },
+        revalidate: notion.revalidate,
+      }
+    } catch (err) {
+      const options: logOption = {
+        category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+        message: err,
+        level: 'error',
+      }
+      log(options)
+      return {
+        redirect: {
+          destination: `/${pageName}/${pageSlug}?${FAILSAFE_PAGE_SERVING_QUERY}=1`,
+          permanent: false,
+        },
+      }
+    }
   }
 )
 
