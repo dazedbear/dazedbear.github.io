@@ -1,14 +1,18 @@
 require('./env')()
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 const { XMLParser } = require('fast-xml-parser')
-const fetch = require('node-fetch')
 const get = require('lodash/get')
-const pMap = require('p-map')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
 const { aws, currentEnv, website, failsafe } = require('../site.config')
 const { FAILSAFE_PAGE_GENERATION_QUERY } = require('../src/libs/constant')
 const log = require('./log')
+
+// node-fetch and pMap doesn't support common js since v3.
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args))
+const pMap = (...args) =>
+  import('p-map').then(({ default: pMap }) => pMap(...args))
 
 const parser = new XMLParser()
 const ajv = new Ajv()

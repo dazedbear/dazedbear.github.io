@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.0...v4.11.1) (2022-02-01)
+
+### Bug Fixes
+
+- workaround for packages which don't support common js ([81f0a2f](https://github.com/dazedbear/dazedbear.github.io/commit/81f0a2f080f65febdf933b73e02fe4347ed6e68d))
+
+### CI/CD
+
+- prevent cache warmup redirect and make it verbose ([454934a](https://github.com/dazedbear/dazedbear.github.io/commit/454934a0374b8c8cd22c4dd619731a0bedc7dae2))
+
+### Build
+
+- add missing dependencies ([ddad1e2](https://github.com/dazedbear/dazedbear.github.io/commit/ddad1e2b7b11ce7989db09e2ef983bae512ab102))
+
 ## [4.11.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.10.0...v4.11.0) (2022-01-19)
 
 ### Features

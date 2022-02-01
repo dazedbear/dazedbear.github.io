@@ -8,4 +8,4 @@ jobs:
     name: Sitemap Cache Warm Up
     runs-on: ubuntu-latest
     steps:
-      - run: curl -L -X GET "https://dazedbear.pro/api/sitemap"
+      - run: curl -v -L -X GET "https://www.dazedbear.pro/api/sitemap"
