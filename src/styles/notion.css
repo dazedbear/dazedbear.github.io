@@ -50,7 +50,7 @@
   #app .notion-row {
     @apply overflow-visible;
   }
-  #app img {
+  #app .notion img {
     @apply bg-gray-200;
   }
 
