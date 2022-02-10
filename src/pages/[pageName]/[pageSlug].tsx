@@ -147,9 +147,7 @@ const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: () => null, // we don't render property table for each articles
-  equation: dynamic(() =>
-    import('react-notion-x').then(notion => notion.Equation)
-  ),
+  equation: () => null, // we don't have math equation in articles, so we don't need this
   modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
     ssr: false,
   }),
