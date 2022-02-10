@@ -21,7 +21,7 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
     - [NotionX/react-notion-x](https://github.com/NotionX/react-notion-x) for fetching data from Notion then rendering posts
     - [preview image](https://github.com/transitive-bullshit/nextjs-notion-starter-kit#preview-images) to generate image placeholder with lqip.
   - [ijjk/notion-blog](https://github.com/ijjk/notion-blog)
-    - [filesystem cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) idea that we use [cache-manager](https://www.npmjs.com/package/cache-manager) and [node-cache-manager-fs-hash](https://github.com/rolandstarke/node-cache-manager-fs-hash) to implement instead
+    - [API response cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) that we use [cache-manager](https://www.npmjs.com/package/cache-manager) and [cache-manager-ioredis](https://github.com/dabroek/node-cache-manager-ioredis) to implement instead
 - [Next.js](https://nextjs.org/) - React core framework
   - [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) to serve dynamic data from Notion.
 - [Redux](https://redux.js.org/) - state management
@@ -70,7 +70,7 @@ $ npm run dev
 $ npm run build
 ```
 
-### setup local development domain
+### Setup local development domain
 
 ```bash
 $ sudo vim /etc/hosts
@@ -80,3 +80,15 @@ $ sudo vim /etc/hosts
 ```
 
 then visit the test site http://local.dazedbear.pro:3000
+
+### Environment variables for development
+
+| name                         | default value         | required | description                                                                                                                                          |
+| ---------------------------- | --------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| NEXT_PUBLIC_APP_ENV          | `development`         | no       | app env. available values: `development`, `stage`, `production`                                                                                      |
+| HOST                         | `local.dazedbear.pro` | no       | app hostname                                                                                                                                         |
+| PORT                         | `3000`                | no       | app port                                                                                                                                             |
+| CACHE_CLIENT_ENABLED         | `false`               | no       | flag to turn on cache client                                                                                                                         |
+| DEBUG                        | -                     | no       | useful flag to turn on debug mode for specific modules. ex: `DEBUG=ioredis:*`                                                                        |
+| DISABLE_PAGE_PROCESS_TIMEOUT | `false`               | no       | notion pages will be redirected to failsafe pages if server-side rendering exceeds the page progress timeout (3500 ms). use this flag to turn it off |
+| BUNDLE_ANALYSIS              | `false`               | no       | use this flag to turn on bundle analyzer to show the report after running `npm run build`                                                            |
