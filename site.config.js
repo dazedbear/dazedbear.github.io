@@ -23,6 +23,12 @@ module.exports = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
   },
+  bundleAnalysis: {
+    enabled: env
+      .get('BUNDLE_ANALYSIS')
+      .default('false')
+      .asBool(),
+  },
   cache: {
     enable: env
       .get('CACHE_CLIENT_ENABLED')
