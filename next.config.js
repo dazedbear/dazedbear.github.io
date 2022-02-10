@@ -1,4 +1,10 @@
-const { currentEnv, failsafe, notion, website } = require('./site.config')
+const {
+  bundleAnalysis,
+  currentEnv,
+  failsafe,
+  notion,
+  website,
+} = require('./site.config')
 const { FAILSAFE_PAGE_SERVING_QUERY } = require('./src/libs/constant')
 const get = require('lodash/get')
 
@@ -24,7 +30,16 @@ const validateRequiredEnv = () => {
   })
 }
 
-module.exports = {
+const withBundleAnalyzer = config => {
+  if (!bundleAnalysis.enabled) {
+    return config
+  }
+  return require('@next/bundle-analyzer')({ enabled: bundleAnalysis.enabled })(
+    config
+  )
+}
+
+module.exports = withBundleAnalyzer({
   swcMinify: true,
 
   webpack(cfg) {
@@ -76,4 +91,4 @@ module.exports = {
       ],
     }
   },
-}
+})

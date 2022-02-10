@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { FaGithub, FaLinkedin, FaSoundcloud, FaYoutube } from 'react-icons/fa'
+import { IconContext } from 'react-icons'
 import ExtLink from './ext-link'
 import {
   copyright,
@@ -7,19 +9,26 @@ import {
 } from '../../site.config'
 import logoOpenProcessing from '../../public/logo-openprocessing.png'
 
+const unsupportIcons = {
+  openprocessing: logoOpenProcessing,
+}
+const supportIcons = {
+  github: FaGithub,
+  linkedin: FaLinkedin,
+  soundcloud: FaSoundcloud,
+  youtube: FaYoutube,
+}
+
 const CommunityIcon = ({ name, link }) => {
-  const fontAwesomeUnsupportIcons = {
-    openprocessing: logoOpenProcessing,
-  }
   if (!name || !link) {
     return null
   }
-  if (fontAwesomeUnsupportIcons[name]) {
+  if (unsupportIcons[name]) {
     return (
       <div className="w-24 p-0 m-0 text-center">
         <ExtLink href={link} target="_blank" className="text-gray-500">
           <Image
-            src={fontAwesomeUnsupportIcons[name]}
+            src={unsupportIcons[name]}
             className="h-8 mx-auto my-0 block filter grayscale"
             height="32"
             width="36"
@@ -29,11 +38,19 @@ const CommunityIcon = ({ name, link }) => {
       </div>
     )
   }
+  const IconComponent = supportIcons[name] || null
   return (
     <div className="w-24 p-0 m-0 text-center">
-      <ExtLink href={link} target="_blank" className="text-gray-500">
-        <i className={`text-gray-300 fab fa-2x fa-${name}`} />
-        {/* <p className="text-gray-300 mt-0.5 capitalize">{name}</p> */}
+      <ExtLink
+        href={link}
+        target="_blank"
+        className="text-gray-500 inline-block"
+      >
+        <IconContext.Provider
+          value={{ className: 'text-gray-300', size: '2em' }}
+        >
+          <IconComponent />
+        </IconContext.Provider>
       </ExtLink>
     </div>
   )
