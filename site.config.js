@@ -53,20 +53,6 @@ module.exports = {
     concurrency: 15,
     host: 'failsafe.dazedbear.pro',
   },
-  splunk: {
-    enable: false,
-    // https://docs.splunk.com/Documentation/SplunkCloud/8.2.2105/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector_on_Splunk_Cloud
-    // https://github.com/splunk/splunk-javascript-logging/blob/master/splunklogger.js
-    option: {
-      batchInterval: 2500,
-      host: `inputs.${env.get('SPLUNK_HEC_HOST').asString()}`,
-      path: '/services/collector',
-      port: 8088,
-      protocol: 'https',
-      maxBatchCount: 25,
-      token: env.get('SPLUNK_HEC_TOKEN').asString(),
-    },
-  },
   meta: {
     title: 'DazedBear Studio',
     description: 'Web。Digital Music。Self Development',
