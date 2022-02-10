@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.1...v4.11.2) (2022-02-10)
+
+### Bug Fixes
+
+- add missing dependnecy ([f7dea62](https://github.com/dazedbear/dazedbear.github.io/commit/f7dea62dd1f2faa8fb77bf01a662ecfdc9e20089))
+
+### Performance
+
+- add bundle analyzer integration ([bb59d8f](https://github.com/dazedbear/dazedbear.github.io/commit/bb59d8fe75208adacb16b401ca52ca4a5531e339))
+- move prismjs dependency to page level ([4f56665](https://github.com/dazedbear/dazedbear.github.io/commit/4f56665d5357ac3b638ae5b50407f5b371da9bd0))
+- remove dependency for unused react-notion-x blocks ([39ba9a1](https://github.com/dazedbear/dazedbear.github.io/commit/39ba9a10a8764fa61414f6e32f0ffd231ba620c0))
+- remove splunk integration ([6c7ff0b](https://github.com/dazedbear/dazedbear.github.io/commit/6c7ff0b8375ad8bc9630885cac856c45c89b2385))
+- remove unused dependencies ([0d2b4d9](https://github.com/dazedbear/dazedbear.github.io/commit/0d2b4d9120231ab04ca48bb709bc535394674fd8))
+- replace fortawesome with react-icons to reduce bundle size ([66cb9bb](https://github.com/dazedbear/dazedbear.github.io/commit/66cb9bb5937384351bec72703596573fda7c9f0e))
+
+### Documentation
+
+- correct README and add env variable section ([a1131b0](https://github.com/dazedbear/dazedbear.github.io/commit/a1131b0cab0bc585a23169f957266ad3f29ade93))
+
 ### [4.11.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.0...v4.11.1) (2022-02-01)
 
 ### Bug Fixes

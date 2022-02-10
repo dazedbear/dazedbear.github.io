@@ -7,6 +7,7 @@ import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
 import { ExtendedRecordMap } from 'notion-types'
 import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
+import { FaCircleNotch, FaRedo } from 'react-icons/fa'
 
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
@@ -115,9 +116,7 @@ const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
-  equation: dynamic(() =>
-    import('react-notion-x').then(notion => notion.Equation)
-  ),
+  equation: () => null, // we don't have math equation in articles, so we don't need this
   modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
     ssr: false,
   }),
@@ -160,7 +159,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
           <p className="text-gray-700 text-sm text-center inline-block">
             文章讀取中...
             <span className="w-4 ml-2 text-center inline-block animate-spin">
-              <i className="fas fa-circle-notch"></i>
+              <FaCircleNotch />
             </span>
           </p>
         </div>
@@ -176,7 +175,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
           <p className="text-gray-700 text-sm text-center inline-block">
             文章讀取發生了問題. 請點此再試一次.
             <span className="w-4 ml-2 text-center inline-block">
-              <i className="fas fa-redo"></i>
+              <FaRedo />
             </span>
           </p>
         </button>
