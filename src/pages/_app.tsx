@@ -1,8 +1,6 @@
 // css
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
-import '@fortawesome/fontawesome-free/css/all.css'
-import '@fortawesome/fontawesome-free/js/all'
 import 'nprogress/nprogress.css'
 import '../styles/global.css'
 import '../styles/notion.css'
