@@ -1,3 +1,26 @@
+// for Prism.js language highlight
+import 'prismjs'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-markup-templating'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-css-extras'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-typescript'
+// prism-php has a dependency: prism-markup-templating.
+// see: https://github.com/PrismJS/prism/issues/1400#issuecomment-485847919
+import 'prismjs/components/prism-php'
+import 'prismjs/components/prism-php-extras'
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-shell-session'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-vim'
+import 'prismjs/components/prism-graphql'
+import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-tsx'
+import 'prismjs/components/prism-yaml'
+import 'prismjs/components/prism-docker'
+import 'prismjs/components/prism-log'
+
 import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
