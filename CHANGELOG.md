@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.2...v4.11.3) (2022-02-12)
+
+### Others
+
+- compress background images for static pages ([128baab](https://github.com/dazedbear/dazedbear.github.io/commit/128baabdec9f7948a3acdd8dc1f9013cbd821190))
+- remove unused assets ([a8e59db](https://github.com/dazedbear/dazedbear.github.io/commit/a8e59db1de46a48abd057b4308e7dd8247b13b71))
+
 ### [4.11.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.1...v4.11.2) (2022-02-10)
 
 ### Bug Fixes
