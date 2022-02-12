@@ -12,8 +12,8 @@ module.exports = {
       },
       backgroundImage: theme => ({
         'index-cover': "url('/cover.jpg')",
-        'music-cover': "url('/music-cover-animate.png')",
-        'maintain-cover': "url('/cover-maintain.png')",
+        'music-cover': "url('/music-cover-animate.jpg')",
+        'maintain-cover': "url('/cover-maintain.jpg')",
         'channel-logo': "url('/channel-logo.png')",
         'gradient-red':
           'radial-gradient(circle, rgba(218,142,156,1) 0%, rgba(177,63,77,1) 100%)',
