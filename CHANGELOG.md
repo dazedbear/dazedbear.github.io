@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.11.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.3...v4.11.4) (2022-02-28)
+
+### Performance
+
+- refactor to process async call parallelly ([11c3d25](https://github.com/dazedbear/dazedbear.github.io/commit/11c3d2549c119944d39c6841897842a6e97bac69))
+
 ### [4.11.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.2...v4.11.3) (2022-02-12)
 
 ### Others

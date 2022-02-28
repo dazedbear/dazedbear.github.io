@@ -25,6 +25,7 @@ import { GetServerSideProps } from 'next'
 import Link from 'next/link'
 import Error from 'next/error'
 import dynamic from 'next/dynamic'
+import pAll from 'p-all'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
@@ -91,28 +92,34 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
 
         try {
           let articleStream = {}
-          const response = await fetchArticleStream({
-            req,
-            pageName,
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          })
-          articleStream = await transformArticleStream(pageName, response)
-          articleStream = await transformArticleStreamPreviewImages(
-            articleStream
-          )
-
-          // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
-          const singleArticleResponse = await fetchArticleStream({
-            req,
-            pageId: articleId,
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          })
-          let singleArticle = await transformSingleArticle(
-            singleArticleResponse
-          )
-          singleArticle = await transformArticleStreamPreviewImages(
-            singleArticle
-          )
+          let singleArticle = {}
+          await pAll([
+            async () => {
+              const response = await fetchArticleStream({
+                req,
+                pageName,
+                category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+              })
+              articleStream = await transformArticleStream(pageName, response)
+              articleStream = await transformArticleStreamPreviewImages(
+                articleStream
+              )
+            },
+            async () => {
+              // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
+              const singleArticleResponse = await fetchArticleStream({
+                req,
+                pageId: articleId,
+                category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+              })
+              singleArticle = await transformSingleArticle(
+                singleArticleResponse
+              )
+              singleArticle = await transformArticleStreamPreviewImages(
+                singleArticle
+              )
+            },
+          ])
           articleStream = merge(articleStream, singleArticle)
 
           const menuItems = transformMenuItems(pageName, articleStream)
