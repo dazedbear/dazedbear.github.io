@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.12.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.0...v4.12.1) (2022-04-04)
+
+### Bug Fixes
+
+- incorrect size of article content cover ([ed02a9d](https://github.com/dazedbear/dazedbear.github.io/commit/ed02a9db7c76023736999dea7b0b3db1b61940cf))
+
 ## [4.12.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.4...v4.12.0) (2022-04-04)
 
 ### Features

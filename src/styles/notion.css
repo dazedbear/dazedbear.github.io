@@ -36,7 +36,10 @@
     @apply -top-40 lg:-top-16;
   }
   #app .notion-page-cover {
-    @apply max-h-unset min-h-unset h-auto object-center object-contain;
+    @apply object-center object-contain;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: unset !important;
   }
   #app .notion-page-link {
     @apply h-auto;
