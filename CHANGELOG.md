@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.12.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.4...v4.12.0) (2022-04-04)
+
+### Features
+
+- use music page design to landing page ([8c9524d](https://github.com/dazedbear/dazedbear.github.io/commit/8c9524dce53a970c291a0f577f8f849e6af23fb7))
+
+### Others
+
+- remove unused assets ([85db179](https://github.com/dazedbear/dazedbear.github.io/commit/85db179f219f6ee01af37cce3d82d1e4d792e99a))
+
 ### [4.11.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.11.3...v4.11.4) (2022-02-28)
 
 ### Performance

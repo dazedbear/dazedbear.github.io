@@ -2,7 +2,7 @@ import ExtLink from '../components/ext-link'
 
 const MaintainPage = () => (
   <div className="text-center homeContainer">
-    <div className="min-h-screen pt-24 lg:pt-12 bg-cover bg-50% bg-opacity-50 bg-maintain-cover homeSplashFade flex items-center justify-center">
+    <div className="min-h-screen pt-24 lg:pt-12 bg-cover bg-50% bg-opacity-50 bg-cover-maintain homeSplashFade flex items-center justify-center">
       <div className="my-0 mx-auto max-w-1100 py-8 px-8 wrapper homeWrapper">
         <div>
           <div className="pb-10 pt-10 my-0 mx-auto md:pb-20 md:pt-20 bg-opacity-white-75 rounded-xl container feature-topic paddingBottom paddingTop">

@@ -26,7 +26,6 @@ jobs:
           urls: |
             https://www.dazedbear.pro/
             https://www.dazedbear.pro/music
-            https://www.dazedbear.pro/music-notebook
             https://www.dazedbear.pro/coding
             https://www.dazedbear.pro/article
           uploadArtifacts: false
