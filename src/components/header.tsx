@@ -8,7 +8,7 @@ import { getCurrentPageTitle, isActivePage } from '../libs/util'
 import faviconIcon from '../../public/favicon.ico'
 
 const themeClassMap = {
-  original: {
+  classic: {
     header: 'bg-lavender-purple-300 text-white',
     nav: 'bg-lavender-purple-500 text-white lg:bg-transparent',
     title: 'text-white',
@@ -26,16 +26,7 @@ const themeClassMap = {
 }
 
 const Header = () => {
-  let currentTheme = 'original'
-  navItems.some(({ page, theme }) => {
-    const isActive = isActivePage(page)
-    if (isActive && theme) {
-      currentTheme = theme
-      return true
-    }
-    return false
-  })
-
+  const currentTheme = isActivePage('/') ? 'modern' : 'classic'
   const titlePre = getCurrentPageTitle()
   const linkClass =
     'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'

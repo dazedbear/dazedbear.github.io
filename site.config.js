@@ -61,14 +61,13 @@ module.exports = {
   },
   meta: {
     title: 'DazedBear Studio',
-    description: 'Web。Digital Music。Self Development',
+    description: 'Web。Music。Creative Coding',
     image: '',
   },
   navigation: [
     {
       label: 'Music',
       page: '/music',
-      theme: 'modern',
       enabled: true,
     },
     {
@@ -114,13 +113,13 @@ module.exports = {
           'CODING_COLLECTION_VIEW_ID',
         ],
       },
-      'music-notebook': {
+      music: {
         collectionId: normalizeId(env.get('MUSIC_COLLECTION_ID').asString()),
         collectionViewId: normalizeId(
           env.get('MUSIC_COLLECTION_VIEW_ID').asString()
         ),
         enabled: true,
-        navMenuTitle: 'Music Notes 音樂筆記',
+        navMenuTitle: 'Music 音樂',
         pageId: normalizeId(env.get('MUSIC_PAGE_ID').asString()),
         requiredEnv: [
           'MUSIC_PAGE_ID',
@@ -143,34 +142,6 @@ module.exports = {
     index: {
       enabled: true,
       page: '/',
-    },
-    music: {
-      // should always be 4 blocks
-      blocks: [
-        {
-          title: 'Demos',
-          description: '音樂編曲、創作片段',
-          link: 'https://soundcloud.com/dazedbear',
-        },
-        {
-          title: 'Videos',
-          description: '演出紀錄、Cover 影片',
-          link: 'https://www.youtube.com/channel/UCvyYCMFjUbcHtZhnC-VGwHw',
-        },
-        {
-          title: 'Sheets',
-          description: '創作、採譜樂譜',
-          link:
-            'https://www.noteflight.com/profile/9a486122ae3cc1fbf78bb973e280f8cc35f67e27',
-        },
-        {
-          title: 'Notes',
-          description: '音樂筆記',
-          link: '/music-notebook',
-        },
-      ],
-      enabled: true,
-      page: '/music',
     },
     maintain: {
       enabled: true,

@@ -11,26 +11,11 @@ module.exports = {
         '50%': '50%',
       },
       backgroundImage: theme => ({
-        'index-cover': "url('/cover.jpg')",
-        'music-cover': "url('/music-cover-animate.jpg')",
-        'maintain-cover': "url('/cover-maintain.jpg')",
-        'channel-logo': "url('/channel-logo.png')",
-        'gradient-red':
-          'radial-gradient(circle, rgba(218,142,156,1) 0%, rgba(177,63,77,1) 100%)',
-        'gradient-red-spread':
-          'radial-gradient(circle, rgba(254,209,217,1) 0%, rgba(218,142,156,1) 30%, rgba(177,63,77,1) 100%)',
-        'gradient-yellow':
-          'radial-gradient(circle, rgba(255,218,124,1) 0%, rgba(255,172,50,1) 100%)',
-        'gradient-yellow-spread':
-          'radial-gradient(circle, rgba(255,242,208,1) 0%, rgba(255,218,124,1) 30%, rgba(255,172,50,1) 100%)',
-        'gradient-green':
-          'radial-gradient(circle, rgba(162,216,221,1) 0%, rgba(55,163,142,1) 100%)',
-        'gradient-green-spread':
-          'radial-gradient(circle, rgba(218,252,255,1) 0%, rgba(162,216,221,1) 30%, rgba(55,163,142,1) 100%)',
-        'gradient-purple':
-          'radial-gradient(circle, rgba(154,144,190,1) 0%, rgba(54,50,73,1) 100%)',
-        'gradient-purple-spread':
-          'radial-gradient(circle, rgba(234,228,255,1) 0%, rgba(154,144,190,1) 30%, rgba(54,50,73,1) 100%)',
+        'cover-music': "url('/cover-music.jpg')",
+        'cover-maintain': "url('/cover-maintain.jpg')",
+        'texture-colorful': "url('/texture-colorful.jpg')",
+        'gradient-yellow-purple':
+          'linear-gradient(90deg, rgba(255,211,71,1) 0%, rgba(217,141,238,1) 100%)',
       }),
       colors: {
         brown: {
