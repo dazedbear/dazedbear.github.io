@@ -7,7 +7,11 @@ import {
   getNotionPostsFromTable,
   getNotionPreviewImages,
 } from '../../libs/server/notion'
-import { getCategory, validateRequest } from '../../libs/server/api'
+import {
+  getCategory,
+  validateRequest,
+  setAPICacheHeaders,
+} from '../../libs/server/api'
 import { notion } from '../../../site.config'
 
 const route = '/posts'
@@ -122,7 +126,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       ['result', 'reducerResults', 'collection_group_results', 'hasNext'],
       currentIndex + 1 < currentTotal
     )
-
+    setAPICacheHeaders(res)
     res.status(200).json(data)
   } catch (err) {
     const statusCode = err.status || 500
