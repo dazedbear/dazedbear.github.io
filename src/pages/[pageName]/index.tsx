@@ -27,6 +27,7 @@ import {
   fetchArticleStream,
   isValidPageName,
   executeFunctionWithTimeout,
+  setSSRCacheHeaders,
 } from '../../libs/server/page'
 import {
   transformArticleStream,
@@ -78,6 +79,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             req,
           }
           log(options)
+          setSSRCacheHeaders(res)
           return {
             props: {
               menuItems,

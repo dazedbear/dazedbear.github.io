@@ -235,3 +235,23 @@ export const executeFunctionWithTimeout = async (
   }
   return result
 }
+
+/**
+ * set cache headers for the pages which use getServerSideProps
+ * @param res {object} res
+ */
+export const setSSRCacheHeaders = (res: GetServerSidePropsResponse): void => {
+  /**
+   * < s-maxage: data is fresh, serve cache. X-Vercel-Cache HIT
+   * s-maxage - stale-while-revalidate: data is stale, still serve cache and start background new cache generation. X-Vercel-Cache STALE
+   * > stale-while-revalidate: data is stale and cache won't be used any more. X-Vercel-Cache MISS
+   *
+   * @see https://vercel.com/docs/concepts/edge-network/caching#serverless-functions---lambdas
+   * @see https://vercel.com/docs/concepts/edge-network/x-vercel-cache
+   * @see https://web.dev/stale-while-revalidate/
+   */
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=30, stale-while-revalidate=86400'
+  )
+}
