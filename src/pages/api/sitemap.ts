@@ -1,5 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCategory, validateRequest } from '../../libs/server/api'
+import {
+  getCategory,
+  validateRequest,
+  setAPICacheHeaders,
+} from '../../libs/server/api'
 import get from 'lodash/get'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { Readable } from 'stream'
@@ -97,8 +101,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       generateSiteMapXml.bind(this, req),
       { ttl: cacheConfig.ttls.sitemap }
     )
-    res.writeHead(200, { 'Content-Type': 'application/xml' })
-    res.end(sitemapXml)
+    setAPICacheHeaders(res)
+    res.setHeader('Content-Type', 'application/xml')
+    res.status(200).end(sitemapXml)
   } catch (err) {
     const statusCode = err.status || 500
     res.status(statusCode).send(err.message)

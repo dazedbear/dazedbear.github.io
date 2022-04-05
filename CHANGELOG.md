@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.12.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.1...v4.12.2) (2022-04-05)
+
+### Performance
+
+- add cache headers to API routes ([368bef9](https://github.com/dazedbear/dazedbear.github.io/commit/368bef974b6d82b5be8963ec2198b8518f2b7a71))
+- add cache headers to ssr pages ([f0122db](https://github.com/dazedbear/dazedbear.github.io/commit/f0122db2fc35605cefee379ca0013efd80a31733))
+
 ### [4.12.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.0...v4.12.1) (2022-04-04)
 
 ### Bug Fixes

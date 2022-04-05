@@ -1,4 +1,4 @@
-import { NextApiRequest } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import createError from 'http-errors'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
@@ -111,4 +111,24 @@ export const validateRequest = (
     })
     throw createError(400)
   }
+}
+
+/**
+ * set cache headers for API routes
+ * @param res {object} res
+ */
+export const setAPICacheHeaders = (res: NextApiResponse): void => {
+  /**
+   * < s-maxage: data is fresh, serve cache. X-Vercel-Cache HIT
+   * s-maxage - stale-while-revalidate: data is stale, still serve cache and start background new cache generation. X-Vercel-Cache STALE
+   * > stale-while-revalidate: data is stale and cache won't be used any more. X-Vercel-Cache MISS
+   *
+   * @see https://vercel.com/docs/concepts/edge-network/caching#serverless-functions---lambdas
+   * @see https://vercel.com/docs/concepts/edge-network/x-vercel-cache
+   * @see https://web.dev/stale-while-revalidate/
+   */
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=30, stale-while-revalidate=86400'
+  )
 }
