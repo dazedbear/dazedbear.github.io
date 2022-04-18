@@ -1,0 +1,35 @@
+# Ignore git items
+.gitignore
+.git/
+:include .gitignore
+
+# Directories
+node_modules/
+build/
+dist/
+vendor/
+env/
+.env/
+venv/
+.venv/
+*.min.js
+.next/
+public/
+types/
+
+# Common test directories
+test/
+tests/
+
+# Semgrep rules folder
+.semgrep
+
+# Configurations
+.eslintrc.json
+.versionrc
+.prettierrc.json
+tsconfig.json
+
+# Files
+*.md
+.env*
