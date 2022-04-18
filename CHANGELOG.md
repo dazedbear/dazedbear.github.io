@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.13.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.2...v4.13.0) (2022-04-18)
+
+### Features
+
+- updrage semgrep action ([83cbce0](https://github.com/dazedbear/dazedbear.github.io/commit/83cbce0fae2f1c28f121a4d42426bfa88dca96d3))
+
 ### [4.12.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.1...v4.12.2) (2022-04-05)
 
 ### Performance
