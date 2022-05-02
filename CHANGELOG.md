@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.14.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.13.0...v4.14.0) (2022-05-02)
+
+### Features
+
+- add facebook chat ([9e71206](https://github.com/dazedbear/dazedbear.github.io/commit/9e712066dbe1ebff25f270484b0fce3ce9c81896))
+
+### Bug Fixes
+
+- broken index page when width < 320px ([0ddbd60](https://github.com/dazedbear/dazedbear.github.io/commit/0ddbd60768f9f99e39b1975d868c1dcd9890a4b4))
+- follow official guide to setup likecoin button ([cfda584](https://github.com/dazedbear/dazedbear.github.io/commit/cfda584f7c78096a2f4124d63d3cc8a8b6ba1987))
+
+### Documentation
+
+- update readme links and screenshots ([e449b39](https://github.com/dazedbear/dazedbear.github.io/commit/e449b396b4c1e8e98b63554691457b1179ab60d3))
+
+### Others
+
+- add default gray bg for notion images ([2a12914](https://github.com/dazedbear/dazedbear.github.io/commit/2a129147a5fc7e1bcd94688c423219972083369e))
+- disable likecoin button ([930edac](https://github.com/dazedbear/dazedbear.github.io/commit/930edace31e9b3ad58d8b21ac91dc8fd3a4fe5d8))
+- remove facebook share and comment ([9e784f1](https://github.com/dazedbear/dazedbear.github.io/commit/9e784f1cf66f62a5986f9714b9acc5feb3a8cbfd))
+
 ## [4.13.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.12.2...v4.13.0) (2022-04-18)
 
 ### Features
