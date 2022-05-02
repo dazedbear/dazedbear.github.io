@@ -210,7 +210,7 @@ module.exports = {
     articleFooter: [
       {
         name: 'likecoin',
-        enable: true,
+        enable: false,
       },
     ],
     facebookChat: {
