@@ -1,14 +1,20 @@
 import { communitySettings, communityFeatures } from '../../site.config'
 import { useState, useEffect } from 'react'
 
+// https://docs.like.co/developer/likecoin-button/iframe
 const likecoin = ({ url }) =>
   url && (
-    <iframe
-      className="likecoin w-full min-h-150 lg:min-h-200"
-      scrolling="no"
-      frameBorder="0"
-      src={`https://button.like.co/in/embed/${communitySettings.likecoin.userId}/button?referrer=${url}`}
-    />
+    <div className="likecoin-embed likecoin-button">
+      <div />
+      <iframe
+        className="likecoin w-full min-h-150 lg:min-h-200"
+        scrolling="no"
+        frameBorder="0"
+        src={`https://button.like.co/in/embed/${
+          communitySettings.likecoin.userId
+        }/button?referrer=${encodeURIComponent(url)}`}
+      />
+    </div>
   )
 
 const socialFeatureComponentMap = {
@@ -24,14 +30,15 @@ const NotionPageFooter = () => {
     }
   }, [setCurrentUrl])
 
-  const communityComponents = communityFeatures.articleFooter.map(
-    ({ name, enable }) => {
+  const communityComponents = communityFeatures.articleFooter.reduce(
+    (enableItems, { name, enable }) => {
       if (enable) {
         const Component = socialFeatureComponentMap[name]
-        return <Component key={name} url={currentUrl} />
+        enableItems.push(<Component key={name} url={currentUrl} />)
       }
-      return null
-    }
+      return enableItems
+    },
+    []
   )
 
   if (!communityComponents.length) {
