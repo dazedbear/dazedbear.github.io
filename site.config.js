@@ -168,9 +168,6 @@ module.exports = {
       profileBaseUrl: 'https://www.linkedin.com/in',
       userName: 'dazedbear',
     },
-    facebook: {
-      facebookAppId: '164758098310813',
-    },
     likecoin: {
       userId: 'dazedbear',
     },
@@ -212,16 +209,8 @@ module.exports = {
     ],
     articleFooter: [
       {
-        name: 'facebookLikeButtons',
-        enable: true,
-      },
-      {
         name: 'likecoin',
         enable: true,
-      },
-      {
-        name: 'facebookComments',
-        enable: false,
       },
     ],
   },

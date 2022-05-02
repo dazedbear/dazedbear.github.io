@@ -1,9 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import {
-  communitySettings,
-  currentEnv,
-  trackingSettings,
-} from '../../site.config'
+import { currentEnv, trackingSettings } from '../../site.config'
 
 const isLocal = currentEnv === 'development'
 const isProduction = currentEnv === 'production'
@@ -13,15 +9,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {communitySettings?.facebook?.facebookAppId && (
-            <script
-              async
-              defer
-              crossOrigin="anonymous"
-              nonce="CwIpMVWO"
-              src={`https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=${communitySettings.facebook.facebookAppId}`}
-            />
-          )}
           {!isLocal && trackingSettings?.microsoftClarity?.enable && (
             <script
               dangerouslySetInnerHTML={{
@@ -53,7 +40,6 @@ class MyDocument extends Document {
           {!isProduction && <meta name="robots" content="noindex" />}
         </Head>
         <body>
-          {communitySettings?.facebook?.facebookAppId && <div id="fb-root" />}
           <Main />
           <NextScript />
         </body>
