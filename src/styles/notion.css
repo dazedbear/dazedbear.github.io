@@ -53,6 +53,9 @@
   #app .notion-row {
     @apply overflow-visible;
   }
+  #app .notion img {
+    @apply bg-gray-200;
+  }
 
   /**
    * for common notion list page: #app #notion-list-page ...
