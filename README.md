@@ -8,9 +8,9 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
 
 ## Screenshot
 
-![screenshot](https://user-images.githubusercontent.com/8896191/113568505-43d5ea80-9643-11eb-973d-166888ed57f4.png)
-![screenshot](https://user-images.githubusercontent.com/8896191/113568636-839cd200-9643-11eb-828d-94a329683172.png)
-![screenshot](https://user-images.githubusercontent.com/8896191/113568615-7bdd2d80-9643-11eb-8bf3-0996ff3b42ed.png)
+![screenshot](https://user-images.githubusercontent.com/8896191/166281053-a1c515c2-8daf-4bdd-b60d-4c4939927a6f.png)
+![screenshot](https://user-images.githubusercontent.com/8896191/166289192-8476a730-8987-4a29-b153-c5b41e9da1b4.png)
+![screenshot](https://user-images.githubusercontent.com/8896191/166289018-5476036b-7396-4e44-bd6d-a5b85cb26c74.png)
 
 ## Tech Stack
 
@@ -30,7 +30,7 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
 - [Tailwind CSS](https://tailwindcss.com/) - utility-first css framework
 - Community
   - [Likecoin button](https://liker.land/)
-  - [Facebook like button](https://developers.facebook.com/docs/plugins/like-button)
+  - [Facebook chat plugin](https://www.facebook.com/business/help/1524587524402327)
 
 ### SaaS
 

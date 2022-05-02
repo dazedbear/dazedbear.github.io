@@ -37,6 +37,7 @@ module.exports = {
       fontSize: {
         'xs+': '0.8125rem',
         '4.5xl': '2.5rem',
+        '5.5xl': '3.5rem',
       },
       gridTemplateRows: {
         '12': 'repeat(12, minmax(0, 1fr))',

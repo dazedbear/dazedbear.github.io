@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import {
-  communitySettings,
+  communityFeatures,
   currentEnv,
   trackingSettings,
 } from '../../site.config'
@@ -13,15 +13,6 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {communitySettings?.facebook?.facebookAppId && (
-            <script
-              async
-              defer
-              crossOrigin="anonymous"
-              nonce="CwIpMVWO"
-              src={`https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=${communitySettings.facebook.facebookAppId}`}
-            />
-          )}
           {!isLocal && trackingSettings?.microsoftClarity?.enable && (
             <script
               dangerouslySetInnerHTML={{
@@ -50,10 +41,43 @@ class MyDocument extends Document {
               />
             </>
           )}
+          {communityFeatures?.facebookChat?.enable && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.fbAsyncInit = function() {
+                    FB.init({
+                      xfbml            : true,
+                      version          : 'v13.0'
+                    });
+                  };
+                  (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));`,
+              }}
+            />
+          )}
           {!isProduction && <meta name="robots" content="noindex" />}
         </Head>
         <body>
-          {communitySettings?.facebook?.facebookAppId && <div id="fb-root" />}
+          {communityFeatures?.facebookChat?.enable && (
+            <>
+              <div id="fb-root" />
+              <div id="fb-customer-chat" className="fb-customerchat" />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    var chatbox = document.getElementById('fb-customer-chat');
+                    chatbox.setAttribute("page_id", "${communityFeatures.facebookChat.pageId}");
+                    chatbox.setAttribute("attribution", "biz_inbox");`,
+                }}
+              />
+            </>
+          )}
           <Main />
           <NextScript />
         </body>
