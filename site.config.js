@@ -213,6 +213,10 @@ module.exports = {
         enable: true,
       },
     ],
+    facebookChat: {
+      enable: true,
+      pageId: '1835182753446962',
+    },
   },
   trackingSettings: {
     googleAnalytics: {

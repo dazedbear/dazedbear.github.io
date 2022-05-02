@@ -1,5 +1,9 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { currentEnv, trackingSettings } from '../../site.config'
+import {
+  communityFeatures,
+  currentEnv,
+  trackingSettings,
+} from '../../site.config'
 
 const isLocal = currentEnv === 'development'
 const isProduction = currentEnv === 'production'
@@ -37,9 +41,43 @@ class MyDocument extends Document {
               />
             </>
           )}
+          {communityFeatures?.facebookChat?.enable && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.fbAsyncInit = function() {
+                    FB.init({
+                      xfbml            : true,
+                      version          : 'v13.0'
+                    });
+                  };
+                  (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;
+                    js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+                  }(document, 'script', 'facebook-jssdk'));`,
+              }}
+            />
+          )}
           {!isProduction && <meta name="robots" content="noindex" />}
         </Head>
         <body>
+          {communityFeatures?.facebookChat?.enable && (
+            <>
+              <div id="fb-root" />
+              <div id="fb-customer-chat" className="fb-customerchat" />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    var chatbox = document.getElementById('fb-customer-chat');
+                    chatbox.setAttribute("page_id", "${communityFeatures.facebookChat.pageId}");
+                    chatbox.setAttribute("attribution", "biz_inbox");`,
+                }}
+              />
+            </>
+          )}
           <Main />
           <NextScript />
         </body>
