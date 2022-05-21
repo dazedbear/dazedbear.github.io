@@ -41,7 +41,7 @@ const Breadcrumb = ({ title, enableToc = false }) => {
           >
             <div
               className={classnames(hamburgerLineClass, {
-                'origin-left transform rotate-45': isNavMenuViewable,
+                'origin-left rotate-45': isNavMenuViewable,
               })}
             ></div>
             <div
@@ -51,7 +51,7 @@ const Breadcrumb = ({ title, enableToc = false }) => {
             ></div>
             <div
               className={classnames(hamburgerLineClass, {
-                'origin-left transform -rotate-45': isNavMenuViewable,
+                'origin-left -rotate-45': isNavMenuViewable,
               })}
             ></div>
           </div>

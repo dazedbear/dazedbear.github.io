@@ -17,7 +17,7 @@ const NavigationMenu = ({ title, menuItems }) => {
   return (
     <section
       className={classnames(
-        'overflow-y-scroll lg:mr-12 lg:w-60 lg:pb-10 lg:mt-12 lg:px-0 lg:flex-shrink-0 lg:max-h-full-viewport',
+        'overflow-y-scroll lg:mr-12 lg:w-60 lg:pb-10 lg:mt-12 lg:px-0 lg:shrink-0 lg:max-h-full-viewport',
         {
           block: isNavMenuViewable,
           hidden: !isNavMenuViewable,

@@ -29,7 +29,7 @@ const CommunityIcon = ({ name, link }) => {
         <ExtLink href={link} target="_blank" className="text-gray-500">
           <Image
             src={unsupportIcons[name]}
-            className="h-8 mx-auto my-0 block filter grayscale"
+            className="h-8 mx-auto my-0 block grayscale"
             height="32"
             width="36"
             alt={name}
@@ -60,7 +60,7 @@ const Footer = () => {
   return (
     <>
       <footer
-        className="flex-shrink lg:flex-shrink-0 bg-lavender-purple-900 text-current text-base antialiased font-normal leading-6 py-8 relative"
+        className="shrink lg:shrink-0 bg-lavender-purple-900 text-current text-base antialiased font-normal leading-6 py-8 relative"
         id="footer"
       >
         <section className="flex justify-center mt-0 mb-5 mx-auto">
@@ -75,9 +75,7 @@ const Footer = () => {
             return <CommunityIcon key={brand} link={link} name={brand} />
           })}
         </section>
-        <section className="text-white text-opacity-40 text-center">
-          {copyright}
-        </section>
+        <section className="text-white/40 text-center">{copyright}</section>
       </footer>
     </>
   )

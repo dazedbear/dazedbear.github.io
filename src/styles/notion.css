@@ -9,94 +9,90 @@
  * See the all styles defined in react-notion-x.
  * https://github.com/NotionX/react-notion-x/blob/master/packages/react-notion-x/src/styles.css
  *
- * We use tailwind's feature 'extracting components class with @apply' to override the Notion styles.
- * https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply
  */
 
-@layer components {
-  /**
-   * for global notion style override: #app ...
-   */
-  #app .notion-page {
-    @apply pt-14 pb-5 lg:pt-12 lg:pb-10 px-0 m-0;
-  }
-  #app .notion-viewport {
-    @apply invisible; /* It's important for image preview, but it will block the hover behavior of left menu, so just hide it instead of display:none */
-  }
-  #app .notion-collection-header {
-    @apply hidden;
-  }
-  #app svg.notion-page-icon {
-    @apply hidden;
-  }
-  #app .notion-header {
-    @apply hidden;
-  }
-  #app .notion-header-anchor {
-    @apply -top-40 lg:-top-16;
-  }
-  #app .notion-page-cover {
-    @apply object-center object-contain;
-    height: auto !important;
-    min-height: unset !important;
-    max-height: unset !important;
-  }
-  #app .notion-page-link {
-    @apply h-auto;
-  }
-  #app .notion-title {
-    @apply text-lavender-purple-300;
-  }
-  #app .notion-collection-card-cover .lazy-image-wrapper {
-    @apply rounded-md;
-  }
-  #app .notion-row {
-    @apply overflow-visible;
-  }
-  #app .notion img {
-    @apply bg-gray-200;
-  }
+/**
+ * for global notion style override: #app ...
+ */
+#app .notion-page {
+  @apply pt-14 pb-5 lg:pt-12 lg:pb-10 px-0 m-0;
+}
+#app .notion-viewport {
+  @apply invisible; /* It's important for image preview, but it will block the hover behavior of left menu, so just hide it instead of display:none */
+}
+#app .notion-collection-header {
+  @apply hidden;
+}
+#app svg.notion-page-icon {
+  @apply hidden;
+}
+#app .notion-header {
+  @apply hidden;
+}
+#app .notion-header-anchor {
+  @apply -top-40 lg:-top-16;
+}
+#app .notion-page-cover {
+  @apply object-center object-contain;
+  height: auto !important;
+  min-height: unset !important;
+  max-height: unset !important;
+}
+#app .notion-page-link {
+  @apply h-auto;
+}
+#app .notion-title {
+  @apply text-lavender-purple-300;
+}
+#app .notion-collection-card-cover .lazy-image-wrapper {
+  @apply rounded-md;
+}
+#app .notion-row {
+  @apply overflow-visible;
+}
+#app .notion img {
+  @apply bg-gray-200;
+}
 
-  /**
-   * for common notion list page: #app #notion-list-page ...
-   */
-  #app #notion-list-page .notion-page-title-text {
-    @apply text-2xl text-lavender-purple-300 whitespace-normal;
-  }
-  #app #notion-list-page .notion-gallery-grid {
-    @apply border-0 grid-cols-none block;
-  }
-  #app #notion-list-page .notion-collection-card {
-    @apply mb-5 last:mb-0 shadow-none pb-4 border-b last:border-0 border-gray-300;
-  }
-  #app #notion-list-page .notion-collection-card-property {
-    @apply text-sm;
-  }
-  #app #notion-list-page .notion-collection-card-cover {
-    @apply border-0;
-  }
-  #app #notion-list-page .notion-collection-card-cover img {
-    @apply rounded-md;
-  }
+/**
+  * for common notion list page: #app #notion-list-page ...
+  */
+#app #notion-list-page .notion-page-title-text {
+  @apply text-2xl text-lavender-purple-300 whitespace-normal;
+}
+#app #notion-list-page .notion-gallery-grid {
+  @apply border-0 grid-cols-none block;
+}
+#app #notion-list-page .notion-collection-card {
+  @apply mb-5 last:mb-0 shadow-none pb-4 border-b last:border-0 border-gray-300;
+}
+#app #notion-list-page .notion-collection-card-property {
+  @apply text-sm;
+}
+#app #notion-list-page .notion-collection-card-cover {
+  @apply border-0;
+}
+#app #notion-list-page .notion-collection-card-cover img {
+  @apply rounded-md;
+}
 
-  /**
-   * for common notion single page: #app #notion-single-page ...
-   */
-  #app #notion-single-page .notion-collection {
-    @apply w-full;
-  }
-  #app #notion-single-page .notion-collection .notion-table {
-    width: 100% !important;
-  }
-  #app #notion-single-page .notion-collection .notion-table-view {
-    padding: 20px !important;
-  }
-  #app #notion-single-page .notion-code {
-    overflow: initial;
-  }
-  #app #notion-single-page .notion-code > code {
-    display: block;
-    overflow-x: scroll;
-    overflow-y: visible;
-  }
+/**
+ * for common notion single page: #app #notion-single-page ...
+ */
+#app #notion-single-page .notion-collection {
+  @apply w-full;
+}
+#app #notion-single-page .notion-collection .notion-table {
+  width: 100% !important;
+}
+#app #notion-single-page .notion-collection .notion-table-view {
+  padding: 20px !important;
+}
+#app #notion-single-page .notion-code {
+  overflow: initial;
+}
+#app #notion-single-page .notion-code > code {
+  display: block;
+  overflow-x: scroll;
+  overflow-y: visible;
 }

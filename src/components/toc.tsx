@@ -22,7 +22,7 @@ const TableOfContent = ({ toc }) => {
   return (
     <section
       className={classnames(
-        'overflow-y-scroll lg:w-60 lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:px-4 lg:flex-shrink-0 lg:flex-grow-0 lg:max-h-full-viewport lg:h-full lg:border-solid lg:border-l',
+        'overflow-y-scroll lg:w-60 lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:px-4 lg:shrink-0 lg:grow-0 lg:max-h-full-viewport lg:h-full lg:border-solid lg:border-l',
         {
           block: isTableOfContentViewable,
           hidden: !isTableOfContentViewable,
