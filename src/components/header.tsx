@@ -12,15 +12,15 @@ const themeClassMap = {
     header: 'bg-lavender-purple-300 text-white',
     nav: 'bg-lavender-purple-500 text-white lg:bg-transparent',
     title: 'text-white',
-    linkInActive: 'text-white lg:text-opacity-white-80 lg:hover:text-white',
+    linkInActive: 'text-white lg:text-white/80 lg:hover:text-white',
     linkActive: 'bg-lavender-purple-300 lg:text-white lg:bg-transparent',
   },
   modern: {
-    header: 'text-white bg-black bg-opacity-90 lg:bg-transparent',
+    header: 'text-white bg-black/90 lg:bg-transparent',
     nav: 'bg-lavender-purple-500 lg:bg-transparent',
     title: 'text-white',
     linkInActive:
-      'text-white focus:bg-lavender-purple-300 lg:text-opacity-white-80 lg:hover:text-white lg:bg-transparent lg:hover:bg-transparent',
+      'text-white focus:bg-lavender-purple-300 lg:text-white/80 lg:hover:text-white lg:bg-transparent lg:hover:bg-transparent',
     linkActive: 'bg-lavender-purple-300 lg:bg-transparent',
   },
 }
@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <div
       className={classnames(
-        'fixed w-full z-9999 min-h-12 py-2 px-0 lg:flex-shrink-0',
+        'fixed w-full z-9999 min-h-12 py-2 px-0 lg:shrink-0',
         themeClassMap[currentTheme]?.header
       )}
       style={{ transform: 'translateZ(0)' }}

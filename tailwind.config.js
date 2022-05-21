@@ -1,9 +1,5 @@
 module.exports = {
-  purge: {
-    layers: ['base', 'utilities'],
-    content: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
   important: '#app',
   theme: {
     extend: {
@@ -110,14 +106,6 @@ module.exports = {
       padding: {
         full: '100%',
       },
-    },
-  },
-  variants: {
-    extend: {
-      backgroundImage: ['hover', 'active'],
-      borderWidth: ['last'],
-      margin: ['last'],
-      scale: ['active'],
     },
   },
   plugins: [],
