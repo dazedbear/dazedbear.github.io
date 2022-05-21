@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.14.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.14.0...v4.14.1) (2022-05-21)
+
+### Bug Fixes
+
+- lock nextjs version to fix renderToString issue ([56d5295](https://github.com/dazedbear/dazedbear.github.io/commit/56d529502ceb2206d79063ac9c3829d9813f4146))
+
+### Build
+
+- add lockfile for better package tracing ([8a27259](https://github.com/dazedbear/dazedbear.github.io/commit/8a27259646c46a80b443a55f6337dbc73e5bcf14))
+- migrate to tailwind css v3 ([04602f4](https://github.com/dazedbear/dazedbear.github.io/commit/04602f42c92fdd3ea8e2c69c328527c02b7cc46f))
+
 ## [4.14.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.13.0...v4.14.0) (2022-05-02)
 
 ### Features
