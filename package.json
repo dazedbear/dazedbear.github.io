@@ -1,19 +1,170 @@
 {
   "name": "dazedbear.github.io",
   "version": "4.14.1",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
     "build": "CACHE_CLIENT_ENABLED=false next build",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
-    "release": "standard-version",
+    "prepare": "is-ci || husky install",
     "task:failsafe": "node scripts/failsafe.js"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "angular",
+          "releaseRules": [
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "build",
+              "release": "minor"
+            },
+            {
+              "type": "refactor",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "perf",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "style",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "ci",
+              "release": "patch"
+            },
+            {
+              "type": "chore",
+              "release": "patch"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "angular",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES",
+              "BREAKING"
+            ]
+          },
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "style",
+                "section": "Others"
+              },
+              {
+                "type": "refactor",
+                "section": "Others"
+              },
+              {
+                "type": "patch",
+                "section": "Hotfix"
+              },
+              {
+                "type": "perf",
+                "section": "Performance"
+              },
+              {
+                "type": "test",
+                "section": "Testing"
+              },
+              {
+                "type": "build",
+                "section": "Build"
+              },
+              {
+                "type": "ci",
+                "section": "CI/CD"
+              },
+              {
+                "type": "chore",
+                "section": "Others"
+              },
+              {
+                "type": "revert",
+                "section": "Others"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ]
+    ]
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.44.0",
@@ -53,6 +204,8 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.0.10",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "@types/http-errors": "^1.8.2",
     "@types/ioredis": "^4.28.5",
     "@types/node": "^17.0.0",
@@ -60,16 +213,18 @@
     "@types/react": "^16.9.17",
     "@types/react-redux": "^7.1.21",
     "autoprefixer": "^10.4.7",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "fast-xml-parser": "^4.0.0-beta.8",
-    "husky": "^3.1.0",
+    "husky": "^8.0.1",
+    "is-ci": "^3.0.1",
     "lint-staged": "^9.5.0",
     "notion-types": "^3.1.1",
     "postcss": "^8.4.14",
     "prettier": "^1.19.1",
+    "semantic-release": "^19.0.3",
     "shell-quote": "^1.7.3",
-    "standard-version": "^9.3.0",
     "tailwindcss": "^3.0.24",
     "typescript": "^4.3.2"
   }
