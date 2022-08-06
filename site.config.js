@@ -248,8 +248,14 @@ module.exports = {
       protocol: 'http',
     },
     stage: {
-      host: 'stage.dazedbear.pro',
-      hostname: 'stage.dazedbear.pro',
+      host: env
+        .get('VERCEL_URL')
+        .default('stage.dazedbear.pro')
+        .asString(),
+      hostname: env
+        .get('VERCEL_URL')
+        .default('stage.dazedbear.pro')
+        .asString(),
       protocol: 'https',
     },
     production: {

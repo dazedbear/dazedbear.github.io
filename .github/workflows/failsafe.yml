@@ -1,7 +1,9 @@
 name: Failsafe Page Generation
 on:
   push:
-    branches: [main, develop]
+    branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     # every day 06:00, 18:00 GMT+8
     - cron: '0 10,22 * * *'
@@ -21,7 +23,7 @@ jobs:
   failsafe-generation-stage:
     name: Failsafe Page Generation Stage
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/develop' }}
+    if: contains(github.ref, 'refs/pull')
     needs: wait-for-deployment
     env:
       NEXT_PUBLIC_APP_ENV: stage
@@ -40,7 +42,7 @@ jobs:
   failsafe-generation-production:
     name: Failsafe Page Generation Production
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: github.ref == 'refs/heads/main'
     needs: wait-for-deployment
     env:
       NEXT_PUBLIC_APP_ENV: production
