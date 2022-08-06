@@ -1,3 +1,5 @@
+## [4.15.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.0...v4.15.1) (2022-08-06)
+
 # [4.15.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.14.1...v4.15.0) (2022-08-06)
 
 # Changelog
