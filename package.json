@@ -92,7 +92,6 @@
         {
           "preset": "conventionalcommits",
           "presetConfig": {
-            "header": "Changelog",
             "types": [
               {
                 "type": "feat",
@@ -161,7 +160,7 @@
       [
         "@semantic-release/changelog",
         {
-          "changelogTitle": "Changelog"
+          "changelogTitle": "# Changelog"
         }
       ],
       [

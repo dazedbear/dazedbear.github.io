@@ -1,4 +1,4 @@
-Changelog
+# Changelog
 
 ## [4.15.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.1...v4.15.2) (2022-08-06)
 
@@ -6,10 +6,6 @@ Changelog
 ### Others
 
 * fix release note generation ([#46](https://github.com/dazedbear/dazedbear.github.io/issues/46)) ([c6611ed](https://github.com/dazedbear/dazedbear.github.io/commit/c6611ed3ba36a2bcb016efcf87cec842c321ed09))
-
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## [4.15.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.0...v4.15.1) (2022-08-06)
 
