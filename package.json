@@ -1,6 +1,11 @@
 {
   "name": "dazedbear.github.io",
   "version": "4.15.1",
+  "homepage": "https://github.com/dazedbear/dazedbear.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dazedbear/dazedbear.github.io.git"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -29,7 +34,7 @@
       [
         "@semantic-release/commit-analyzer",
         {
-          "preset": "angular",
+          "preset": "conventionalcommits",
           "releaseRules": [
             {
               "breaking": true,
@@ -85,69 +90,80 @@
       [
         "@semantic-release/release-notes-generator",
         {
-          "preset": "angular",
-          "parserOpts": {
-            "noteKeywords": [
-              "BREAKING CHANGE",
-              "BREAKING CHANGES",
-              "BREAKING"
-            ]
-          },
+          "preset": "conventionalcommits",
           "presetConfig": {
+            "header": "Changelog",
             "types": [
               {
                 "type": "feat",
-                "section": "Features"
+                "section": "Features",
+                "hidden": false
               },
               {
                 "type": "fix",
-                "section": "Bug Fixes"
+                "section": "Bug Fixes",
+                "hidden": false
               },
               {
                 "type": "docs",
-                "section": "Documentation"
+                "section": "Documentation",
+                "hidden": false
               },
               {
                 "type": "style",
-                "section": "Others"
+                "section": "Others",
+                "hidden": false
               },
               {
                 "type": "refactor",
-                "section": "Others"
+                "section": "Others",
+                "hidden": false
               },
               {
                 "type": "patch",
-                "section": "Hotfix"
+                "section": "Hotfix",
+                "hidden": false
               },
               {
                 "type": "perf",
-                "section": "Performance"
+                "section": "Performance",
+                "hidden": false
               },
               {
                 "type": "test",
-                "section": "Testing"
+                "section": "Testing",
+                "hidden": false
               },
               {
                 "type": "build",
-                "section": "Build"
+                "section": "Build",
+                "hidden": false
               },
               {
                 "type": "ci",
-                "section": "CI/CD"
+                "section": "CI/CD",
+                "hidden": false
               },
               {
                 "type": "chore",
-                "section": "Others"
+                "section": "Others",
+                "hidden": false
               },
               {
                 "type": "revert",
-                "section": "Others"
+                "section": "Others",
+                "hidden": false
               }
             ]
           }
         }
       ],
-      "@semantic-release/changelog",
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogTitle": "Changelog"
+        }
+      ],
       [
         "@semantic-release/npm",
         {
@@ -213,6 +229,7 @@
     "@types/react": "^16.9.17",
     "@types/react-redux": "^7.1.21",
     "autoprefixer": "^10.4.7",
+    "conventional-changelog-conventionalcommits": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
