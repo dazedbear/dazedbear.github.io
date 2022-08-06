@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.2...v4.15.3) (2022-08-06)
+
+
+### Others
+
+* fix changelog title ([#47](https://github.com/dazedbear/dazedbear.github.io/issues/47)) ([0e4787f](https://github.com/dazedbear/dazedbear.github.io/commit/0e4787f0271c6075fcc38f0e8c01e6cff2a06b43))
+
 ## [4.15.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.1...v4.15.2) (2022-08-06)
 
 
