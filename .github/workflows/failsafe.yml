@@ -16,7 +16,7 @@ env:
 
 jobs:
   wait-for-deployment:
-    uses: dazedbear/dazedbear.github.io/.github/workflows/vercel-deployment.yml@main
+    uses: ./.github/workflows/vercel-deployment.yml
     secrets:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
@@ -27,6 +27,7 @@ jobs:
     needs: wait-for-deployment
     env:
       NEXT_PUBLIC_APP_ENV: stage
+      VERCEL_URL: ${{ needs.wait-for-deployment.outputs.vercel-deployment-url }}
     steps:
       - name: Checkout project source
         uses: actions/checkout@v2
