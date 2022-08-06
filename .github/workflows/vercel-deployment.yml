@@ -2,6 +2,10 @@ name: Wait for Vercel Deployment
 
 on:
   workflow_call:
+    outputs:
+      vercel-deployment-url: 
+        description: "The vercel deployment url"
+        value: ${{ jobs.wait-for-vercel-deployment.outputs.vercel-deployment-url }}
     secrets:
       VERCEL_TOKEN:
         required: true
@@ -13,6 +17,8 @@ jobs:
   wait-for-vercel-deployment:
     name: Wait for current Vercel deployment to be ready
     runs-on: ubuntu-latest
+    outputs:
+      vercel-deployment-url: ${{ steps.expose-vercel-deployment.outputs.vercel-deployment-url }}
     steps:
       - name: Sleep to wait for new deployment is created
         run: sleep 10
@@ -36,6 +42,8 @@ jobs:
         with:
           deployment-url: ${{ env.VERCEL_DEPLOYMENT_URL }} # Must only contain the domain name (no http prefix, etc.)
           timeout: 240 # Wait for 4 mins before failing
-
+      - name: Expose Vercel deployment info
+        id: expose-vercel-deployment
+        run: echo "::set-output name=vercel-deployment-url::${{ env.VERCEL_DEPLOYMENT_URL }}"
       - name: Display Vercel deployment status
         run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'
