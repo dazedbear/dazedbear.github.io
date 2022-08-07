@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.3...v4.15.4) (2022-08-07)
+
+
+### CI/CD
+
+* split prod schedule failsafe generation ([#48](https://github.com/dazedbear/dazedbear.github.io/issues/48)) ([cdb81b6](https://github.com/dazedbear/dazedbear.github.io/commit/cdb81b6d2f4b8c9c925bc39057830655043fec5a))
+
 ## [4.15.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.2...v4.15.3) (2022-08-06)
 
 
