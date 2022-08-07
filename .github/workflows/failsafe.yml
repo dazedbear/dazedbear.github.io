@@ -21,7 +21,7 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
   failsafe-generation-stage:
-    name: Failsafe Page Generation Stage
+    name: Failsafe Page Generation (Stage Deployment)
     runs-on: ubuntu-latest
     if: contains(github.ref, 'refs/pull')
     needs: wait-for-deployment
@@ -41,10 +41,29 @@ jobs:
         run: npm run task:failsafe
 
   failsafe-generation-production:
-    name: Failsafe Page Generation Production
+    name: Failsafe Page Generation (Production Deployment)
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: wait-for-deployment
+    env:
+      NEXT_PUBLIC_APP_ENV: production
+    steps:
+      - name: Checkout project source
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Install dependency
+        run: npm install --legacy-peer-deps
+      - name: Run failsafe generation
+        run: npm run task:failsafe
+
+  failsafe-generation-production-schedule:
+    name: Failsafe Page Generation (Production Schedule)
+    runs-on: ubuntu-latest
+    # skip waiting for deployment for production schedule generation
+    if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
     env:
       NEXT_PUBLIC_APP_ENV: production
     steps:
