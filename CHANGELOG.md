@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.5](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.4...v4.15.5) (2022-08-08)
+
+
+### CI/CD
+
+* skip wait for deployment for schedule job ([#49](https://github.com/dazedbear/dazedbear.github.io/issues/49)) ([64abd65](https://github.com/dazedbear/dazedbear.github.io/commit/64abd65a9814fe9ae9a53eda17469d5204ea16f6))
+
 ## [4.15.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.3...v4.15.4) (2022-08-07)
 
 
