@@ -64,6 +64,11 @@ module.exports = {
   },
   navigation: [
     {
+      label: 'About',
+      page: '/about',
+      enabled: true,
+    },
+    {
       label: 'Music',
       page: '/music',
       enabled: true,
@@ -83,6 +88,15 @@ module.exports = {
     token: env.get('NOTION_TOKEN').asString(),
     // you can insert any notion index page you need here.
     pages: {
+      about: {
+        enabled: true,
+        navMenuTitle: 'About 關於我',
+        pageId: normalizeId(env.get('ABOUT_PAGE_ID').asString()),
+        requiredEnv: [
+          'ABOUT_PAGE_ID',
+        ],
+        type: 'page',
+      },
       article: {
         collectionId: normalizeId(env.get('ARTICLE_COLLECTION_ID').asString()),
         collectionViewId: normalizeId(

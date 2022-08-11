@@ -149,7 +149,7 @@ export const fetchArticleStream = async ({
       req,
     }
     log(options)
-    throw 'Required info are invalid in fetchArticles.'
+    throw 'Required info are invalid in fetchArticleStream.'
   }
 
   const response = await getNotionPage(id)
@@ -157,28 +157,51 @@ export const fetchArticleStream = async ({
 }
 
 /**
- * fetch article from upstream API
+ * fetch single page content from upstream API
  * @param {object} req
  * @param {string} pageName
  * @returns {object} raw data from upstream API
  */
-export const fetchSingleArticleStream = async (
-  req: GetServerSidePropsRequest,
-  pageId: string,
-  category: string
-): Promise<ExtendedRecordMap> => {
-  if (!pageId) {
+export const fetchSinglePage = async ({
+  req,
+  pageName,
+  pageId,
+  category,
+}: {
+  req?: GetServerSidePropsRequest
+  pageName?: NotionPageName
+  pageId?: string
+  category?: string
+}): Promise<ExtendedRecordMap> => {
+  let isRequiredInfoReady = false
+  let message = ''
+  let id: string = ''
+
+  if (pageName) {
+    id = get(notion, ['pages', pageName, 'pageId'])
+    const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
+    if (id && pageEnabled) {
+      isRequiredInfoReady = true
+    } else {
+      message = `required info are invalid | pageId: ${pageId} | pageEnabled: ${pageEnabled}`
+    }
+  } else if (pageId) {
+    id = pageId
+    isRequiredInfoReady = true
+  }
+
+  if (!isRequiredInfoReady) {
     const options: logOption = {
-      category,
-      message: `required info are invalid | pageId: ${pageId}`,
+      category: category || 'fetchSinglePage',
+      message,
       level: 'error',
       req,
     }
     log(options)
-    throw 'Required info are invalid in fetchArticles.'
+    throw 'Required info are invalid in fetchSinglePage.'
   }
 
-  const response = await getNotionPage(pageId)
+  const response = await getNotionPage(id)
   return response
 }
 
