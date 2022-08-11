@@ -96,6 +96,7 @@ module.exports = {
           'ARTICLE_COLLECTION_ID',
           'ARTICLE_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
       coding: {
         collectionId: normalizeId(env.get('CODING_COLLECTION_ID').asString()),
@@ -110,6 +111,7 @@ module.exports = {
           'CODING_COLLECTION_ID',
           'CODING_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
       music: {
         collectionId: normalizeId(env.get('MUSIC_COLLECTION_ID').asString()),
@@ -124,6 +126,7 @@ module.exports = {
           'MUSIC_COLLECTION_ID',
           'MUSIC_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
     },
     pagination: {

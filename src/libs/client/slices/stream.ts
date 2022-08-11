@@ -40,7 +40,7 @@ const getInitialState: getInitialStateFn = () => {
   }
   return Object.keys(notion.pages).reduce((initState, name) => {
     const pageConfig = notion.pages[name]
-    if (pageConfig.enabled) {
+    if (pageConfig.enabled && pageConfig.type === 'stream') {
       initState[name] = Object.assign({}, defaultContentState)
     }
     return initState
