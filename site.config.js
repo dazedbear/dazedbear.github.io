@@ -15,10 +15,8 @@ const normalizeId = id => {
   )}-${id.substr(20)}`
 }
 
-const currentEnv = env
-  .get('NEXT_PUBLIC_APP_ENV')
-  .default('production')
-  .asString()
+// env-var cannot read `NEXT_PUBLIC_` prefix env variables on client-side
+const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production';
 module.exports = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
