@@ -49,8 +49,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       'collectionViewId',
     ])
     const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
+    const pageType = get(notion, ['pages', pageName, 'type'])
 
-    if (!pageEnabled) {
+    if (!pageEnabled || pageType !== 'stream') {
       log({
         category,
         message: `posts data not found because this page is disabled \nquery params = ${JSON.stringify(
