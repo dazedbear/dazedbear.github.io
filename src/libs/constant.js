@@ -1,4 +1,5 @@
 module.exports = {
+  ABOUT_PAGE: 'AboutPage',
   PAGE_TYPE_ARTICLE_LIST_PAGE: 'ArticleListPage',
   PAGE_TYPE_ARTICLE_SINGLE_PAGE: 'ArticleSinglePage',
   PAGE_TYPE_ERROR_PAGE: 'ErrorPage',

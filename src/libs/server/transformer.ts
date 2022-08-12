@@ -18,6 +18,7 @@ import {
   logOption,
   PreviewImagesMap,
   MenuItem,
+  SinglePage,
 } from '../../../types'
 
 const ajv = new Ajv()
@@ -196,6 +197,46 @@ export const transformSingleArticle = async (
 }
 
 /**
+ * transform Notion API response to single page
+ * @param {object} data
+ * @returns {object} single page
+ */
+export const transformSinglePage = async (
+  data: ExtendedRecordMap
+): Promise<SinglePage> => {
+  let pageContent: SinglePage = data || {}
+
+  const isPreviewImageGenerationEnabled: boolean = get(notion, [
+    'previeImages',
+    'enable',
+  ])
+
+  if (!isEmpty(pageContent) && isPreviewImageGenerationEnabled) {
+    // we only parse the cover preview images from the recordMap of collection data to prevent duplicated parsing from blog/[slug]
+    const previewImageMap: PreviewImagesMap = await getNotionPreviewImages(
+      pageContent
+    )
+    set(pageContent, ['preview_images'], previewImageMap)
+  }
+
+  const schema = {
+    type: 'object',
+  }
+  const validate = ajv.compile(schema)
+  if (!validate(pageContent)) {
+    const options: logOption = {
+      category: 'transformSinglePage',
+      message: validate.errors,
+      level: 'warn',
+    }
+    log(options)
+    throw 'single page is invalid'
+  }
+
+  return pageContent
+}
+
+/**
  * transform article stream to menu items
  * @param {string} pageName
  * @param {object} articleStream
@@ -310,6 +351,22 @@ export const transformStreamActionPayload = (
       index: articleStream.index,
       total: articleStream.total,
     },
+  }
+}
+
+/**
+ * transform single page to updateSinglePage action payload
+ * @param {string} pageName
+ * @param {object} pageContent
+ * @returns {object} stream action payload
+ */
+export const transformPageActionPayload = (
+  pageName: NotionPageName,
+  pageContent: SinglePage
+): StreamActionPayloadState => {
+  return {
+    name: pageName as string,
+    data: cloneDeep(pageContent),
   }
 }
 

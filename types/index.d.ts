@@ -49,6 +49,8 @@ export interface ArticleStream {
   total?: number
 }
 
+export interface SinglePage {}
+
 export type CacheClientServingStatus =
   | 'default'
   | 'initializing'

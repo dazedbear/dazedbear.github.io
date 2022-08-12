@@ -15,10 +15,8 @@ const normalizeId = id => {
   )}-${id.substr(20)}`
 }
 
-const currentEnv = env
-  .get('NEXT_PUBLIC_APP_ENV')
-  .default('production')
-  .asString()
+// env-var cannot read `NEXT_PUBLIC_` prefix env variables on client-side
+const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production';
 module.exports = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
@@ -66,6 +64,11 @@ module.exports = {
   },
   navigation: [
     {
+      label: 'About',
+      page: '/about',
+      enabled: true,
+    },
+    {
       label: 'Music',
       page: '/music',
       enabled: true,
@@ -85,6 +88,15 @@ module.exports = {
     token: env.get('NOTION_TOKEN').asString(),
     // you can insert any notion index page you need here.
     pages: {
+      about: {
+        enabled: true,
+        navMenuTitle: 'About 關於我',
+        pageId: normalizeId(env.get('ABOUT_PAGE_ID').asString()),
+        requiredEnv: [
+          'ABOUT_PAGE_ID',
+        ],
+        type: 'page',
+      },
       article: {
         collectionId: normalizeId(env.get('ARTICLE_COLLECTION_ID').asString()),
         collectionViewId: normalizeId(
@@ -98,6 +110,7 @@ module.exports = {
           'ARTICLE_COLLECTION_ID',
           'ARTICLE_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
       coding: {
         collectionId: normalizeId(env.get('CODING_COLLECTION_ID').asString()),
@@ -112,6 +125,7 @@ module.exports = {
           'CODING_COLLECTION_ID',
           'CODING_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
       music: {
         collectionId: normalizeId(env.get('MUSIC_COLLECTION_ID').asString()),
@@ -126,6 +140,7 @@ module.exports = {
           'MUSIC_COLLECTION_ID',
           'MUSIC_COLLECTION_VIEW_ID',
         ],
+        type: 'stream',
       },
     },
     pagination: {
