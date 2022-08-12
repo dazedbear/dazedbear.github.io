@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.16.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.0...v4.16.1) (2022-08-12)
+
+
+### CI/CD
+
+* separate lighthouse schedule job and audit /about page ([#51](https://github.com/dazedbear/dazedbear.github.io/issues/51)) ([78565e5](https://github.com/dazedbear/dazedbear.github.io/commit/78565e51efea441d480cada67d32276756475375))
+
 ## [4.16.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.5...v4.16.0) (2022-08-12)
 
 
