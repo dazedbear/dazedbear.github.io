@@ -42,6 +42,7 @@ const generateSiteMapXml = async req => {
     Object.keys(notion.pages),
     async pageName => {
       const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
+      const pageType = get(notion, ['pages', pageName, 'type'])
       if (!pageEnabled) {
         log({
           category,
@@ -50,13 +51,23 @@ const generateSiteMapXml = async req => {
         })
         return []
       }
-      const response = await fetchArticleStream({
-        req,
-        pageName,
-        category,
-      })
-      const articleStream = await transformArticleStream(pageName, response)
-      return transformPageUrls(pageName, articleStream)
+      switch (pageType) {
+        case 'stream': {
+          const response = await fetchArticleStream({
+            req,
+            pageName,
+            category,
+          })
+          const articleStream = await transformArticleStream(pageName, response)
+          return transformPageUrls(pageName, articleStream)
+        }
+        case 'page': {
+          return [`/${pageName}`]
+        }
+        default: {
+          throw Error(`page type is invalid: ${pageType}`);
+        }
+      }
     },
     {
       concurrency: 10,
