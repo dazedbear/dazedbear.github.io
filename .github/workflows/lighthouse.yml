@@ -27,6 +27,7 @@ jobs:
         with:
           urls: |
             https://www.dazedbear.pro/
+            https://www.dazedbear.pro/about
             https://www.dazedbear.pro/music
             https://www.dazedbear.pro/coding
             https://www.dazedbear.pro/article
@@ -75,6 +76,7 @@ jobs:
         with:
           urls: |
             https://www.dazedbear.pro/
+            https://www.dazedbear.pro/about
             https://www.dazedbear.pro/music
             https://www.dazedbear.pro/coding
             https://www.dazedbear.pro/article
