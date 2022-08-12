@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.16.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.5...v4.16.0) (2022-08-12)
+
+
+### Features
+
+* add about page served by notion ([#50](https://github.com/dazedbear/dazedbear.github.io/issues/50)) ([e2c2abb](https://github.com/dazedbear/dazedbear.github.io/commit/e2c2abbcee255f375b954c19f44062299cb4d059))
+
 ## [4.15.5](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.4...v4.15.5) (2022-08-08)
 
 
