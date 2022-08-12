@@ -164,7 +164,7 @@ const AboutPage = ({ hasError, pageName }) => {
 
   return (
     <div
-      id="about-page"
+      id="notion-about-page"
       data-namespace={pageName}
       className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
     >
