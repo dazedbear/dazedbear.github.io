@@ -10,13 +10,15 @@ on:
 
 jobs:
   wait-for-deployment:
-    uses: dazedbear/dazedbear.github.io/.github/workflows/vercel-deployment.yml@main
+    uses: ./.github/workflows/vercel-deployment.yml
+    if: github.event_name == 'push'
     secrets:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
   lighthouse-production:
     needs: wait-for-deployment
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
       - name: Audit URLs using Lighthouse
@@ -25,6 +27,56 @@ jobs:
         with:
           urls: |
             https://www.dazedbear.pro/
+            https://www.dazedbear.pro/about
+            https://www.dazedbear.pro/music
+            https://www.dazedbear.pro/coding
+            https://www.dazedbear.pro/article
+          uploadArtifacts: false
+          temporaryPublicStorage: false
+      - name: Upload Lighthouse Report JSON files to Gist
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GIST_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const path = require('path')
+
+            const reportFileExtension = '.report.json'
+            const reportBaseUrl = 'https://googlechrome.github.io/lighthouse/viewer?gist='
+
+            const reportDir = '${{ steps.lighthouseci.outputs.resultsPath }}'
+            const reportPaths = (fs.readdirSync(reportDir) || []).filter(filename => filename.includes(reportFileExtension))
+            const createGistPromises = reportPaths.map(filename => {
+              const filePath = path.join(reportDir, filename)
+              const content = fs.readFileSync(filePath, 'utf-8')
+              const files = {
+                [filename]: { 
+                  content
+                }
+              }
+              return github.gists.create({ files })
+                .then(newGist => {
+                  core.info(`${reportBaseUrl}${newGist.data.id}`);
+                })
+            })
+            core.startGroup('Deploy to Gist')
+            core.info('Lighthouse Reports:')
+            await Promise.all(createGistPromises)
+            core.endGroup()
+
+  lighthouse-production-schedule:
+    runs-on: ubuntu-latest
+    # skip waiting for deployment for production schedule generation
+    if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Audit URLs using Lighthouse
+        id: lighthouseci
+        uses: treosh/lighthouse-ci-action@v8
+        with:
+          urls: |
+            https://www.dazedbear.pro/
+            https://www.dazedbear.pro/about
             https://www.dazedbear.pro/music
             https://www.dazedbear.pro/coding
             https://www.dazedbear.pro/article
