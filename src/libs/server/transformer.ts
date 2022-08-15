@@ -307,7 +307,7 @@ export const transformArticleSinglePageMeta = (
 
   const pageMeta = {
     // description: '', TODO: add description later
-    image: property.PageCover,
+    // image: property.PageCover, TODO: notion image url doesn't work
     title: property.PageTitle
   };
 
