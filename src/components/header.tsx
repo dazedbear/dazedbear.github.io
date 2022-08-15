@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Head from 'next/head'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems } from '../../site.config'
-import { getCurrentPageTitle, isActivePage } from '../libs/util'
+import { isActivePage } from '../libs/util'
 import faviconIcon from '../../public/favicon.ico'
 
 const themeClassMap = {
@@ -27,7 +26,6 @@ const themeClassMap = {
 
 const Header = () => {
   const currentTheme = isActivePage('/') ? 'modern' : 'classic'
-  const titlePre = getCurrentPageTitle()
   const linkClass =
     'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
   const liniInActiveClass = themeClassMap[currentTheme]?.linkInActive || ''
@@ -43,14 +41,6 @@ const Header = () => {
     >
       <div className="my-0 mx-auto max-w-1400 py-0 px-5">
         <header className="flex relative text-left flex-nowrap flex-row">
-          <Head>
-            <title>
-              {titlePre ? `${titlePre} · ${meta.title}` : meta.title}
-            </title>
-            <meta name="description" content={meta.description} />
-            <meta name="og:title" content={meta.title} />
-            <meta property="og:image" content={meta.image} />
-          </Head>
           <Link href="/">
             <a className="items-center border-0 border-white flex flex-row flex-nowrap h-9 z-10000">
               <div className="h-9 w-9 mr-2.5 box-content relative">
