@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.17.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.1...v4.17.0) (2022-08-15)
+
+
+### Features
+
+* add custom meta title, description, image for all pages ([#52](https://github.com/dazedbear/dazedbear.github.io/issues/52)) ([a712199](https://github.com/dazedbear/dazedbear.github.io/commit/a712199f80d2361cc978f67b9dafc50e602a7967))
+
 ## [4.16.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.0...v4.16.1) (2022-08-12)
 
 
