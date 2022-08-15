@@ -56,3 +56,9 @@ export type CacheClientServingStatus =
   | 'initializing'
   | 'running'
   | 'terminated'
+
+export interface PageMeta {
+  title?: string;
+  description?: string;
+  image?: string;
+}
