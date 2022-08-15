@@ -60,7 +60,7 @@ module.exports = {
   meta: {
     title: 'DazedBear Studio',
     description: 'Web。Music。Creative Coding',
-    image: '',
+    image: 'https://static.dazedbear.pro/website-thumbnail.png',
   },
   navigation: [
     {
@@ -156,10 +156,12 @@ module.exports = {
   pages: {
     index: {
       enabled: true,
+      title: '首頁',
       page: '/',
     },
     maintain: {
       enabled: true,
+      title: '頁面維護中',
       page: '/maintain',
     },
   },

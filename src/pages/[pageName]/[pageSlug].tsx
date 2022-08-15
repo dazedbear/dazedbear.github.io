@@ -61,6 +61,7 @@ import {
   transformArticleStream,
   transformArticleStreamPreviewImages,
   transformSingleArticle,
+  transformArticleSinglePageMeta,
   transformMenuItems,
   transformStreamActionPayload,
   transformTableOfContent,
@@ -124,6 +125,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           articleStream = merge(articleStream, singleArticle)
 
           const menuItems = transformMenuItems(pageName, articleStream)
+          const meta = transformArticleSinglePageMeta(articleStream, articleId)
           const toc = transformTableOfContent(articleStream, articleId)
 
           // save SSR fetch stream article contents to redux store
@@ -142,6 +144,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
           return {
             props: {
               menuItems,
+              meta,
               pageId: idToUuid(articleId),
               pageName,
               toc,

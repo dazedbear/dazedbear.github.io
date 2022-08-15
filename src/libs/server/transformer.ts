@@ -11,11 +11,12 @@ import { notion } from '../../../site.config'
 import log from './log'
 import { getNotionPreviewImages } from './notion'
 import { ActionPayloadState as StreamActionPayloadState } from '../client/slices/stream'
-import { getSinglePagePath } from '../notion'
+import { getSinglePagePath, getPageProperty } from '../notion'
 import {
   ArticleStream,
   NotionPageName,
   logOption,
+  PageMeta,
   PreviewImagesMap,
   MenuItem,
   SinglePage,
@@ -288,6 +289,54 @@ export const transformMenuItems = (
   }
 
   return menuItems
+}
+
+/**
+ * transform article stream to page meta
+ * @param {string} pageName
+ * @param {object} articleStream
+ * @returns {array} menu items array
+ */
+export const transformArticleSinglePageMeta = (
+  articleStream: ArticleStream,
+  articleId: string,
+): PageMeta => {
+  const recordMap = articleStream.content
+  const pageId = idToUuid(articleId);
+  const property: any = getPageProperty({ pageId, recordMap })
+
+  const pageMeta = {
+    // description: '', TODO: add description later
+    image: property.PageCover,
+    title: property.PageTitle
+  };
+
+  const schema = {
+    type: 'object',
+    properties: {
+      description: {
+        type: 'string',
+      },
+      image: {
+        type: 'string',
+      },
+      title: {
+        type: 'string',
+      },
+    },
+  }
+  const validate = ajv.compile(schema)
+  if (!validate(pageMeta)) {
+    const options: logOption = {
+      category: 'transformArticleSinglePageMeta',
+      message: `${validate.errors}`,
+      level: 'warn',
+    }
+    log(options)
+    throw 'page meta are invalid'
+  }
+
+  return pageMeta
 }
 
 /**
