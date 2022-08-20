@@ -31,10 +31,7 @@ import { ExtendedRecordMap } from 'notion-types'
 import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
 
 import { notion, pageProcessTimeout } from '../../site.config'
-import {
-  FAILSAFE_PAGE_GENERATION_QUERY,
-  ABOUT_PAGE,
-} from '../libs/constant'
+import { FAILSAFE_PAGE_GENERATION_QUERY, ABOUT_PAGE } from '../libs/constant'
 import { mapNotionPageLinkUrl } from '../libs/notion'
 import log from '../libs/server/log'
 import wrapper from '../libs/client/store'
@@ -53,7 +50,7 @@ import {
 } from '../libs/server/transformer'
 import { logOption } from '../../types'
 
-const pageName = 'about';
+const pageName = 'about'
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
   store => async ({ query, req, res }) => {
@@ -80,7 +77,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
             category: ABOUT_PAGE,
           })
           const pageContent = await transformSinglePage(response)
-          
+
           // save SSR fetch page contents to redux store
           const payload = transformPageActionPayload(pageName, pageContent)
           const action = updateSinglePage(payload)

@@ -1,7 +1,11 @@
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
-import { notion, meta as commonMeta, pages as staticPages } from '../../site.config'
-import type { PageMeta } from '../../types'
+import {
+  notion,
+  meta as commonMeta,
+  pages as staticPages,
+} from '../../site.config'
+import { PageMeta } from '../../types'
 
 /**
  * get formatted date string
@@ -35,25 +39,28 @@ export const isActivePage = page => {
  * @returns {string} title of current page
  */
 export const getPageMeta = (pageMeta: PageMeta = {}): PageMeta => {
-  const { asPath } = useRouter();
+  const { asPath } = useRouter()
   const meta = {
     title: commonMeta.title,
     description: commonMeta.description,
-    image: commonMeta.image
-  };
+    image: commonMeta.image,
+  }
 
   // pageMeta is for SSR pages override
   // add fallback logic for static pages & SSR pages without meta override
-  const page = asPath === '/' ? 'index' : asPath.split('/').filter(Boolean)[0];
-  const pageTitle = pageMeta.title || get(staticPages, [page, 'title']) || get(notion, ['pages', page, 'navMenuTitle']);
+  const page = asPath === '/' ? 'index' : asPath.split('/').filter(Boolean)[0]
+  const pageTitle =
+    pageMeta.title ||
+    get(staticPages, [page, 'title']) ||
+    get(notion, ['pages', page, 'navMenuTitle'])
   if (pageTitle) {
-    meta.title = `${pageTitle} · ${commonMeta.title}`;
+    meta.title = `${pageTitle} · ${commonMeta.title}`
   }
   if (pageMeta.description) {
-    meta.description = pageMeta.description;
+    meta.description = pageMeta.description
   }
   if (pageMeta.image) {
-    meta.image = pageMeta.image;
+    meta.image = pageMeta.image
   }
-  return meta;
+  return meta
 }

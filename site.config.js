@@ -16,7 +16,7 @@ const normalizeId = id => {
 }
 
 // env-var cannot read `NEXT_PUBLIC_` prefix env variables on client-side
-const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production';
+const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
 module.exports = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
@@ -92,9 +92,7 @@ module.exports = {
         enabled: true,
         navMenuTitle: 'About 關於我',
         pageId: normalizeId(env.get('ABOUT_PAGE_ID').asString()),
-        requiredEnv: [
-          'ABOUT_PAGE_ID',
-        ],
+        requiredEnv: ['ABOUT_PAGE_ID'],
         type: 'page',
       },
       article: {

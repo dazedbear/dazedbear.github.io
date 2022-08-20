@@ -2,52 +2,45 @@
 
 ## [4.17.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.1...v4.17.0) (2022-08-15)
 
-
 ### Features
 
-* add custom meta title, description, image for all pages ([#52](https://github.com/dazedbear/dazedbear.github.io/issues/52)) ([a712199](https://github.com/dazedbear/dazedbear.github.io/commit/a712199f80d2361cc978f67b9dafc50e602a7967))
+- add custom meta title, description, image for all pages ([#52](https://github.com/dazedbear/dazedbear.github.io/issues/52)) ([a712199](https://github.com/dazedbear/dazedbear.github.io/commit/a712199f80d2361cc978f67b9dafc50e602a7967))
 
 ## [4.16.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.0...v4.16.1) (2022-08-12)
 
-
 ### CI/CD
 
-* separate lighthouse schedule job and audit /about page ([#51](https://github.com/dazedbear/dazedbear.github.io/issues/51)) ([78565e5](https://github.com/dazedbear/dazedbear.github.io/commit/78565e51efea441d480cada67d32276756475375))
+- separate lighthouse schedule job and audit /about page ([#51](https://github.com/dazedbear/dazedbear.github.io/issues/51)) ([78565e5](https://github.com/dazedbear/dazedbear.github.io/commit/78565e51efea441d480cada67d32276756475375))
 
 ## [4.16.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.5...v4.16.0) (2022-08-12)
 
-
 ### Features
 
-* add about page served by notion ([#50](https://github.com/dazedbear/dazedbear.github.io/issues/50)) ([e2c2abb](https://github.com/dazedbear/dazedbear.github.io/commit/e2c2abbcee255f375b954c19f44062299cb4d059))
+- add about page served by notion ([#50](https://github.com/dazedbear/dazedbear.github.io/issues/50)) ([e2c2abb](https://github.com/dazedbear/dazedbear.github.io/commit/e2c2abbcee255f375b954c19f44062299cb4d059))
 
 ## [4.15.5](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.4...v4.15.5) (2022-08-08)
 
-
 ### CI/CD
 
-* skip wait for deployment for schedule job ([#49](https://github.com/dazedbear/dazedbear.github.io/issues/49)) ([64abd65](https://github.com/dazedbear/dazedbear.github.io/commit/64abd65a9814fe9ae9a53eda17469d5204ea16f6))
+- skip wait for deployment for schedule job ([#49](https://github.com/dazedbear/dazedbear.github.io/issues/49)) ([64abd65](https://github.com/dazedbear/dazedbear.github.io/commit/64abd65a9814fe9ae9a53eda17469d5204ea16f6))
 
 ## [4.15.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.3...v4.15.4) (2022-08-07)
 
-
 ### CI/CD
 
-* split prod schedule failsafe generation ([#48](https://github.com/dazedbear/dazedbear.github.io/issues/48)) ([cdb81b6](https://github.com/dazedbear/dazedbear.github.io/commit/cdb81b6d2f4b8c9c925bc39057830655043fec5a))
+- split prod schedule failsafe generation ([#48](https://github.com/dazedbear/dazedbear.github.io/issues/48)) ([cdb81b6](https://github.com/dazedbear/dazedbear.github.io/commit/cdb81b6d2f4b8c9c925bc39057830655043fec5a))
 
 ## [4.15.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.2...v4.15.3) (2022-08-06)
 
-
 ### Others
 
-* fix changelog title ([#47](https://github.com/dazedbear/dazedbear.github.io/issues/47)) ([0e4787f](https://github.com/dazedbear/dazedbear.github.io/commit/0e4787f0271c6075fcc38f0e8c01e6cff2a06b43))
+- fix changelog title ([#47](https://github.com/dazedbear/dazedbear.github.io/issues/47)) ([0e4787f](https://github.com/dazedbear/dazedbear.github.io/commit/0e4787f0271c6075fcc38f0e8c01e6cff2a06b43))
 
 ## [4.15.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.1...v4.15.2) (2022-08-06)
 
-
 ### Others
 
-* fix release note generation ([#46](https://github.com/dazedbear/dazedbear.github.io/issues/46)) ([c6611ed](https://github.com/dazedbear/dazedbear.github.io/commit/c6611ed3ba36a2bcb016efcf87cec842c321ed09))
+- fix release note generation ([#46](https://github.com/dazedbear/dazedbear.github.io/issues/46)) ([c6611ed](https://github.com/dazedbear/dazedbear.github.io/commit/c6611ed3ba36a2bcb016efcf87cec842c321ed09))
 
 ## [4.15.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.15.0...v4.15.1) (2022-08-06)
 

@@ -65,7 +65,7 @@ const generateSiteMapXml = async req => {
           return [`/${pageName}`]
         }
         default: {
-          throw Error(`page type is invalid: ${pageType}`);
+          throw Error(`page type is invalid: ${pageType}`)
         }
       }
     },

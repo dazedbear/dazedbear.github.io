@@ -299,17 +299,17 @@ export const transformMenuItems = (
  */
 export const transformArticleSinglePageMeta = (
   articleStream: ArticleStream,
-  articleId: string,
+  articleId: string
 ): PageMeta => {
   const recordMap = articleStream.content
-  const pageId = idToUuid(articleId);
+  const pageId = idToUuid(articleId)
   const property: any = getPageProperty({ pageId, recordMap })
 
   const pageMeta = {
     // description: '', TODO: add description later
     // image: property.PageCover, TODO: notion image url doesn't work
-    title: property.PageTitle
-  };
+    title: property.PageTitle,
+  }
 
   const schema = {
     type: 'object',

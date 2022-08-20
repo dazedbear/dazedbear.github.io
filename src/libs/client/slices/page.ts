@@ -6,7 +6,7 @@ import merge from 'lodash/merge'
 import isEmpty from 'lodash/isEmpty'
 import { notion } from '../../../../site.config'
 
-const slideName = 'page';
+const slideName = 'page'
 
 interface ContentState {}
 
