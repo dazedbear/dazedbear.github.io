@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .block-image::after {
-  @apply h-full w-0 inline-block align-middle;
+  @apply inline-block h-full w-0 align-middle;
 
   content: '';
 }
@@ -22,7 +22,7 @@
 
 #nprogress .bar,
 #nprogress.spinner {
-  @apply z-990 top-25 lg:top-13;
+  @apply top-25 z-990 lg:top-13;
 
   position: fixed !important;
 }

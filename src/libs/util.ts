@@ -12,7 +12,7 @@ import { PageMeta } from '../../types'
  * @param {any} date timestamp or date string
  * @returns {string} formatted date string like `January 23, 2021`
  */
-export const getDateStr = date => {
+export const getDateStr = (date) => {
   return new Date(date).toLocaleString('en-US', {
     month: 'long',
     day: '2-digit',
@@ -25,7 +25,7 @@ export const getDateStr = date => {
  * @param {string} page next.js page pathname
  * @returns {boolean} current next.js page is active or not
  */
-export const isActivePage = page => {
+export const isActivePage = (page) => {
   const { asPath } = useRouter()
   if (!page) {
     return false

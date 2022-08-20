@@ -1,14 +1,14 @@
 import { meta } from '../../site.config'
 
 const Homepage = () => (
-  <div className="text-center homeContainer">
-    <div className="min-h-screen pt-24 lg:pt-12 bg-cover bg-50% bg-cover-music homeSplashFade flex items-center justify-center">
-      <div className="m-0 py-14 px-0 wrapper homeWrapper w-full bg-black/20">
-        <h2 className="inline-block font-serif text-transparent text-5.5xl mb-2 md:text-8xl font-semibold mx-auto projectTitle bg-contain bg-texture-colorful bg-clip-text">
+  <div className="homeContainer text-center">
+    <div className="homeSplashFade flex min-h-screen items-center justify-center bg-cover-music bg-cover bg-50% pt-24 lg:pt-12">
+      <div className="wrapper homeWrapper m-0 w-full bg-black/20 py-14 px-0">
+        <h2 className="projectTitle mx-auto mb-2 inline-block bg-texture-colorful bg-contain bg-clip-text font-serif text-5.5xl font-semibold text-transparent md:text-8xl">
           {meta.title}
         </h2>
-        <div className="w-2/5 mx-auto my-0 h-1 bg-gradient-yellow-purple"></div>
-        <small className="block font-normal font-serif text-white text-xl md:text-2xl mt-3 mb-5 mx-0">
+        <div className="mx-auto my-0 h-1 w-2/5 bg-gradient-yellow-purple"></div>
+        <small className="mx-0 mt-3 mb-5 block font-serif text-xl font-normal text-white md:text-2xl">
           {meta.description}
         </small>
       </div>

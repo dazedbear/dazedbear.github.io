@@ -7,9 +7,9 @@ import { updateNavMenuViewability } from '../libs/client/slices/layout'
 const NavigationMenu = ({ title, menuItems }) => {
   const dispatch = useAppDispatch()
   const isNavMenuViewable = useAppSelector(
-    state => state.layout.isNavMenuViewable
+    (state) => state.layout.isNavMenuViewable
   )
-  const device = useAppSelector(state => state.layout.device)
+  const device = useAppSelector((state) => state.layout.device)
   const isMobile = device === 'smartphone'
   const itemClass = 'py-1 cursor-pointer'
   const linkClass =
@@ -17,17 +17,18 @@ const NavigationMenu = ({ title, menuItems }) => {
   return (
     <section
       className={classnames(
-        'overflow-y-scroll lg:mr-12 lg:w-60 lg:pb-10 lg:mt-12 lg:px-0 lg:shrink-0 lg:max-h-full-viewport',
+        'overflow-y-scroll lg:mr-12 lg:mt-12 lg:max-h-full-viewport lg:w-60 lg:shrink-0 lg:px-0 lg:pb-10',
         {
           block: isNavMenuViewable,
           hidden: !isNavMenuViewable,
-          'fixed w-full z-970 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
+          'fixed left-0 right-0 top-0 z-970 m-0 h-full w-full bg-white px-5 pt-40 pb-5':
+            isMobile,
         }
       )}
     >
       <nav>
         {title && (
-          <h3 className="text-lg font-medium text-gray-700 mb-2">{title}</h3>
+          <h3 className="mb-2 text-lg font-medium text-gray-700">{title}</h3>
         )}
         <ul
           className={classnames({

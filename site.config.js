@@ -1,7 +1,7 @@
 const env = require('env-var')
 
 // use commonJS format
-const normalizeId = id => {
+const normalizeId = (id) => {
   if (!id) return id
   if (id.length === 36) return id
   if (id.length !== 32) {
@@ -22,10 +22,7 @@ module.exports = {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
   },
   bundleAnalysis: {
-    enabled: env
-      .get('BUNDLE_ANALYSIS')
-      .default('false')
-      .asBool(),
+    enabled: env.get('BUNDLE_ANALYSIS').default('false').asBool(),
   },
   cache: {
     enable: env
@@ -249,28 +246,16 @@ module.exports = {
   },
   website: {
     development: {
-      host: `${env
-        .get('HOST')
-        .default('local.dazedbear.pro')
-        .asString()}:${env
+      host: `${env.get('HOST').default('local.dazedbear.pro').asString()}:${env
         .get('PORT')
         .default('3000')
         .asString()}`,
-      hostname: env
-        .get('HOST')
-        .default('local.dazedbear.pro')
-        .asString(),
+      hostname: env.get('HOST').default('local.dazedbear.pro').asString(),
       protocol: 'http',
     },
     stage: {
-      host: env
-        .get('VERCEL_URL')
-        .default('stage.dazedbear.pro')
-        .asString(),
-      hostname: env
-        .get('VERCEL_URL')
-        .default('stage.dazedbear.pro')
-        .asString(),
+      host: env.get('VERCEL_URL').default('stage.dazedbear.pro').asString(),
+      hostname: env.get('VERCEL_URL').default('stage.dazedbear.pro').asString(),
       protocol: 'https',
     },
     production: {

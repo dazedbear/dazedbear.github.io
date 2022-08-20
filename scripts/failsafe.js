@@ -39,7 +39,7 @@ const getPageUrls = async () => {
   return pageUrls
 }
 
-const generateFailsafePages = async pageUrls => {
+const generateFailsafePages = async (pageUrls) => {
   const failsafeSuffix = '<!-- dazedbear studio failsafe -->'
   const pageUrlsSchema = {
     type: 'array',
@@ -72,7 +72,7 @@ const generateFailsafePages = async pageUrls => {
 
   let failsafePages = await pMap(
     pageUrls,
-    async url => {
+    async (url) => {
       const response = await fetch(url)
       if (!response.ok) {
         log({
@@ -104,18 +104,18 @@ const generateFailsafePages = async pageUrls => {
     }
   )
 
-  failsafePages = failsafePages.filter(metadata => metadata)
+  failsafePages = failsafePages.filter((metadata) => metadata)
   if (!validateFailsafePages(failsafePages)) {
     throw validateFailsafePages.errors
   }
   return failsafePages
 }
 
-const uploadFailsafeToCDN = async failsafePages => {
+const uploadFailsafeToCDN = async (failsafePages) => {
   const awsS3Client = new S3Client({})
   await pMap(
     failsafePages,
-    async metadata => {
+    async (metadata) => {
       try {
         const param = {
           Bucket: aws.s3bucket,

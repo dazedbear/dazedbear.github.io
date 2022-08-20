@@ -37,92 +37,103 @@ import {
 } from '../../libs/server/transformer'
 import { logOption } from '../../../types'
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName }, query, req, res }) => {
-    // disable page timeout when failsafe generation mode (?fsg=1)
-    const timeout =
-      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
-    const props = await executeFunctionWithTimeout(
-      async () => {
-        if (!isValidPageName(pageName)) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-            message: `invalid page | pageName: ${pageName}`,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'notFound', pageName)
-        }
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps(
+    (store) =>
+      async ({ params: { pageName }, query, req, res }) => {
+        // disable page timeout when failsafe generation mode (?fsg=1)
+        const timeout =
+          query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+        const props = await executeFunctionWithTimeout(
+          async () => {
+            if (!isValidPageName(pageName)) {
+              const options: logOption = {
+                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+                message: `invalid page | pageName: ${pageName}`,
+                level: 'error',
+                req,
+              }
+              log(options)
+              return showCommonPage(req, res, 'notFound', pageName)
+            }
 
-        try {
-          const response = await fetchArticleStream({
-            req,
-            pageName,
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-          })
-          let articleStream = await transformArticleStream(pageName, response)
-          articleStream = await transformArticleStreamPreviewImages(
-            articleStream
-          )
-          const menuItems = transformMenuItems(pageName, articleStream)
+            try {
+              const response = await fetchArticleStream({
+                req,
+                pageName,
+                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+              })
+              let articleStream = await transformArticleStream(
+                pageName,
+                response
+              )
+              articleStream = await transformArticleStreamPreviewImages(
+                articleStream
+              )
+              const menuItems = transformMenuItems(pageName, articleStream)
 
-          // save SSR fetch stream article contents to redux store
-          const payload = transformStreamActionPayload(pageName, articleStream)
-          const action = updateStream(payload)
-          store.dispatch(action)
+              // save SSR fetch stream article contents to redux store
+              const payload = transformStreamActionPayload(
+                pageName,
+                articleStream
+              )
+              const action = updateStream(payload)
+              store.dispatch(action)
 
-          const options: logOption = {
-            category: 'page',
-            message: `dumpaccess to /${pageName}`,
-            level: 'info',
-            req,
-          }
-          log(options)
-          setSSRCacheHeaders(res)
-          return {
-            props: {
-              menuItems,
-              pageName,
-            },
-          }
-        } catch (err) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-            message: err,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'error', pageName)
-        }
-      },
-      timeout,
-      duration => {
-        const options: logOption = {
-          category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-          message: `page processing timeout | duration: ${duration} ms`,
-          level: 'warn',
-          req,
-        }
-        log(options)
-        return showCommonPage(req, res, 'error', pageName)
-      },
-      PAGE_TYPE_ARTICLE_LIST_PAGE
-    )
-    return props
-  }
-)
+              const options: logOption = {
+                category: 'page',
+                message: `dumpaccess to /${pageName}`,
+                level: 'info',
+                req,
+              }
+              log(options)
+              setSSRCacheHeaders(res)
+              return {
+                props: {
+                  menuItems,
+                  pageName,
+                },
+              }
+            } catch (err) {
+              const options: logOption = {
+                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+                message: err,
+                level: 'error',
+                req,
+              }
+              log(options)
+              return showCommonPage(req, res, 'error', pageName)
+            }
+          },
+          timeout,
+          (duration) => {
+            const options: logOption = {
+              category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+              message: `page processing timeout | duration: ${duration} ms`,
+              level: 'warn',
+              req,
+            }
+            log(options)
+            return showCommonPage(req, res, 'error', pageName)
+          },
+          PAGE_TYPE_ARTICLE_LIST_PAGE
+        )
+        return props
+      }
+  )
 
 const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
   equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
-    ssr: false,
-  }),
-  pageLink: props => (
+  modal: dynamic(
+    () => import('react-notion-x').then((notion) => notion.Modal),
+    {
+      ssr: false,
+    }
+  ),
+  pageLink: (props) => (
     <Link {...props}>
       <a {...props} />
     </Link>
@@ -131,7 +142,7 @@ const NotionComponentMap: object = {
 }
 
 const ArticleListPage = ({ hasError, menuItems, pageName }) => {
-  const streamState = useAppSelector(state => state.stream)
+  const streamState = useAppSelector((state) => state.stream)
   const dispatch = useAppDispatch()
 
   if (hasError) {
@@ -157,10 +168,10 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
 
     if (isLoading) {
       return (
-        <div className="text-center w-full block m-0 py-4 rounded-md bg-gray-200">
-          <p className="text-gray-700 text-sm text-center inline-block">
+        <div className="m-0 block w-full rounded-md bg-gray-200 py-4 text-center">
+          <p className="inline-block text-center text-sm text-gray-700">
             文章讀取中...
-            <span className="w-4 ml-2 text-center inline-block animate-spin">
+            <span className="ml-2 inline-block w-4 animate-spin text-center">
               <FaCircleNotch />
             </span>
           </p>
@@ -171,12 +182,12 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
     if (error) {
       return (
         <button
-          className="text-center w-full block m-0 py-4 rounded-md bg-gray-200"
+          className="m-0 block w-full rounded-md bg-gray-200 py-4 text-center"
           onClick={() => dispatch(fetchStreamPosts({ index, count, pageName }))}
         >
-          <p className="text-gray-700 text-sm text-center inline-block">
+          <p className="inline-block text-center text-sm text-gray-700">
             文章讀取發生了問題. 請點此再試一次.
-            <span className="w-4 ml-2 text-center inline-block">
+            <span className="ml-2 inline-block w-4 text-center">
               <FaRedo />
             </span>
           </p>
@@ -185,7 +196,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
     }
 
     if (hasNext) {
-      const handlePaginationFetch = isVisible => {
+      const handlePaginationFetch = (isVisible) => {
         if (isVisible && !isLoading) {
           dispatch(fetchStreamPosts({ index, count, pageName }))
         }
@@ -211,7 +222,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
     <div
       id="notion-list-page"
       data-namespace={pageName}
-      className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
+      className="my-0 mx-auto flex max-w-1100 flex-grow flex-row flex-nowrap py-0 px-5 pt-24 lg:pt-12"
     >
       <Breadcrumb title={get(notion, ['pages', pageName, 'navMenuTitle'])} />
       <NavMenu

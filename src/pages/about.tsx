@@ -52,8 +52,8 @@ import { logOption } from '../../types'
 
 const pageName = 'about'
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ query, req, res }) => {
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async ({ query, req, res }) => {
     // disable page timeout when failsafe generation mode (?fsg=1)
     const timeout =
       query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
@@ -108,7 +108,7 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
         }
       },
       timeout,
-      duration => {
+      (duration) => {
         const options: logOption = {
           category: ABOUT_PAGE,
           message: `page processing timeout | duration: ${duration} ms`,
@@ -121,18 +121,20 @@ export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps
       ABOUT_PAGE
     )
     return props
-  }
-)
+  })
 
 const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: CollectionRow,
   equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
-    ssr: false,
-  }),
-  pageLink: props => (
+  modal: dynamic(
+    () => import('react-notion-x').then((notion) => notion.Modal),
+    {
+      ssr: false,
+    }
+  ),
+  pageLink: (props) => (
     <Link {...props}>
       <a {...props} />
     </Link>
@@ -141,7 +143,7 @@ const NotionComponentMap: object = {
 }
 
 const AboutPage = ({ hasError, pageName }) => {
-  const pageState = useAppSelector(state => state.page)
+  const pageState = useAppSelector((state) => state.page)
   // disable links from notion table.
   useRemoveLinks({
     selector: '.notion-table a.notion-page-link',
@@ -163,7 +165,7 @@ const AboutPage = ({ hasError, pageName }) => {
     <div
       id="notion-about-page"
       data-namespace={pageName}
-      className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap max-w-1100 py-0 px-5 my-0 mx-auto"
+      className="my-0 mx-auto flex max-w-1100 flex-grow flex-row flex-nowrap py-0 px-5 pt-24 lg:pt-12"
     >
       <NotionRenderer
         blockId={blockId}

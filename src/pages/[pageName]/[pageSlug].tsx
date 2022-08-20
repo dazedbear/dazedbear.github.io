@@ -72,121 +72,135 @@ import TableOfContent from '../../components/toc'
 import NotionPageHeader from '../../components/notion-page-header'
 import NotionPageFooter from '../../components/notion-page-footer'
 
-export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
-  store => async ({ params: { pageName, pageSlug }, req, res, query }) => {
-    // disable page timeout when failsafe generation mode (?fsg=1)
-    const timeout =
-      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
-    const props = await executeFunctionWithTimeout(
-      async () => {
-        if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-            message: `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'notFound', pageName)
-        }
-
-        const { pageId: articleId } = extractSinglePagePath(pageSlug)
-
-        try {
-          let articleStream = {}
-          let singleArticle = {}
-          await pAll([
-            async () => {
-              const response = await fetchArticleStream({
-                req,
-                pageName,
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps(
+    (store) =>
+      async ({ params: { pageName, pageSlug }, req, res, query }) => {
+        // disable page timeout when failsafe generation mode (?fsg=1)
+        const timeout =
+          query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+        const props = await executeFunctionWithTimeout(
+          async () => {
+            if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
+              const options: logOption = {
                 category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-              })
-              articleStream = await transformArticleStream(pageName, response)
-              articleStream = await transformArticleStreamPreviewImages(
+                message: `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`,
+                level: 'error',
+                req,
+              }
+              log(options)
+              return showCommonPage(req, res, 'notFound', pageName)
+            }
+
+            const { pageId: articleId } = extractSinglePagePath(pageSlug)
+
+            try {
+              let articleStream = {}
+              let singleArticle = {}
+              await pAll([
+                async () => {
+                  const response = await fetchArticleStream({
+                    req,
+                    pageName,
+                    category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+                  })
+                  articleStream = await transformArticleStream(
+                    pageName,
+                    response
+                  )
+                  articleStream = await transformArticleStreamPreviewImages(
+                    articleStream
+                  )
+                },
+                async () => {
+                  // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
+                  const singleArticleResponse = await fetchArticleStream({
+                    req,
+                    pageId: articleId,
+                    category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+                  })
+                  singleArticle = await transformSingleArticle(
+                    singleArticleResponse
+                  )
+                  singleArticle = await transformArticleStreamPreviewImages(
+                    singleArticle
+                  )
+                },
+              ])
+              articleStream = merge(articleStream, singleArticle)
+
+              const menuItems = transformMenuItems(pageName, articleStream)
+              const meta = transformArticleSinglePageMeta(
+                articleStream,
+                articleId
+              )
+              const toc = transformTableOfContent(articleStream, articleId)
+
+              // save SSR fetch stream article contents to redux store
+              const payload = transformStreamActionPayload(
+                pageName,
                 articleStream
               )
-            },
-            async () => {
-              // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
-              const singleArticleResponse = await fetchArticleStream({
+              const action = updateStream(payload)
+              store.dispatch(action)
+
+              const options: logOption = {
+                category: 'page',
+                message: `dumpaccess to /${pageName}/${pageSlug}`,
+                level: 'info',
                 req,
-                pageId: articleId,
+              }
+              log(options)
+              setSSRCacheHeaders(res)
+              return {
+                props: {
+                  menuItems,
+                  meta,
+                  pageId: idToUuid(articleId),
+                  pageName,
+                  toc,
+                },
+              }
+            } catch (err) {
+              const options: logOption = {
                 category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-              })
-              singleArticle = await transformSingleArticle(
-                singleArticleResponse
-              )
-              singleArticle = await transformArticleStreamPreviewImages(
-                singleArticle
-              )
-            },
-          ])
-          articleStream = merge(articleStream, singleArticle)
-
-          const menuItems = transformMenuItems(pageName, articleStream)
-          const meta = transformArticleSinglePageMeta(articleStream, articleId)
-          const toc = transformTableOfContent(articleStream, articleId)
-
-          // save SSR fetch stream article contents to redux store
-          const payload = transformStreamActionPayload(pageName, articleStream)
-          const action = updateStream(payload)
-          store.dispatch(action)
-
-          const options: logOption = {
-            category: 'page',
-            message: `dumpaccess to /${pageName}/${pageSlug}`,
-            level: 'info',
-            req,
-          }
-          log(options)
-          setSSRCacheHeaders(res)
-          return {
-            props: {
-              menuItems,
-              meta,
-              pageId: idToUuid(articleId),
-              pageName,
-              toc,
-            },
-          }
-        } catch (err) {
-          const options: logOption = {
-            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-            message: err,
-            level: 'error',
-            req,
-          }
-          log(options)
-          return showCommonPage(req, res, 'error', pageName)
-        }
-      },
-      timeout,
-      duration => {
-        const options: logOption = {
-          category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-          message: `page processing timeout | duration: ${duration} ms`,
-          level: 'warn',
-          req,
-        }
-        log(options)
-        return showCommonPage(req, res, 'error', pageName)
-      },
-      PAGE_TYPE_ARTICLE_SINGLE_PAGE
-    )
-    return props
-  }
-)
+                message: err,
+                level: 'error',
+                req,
+              }
+              log(options)
+              return showCommonPage(req, res, 'error', pageName)
+            }
+          },
+          timeout,
+          (duration) => {
+            const options: logOption = {
+              category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+              message: `page processing timeout | duration: ${duration} ms`,
+              level: 'warn',
+              req,
+            }
+            log(options)
+            return showCommonPage(req, res, 'error', pageName)
+          },
+          PAGE_TYPE_ARTICLE_SINGLE_PAGE
+        )
+        return props
+      }
+  )
 
 const NotionComponentMap: object = {
   code: Code,
   collection: Collection,
   collectionRow: () => null, // we don't render property table for each articles
   equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(() => import('react-notion-x').then(notion => notion.Modal), {
-    ssr: false,
-  }),
-  pageLink: props => (
+  modal: dynamic(
+    () => import('react-notion-x').then((notion) => notion.Modal),
+    {
+      ssr: false,
+    }
+  ),
+  pageLink: (props) => (
     <Link {...props}>
       <a {...props} />
     </Link>
@@ -201,7 +215,7 @@ const ArticleSinglePage = ({
   pageName,
   toc,
 }) => {
-  const streamState = useAppSelector(state => state.stream)
+  const streamState = useAppSelector((state) => state.stream)
 
   // disable links from notion table.
   useRemoveLinks({
@@ -235,7 +249,7 @@ const ArticleSinglePage = ({
     <div
       id="notion-single-page"
       data-namespace={pageName}
-      className="pt-24 lg:pt-12 flex flex-row flex-grow flex-nowrap justify-center max-w-1400 py-0 px-5 my-0 mx-auto"
+      className="my-0 mx-auto flex max-w-1400 flex-grow flex-row flex-nowrap justify-center py-0 px-5 pt-24 lg:pt-12"
     >
       <Breadcrumb
         title={get(notion, ['pages', pageName, 'navMenuTitle'])}
@@ -248,7 +262,7 @@ const ArticleSinglePage = ({
       <NotionRenderer
         blockId={pageId}
         components={NotionComponentMap}
-        className="pt-20 lg:pt-10 overflow-y-scroll lg:max-h-full-viewport lg:w-3-cols-center"
+        className="overflow-y-scroll pt-20 lg:max-h-full-viewport lg:w-3-cols-center lg:pt-10"
         recordMap={recordMap}
         fullPage={false}
         darkMode={false}

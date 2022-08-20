@@ -248,7 +248,7 @@ export const transformMenuItems = (
   articleStream: ArticleStream
 ): MenuItem[] => {
   const recordMap = articleStream.content
-  const menuItems: MenuItem[] = articleStream.ids.map(pageId => {
+  const menuItems: MenuItem[] = articleStream.ids.map((pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
@@ -350,7 +350,7 @@ export const transformPageUrls = (
   articleStream: ArticleStream
 ): string[] => {
   const recordMap = articleStream.content
-  let pageUrls: string[] = articleStream.ids.map(pageId => {
+  let pageUrls: string[] = articleStream.ids.map((pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,

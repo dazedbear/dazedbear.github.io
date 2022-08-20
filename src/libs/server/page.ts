@@ -225,7 +225,7 @@ export const executeFunctionWithTimeout = async (
   }
 
   let timerId
-  const timer = new Promise(resolve => {
+  const timer = new Promise((resolve) => {
     timerId = setTimeout(() => {
       timerId = undefined
       resolve(REACH_TIMEOUT)

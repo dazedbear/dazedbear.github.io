@@ -7,10 +7,10 @@ import {
 
 const Breadcrumb = ({ title, enableToc = false }) => {
   const isNavMenuViewable = useAppSelector(
-    state => state.layout.isNavMenuViewable
+    (state) => state.layout.isNavMenuViewable
   )
   const isTableOfContentViewable = useAppSelector(
-    state => state.layout.isTableOfContentViewable
+    (state) => state.layout.isTableOfContentViewable
   )
   const dispatch = useAppDispatch()
 
@@ -21,17 +21,17 @@ const Breadcrumb = ({ title, enableToc = false }) => {
   return (
     <section
       className={classnames(
-        'fixed w-full left-0 right-0 z-980 block lg:hidden',
+        'fixed left-0 right-0 z-980 block w-full lg:hidden',
         {
           'border-b border-gray-300':
             isNavMenuViewable || isTableOfContentViewable,
         }
       )}
     >
-      <div className="max-w-1100 py-2 px-5 my-0 mx-auto relative bg-gray-200 flex flex-row flex-nowrap box-border overflow-hidden">
+      <div className="relative my-0 mx-auto box-border flex max-w-1100 flex-row flex-nowrap overflow-hidden bg-gray-200 py-2 px-5">
         {/* hamburger lines */}
         <div
-          className={classnames('h-8 w-5 mr-3 relative', {
+          className={classnames('relative mr-3 h-8 w-5', {
             invisible: isTableOfContentViewable,
           })}
         >
@@ -69,7 +69,7 @@ const Breadcrumb = ({ title, enableToc = false }) => {
         </h2>
         {/* toc icon */}
         {enableToc && (
-          <div className="h-8 w-5 ml-3 relative">
+          <div className="relative ml-3 h-8 w-5">
             <div
               className="absolute top-2 w-full text-center"
               onClick={() => dispatch(updateTableOfContentViewability())}
