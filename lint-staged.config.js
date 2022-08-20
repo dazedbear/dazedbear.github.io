@@ -1,11 +1,5 @@
 module.exports = {
-  '*': filenames => {
-    const changedFiles = filenames.join(' ')
-    return [
-      'npm run lint:eslint',
-      'npm run lint:stylelint',
-      'npm run format',
-      `git add ${changedFiles}`,
-    ]
-  },
+  '*': () => ['npm run format'],
+  '*.{js,jsx,ts,tsx,cjs}': () => ['npm run lint:eslint', 'npm run test:unit'],
+  '*.css': () => ['npm run lint:stylelint'],
 }
