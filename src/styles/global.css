@@ -4,21 +4,26 @@
 
 .block-image::after {
   @apply h-full w-0 inline-block align-middle;
+
   content: '';
 }
+
 /* start - to hide scrollbar */
 * {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
 ::-webkit-scrollbar {
   display: none;
 }
+
 /* end - to hide scrollbar */
 
 #nprogress .bar,
 #nprogress.spinner {
   @apply z-990 top-25 lg:top-13;
+
   position: fixed !important;
 }
 
@@ -30,9 +35,11 @@
   max-height: 240px;
   margin: 0 auto;
 }
+
 .likecoin-button > div {
-  padding-top: 49.48454%;
+  padding-top: 49.4845%;
 }
+
 .likecoin-button > iframe {
   position: absolute;
   top: 0;
@@ -40,4 +47,5 @@
   width: 100%;
   height: 100%;
 }
+
 /* end - likecoin button */
