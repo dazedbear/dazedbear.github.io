@@ -20,7 +20,7 @@ const validateRequiredEnv = () => {
     }
     return list
   }, [])
-  envList.forEach(name => {
+  envList.forEach((name) => {
     if (!process.env[name]) {
       throw new Error(
         `\n${name} is missing from env, this will result in an error\n` +
@@ -30,7 +30,7 @@ const validateRequiredEnv = () => {
   })
 }
 
-const withBundleAnalyzer = config => {
+const withBundleAnalyzer = (config) => {
   if (!bundleAnalysis.enabled) {
     return config
   }

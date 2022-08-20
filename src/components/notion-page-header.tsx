@@ -14,7 +14,7 @@ const PageCover = ({ alt = '', cover, recordMap }) => {
     const aspectRatio = previewImage.originalHeight / previewImage.originalWidth
     return (
       <div
-        className="w-full rounded-md relative"
+        className="relative w-full rounded-md"
         style={{
           paddingBottom: `${aspectRatio * 100}%`,
         }}
@@ -48,7 +48,7 @@ const NotionPageHeader = ({
     <div className="notion-title">{title}</div>
     <p>
       <span>{`${publishDate}`}</span>
-      <span className="text-xs ml-2">{`(updated: ${lastEditedDate})`}</span>
+      <span className="ml-2 text-xs">{`(updated: ${lastEditedDate})`}</span>
     </p>
     <PageCover cover={cover} recordMap={recordMap} alt={title} />
   </>

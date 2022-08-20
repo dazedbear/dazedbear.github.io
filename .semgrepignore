@@ -28,7 +28,9 @@ tests/
 .eslintrc.json
 .versionrc
 .prettierrc.json
+.stylelintrc.json
 tsconfig.json
+lint-staged.config.js
 
 # Files
 *.md

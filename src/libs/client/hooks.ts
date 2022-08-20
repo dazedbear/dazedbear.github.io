@@ -31,20 +31,20 @@ export const useBrokenImageHandler = ({ selector, fallbackImageUrl }) => {
       return
     }
     const images = document.querySelectorAll(selector)
-    const loadFallbackImageHandler = e => {
+    const loadFallbackImageHandler = (e) => {
       e.target.setAttribute('src', fallbackImageUrl)
     }
-    const hideBrokenImageHandler = e => {
+    const hideBrokenImageHandler = (e) => {
       e.target.className = 'hidden'
     }
-    images.forEach(img => {
+    images.forEach((img) => {
       const handler = fallbackImageUrl
         ? loadFallbackImageHandler
         : hideBrokenImageHandler
       img.addEventListener('error', handler)
     })
     return () => {
-      images.forEach(img => {
+      images.forEach((img) => {
         img.removeEventListener('error', hideBrokenImageHandler)
         img.removeEventListener('error', loadFallbackImageHandler)
       })
@@ -71,14 +71,14 @@ export const useRemoveLinks = ({ selector, condition }) => {
     }
 
     const links = document.querySelectorAll(selector)
-    links.forEach(node => {
+    links.forEach((node) => {
       if (node.hasAttribute('href')) {
         node.removeAttribute('href')
       }
       if (node.hasAttribute('src')) {
         node.removeAttribute('src')
       }
-      node.addEventListener('click', e => e.preventDefault()) // disable a redirection
+      node.addEventListener('click', (e) => e.preventDefault()) // disable a redirection
     })
   })
 }

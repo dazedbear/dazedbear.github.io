@@ -9,24 +9,25 @@ import { updateTableOfContentViewability } from '../libs/client/slices/layout'
 
 const TableOfContent = ({ toc }) => {
   const dispatch = useAppDispatch()
-  const device = useAppSelector(state => state.layout.device)
+  const device = useAppSelector((state) => state.layout.device)
   const isTableOfContentViewable = useAppSelector(
-    state => state.layout.isTableOfContentViewable
+    (state) => state.layout.isTableOfContentViewable
   )
   const { activeSectionId, updateTocActiveSectionId } = useTOCScrollHandler()
   const isMobile = device === 'smartphone'
-  const tocItemClickHandler = id => {
+  const tocItemClickHandler = (id) => {
     updateTocActiveSectionId(id)
     isMobile && dispatch(updateTableOfContentViewability())
   }
   return (
     <section
       className={classnames(
-        'overflow-y-scroll lg:w-60 lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:px-4 lg:shrink-0 lg:grow-0 lg:max-h-full-viewport lg:h-full lg:border-solid lg:border-l',
+        'overflow-y-scroll lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:h-full lg:max-h-full-viewport lg:w-60 lg:shrink-0 lg:grow-0 lg:border-l lg:border-solid lg:px-4',
         {
           block: isTableOfContentViewable,
           hidden: !isTableOfContentViewable,
-          'fixed w-full z-970 bg-white left-0 right-0 top-0 m-0 h-full pt-40 pb-5 px-5': isMobile,
+          'fixed left-0 right-0 top-0 z-970 m-0 h-full w-full bg-white px-5 pt-40 pb-5':
+            isMobile,
         }
       )}
     >
@@ -51,9 +52,9 @@ const TableOfContent = ({ toc }) => {
                   >
                     <span
                       className={classnames(
-                        'inline-block text-sm text-gray-500 font-normal lg:text-xs+',
+                        'inline-block text-sm font-normal text-gray-500 lg:text-xs+',
                         {
-                          'text-lavender-purple-300 font-semibold':
+                          'font-semibold text-lavender-purple-300':
                             activeSectionId === id,
                         }
                       )}

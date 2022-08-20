@@ -183,7 +183,7 @@ export const getNotionPostsFromTable = async (
  * @param {object} recordMap
  * @returns {object} previewImageMap
  */
-export const getNotionPreviewImages = async recordMap => {
+export const getNotionPreviewImages = async (recordMap) => {
   if (!recordMap) {
     log({
       category: 'getNotionPreviewImages',
@@ -194,7 +194,7 @@ export const getNotionPreviewImages = async recordMap => {
   }
   const blockIds = Object.keys(recordMap.block)
   const imageUrls: string[] = blockIds
-    .map(blockId => {
+    .map((blockId) => {
       const block = recordMap.block[blockId]?.value
       if (block) {
         if (block.type === 'image') {
@@ -222,7 +222,7 @@ export const getNotionPreviewImages = async recordMap => {
 
   const results = await pMap(
     imageUrls,
-    async url => {
+    async (url) => {
       let result
       try {
         result = await cacheClient.proxy(
@@ -275,7 +275,7 @@ export const getNotionPreviewImages = async recordMap => {
 
   return results
     .filter(Boolean)
-    .filter(image => !image.error)
+    .filter((image) => !image.error)
     .reduce(
       (acc, result) => ({
         ...acc,

@@ -18,10 +18,10 @@ const Placeholder = ({
           itemClassNames
         )}
       >
-        <div className="rounded-md bg-gray-200 h-48 w-full" />
-        <div className="rounded-md bg-gray-200 mt-4 h-8 w-10/12 lg:w-8/12" />
-        <div className="rounded-md bg-gray-200 mt-3 h-4 w-4/12 lg:w-2/12" />
-        <div className="rounded-md bg-gray-200 mt-2 h-4 w-3/12 lg:w-1/12" />
+        <div className="h-48 w-full rounded-md bg-gray-200" />
+        <div className="mt-4 h-8 w-10/12 rounded-md bg-gray-200 lg:w-8/12" />
+        <div className="mt-3 h-4 w-4/12 rounded-md bg-gray-200 lg:w-2/12" />
+        <div className="mt-2 h-4 w-3/12 rounded-md bg-gray-200 lg:w-1/12" />
       </li>
     ))
   return (

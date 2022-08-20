@@ -1,15 +1,5 @@
-const escape = require('shell-quote').quote
-const isWin = process.platform === 'win32'
-
 module.exports = {
-  '**/*.{js,jsx,ts,tsx,json,md,mdx,css,html,yml,yaml,scss,sass}': filenames => {
-    const escapedFileNames = filenames
-      .map(filename => `"${isWin ? filename : escape([filename])}"`)
-      .join(' ')
-    return [
-      `next lint --fix`,
-      `prettier --ignore-path='.gitignore' --write ${escapedFileNames}`,
-      `git add ${escapedFileNames}`,
-    ]
-  },
+  '*': () => ['npm run format'],
+  '*.{js,jsx,ts,tsx,cjs}': () => ['npm run lint:eslint', 'npm run test:unit'],
+  '*.css': () => ['npm run lint:stylelint'],
 }

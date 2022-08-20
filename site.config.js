@@ -1,7 +1,7 @@
 const env = require('env-var')
 
 // use commonJS format
-const normalizeId = id => {
+const normalizeId = (id) => {
   if (!id) return id
   if (id.length === 36) return id
   if (id.length !== 32) {
@@ -16,16 +16,13 @@ const normalizeId = id => {
 }
 
 // env-var cannot read `NEXT_PUBLIC_` prefix env variables on client-side
-const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production';
+const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
 module.exports = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
   },
   bundleAnalysis: {
-    enabled: env
-      .get('BUNDLE_ANALYSIS')
-      .default('false')
-      .asBool(),
+    enabled: env.get('BUNDLE_ANALYSIS').default('false').asBool(),
   },
   cache: {
     enable: env
@@ -92,9 +89,7 @@ module.exports = {
         enabled: true,
         navMenuTitle: 'About 關於我',
         pageId: normalizeId(env.get('ABOUT_PAGE_ID').asString()),
-        requiredEnv: [
-          'ABOUT_PAGE_ID',
-        ],
+        requiredEnv: ['ABOUT_PAGE_ID'],
         type: 'page',
       },
       article: {
@@ -251,28 +246,16 @@ module.exports = {
   },
   website: {
     development: {
-      host: `${env
-        .get('HOST')
-        .default('local.dazedbear.pro')
-        .asString()}:${env
+      host: `${env.get('HOST').default('local.dazedbear.pro').asString()}:${env
         .get('PORT')
         .default('3000')
         .asString()}`,
-      hostname: env
-        .get('HOST')
-        .default('local.dazedbear.pro')
-        .asString(),
+      hostname: env.get('HOST').default('local.dazedbear.pro').asString(),
       protocol: 'http',
     },
     stage: {
-      host: env
-        .get('VERCEL_URL')
-        .default('stage.dazedbear.pro')
-        .asString(),
-      hostname: env
-        .get('VERCEL_URL')
-        .default('stage.dazedbear.pro')
-        .asString(),
+      host: env.get('VERCEL_URL').default('stage.dazedbear.pro').asString(),
+      hostname: env.get('VERCEL_URL').default('stage.dazedbear.pro').asString(),
       protocol: 'https',
     },
     production: {

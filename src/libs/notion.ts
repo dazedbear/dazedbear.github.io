@@ -10,7 +10,7 @@ import { NotionPageName } from '../../types'
  * @returns {object} map contains property path and type.
  * eg: { Slug: { type: 'text', path: ['value', 'schema', 'QzV^'] }}
  */
-const getPropertyPathMap = collection => {
+const getPropertyPathMap = (collection) => {
   const schemaPath = ['value', 'schema']
   const basePath = ['value', 'properties']
   const schema = get(collection, schemaPath)
@@ -34,7 +34,7 @@ const getPropertyPathMap = collection => {
  * @param {any} property
  * @returns {string} extracted value
  */
-const getPropertyValue = property => {
+const getPropertyValue = (property) => {
   if (property && Array.isArray(property)) {
     for (const v of property) {
       const value = getPropertyValue(v)
@@ -121,7 +121,7 @@ export const getAllPostSlugs = ({ recordMap, postIds, propertyPathMap }) => {
 
   const SLUG_PROPERTY_NAME = 'Slug'
   const slugPath = propertyPathMap[SLUG_PROPERTY_NAME]
-  return postIds.map(postId => {
+  return postIds.map((postId) => {
     const slug = get(recordMap, ['block', postId, ...slugPath], [[]])[0][0]
     return { postId, slug }
   })
@@ -216,7 +216,7 @@ export const getSinglePagePath = ({ pageName, pageId, recordMap }) => {
  * @param {string} pagePath
  * @returns {object} result like {slug: announce-memos, pageId: c1510a50f1b44dbc95f3cd8c733dd472}
  */
-export const extractSinglePagePath = pagePath => {
+export const extractSinglePagePath = (pagePath) => {
   if (!pagePath) {
     return {}
   }

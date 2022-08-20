@@ -7,7 +7,7 @@ const likecoin = ({ url }) =>
     <div className="likecoin-embed likecoin-button">
       <div />
       <iframe
-        className="likecoin w-full min-h-150 lg:min-h-200"
+        className="likecoin min-h-150 w-full lg:min-h-200"
         scrolling="no"
         frameBorder="0"
         src={`https://button.like.co/in/embed/${
@@ -46,7 +46,7 @@ const NotionPageFooter = () => {
   }
 
   return (
-    <div className="w-full my-5 min-h-150 lg:min-h-200">
+    <div className="my-5 min-h-150 w-full lg:min-h-200">
       {communityComponents}
     </div>
   )

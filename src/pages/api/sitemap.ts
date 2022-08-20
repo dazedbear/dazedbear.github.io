@@ -31,16 +31,16 @@ const methods = ['GET']
 dayjs.extend(utc)
 const category = getCategory(route)
 
-const generateSiteMapXml = async req => {
+const generateSiteMapXml = async (req) => {
   // get all enabled static page paths
   const pageUrls = Object.values(pages)
-    .map(item => item.enabled && item.page)
-    .filter(path => path)
+    .map((item) => item.enabled && item.page)
+    .filter((path) => path)
 
   // get all enabled notion list page paths
   const currentNotionListUrls: string[][] = await pMap(
     Object.keys(notion.pages),
-    async pageName => {
+    async (pageName) => {
       const pageEnabled = get(notion, ['pages', pageName, 'enabled'])
       const pageType = get(notion, ['pages', pageName, 'type'])
       if (!pageEnabled) {
@@ -65,7 +65,7 @@ const generateSiteMapXml = async req => {
           return [`/${pageName}`]
         }
         default: {
-          throw Error(`page type is invalid: ${pageType}`);
+          throw Error(`page type is invalid: ${pageType}`)
         }
       }
     },
@@ -79,7 +79,7 @@ const generateSiteMapXml = async req => {
   )
 
   // all collected urls
-  const urls = [].concat(pageUrls, notionUrls).map(url => ({ url }))
+  const urls = [].concat(pageUrls, notionUrls).map((url) => ({ url }))
 
   // generate sitemap xml
   const stream = new SitemapStream({
@@ -90,7 +90,7 @@ const generateSiteMapXml = async req => {
   })
   const sitemapXml = await streamToPromise(
     Readable.from(urls).pipe(stream)
-  ).then(data => data.toString())
+  ).then((data) => data.toString())
   return sitemapXml
 }
 

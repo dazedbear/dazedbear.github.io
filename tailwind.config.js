@@ -6,7 +6,7 @@ module.exports = {
       backgroundPosition: {
         '50%': '50%',
       },
-      backgroundImage: theme => ({
+      backgroundImage: (theme) => ({
         'cover-music': "url('/cover-music.jpg')",
         'cover-maintain': "url('/cover-maintain.jpg')",
         'texture-colorful': "url('/texture-colorful.jpg')",
@@ -36,28 +36,28 @@ module.exports = {
         '5.5xl': '3.5rem',
       },
       gridTemplateRows: {
-        '12': 'repeat(12, minmax(0, 1fr))',
+        12: 'repeat(12, minmax(0, 1fr))',
       },
       gridTemplateColumns: {
-        '12': 'repeat(12, minmax(0, 1fr))',
+        12: 'repeat(12, minmax(0, 1fr))',
       },
       gridRowStart: {
-        '8': '8',
-        '9': '9',
-        '10': '10',
-        '11': '11',
-        '12': '12',
+        8: '8',
+        9: '9',
+        10: '10',
+        11: '11',
+        12: '12',
       },
       gridColumnStart: {
-        '8': '8',
-        '9': '9',
-        '10': '10',
-        '11': '11',
-        '12': '12',
+        8: '8',
+        9: '9',
+        10: '10',
+        11: '11',
+        12: '12',
       },
       height: {
-        '0.5': '0.125rem',
-        '0.75': '0.1875rem',
+        0.5: '0.125rem',
+        0.75: '0.1875rem',
       },
       lineHeight: {
         '4.5xl': '2.75rem',

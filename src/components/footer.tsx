@@ -25,11 +25,11 @@ const CommunityIcon = ({ name, link }) => {
   }
   if (unsupportIcons[name]) {
     return (
-      <div className="w-24 p-0 m-0 text-center">
+      <div className="m-0 w-24 p-0 text-center">
         <ExtLink href={link} target="_blank" className="text-gray-500">
           <Image
             src={unsupportIcons[name]}
-            className="h-8 mx-auto my-0 block grayscale"
+            className="mx-auto my-0 block h-8 grayscale"
             height="32"
             width="36"
             alt={name}
@@ -40,11 +40,11 @@ const CommunityIcon = ({ name, link }) => {
   }
   const IconComponent = supportIcons[name] || null
   return (
-    <div className="w-24 p-0 m-0 text-center">
+    <div className="m-0 w-24 p-0 text-center">
       <ExtLink
         href={link}
         target="_blank"
-        className="text-gray-500 inline-block"
+        className="inline-block text-gray-500"
       >
         <IconContext.Provider
           value={{ className: 'text-gray-300', size: '2em' }}
@@ -60,10 +60,10 @@ const Footer = () => {
   return (
     <>
       <footer
-        className="shrink lg:shrink-0 bg-lavender-purple-900 text-current text-base antialiased font-normal leading-6 py-8 relative"
+        className="relative shrink bg-lavender-purple-900 py-8 text-base font-normal leading-6 text-current antialiased lg:shrink-0"
         id="footer"
       >
-        <section className="flex justify-center mt-0 mb-5 mx-auto">
+        <section className="mx-auto mt-0 mb-5 flex justify-center">
           {communityFeatures.siteFooterIcon.map(({ name: brand, enable }) => {
             if (!enable) return
             let link
@@ -75,7 +75,7 @@ const Footer = () => {
             return <CommunityIcon key={brand} link={link} name={brand} />
           })}
         </section>
-        <section className="text-white/40 text-center">{copyright}</section>
+        <section className="text-center text-white/40">{copyright}</section>
       </footer>
     </>
   )

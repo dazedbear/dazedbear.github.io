@@ -28,7 +28,7 @@ const App = ({ Component, pageProps }) => {
   useInitLogRocket()
   useResizeHandler()
   useCodeSyntaxHighlight()
-  const { title, description, image } = getPageMeta(pageProps.meta);
+  const { title, description, image } = getPageMeta(pageProps.meta)
   return (
     <div id="app">
       <Head>

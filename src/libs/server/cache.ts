@@ -68,7 +68,7 @@ class CacheClient {
       this.status = 'terminated'
     })
 
-    redisClient.on('error', error => {
+    redisClient.on('error', (error) => {
       log({
         category: 'cacheClient|redis',
         message: error,
@@ -85,7 +85,7 @@ class CacheClient {
     if (!this.client) {
       return false
     }
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const timeout = this.option.statusCheckTimeout
       const delay = this.option.statusCheckDelay
       let duration = 0

@@ -248,7 +248,7 @@ export const transformMenuItems = (
   articleStream: ArticleStream
 ): MenuItem[] => {
   const recordMap = articleStream.content
-  const menuItems: MenuItem[] = articleStream.ids.map(pageId => {
+  const menuItems: MenuItem[] = articleStream.ids.map((pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
@@ -299,17 +299,17 @@ export const transformMenuItems = (
  */
 export const transformArticleSinglePageMeta = (
   articleStream: ArticleStream,
-  articleId: string,
+  articleId: string
 ): PageMeta => {
   const recordMap = articleStream.content
-  const pageId = idToUuid(articleId);
+  const pageId = idToUuid(articleId)
   const property: any = getPageProperty({ pageId, recordMap })
 
   const pageMeta = {
     // description: '', TODO: add description later
     // image: property.PageCover, TODO: notion image url doesn't work
-    title: property.PageTitle
-  };
+    title: property.PageTitle,
+  }
 
   const schema = {
     type: 'object',
@@ -350,7 +350,7 @@ export const transformPageUrls = (
   articleStream: ArticleStream
 ): string[] => {
   const recordMap = articleStream.content
-  let pageUrls: string[] = articleStream.ids.map(pageId => {
+  let pageUrls: string[] = articleStream.ids.map((pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
