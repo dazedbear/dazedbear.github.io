@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.17.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.17.0...v4.17.1) (2022-08-20)
+
+
+### Others
+
+* update linter and set up unit test environment ([#53](https://github.com/dazedbear/dazedbear.github.io/issues/53)) ([3936a83](https://github.com/dazedbear/dazedbear.github.io/commit/3936a83c79eedf68a960aabbed159f7bf5e068f1))
+
 ## [4.17.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.16.1...v4.17.0) (2022-08-15)
 
 ### Features
