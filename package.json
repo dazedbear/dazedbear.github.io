@@ -14,7 +14,7 @@
     "lint:eslint": "next lint --fix",
     "lint:stylelint": "stylelint src/styles/*.css --fix",
     "build": "CACHE_CLIENT_ENABLED=false next build",
-    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\" --ignore-path .gitignore",
+    "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\"",
     "prepare": "is-ci || husky install",
     "task:failsafe": "node scripts/failsafe.js"
   },

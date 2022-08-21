@@ -28,6 +28,7 @@ tests/
 .eslintrc.json
 .versionrc
 .prettierrc.json
+.prettierignore
 .stylelintrc.json
 tsconfig.json
 lint-staged.config.js
