@@ -22,16 +22,14 @@ import 'prismjs/components/prism-docker'
 import 'prismjs/components/prism-log'
 
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
 import Error from 'next/error'
-import dynamic from 'next/dynamic'
 import pAll from 'p-all'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
 import { ExtendedRecordMap } from 'notion-types'
 import { idToUuid } from 'notion-utils'
-import { Code, Collection, NotionRenderer } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 
 import { logOption } from '../../../types'
 import { notion, pageProcessTimeout } from '../../../site.config'
@@ -71,6 +69,7 @@ import NavMenu from '../../components/nav-menu'
 import TableOfContent from '../../components/toc'
 import NotionPageHeader from '../../components/notion-page-header'
 import NotionPageFooter from '../../components/notion-page-footer'
+import NotionComponentMap from '../../components/notion-components'
 
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps(
@@ -188,25 +187,6 @@ export const getServerSideProps: GetServerSideProps =
         return props
       }
   )
-
-const NotionComponentMap: object = {
-  code: Code,
-  collection: Collection,
-  collectionRow: () => null, // we don't render property table for each articles
-  equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(
-    () => import('react-notion-x').then((notion) => notion.Modal),
-    {
-      ssr: false,
-    }
-  ),
-  pageLink: (props) => (
-    <Link {...props}>
-      <a {...props} />
-    </Link>
-  ),
-  tweet: () => null,
-}
 
 const ArticleSinglePage = ({
   hasError,
