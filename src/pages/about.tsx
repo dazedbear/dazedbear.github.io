@@ -22,14 +22,13 @@ import 'prismjs/components/prism-docker'
 import 'prismjs/components/prism-log'
 
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
 import Error from 'next/error'
-import dynamic from 'next/dynamic'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import { ExtendedRecordMap } from 'notion-types'
-import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 
+import NotionComponentMap from '../components/notion-components'
 import { notion, pageProcessTimeout } from '../../site.config'
 import { FAILSAFE_PAGE_GENERATION_QUERY, ABOUT_PAGE } from '../libs/constant'
 import { mapNotionPageLinkUrl } from '../libs/notion'
@@ -122,25 +121,6 @@ export const getServerSideProps: GetServerSideProps =
     )
     return props
   })
-
-const NotionComponentMap: object = {
-  code: Code,
-  collection: Collection,
-  collectionRow: CollectionRow,
-  equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(
-    () => import('react-notion-x').then((notion) => notion.Modal),
-    {
-      ssr: false,
-    }
-  ),
-  pageLink: (props) => (
-    <Link {...props}>
-      <a {...props} />
-    </Link>
-  ),
-  tweet: () => null,
-}
 
 const AboutPage = ({ hasError, pageName }) => {
   const pageState = useAppSelector((state) => state.page)

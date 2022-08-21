@@ -93,6 +93,10 @@
   @apply rounded-md;
 }
 
+#app #notion-list-page .notion-page-icon-inline {
+  @apply hidden; /* hide page title icon */
+}
+
 /**
  * for common notion single page: #app #notion-single-page ...
  */
@@ -116,6 +120,10 @@
   display: block;
   overflow-x: scroll;
   overflow-y: visible;
+}
+
+#app #notion-single-page .notion-collection-page-properties {
+  @apply hidden; /* hide page property meta */
 }
 
 /**

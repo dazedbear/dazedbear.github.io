@@ -1,17 +1,16 @@
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
 import Error from 'next/error'
-import dynamic from 'next/dynamic'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
 import { ExtendedRecordMap } from 'notion-types'
-import { Code, Collection, CollectionRow, NotionRenderer } from 'react-notion-x'
+import { NotionRenderer } from 'react-notion-x'
 import { FaCircleNotch, FaRedo } from 'react-icons/fa'
 
 import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
+import NotionComponentMap from '../../components/notion-components'
 import { notion, pageProcessTimeout } from '../../../site.config'
 import {
   FAILSAFE_PAGE_GENERATION_QUERY,
@@ -121,25 +120,6 @@ export const getServerSideProps: GetServerSideProps =
         return props
       }
   )
-
-const NotionComponentMap: object = {
-  code: Code,
-  collection: Collection,
-  collectionRow: CollectionRow,
-  equation: () => null, // we don't have math equation in articles, so we don't need this
-  modal: dynamic(
-    () => import('react-notion-x').then((notion) => notion.Modal),
-    {
-      ssr: false,
-    }
-  ),
-  pageLink: (props) => (
-    <Link {...props}>
-      <a {...props} />
-    </Link>
-  ),
-  tweet: () => null,
-}
 
 const ArticleListPage = ({ hasError, menuItems, pageName }) => {
   const streamState = useAppSelector((state) => state.stream)
