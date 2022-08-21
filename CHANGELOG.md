@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.17.1...v4.18.0) (2022-08-21)
+
+
+### Build
+
+* upgrade Notion packages to v6 to fix broken signed file urls ([#54](https://github.com/dazedbear/dazedbear.github.io/issues/54)) ([f2d4aeb](https://github.com/dazedbear/dazedbear.github.io/commit/f2d4aeb443ed2f65877c1522242a63c42a95a930))
+
 ## [4.17.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.17.0...v4.17.1) (2022-08-20)
 
 
