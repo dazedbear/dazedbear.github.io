@@ -18,8 +18,7 @@
     "build:storybook": "build-storybook",
     "format": "prettier --write \"**/*.{js,jsx,json,ts,tsx,md,mdx,css,html,yml,yaml,scss,sass}\"",
     "prepare": "is-ci || husky install",
-    "task:failsafe": "node scripts/failsafe.js",
-    "deploy:chromatic": "chromatic --build-script-name build:storybook"
+    "task:failsafe": "node scripts/failsafe.js"
   },
   "config": {
     "commitizen": {
