@@ -135,7 +135,7 @@ const AboutPage = ({ hasError, pageName }) => {
   }
 
   const blockId: string = get(notion, ['pages', pageName, 'pageId'])
-  const content: ExtendedRecordMap = get(pageState, [pageName])
+  const content: any = get(pageState, [pageName])
   const previewImagesEnabled: boolean = get(notion, ['previeImages', 'enable'])
 
   // hack to temporarily fix "cannot assign type to read-only object" issue in react-notion-x

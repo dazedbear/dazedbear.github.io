@@ -37,89 +37,81 @@ import {
 import { logOption } from '../../../types'
 
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps(
-    (store) =>
-      async ({ params: { pageName }, query, req, res }) => {
-        // disable page timeout when failsafe generation mode (?fsg=1)
-        const timeout =
-          query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
-        const props = await executeFunctionWithTimeout(
-          async () => {
-            if (!isValidPageName(pageName)) {
-              const options: logOption = {
-                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-                message: `invalid page | pageName: ${pageName}`,
-                level: 'error',
-                req,
-              }
-              log(options)
-              return showCommonPage(req, res, 'notFound', pageName)
-            }
+  wrapper.getServerSideProps((store) => async ({ params, query, req, res }) => {
+    const pageName = params.pageName as string
+    // disable page timeout when failsafe generation mode (?fsg=1)
+    const timeout =
+      query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+    const props = await executeFunctionWithTimeout(
+      async () => {
+        if (!isValidPageName(pageName)) {
+          const options: logOption = {
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+            message: `invalid page | pageName: ${pageName}`,
+            level: 'error',
+            req,
+          }
+          log(options)
+          return showCommonPage(req, res, 'notFound', pageName)
+        }
 
-            try {
-              const response = await fetchArticleStream({
-                req,
-                pageName,
-                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-              })
-              let articleStream = await transformArticleStream(
-                pageName,
-                response
-              )
-              articleStream = await transformArticleStreamPreviewImages(
-                articleStream
-              )
-              const menuItems = transformMenuItems(pageName, articleStream)
+        try {
+          const response = await fetchArticleStream({
+            req,
+            pageName,
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+          })
+          let articleStream = await transformArticleStream(pageName, response)
+          articleStream = await transformArticleStreamPreviewImages(
+            articleStream
+          )
+          const menuItems = transformMenuItems(pageName, articleStream)
 
-              // save SSR fetch stream article contents to redux store
-              const payload = transformStreamActionPayload(
-                pageName,
-                articleStream
-              )
-              const action = updateStream(payload)
-              store.dispatch(action)
+          // save SSR fetch stream article contents to redux store
+          const payload = transformStreamActionPayload(pageName, articleStream)
+          const action = updateStream(payload)
+          store.dispatch(action)
 
-              const options: logOption = {
-                category: 'page',
-                message: `dumpaccess to /${pageName}`,
-                level: 'info',
-                req,
-              }
-              log(options)
-              setSSRCacheHeaders(res)
-              return {
-                props: {
-                  menuItems,
-                  pageName,
-                },
-              }
-            } catch (err) {
-              const options: logOption = {
-                category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-                message: err,
-                level: 'error',
-                req,
-              }
-              log(options)
-              return showCommonPage(req, res, 'error', pageName)
-            }
-          },
-          timeout,
-          (duration) => {
-            const options: logOption = {
-              category: PAGE_TYPE_ARTICLE_LIST_PAGE,
-              message: `page processing timeout | duration: ${duration} ms`,
-              level: 'warn',
-              req,
-            }
-            log(options)
-            return showCommonPage(req, res, 'error', pageName)
-          },
-          PAGE_TYPE_ARTICLE_LIST_PAGE
-        )
-        return props
-      }
-  )
+          const options: logOption = {
+            category: 'page',
+            message: `dumpaccess to /${pageName}`,
+            level: 'info',
+            req,
+          }
+          log(options)
+          setSSRCacheHeaders(res)
+          return {
+            props: {
+              menuItems,
+              pageName,
+            },
+          }
+        } catch (err) {
+          const options: logOption = {
+            category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+            message: err,
+            level: 'error',
+            req,
+          }
+          log(options)
+          return showCommonPage(req, res, 'error', pageName)
+        }
+      },
+      timeout,
+      (duration) => {
+        const options: logOption = {
+          category: PAGE_TYPE_ARTICLE_LIST_PAGE,
+          message: `page processing timeout | duration: ${duration} ms`,
+          level: 'warn',
+          req,
+        }
+        log(options)
+        return showCommonPage(req, res, 'error', pageName)
+      },
+      PAGE_TYPE_ARTICLE_LIST_PAGE
+    )
+    return props
+  })
 
 const ArticleListPage = ({ hasError, menuItems, pageName }) => {
   const streamState = useAppSelector((state) => state.stream)
@@ -131,7 +123,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
 
   const blockId: string = get(notion, ['pages', pageName, 'collectionViewId'])
   const count: number = get(notion, ['pagination', 'batchLoadCount'])
-  const content: ExtendedRecordMap = get(streamState, [pageName, 'content'])
+  const content: any = get(streamState, [pageName, 'content'])
   const error: boolean = get(streamState, [pageName, 'error'])
   const hasNext: boolean = get(streamState, [pageName, 'hasNext'])
   const index: number = get(streamState, [pageName, 'index'], 0)

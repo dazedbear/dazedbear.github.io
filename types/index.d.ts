@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiRequestCookies } from 'next'
 import { RecordMap, SearchResults } from 'notion-types'
 import { IncomingMessage, ServerResponse } from 'http'
 
-export type NotionPageName = 'article' | 'coding' | 'music' | string | string[]
+export type NotionPageName = 'article' | 'coding' | 'music' | 'about' | string
 
 export interface ErrorPageProps {
   hasError: true

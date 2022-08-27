@@ -41,7 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const category = getCategory(route)
     validateRequest(req, { querySchema, route, methods })
 
-    const pageName = req.query?.pageName
+    const pageName = req.query?.pageName as string
     const pageId = get(notion, ['pages', pageName, 'pageId'])
     const collectionViewId = get(notion, [
       'pages',
