@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.0...v4.18.1) (2022-08-28)
+
+
+### Testing
+
+* set up component testing environment with Storybook, Jest, and Chromatic CI job ([#55](https://github.com/dazedbear/dazedbear.github.io/issues/55)) ([e2a3c39](https://github.com/dazedbear/dazedbear.github.io/commit/e2a3c3974dd5a1f552af97385479af5d319bc7a6))
+
 ## [4.18.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.17.1...v4.18.0) (2022-08-21)
 
 
