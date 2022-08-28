@@ -17,6 +17,7 @@ export const getDateStr = (date) => {
     month: 'long',
     day: '2-digit',
     year: 'numeric',
+    timeZone: 'Asia/Taipei',
   })
 }
 

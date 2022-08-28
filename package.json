@@ -11,7 +11,7 @@
     "dev": "next dev",
     "dev:storybook": "start-storybook -p 6006",
     "start": "next start",
-    "test:unit": "jest --coverage --coverageDirectory=${COVERAGE_DIR:=artifacts/coverage} --config=jest.config.js",
+    "test:unit": "TZ=UTC jest --coverage --coverageDirectory=${COVERAGE_DIR:=artifacts/coverage} --config=jest.config.js",
     "test:storybook": "test-storybook",
     "lint:eslint": "next lint --fix",
     "lint:stylelint": "stylelint src/styles/*.css --fix",
