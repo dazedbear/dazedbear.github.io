@@ -9,6 +9,7 @@ on:
       - 'src/stories/**'
       - 'src/styles/**'
       - 'tailwind.config.js'
+      - '.github/workflows/chromatic.yml'
     branches-ignore:
       - 'dependabot/**'
 
@@ -24,6 +25,7 @@ jobs:
 
       # for other branches
       - name: Publish to Chromatic
+        if: github.ref != 'refs/heads/main'
         uses: chromaui/action@v1
         env:
           CHROMATIC_RETRIES: 3
