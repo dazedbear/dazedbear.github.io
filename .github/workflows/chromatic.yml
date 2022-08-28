@@ -3,13 +3,14 @@ name: 'Chromatic'
 
 on:
   push:
-    paths:
-      - 'src/components/**'
-      - 'src/libs/client/**'
-      - 'src/stories/**'
-      - 'src/styles/**'
-      - 'tailwind.config.js'
-      - '.github/workflows/chromatic.yml'
+    # Ignore first since new PR commit won't trigger this job even though changed file is valid in old commits.
+    # paths:
+    #   - 'src/components/**'
+    #   - 'src/libs/client/**'
+    #   - 'src/stories/**'
+    #   - 'src/styles/**'
+    #   - 'tailwind.config.js'
+    #   - '.github/workflows/chromatic.yml'
     branches-ignore:
       - 'dependabot/**'
 
