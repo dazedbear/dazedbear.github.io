@@ -1,4 +1,4 @@
-# Chromatic: publish storybook and run UI visual tests
+# Chromatic: publish storybook and run UI visual and interaction tests
 name: 'Chromatic'
 
 on:
