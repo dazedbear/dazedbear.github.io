@@ -17,6 +17,7 @@ const Placeholder = ({
           },
           itemClassNames
         )}
+        data-testid="placeholder-item"
       >
         <div className="h-48 w-full rounded-md bg-gray-200" />
         <div className="mt-4 h-8 w-10/12 rounded-md bg-gray-200 lg:w-8/12" />
@@ -30,6 +31,7 @@ const Placeholder = ({
         'placeholder w-full animate-pulse',
         wrapperClassNames
       )}
+      data-testid="placeholder"
     >
       {items}
     </ul>

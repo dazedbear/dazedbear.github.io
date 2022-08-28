@@ -1,0 +1,50 @@
+# Chromatic: publish storybook and run UI visual and interaction tests
+name: 'Chromatic'
+
+on:
+  push:
+    # Ignore first since new PR commit won't trigger this job even though changed file is valid in old commits.
+    # paths:
+    #   - 'src/components/**'
+    #   - 'src/libs/client/**'
+    #   - 'src/stories/**'
+    #   - 'src/styles/**'
+    #   - 'tailwind.config.js'
+    #   - '.github/workflows/chromatic.yml'
+    branches-ignore:
+      - 'dependabot/**'
+
+jobs:
+  chromatic-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install dependency
+        run: npm ci --legacy-peer-deps
+
+      # for other branches
+      - name: Publish to Chromatic
+        if: github.ref != 'refs/heads/main'
+        uses: chromaui/action@v1
+        env:
+          CHROMATIC_RETRIES: 3
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: 'build:storybook'
+          skip: 'dependabot/**'
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+
+      # for main branch (squashed commits)
+      - name: Publish to Chromatic and auto accept changes
+        if: github.ref == 'refs/heads/main'
+        uses: chromaui/action@v1
+        env:
+          CHROMATIC_RETRIES: 3
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: 'build:storybook'
+          skip: 'dependabot/**'
+          autoAcceptChanges: true
