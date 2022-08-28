@@ -263,7 +263,6 @@
     "react-test-renderer": "^18.2.0",
     "semantic-release": "^19.0.3",
     "storybook-addon-next": "^1.6.7",
-    "storybook-addon-root-attribute": "^1.0.2",
     "stylelint": "^14.10.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^27.0.0",

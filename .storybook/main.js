@@ -12,7 +12,6 @@ const config = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-addon-next',
-    'storybook-addon-root-attribute/register',
   ],
   framework: '@storybook/react',
   core: {
