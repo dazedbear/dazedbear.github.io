@@ -8,7 +8,11 @@ module.exports = {
     '<rootDir>/tests/__mocks__',
   ],
   testEnvironment: 'node',
-  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+  testMatch: [
+    '**/__tests__/**/*.[jt]s?(x)',
+    '**/?(*.)+(spec|test).[jt]s?(x)',
+    '!**/e2e/**',
+  ],
   globals: {
     'ts-jest': {
       tsconfig: 'tests/tsconfig.json',
