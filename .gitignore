@@ -34,3 +34,6 @@ yarn-error.log*
 .now
 .vercel
 artifacts
+/test-results/
+/playwright-report/
+/playwright/.cache/
