@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.1...v4.18.2) (2022-09-03)
+
+
+### Testing
+
+* update README and bump version for E2E testing env setup ([#59](https://github.com/dazedbear/dazedbear.github.io/issues/59)) ([085b45c](https://github.com/dazedbear/dazedbear.github.io/commit/085b45cb2ab6320a04be4f64d66c8044e3a309c4)), closes [#58](https://github.com/dazedbear/dazedbear.github.io/issues/58)
+
 ## [4.18.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.0...v4.18.1) (2022-08-28)
 
 
