@@ -1,9 +1,9 @@
-require('./scripts/env')()
+require('../../scripts/env')()
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 import env from 'env-var'
 import get from 'lodash/get'
-import { currentEnv, website } from './site.config'
+import { currentEnv, website } from '../../site.config'
 
 const isCI = env.get('CI').default('false').asBool()
 
@@ -11,7 +11,7 @@ const isCI = env.get('CI').default('false').asBool()
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './tests/e2e',
+  testDir: './',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -32,7 +32,7 @@ const config: PlaywrightTestConfig = {
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: isCI
     ? [['list'], ['github']]
-    : [['list'], ['html', { open: 'on-failure' }]],
+    : [['list'], ['html', { open: 'never' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -50,14 +50,14 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'Desktop Chrome',
-      testDir: './tests/e2e/pages',
+      testDir: './pages',
       use: {
         ...devices['Desktop Chrome'],
       },
     },
     {
       name: 'Desktop Safari',
-      testDir: './tests/e2e/pages',
+      testDir: './pages',
       use: {
         ...devices['Desktop Safari'],
       },
@@ -65,21 +65,21 @@ const config: PlaywrightTestConfig = {
     /* Test against mobile viewports. */
     {
       name: 'Mobile Chrome',
-      testDir: './tests/e2e/pages',
+      testDir: './pages',
       use: {
         ...devices['Pixel 5'],
       },
     },
     {
       name: 'Mobile Safari',
-      testDir: './tests/e2e/pages',
+      testDir: './pages',
       use: {
         ...devices['iPhone 6'],
       },
     },
     {
       name: 'API Test',
-      testDir: './tests/e2e/api',
+      testDir: './api',
       use: {
         ...devices['Desktop Chrome'],
       },
@@ -87,7 +87,7 @@ const config: PlaywrightTestConfig = {
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  outputDir: 'artifacts/',
+  outputDir: '../../artifacts/',
 
   /* Run your local dev server before starting the tests */
   // webServer: {
