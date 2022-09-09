@@ -3,16 +3,15 @@ import get from 'lodash/get'
 import { E2E_TEST_QUERY, ScreenShotOption } from '../libs/util'
 import locator from '../libs/locator'
 
-let pagePath = ''
 const screenshotOption: ScreenShotOption = {
   mask: [],
   fullPage: false,
 }
-
-const notionPages = ['article', 'coding', 'music']
+const notionPages = ['about']
+let pagePath = ''
 
 notionPages.forEach((pageName) => {
-  test.describe(`Page test for Notion article list page: ${pageName}`, () => {
+  test.describe(`Page test for Notion single page: ${pageName}`, () => {
     test.beforeEach(({ page }, testInfo) => {
       /**
        * It's important to remove `-darwin` or `-linux` suffix for snapshots / screenshots files.
@@ -27,9 +26,7 @@ notionPages.forEach((pageName) => {
        **/
       screenshotOption.mask = [
         page.locator(get(locator, ['pages', pageName, 'notionContent'])),
-        page.locator(get(locator, ['pages', pageName, 'navigationMenu'])),
       ]
-
       pagePath = `/${pageName}?${E2E_TEST_QUERY}`
     })
 

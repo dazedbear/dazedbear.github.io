@@ -34,7 +34,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -60,7 +60,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -85,7 +85,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
