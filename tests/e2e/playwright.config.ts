@@ -20,6 +20,10 @@ const config: PlaywrightTestConfig = {
      * For example in `await expect(locator).toHaveText();`
      */
     timeout: 5000,
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
+    },
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -55,21 +59,7 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Chrome'],
       },
     },
-    {
-      name: 'Desktop Safari',
-      testDir: './pages',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      testDir: './pages',
-      use: {
-        ...devices['Pixel 5'],
-      },
-    },
     {
       name: 'Mobile Safari',
       testDir: './pages',
@@ -90,10 +80,10 @@ const config: PlaywrightTestConfig = {
   outputDir: '../../artifacts/',
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
+  webServer: {
+    command: 'npm run dev',
+    port: 3000,
+  },
 }
 
 export default config
