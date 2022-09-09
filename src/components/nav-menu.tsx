@@ -35,6 +35,7 @@ const NavigationMenu = ({ title, menuItems }) => {
             'px-2 py-0': !isMobile,
             'p-0': isMobile,
           })}
+          data-testid="navigation-menu"
         >
           {menuItems.map(({ url, label }) => {
             const isRelativePath = /^\/.+/g.test(url)
