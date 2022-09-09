@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: isCI,
   /* Retry on CI only */
-  retries: isCI ? 3 : 1,
+  retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -72,6 +72,20 @@ const config: PlaywrightTestConfig = {
       testDir: './api',
       use: {
         ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'failsafe-test-desktop',
+      testDir: './failsafe',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'failsafe-test-mobile',
+      testDir: './failsafe',
+      use: {
+        ...devices['iPhone 6'],
       },
     },
   ],
