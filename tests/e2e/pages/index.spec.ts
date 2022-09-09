@@ -35,7 +35,7 @@ test.describe('Index Page', () => {
       'meta-og-title'
     )
     expect(await metaOgImage?.getAttribute('content')).toMatchSnapshot(
-      'meta-ot-image'
+      'meta-og-image'
     )
   })
 
