@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000,
+    timeout: 30000,
     toHaveScreenshot: {
       maxDiffPixelRatio: 0.05,
       threshold: 0.2,
@@ -80,10 +80,12 @@ const config: PlaywrightTestConfig = {
   outputDir: '../../artifacts/',
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run dev',
-    port: 3000,
-  },
+  webServer: isCI
+    ? undefined
+    : {
+        command: 'npm run dev',
+        port: 3000,
+      },
 }
 
 export default config
