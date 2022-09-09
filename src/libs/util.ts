@@ -31,8 +31,9 @@ export const isActivePage = (page) => {
   if (!page) {
     return false
   }
+  const pathname = asPath.replace(/\?.*/gi, '') // remove query params
   const regex = new RegExp(`${page}(\/.+)+`, 'i')
-  return page === asPath || regex.test(asPath)
+  return page === pathname || regex.test(pathname)
 }
 
 /**
@@ -49,7 +50,9 @@ export const getPageMeta = (pageMeta: PageMeta = {}): PageMeta => {
 
   // pageMeta is for SSR pages override
   // add fallback logic for static pages & SSR pages without meta override
-  const page = asPath === '/' ? 'index' : asPath.split('/').filter(Boolean)[0]
+  const pathname = asPath.replace(/\?.*/gi, '') // remove query params
+  const page =
+    pathname === '/' ? 'index' : pathname.split('/').filter(Boolean)[0]
   const pageTitle =
     pageMeta.title ||
     get(staticPages, [page, 'title']) ||
