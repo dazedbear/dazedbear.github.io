@@ -5,4 +5,10 @@ export default {
     ogTitle: 'meta[name="og:title"]',
     ogImage: 'meta[property="og:image"]',
   },
+  pages: {
+    about: {
+      notionWrapper: '#notion-about-page',
+      notionContent: '#notion-about-page > main.notion-page',
+    },
+  },
 }
