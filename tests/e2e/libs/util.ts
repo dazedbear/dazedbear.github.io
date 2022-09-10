@@ -1,26 +1,8 @@
-type BrowserName = 'chromium' | 'firefox' | 'webkit'
+import { Locator } from '@playwright/test'
 
-interface FullPageScreenShotOption {
-  path: string
+export interface ScreenShotOption {
+  mask: Locator[]
   fullPage: boolean
 }
 
-export const getFullPageScreenshotOption = (
-  browserName: BrowserName,
-  pageName: string
-): FullPageScreenShotOption => {
-  const SCREENSHOT_FOLDER = './artifacts/screenshots'
-  if (!browserName) {
-    throw Error(
-      `browserName is invalid in getFullPageScreenshotPath: ${browserName}`
-    )
-  }
-  if (!pageName) {
-    throw Error(`pageName is invalid in getFullPageScreenshotPath: ${pageName}`)
-  }
-  const option = {
-    path: `${SCREENSHOT_FOLDER}/${pageName}-page_${browserName}_${Date.now()}.png`,
-    fullPage: true,
-  }
-  return option
-}
+export const E2E_TEST_QUERY = 'e2e_test'

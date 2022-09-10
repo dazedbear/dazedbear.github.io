@@ -19,7 +19,7 @@ jobs:
     name: Playwright E2E Tests (Stage Deployment)
     needs: wait-for-deployment
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for page visual test
     if: contains(github.ref, 'refs/pull')
     env:
       NEXT_PUBLIC_APP_ENV: stage
@@ -34,19 +34,21 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: stage-deployment-page-api-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   playwright-e2e-test-production:
     name: Playwright E2E Tests (Production Deployment)
     needs: wait-for-deployment
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for page visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     env:
       NEXT_PUBLIC_APP_ENV: production
@@ -60,18 +62,20 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: production-deployment-page-api-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   playwright-e2e-test-production-schedule:
     name: Playwright E2E Tests (Production Schedule)
     timeout-minutes: 60
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for page visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
     env:
       NEXT_PUBLIC_APP_ENV: production
@@ -85,10 +89,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npm run test:e2e
+        run: npm run test:e2e:page; npm run test:e2e:api;
       - uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: production-schedule-page-api-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14

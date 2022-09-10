@@ -23,7 +23,7 @@ jobs:
 
   failsafe-generation-stage:
     name: Failsafe Page Generation (Stage Deployment)
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for failsafe visual test
     if: contains(github.ref, 'refs/pull')
     needs: wait-for-deployment
     env:
@@ -40,10 +40,22 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Run failsafe generation
         run: npm run task:failsafe
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run failsafe e2e tests
+        run: npm run test:e2e:failsafe
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: stage-deployment-failsafe-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   failsafe-generation-production:
     name: Failsafe Page Generation (Production Deployment)
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for failsafe visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: wait-for-deployment
     env:
@@ -59,10 +71,22 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Run failsafe generation
         run: npm run task:failsafe
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run failsafe e2e tests
+        run: npm run test:e2e:failsafe
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: production-deployment-failsafe-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   failsafe-generation-production-schedule:
     name: Failsafe Page Generation (Production Schedule)
-    runs-on: ubuntu-latest
+    runs-on: macos-12 # use macos for failsafe visual test
     # skip waiting for deployment for production schedule generation
     if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
     env:
@@ -78,3 +102,15 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Run failsafe generation
         run: npm run task:failsafe
+      - name: Install playwright browsers
+        run: npx playwright install --with-deps
+      - name: Run failsafe e2e tests
+        run: npm run test:e2e:failsafe
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: production-schedule-failsafe-test-report
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14

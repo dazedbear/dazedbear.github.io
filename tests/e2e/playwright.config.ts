@@ -1,9 +1,9 @@
-require('./scripts/env')()
+require('../../scripts/env')()
 import type { PlaywrightTestConfig } from '@playwright/test'
 import { devices } from '@playwright/test'
 import env from 'env-var'
 import get from 'lodash/get'
-import { currentEnv, website } from './site.config'
+import { currentEnv, website } from '../../site.config'
 
 const isCI = env.get('CI').default('false').asBool()
 
@@ -11,7 +11,7 @@ const isCI = env.get('CI').default('false').asBool()
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
-  testDir: './tests/e2e',
+  testDir: './',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -19,7 +19,11 @@ const config: PlaywrightTestConfig = {
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000,
+    timeout: 30000,
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05,
+      threshold: 0.2,
+    },
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -31,8 +35,8 @@ const config: PlaywrightTestConfig = {
   workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: isCI
-    ? [['list'], ['github']]
-    : [['list'], ['html', { open: 'on-failure' }]],
+    ? [['list'], ['html', { open: 'never' }], ['github']]
+    : [['list'], ['html', { open: 'never' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -49,51 +53,53 @@ const config: PlaywrightTestConfig = {
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'Desktop Chrome',
-      testDir: './tests/e2e/pages',
+      name: 'page-test-desktop',
+      testDir: './pages',
       use: {
         ...devices['Desktop Chrome'],
       },
     },
-    {
-      name: 'Desktop Safari',
-      testDir: './tests/e2e/pages',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
     /* Test against mobile viewports. */
     {
-      name: 'Mobile Chrome',
-      testDir: './tests/e2e/pages',
-      use: {
-        ...devices['Pixel 5'],
-      },
-    },
-    {
-      name: 'Mobile Safari',
-      testDir: './tests/e2e/pages',
+      name: 'page-test-mobile',
+      testDir: './pages',
       use: {
         ...devices['iPhone 6'],
       },
     },
     {
-      name: 'API Test',
-      testDir: './tests/e2e/api',
+      name: 'api-test',
+      testDir: './api',
       use: {
         ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'failsafe-test-desktop',
+      testDir: './failsafe',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'failsafe-test-mobile',
+      testDir: './failsafe',
+      use: {
+        ...devices['iPhone 6'],
       },
     },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  outputDir: 'artifacts/',
+  outputDir: '../../artifacts/e2e-test-results',
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   port: 3000,
-  // },
+  webServer: isCI
+    ? undefined
+    : {
+        command: 'npm run dev',
+        port: 3000,
+      },
 }
 
 export default config
