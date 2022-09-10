@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.3...v4.18.4) (2022-09-10)
+
+
+### Bug Fixes
+
+* remove the spacing on the top of desktop notion article pages ([#61](https://github.com/dazedbear/dazedbear.github.io/issues/61)) ([1d489a2](https://github.com/dazedbear/dazedbear.github.io/commit/1d489a220cb5055381166652032904febdcc5639))
+
 ## [4.18.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.2...v4.18.3) (2022-09-10)
 
 
