@@ -39,8 +39,10 @@ jobs:
         if: always()
         with:
           name: stage-deployment-page-api-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   playwright-e2e-test-production:
     name: Playwright E2E Tests (Production Deployment)
@@ -65,8 +67,10 @@ jobs:
         if: always()
         with:
           name: production-deployment-page-api-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   playwright-e2e-test-production-schedule:
     name: Playwright E2E Tests (Production Schedule)
@@ -90,5 +94,7 @@ jobs:
         if: always()
         with:
           name: production-schedule-page-api-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14

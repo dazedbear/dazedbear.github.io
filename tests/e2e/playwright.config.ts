@@ -35,7 +35,7 @@ const config: PlaywrightTestConfig = {
   workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: isCI
-    ? [['list'], ['github']]
+    ? [['list'], ['html', { open: 'never' }], ['github']]
     : [['list'], ['html', { open: 'never' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -91,7 +91,7 @@ const config: PlaywrightTestConfig = {
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
-  outputDir: '../../artifacts/',
+  outputDir: '../../artifacts/e2e-test-results',
 
   /* Run your local dev server before starting the tests */
   webServer: isCI

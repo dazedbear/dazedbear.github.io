@@ -48,8 +48,10 @@ jobs:
         if: always()
         with:
           name: stage-deployment-failsafe-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   failsafe-generation-production:
     name: Failsafe Page Generation (Production Deployment)
@@ -77,8 +79,10 @@ jobs:
         if: always()
         with:
           name: production-deployment-failsafe-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
 
   failsafe-generation-production-schedule:
     name: Failsafe Page Generation (Production Schedule)
@@ -106,5 +110,7 @@ jobs:
         if: always()
         with:
           name: production-schedule-failsafe-test-report
-          path: playwright-report
-          retention-days: 30
+          path: |
+            playwright-report
+            artifacts/e2e-test-results
+          retention-days: 14
