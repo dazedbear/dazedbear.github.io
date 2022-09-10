@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.2...v4.18.3) (2022-09-10)
+
+
+### Testing
+
+* add e2e page, api, failsafe test cases and adjust e2e CI jobs ([#60](https://github.com/dazedbear/dazedbear.github.io/issues/60)) ([2d05465](https://github.com/dazedbear/dazedbear.github.io/commit/2d05465de1455cdaa4bfb1eda938600fb92705c9))
+
 ## [4.18.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.1...v4.18.2) (2022-09-03)
 
 
