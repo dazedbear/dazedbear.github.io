@@ -15,7 +15,7 @@
  * for global notion style override: #app ...
  */
 #app .notion-page {
-  @apply my-0 mb-0 mt-14 px-0 pt-0 pb-5 lg:pt-12 lg:pb-10;
+  @apply my-0 mb-0 mt-14 px-0 pt-0 pb-5 lg:mt-12 lg:pb-10;
 }
 
 #app .notion-viewport {
