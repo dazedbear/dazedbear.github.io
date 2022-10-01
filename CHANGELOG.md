@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.6](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.5...v4.18.6) (2022-10-01)
+
+
+### Bug Fixes
+
+* broken gtm code ([#64](https://github.com/dazedbear/dazedbear.github.io/issues/64)) ([f871c15](https://github.com/dazedbear/dazedbear.github.io/commit/f871c156605b5b1ab9b05b6595c0c15efd8fea64))
+
 ## [4.18.5](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.4...v4.18.5) (2022-10-01)
 
 
