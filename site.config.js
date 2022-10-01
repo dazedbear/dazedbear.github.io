@@ -233,7 +233,11 @@ module.exports = {
   trackingSettings: {
     googleAnalytics: {
       enable: true,
-      id: 'G-J8DQ8XDQ71', // GA4 id: G-J8DQ8XDQ71, current id: UA-83233420-3
+      id: 'G-J8DQ8XDQ71',
+    },
+    googleTagManager: {
+      enable: true,
+      id: 'GTM-KS2L2F3',
     },
     microsoftClarity: {
       enable: true,
