@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.5](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.4...v4.18.5) (2022-10-01)
+
+
+### Others
+
+* replace GA4 gtag tracking with GTM ([#62](https://github.com/dazedbear/dazedbear.github.io/issues/62)) ([c5c0180](https://github.com/dazedbear/dazedbear.github.io/commit/c5c01800a54f67b17fa70dc1a80e4549fe8e7a34))
+
 ## [4.18.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.3...v4.18.4) (2022-09-10)
 
 
