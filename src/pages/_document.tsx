@@ -24,23 +24,6 @@ class MyDocument extends Document {
               }}
             />
           )}
-          {!isLocal && trackingSettings?.googleAnalytics?.enable && (
-            <>
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${trackingSettings?.googleAnalytics?.id}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${trackingSettings?.googleAnalytics?.id}');`,
-                }}
-              />
-            </>
-          )}
           {!isLocal && trackingSettings?.googleTagManager?.enable && (
             <script
               dangerouslySetInnerHTML={{

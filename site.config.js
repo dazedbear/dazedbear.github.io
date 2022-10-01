@@ -231,10 +231,6 @@ module.exports = {
     },
   },
   trackingSettings: {
-    googleAnalytics: {
-      enable: true,
-      id: 'G-J8DQ8XDQ71',
-    },
     googleTagManager: {
       enable: true,
       id: 'GTM-KS2L2F3',
