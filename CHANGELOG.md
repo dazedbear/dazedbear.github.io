@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.7](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.6...v4.18.7) (2022-12-12)
+
+
+### CI/CD
+
+* seperate e2e test report names ([#68](https://github.com/dazedbear/dazedbear.github.io/issues/68)) ([f6a3f64](https://github.com/dazedbear/dazedbear.github.io/commit/f6a3f64b67e904409b52e2c342afb26fc6d3a52f))
+
 ## [4.18.6](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.5...v4.18.6) (2022-10-01)
 
 
