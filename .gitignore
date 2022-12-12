@@ -36,4 +36,5 @@ yarn-error.log*
 artifacts
 /test-results/
 /playwright-report/
+/e2e-*-report/
 /playwright/.cache/
