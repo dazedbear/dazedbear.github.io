@@ -40,7 +40,8 @@ jobs:
         with:
           name: stage-deployment-page-api-test-report
           path: |
-            playwright-report
+            e2e-page-report
+            e2e-api-report
             artifacts/e2e-test-results
           retention-days: 14
 
@@ -68,7 +69,8 @@ jobs:
         with:
           name: production-deployment-page-api-test-report
           path: |
-            playwright-report
+            e2e-page-report
+            e2e-api-report
             artifacts/e2e-test-results
           retention-days: 14
 
@@ -95,6 +97,7 @@ jobs:
         with:
           name: production-schedule-page-api-test-report
           path: |
-            playwright-report
+            e2e-page-report
+            e2e-api-report
             artifacts/e2e-test-results
           retention-days: 14

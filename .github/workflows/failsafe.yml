@@ -49,7 +49,7 @@ jobs:
         with:
           name: stage-deployment-failsafe-test-report
           path: |
-            playwright-report
+            e2e-failsafe-report
             artifacts/e2e-test-results
           retention-days: 14
 
@@ -80,7 +80,7 @@ jobs:
         with:
           name: production-deployment-failsafe-test-report
           path: |
-            playwright-report
+            e2e-failsafe-report
             artifacts/e2e-test-results
           retention-days: 14
 
@@ -111,6 +111,6 @@ jobs:
         with:
           name: production-schedule-failsafe-test-report
           path: |
-            playwright-report
+            e2e-failsafe-report
             artifacts/e2e-test-results
           retention-days: 14
