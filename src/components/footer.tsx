@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { FaGithub, FaLinkedin, FaSoundcloud, FaYoutube } from 'react-icons/fa'
+import { GiMetronome } from 'react-icons/gi'
 import { IconContext } from 'react-icons'
 import ExtLink from './ext-link'
 import {
@@ -15,6 +16,7 @@ const unsupportIcons = {
 const supportIcons = {
   github: FaGithub,
   linkedin: FaLinkedin,
+  musicLogbook: GiMetronome,
   soundcloud: FaSoundcloud,
   youtube: FaYoutube,
 }
@@ -69,6 +71,8 @@ const Footer = () => {
             let link
             if (brand === 'youtube') {
               link = `${communitySettings[brand]?.channelBaseUrl}/${communitySettings[brand]?.channelHash}`
+            } else if (brand === 'musicLogbook') {
+              link = `${communitySettings[brand]?.pageUrl}`
             } else {
               link = `${communitySettings[brand]?.profileBaseUrl}/${communitySettings[brand]?.userName}`
             }
