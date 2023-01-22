@@ -69,12 +69,18 @@ const Footer = () => {
           {communityFeatures.siteFooterIcon.map(({ name: brand, enable }) => {
             if (!enable) return
             let link
-            if (brand === 'youtube') {
-              link = `${communitySettings[brand]?.channelBaseUrl}/${communitySettings[brand]?.channelHash}`
-            } else if (brand === 'musicLogbook') {
-              link = `${communitySettings[brand]?.pageUrl}`
-            } else {
-              link = `${communitySettings[brand]?.profileBaseUrl}/${communitySettings[brand]?.userName}`
+            switch (brand) {
+              case 'youtube': {
+                link = `${communitySettings[brand]?.channelBaseUrl}/${communitySettings[brand]?.channelHash}`
+                break
+              }
+              case 'musicLogbook': {
+                link = `${communitySettings[brand]?.pageUrl}`
+                break
+              }
+              default: {
+                link = `${communitySettings[brand]?.profileBaseUrl}/${communitySettings[brand]?.userName}`
+              }
             }
             return <CommunityIcon key={brand} link={link} name={brand} />
           })}
