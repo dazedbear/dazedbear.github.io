@@ -183,6 +183,10 @@ module.exports = {
     likecoin: {
       userId: 'dazedbear',
     },
+    musicLogbook: {
+      pageUrl:
+        'https://dazedbear.notion.site/Music-Logbook-aaa71680b0a14cc894e3231e7284036a',
+    },
     openprocessing: {
       profileBaseUrl: 'https://openprocessing.org/user',
       userName: '277076',
@@ -207,16 +211,20 @@ module.exports = {
         enable: false,
       },
       {
+        name: 'musicLogbook',
+        enable: true,
+      },
+      {
         name: 'openprocessing',
-        enable: false,
+        enable: true,
       },
       {
         name: 'soundcloud',
-        enable: true,
+        enable: false,
       },
       {
         name: 'youtube',
-        enable: true,
+        enable: false,
       },
     ],
     articleFooter: [
