@@ -7,7 +7,6 @@ import locator from '../libs/locator'
 let pagePath = ''
 const screenshotOption: ScreenShotOption = {
   mask: [],
-  maxDiffPixelRatio: 0.02,
   fullPage: false,
 }
 

@@ -6,7 +6,6 @@ import locator from '../libs/locator'
 
 const screenshotOption: ScreenShotOption = {
   mask: [],
-  maxDiffPixelRatio: 0.02,
   fullPage: false,
 }
 const notionPages = ['about']

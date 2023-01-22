@@ -21,6 +21,7 @@ const config: PlaywrightTestConfig = {
      */
     timeout: 30000,
     toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
       threshold: 0.2,
     },
   },
@@ -41,10 +42,8 @@ const config: PlaywrightTestConfig = {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: `${get(website, [currentEnv, 'protocol'])}://${get(website, [
-      currentEnv,
-      'host',
-    ])}`,
+    baseURL:
+      'https://dazedbear-github-io-git-test-adjustment-music-logbook-dazedbear.vercel.app/',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
   },
