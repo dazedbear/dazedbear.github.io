@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.22.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.21.0...v4.22.0) (2023-01-22)
+
+
+### Build
+
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([#70](https://github.com/dazedbear/dazedbear.github.io/issues/70)) ([4365b4d](https://github.com/dazedbear/dazedbear.github.io/commit/4365b4d6c357f933a4e37a8da319ff636e6ed239))
+
 ## [4.21.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.20.0...v4.21.0) (2023-01-22)
 
 
