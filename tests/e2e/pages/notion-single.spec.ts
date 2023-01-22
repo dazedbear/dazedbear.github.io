@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import get from 'lodash/get'
-import { E2E_TEST_QUERY, ScreenShotOption } from '../libs/util'
+import { END_TO_END_TEST_QUERY } from '../../../src/libs/constant'
+import { ScreenShotOption } from '../libs/util'
 import locator from '../libs/locator'
 
 const screenshotOption: ScreenShotOption = {
@@ -27,7 +28,7 @@ notionPages.forEach((pageName) => {
       screenshotOption.mask = [
         page.locator(get(locator, ['pages', pageName, 'notionContent'])),
       ]
-      pagePath = `/${pageName}?${E2E_TEST_QUERY}`
+      pagePath = `/${pageName}?${END_TO_END_TEST_QUERY}=1`
     })
 
     test('should have correct meta tags', async ({ page }) => {

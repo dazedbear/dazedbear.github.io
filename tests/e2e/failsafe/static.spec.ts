@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test'
 import get from 'lodash/get'
-import { FAILSAFE_PAGE_SERVING_QUERY } from '../../../src/libs/constant'
-import { E2E_TEST_QUERY, ScreenShotOption } from '../libs/util'
+import {
+  END_TO_END_TEST_QUERY,
+  FAILSAFE_PAGE_SERVING_QUERY,
+} from '../../../src/libs/constant'
+import { ScreenShotOption } from '../libs/util'
 import { pages } from '../../../site.config'
 
 const screenshotOption: ScreenShotOption = {
@@ -28,7 +31,7 @@ staticPages.forEach((pageName) => {
       pagePath = `${get(pages, [
         pageName,
         'page',
-      ])}?${E2E_TEST_QUERY}&${FAILSAFE_PAGE_SERVING_QUERY}=1`
+      ])}?${END_TO_END_TEST_QUERY}=1&${FAILSAFE_PAGE_SERVING_QUERY}=1`
     })
 
     test('static failsafe page should render visually the same as expected', async ({
