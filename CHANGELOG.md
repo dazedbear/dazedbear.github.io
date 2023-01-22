@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.23.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.23.0...v4.23.1) (2023-01-22)
+
+
+### Testing
+
+* make e2e page test more strict to catch visual difference ([#75](https://github.com/dazedbear/dazedbear.github.io/issues/75)) ([30a9e35](https://github.com/dazedbear/dazedbear.github.io/commit/30a9e351b4f4dfb7704c9a77a2147a553cedd8fe))
+
 ## [4.23.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.22.0...v4.23.0) (2023-01-22)
 
 
