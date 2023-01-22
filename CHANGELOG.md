@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.20.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.19.0...v4.20.0) (2023-01-22)
+
+
+### Build
+
+* **deps:** bump trim-newlines and meow ([#63](https://github.com/dazedbear/dazedbear.github.io/issues/63)) ([affe389](https://github.com/dazedbear/dazedbear.github.io/commit/affe389fe1c955c209d3f98e0d17d8f65c283d18))
+
 ## [4.19.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.8...v4.19.0) (2023-01-22)
 
 
