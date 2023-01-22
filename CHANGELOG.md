@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.18.8](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.7...v4.18.8) (2023-01-22)
+
+
+### CI/CD
+
+* fix dependabot build ([#71](https://github.com/dazedbear/dazedbear.github.io/issues/71)) ([34d7263](https://github.com/dazedbear/dazedbear.github.io/commit/34d7263e711ce323728b64fb2c97568ce0cd8875))
+
 ## [4.18.7](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.6...v4.18.7) (2022-12-12)
 
 
