@@ -35,7 +35,7 @@ jobs:
           VERCEL_DEPLOYMENT_URL=`echo $ALL_VERCEL_DEPLOYMENTS | jq '.deployments [0].url' | tr -d \"`
           echo "VERCEL_DEPLOYMENT_URL=$VERCEL_DEPLOYMENT_URL" >> $GITHUB_ENV
       - name: Wait for Vercel deployment to be ready
-        uses: UnlyEd/github-action-await-vercel@v1.2.14
+        uses: UnlyEd/github-action-await-vercel@v1
         id: await-vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
