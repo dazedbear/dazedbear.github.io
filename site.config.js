@@ -208,15 +208,15 @@ module.exports = {
       },
       {
         name: 'openprocessing',
-        enable: false,
+        enable: true,
       },
       {
         name: 'soundcloud',
-        enable: true,
+        enable: false,
       },
       {
         name: 'youtube',
-        enable: true,
+        enable: false,
       },
     ],
     articleFooter: [
