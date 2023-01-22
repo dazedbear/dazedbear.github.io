@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.19.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.8...v4.19.0) (2023-01-22)
+
+
+### Features
+
+* add music logbook page on footer ([#72](https://github.com/dazedbear/dazedbear.github.io/issues/72)) ([590bfc2](https://github.com/dazedbear/dazedbear.github.io/commit/590bfc29aea8619443bd9f90a5c5cbda9c9b4589))
+
 ## [4.18.8](https://github.com/dazedbear/dazedbear.github.io/compare/v4.18.7...v4.18.8) (2023-01-22)
 
 
