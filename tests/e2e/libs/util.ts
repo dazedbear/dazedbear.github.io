@@ -5,5 +5,3 @@ export interface ScreenShotOption {
   fullPage: boolean
   maxDiffPixelRatio?: number
 }
-
-export const E2E_TEST_QUERY = 'e2e_test'

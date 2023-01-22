@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import get from 'lodash/get'
-import { E2E_TEST_QUERY, ScreenShotOption } from '../libs/util'
+import { END_TO_END_TEST_QUERY } from '../../../src/libs/constant'
+import { ScreenShotOption } from '../libs/util'
 import locator from '../libs/locator'
 import { pages } from '../../../site.config'
 
@@ -21,7 +22,7 @@ staticPages.forEach((pageName) => {
        **/
       testInfo.snapshotSuffix = ''
 
-      pagePath = `${get(pages, [pageName, 'page'])}?${E2E_TEST_QUERY}`
+      pagePath = `${get(pages, [pageName, 'page'])}?${END_TO_END_TEST_QUERY}=1`
     })
 
     test('should have correct meta tags', async ({ page }) => {
