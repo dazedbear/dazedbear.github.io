@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.21.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.20.0...v4.21.0) (2023-01-22)
+
+
+### Build
+
+* **deps:** bump decode-uri-component from 0.2.0 to 0.2.2 ([#67](https://github.com/dazedbear/dazedbear.github.io/issues/67)) ([fcfce5b](https://github.com/dazedbear/dazedbear.github.io/commit/fcfce5b41e5a7c2a315e9b3c9fc927aebe0e2014))
+* **deps:** bump loader-utils from 1.4.0 to 1.4.2 ([#66](https://github.com/dazedbear/dazedbear.github.io/issues/66)) ([9541b86](https://github.com/dazedbear/dazedbear.github.io/commit/9541b86ea953d5ae11b9de8ae694c9359add0d3b))
+
 ## [4.20.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.19.0...v4.20.0) (2023-01-22)
 
 
