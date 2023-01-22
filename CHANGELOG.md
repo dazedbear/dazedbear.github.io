@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.23.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.22.0...v4.23.0) (2023-01-22)
+
+
+### Build
+
+* upgrade packages to fix broken builds ([#74](https://github.com/dazedbear/dazedbear.github.io/issues/74)) ([f4be898](https://github.com/dazedbear/dazedbear.github.io/commit/f4be898e01e92606a336a4fca8376c0b8cfa585a))
+
 ## [4.22.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.21.0...v4.22.0) (2023-01-22)
 
 
