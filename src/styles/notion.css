@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 /**
  * This file contains site-specifc style overrides for Notion elements from
  * react-notion-x.
@@ -122,8 +124,35 @@
   overflow-y: visible;
 }
 
-#app #notion-single-page .notion-collection-page-properties {
-  @apply hidden; /* hide page property meta */
+/**
+  styles override for notion single page property tags
+  class name: `notion-property-{type}`
+  https://github.com/NotionX/react-notion-x/blob/ad7f5f10f3ca88bd43f5fd5f9e07b6a669c2c1bb/packages/notion-types/src/core.ts#L40-L59
+ */
+#app
+  #notion-single-page
+  .notion-collection-page-properties
+  .notion-collection-row-value {
+  @apply p-0;
+}
+
+#app
+  #notion-single-page
+  .notion-collection-page-properties
+  .notion-collection-column-title,
+#app
+  #notion-single-page
+  .notion-collection-page-properties
+  .notion-collection-row-value
+  > span:not(.notion-property-select, .notion-property-multi_select) {
+  @apply hidden; /* only allow select, multi_select to displayed for property tags */
+}
+
+#app
+  #notion-single-page
+  .notion-collection-page-properties
+  .notion-collection-row {
+  @apply m-0 border-0;
 }
 
 /**
