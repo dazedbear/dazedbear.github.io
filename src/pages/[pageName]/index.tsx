@@ -203,6 +203,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
       />
       <NotionRenderer
         blockId={blockId}
+        className="overflow-y-scroll lg:max-h-full-viewport"
         fullPage={false}
         recordMap={recordMap}
         components={NotionComponentMap}
