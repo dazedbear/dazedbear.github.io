@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.24.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.23.1...v4.24.0) (2023-01-26)
+
+
+### Features
+
+* apply max-height to notion list page ([#76](https://github.com/dazedbear/dazedbear.github.io/issues/76)) ([8c021dc](https://github.com/dazedbear/dazedbear.github.io/commit/8c021dc76f5cfaffc5a3f189310586a242be63cd))
+
 ## [4.23.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.23.0...v4.23.1) (2023-01-22)
 
 
