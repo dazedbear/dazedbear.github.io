@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.25.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.24.0...v4.25.0) (2023-01-26)
+
+
+### Features
+
+* display tags on notion single page ([#77](https://github.com/dazedbear/dazedbear.github.io/issues/77)) ([621afa7](https://github.com/dazedbear/dazedbear.github.io/commit/621afa7c40766af591fbe0ea5d163186295295a6))
+
 ## [4.24.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.23.1...v4.24.0) (2023-01-26)
 
 
