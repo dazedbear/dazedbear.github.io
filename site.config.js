@@ -238,6 +238,11 @@ module.exports = {
       pageId: '1835182753446962',
     },
   },
+  searchSettings: {
+    appId: 'EI9BA02F53',
+    apiKey: '2203522d0fcaee3f8dca4c086edd254d',
+    indexName: 'dazedbear',
+  },
   trackingSettings: {
     googleTagManager: {
       enable: true,

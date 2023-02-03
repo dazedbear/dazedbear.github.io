@@ -49,3 +49,40 @@
 }
 
 /* end - likecoin button */
+
+/* start - algolia search */
+/* stylelint-disable selector-class-pattern */
+:root {
+  --docsearch-primary-color: #ce7bb9;
+  --docsearch-logo-color: #ce7bb9;
+  --docsearch-text-color: #37352f;
+  --docsearch-searchbox-background: #938ca040;
+
+  /* custom variables */
+  --docsearch-searchbox-highlight-color: #fff;
+}
+
+.DocSearch-Button,
+.DocSearch-Container {
+  @apply z-10000;
+}
+
+#app .DocSearch-Button {
+  @apply fixed right-5 lg:relative lg:right-0;
+
+  background-color: var(
+    --docsearch-searchbox-background
+  ); /* workaround fix for doc search */
+}
+
+#app .DocSearch-Button .DocSearch-Search-Icon {
+  color: var(--docsearch-muted-color);
+}
+
+#app .DocSearch-Button:hover .DocSearch-Search-Icon,
+#app .DocSearch-Button:hover .DocSearch-Button-Placeholder {
+  color: var(--docsearch-searchbox-highlight-color);
+}
+
+/* end - algolia search */
+/* stylelint-enable selector-class-pattern */

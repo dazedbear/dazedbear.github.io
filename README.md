@@ -1,6 +1,6 @@
 # Dazedbear Studio
 
-[![Semgrep Scan](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/semgrep-analysis.yml/badge.svg?branch=main)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/semgrep-analysis.yml) [![Chromatic](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/chromatic.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/chromatic.yml) [![Failsafe Page Generation](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/failsafe.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/failsafe.yml) [![Lighthouse Audit](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/lighthouse.yml) [![Playwright E2E Tests](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/playwright.yml) [![Release Note](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/release-note.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/release-note.yml) [![Cache Warmup](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/cache-warmup.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/cache-warmup.yml)
+[![Semgrep Scan](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/semgrep-analysis.yml/badge.svg?branch=main)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/semgrep-analysis.yml) [![Chromatic](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/chromatic.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/chromatic.yml) [![Failsafe Page Generation](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/failsafe.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/failsafe.yml) [![Lighthouse Audit](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/lighthouse.yml) [![Playwright E2E Tests](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/playwright.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/playwright.yml) [![Release Note](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/release-note.yml/badge.svg)](https://github.com/dazedbear/dazedbear.github.io/actions/workflows/release-note.yml)
 
 ![cover](https://user-images.githubusercontent.com/8896191/113566781-f2782c00-963f-11eb-90da-8d3245c536f1.png)
 
@@ -37,7 +37,7 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
 #### CI/CD
 
 - [Vercel](https://vercel.com/) - application deployment and serving
-- [Github Action](https://github.com/features/actions) - automatic scheduled jobs like sitemap generation, functional test..
+- [Github Action](https://github.com/features/actions) - automatic scheduled jobs like e2e test
 
 #### Cache
 
@@ -57,9 +57,16 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
 
 - [Semgrep](https://semgrep.dev/) - Static Application Analytics
 
+#### Search
+
+- [DocSearch](https://docsearch.algolia.com/) - Algolia Crawler + Search UI component for open source projects and technical blog
+
 #### Testing
 
-See [Testing Strategy](https://github.com/dazedbear/dazedbear.github.io/issues/56) for details.
+- [Jest](https://jestjs.io/) - Unit Test
+- [Storybook](https://storybook.js.org/docs/react/writing-tests/snapshot-testing) - Component Test
+- [Playright](https://playwright.dev/) - End-to-end Browser/API Test and Visual Test
+- See [Testing Strategy](https://github.com/dazedbear/dazedbear.github.io/issues/56) for details.
 
 ## Development
 

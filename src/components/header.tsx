@@ -2,9 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
-import { meta, navigation as navItems } from '../../site.config'
+import { meta, navigation as navItems, searchSettings } from '../../site.config'
 import { isActivePage } from '../libs/util'
 import faviconIcon from '../../public/favicon.ico'
+import { DocSearch } from '@docsearch/react'
 
 const themeClassMap = {
   classic: {
@@ -27,7 +28,7 @@ const themeClassMap = {
 const Header = () => {
   const currentTheme = isActivePage('/') ? 'modern' : 'classic'
   const linkClass =
-    'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-10000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
+    'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-1000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
   const liniInActiveClass = themeClassMap[currentTheme]?.linkInActive || ''
   const linkActiveClass = themeClassMap[currentTheme]?.linkActive || ''
 
@@ -42,7 +43,7 @@ const Header = () => {
       <div className="my-0 mx-auto max-w-1400 py-0 px-5">
         <header className="relative flex flex-row flex-nowrap text-left">
           <Link href="/">
-            <a className="z-10000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
+            <a className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
               <div className="relative mr-2.5 box-content h-9 w-9">
                 <Image src={faviconIcon} alt={meta.title} layout="fill" />
               </div>
@@ -56,7 +57,7 @@ const Header = () => {
               </h2>
             </a>
           </Link>
-          <div className="lg:relative lg:ml-auto lg:h-9">
+          <div className="lg:relative lg:ml-auto lg:flex lg:h-9">
             <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:relative lg:right-auto lg:top-auto lg:h-auto lg:w-auto lg:bg-none">
               <ul
                 className={classnames(
@@ -101,6 +102,11 @@ const Header = () => {
                 })}
               </ul>
             </nav>
+            <DocSearch
+              appId={searchSettings?.appId}
+              apiKey={searchSettings?.apiKey}
+              indexName={searchSettings?.indexName}
+            />
           </div>
         </header>
       </div>

@@ -2,6 +2,7 @@
 import 'react-notion-x/src/styles.css'
 import 'prismjs/themes/prism-tomorrow.css'
 import 'nprogress/nprogress.css'
+import '@docsearch/css'
 import '../styles/global.css'
 import '../styles/notion.css'
 
