@@ -238,6 +238,13 @@ module.exports = {
       pageId: '1835182753446962',
     },
   },
+  searchSettings: {
+    // TODO: This is test config provided from DocSearch docs. Please remember to replace them with real one for this website.
+    // https://docsearch.algolia.com/docs/DocSearch-v3#testing
+    appId: 'R2IYF7ETH7',
+    apiKey: '599cec31baffa4868cae4e79f180729b',
+    indexName: 'docsearch',
+  },
   trackingSettings: {
     googleTagManager: {
       enable: true,

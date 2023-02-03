@@ -6,6 +6,7 @@ import {
 import {
   communityFeatures,
   currentEnv,
+  searchSettings,
   trackingSettings,
 } from '../../site.config'
 
@@ -76,6 +77,11 @@ class MyDocument extends Document {
             />
           )}
           {!isProduction && <meta name="robots" content="noindex" />}
+          <link
+            rel="preconnect"
+            href={`https://${searchSettings?.appId}-dsn.algolia.net`}
+            crossOrigin="true"
+          />
         </Head>
         <body>
           {communityFeatures?.facebookChat?.enable && (
