@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.25.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.25.0...v4.25.1) (2023-02-03)
+
+
+### CI/CD
+
+* update robots.txt for Algolia crawler and reduce scheduled jobs ([#79](https://github.com/dazedbear/dazedbear.github.io/issues/79)) ([5a2a805](https://github.com/dazedbear/dazedbear.github.io/commit/5a2a80517859fd142ea364c76ef655c2f97ba66a))
+
 ## [4.25.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.24.0...v4.25.0) (2023-01-26)
 
 
