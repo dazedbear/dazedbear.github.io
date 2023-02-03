@@ -2,8 +2,8 @@
 User-agent: Googlebot
 User-agent: YandexBot
 User-agent: DuckDuckBot
-User-agent: YandexBot
 User-agent: inoreader.com
+User-agent: Algolia Crawler
 Allow: /
 
 # block all crawers by default
