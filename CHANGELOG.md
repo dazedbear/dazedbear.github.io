@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.26.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.25.1...v4.26.0) (2023-02-03)
+
+
+### Features
+
+* integrate DocSearch search UI component ([#78](https://github.com/dazedbear/dazedbear.github.io/issues/78)) ([cd5648a](https://github.com/dazedbear/dazedbear.github.io/commit/cd5648a6036edd5e7bd96dafed12a79746c5e2ac))
+
 ## [4.25.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.25.0...v4.25.1) (2023-02-03)
 
 
