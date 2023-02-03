@@ -2,6 +2,7 @@ name: Cache Warmup
 on:
   schedule:
     # every day 6:00 am GMT+8
+    # disable this cron job via Github Action UI
     - cron: '0 22 * * *'
 jobs:
   sitemap-cache-warmup:

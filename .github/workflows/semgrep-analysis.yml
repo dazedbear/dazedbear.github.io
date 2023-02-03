@@ -11,9 +11,9 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [main]
-  schedule:
-    # Monday 6:00 am GMT+8
-    - cron: '0 22 * * 0'
+  # schedule:
+  # Monday 6:00 am GMT+8
+  # - cron: '0 22 * * 0'
 
 jobs:
   semgrep:
