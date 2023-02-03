@@ -4,9 +4,9 @@ name: Lighthouse Audit
 on:
   push:
     branches: [main]
-  schedule:
-    # Monday day 6:00 am GMT+8
-    - cron: '0 22 * * 0'
+  # schedule:
+  #   # Monday day 6:00 am GMT+8
+  #   - cron: '0 22 * * 0'
 
 jobs:
   wait-for-deployment:
