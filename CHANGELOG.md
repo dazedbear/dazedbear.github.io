@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.26.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.26.0...v4.26.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* **security:** add notion page uuid check to prevent SSRF and upgrade vulnerable packages ([#84](https://github.com/dazedbear/dazedbear.github.io/issues/84)) ([87ee21a](https://github.com/dazedbear/dazedbear.github.io/commit/87ee21acd9b51ada8c5facfce8628fb474618483))
+
 ## [4.26.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.25.1...v4.26.0) (2023-02-03)
 
 
