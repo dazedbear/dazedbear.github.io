@@ -23,15 +23,13 @@ import 'prismjs/components/prism-log'
 
 import { GetServerSideProps } from 'next'
 import Error from 'next/error'
-import pAll from 'p-all'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import merge from 'lodash/merge'
-import { ExtendedRecordMap } from 'notion-types'
 import { idToUuid } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 
-import { logOption } from '../../../types'
+import { logOption, ArticleStream } from '../../../types'
 import { notion, pageProcessTimeout } from '../../../site.config'
 import {
   FAILSAFE_PAGE_GENERATION_QUERY,
@@ -74,7 +72,7 @@ import NotionComponentMap from '../../components/notion-components'
 export const getServerSideProps: GetServerSideProps =
   wrapper.getServerSideProps((store) => async ({ params, req, res, query }) => {
     const pageName = params.pageName as string
-    const pageSlug = params.pageSlug
+    const pageSlug = params.pageSlug as string
     // disable page timeout when failsafe generation mode (?fsg=1)
     const timeout =
       query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
@@ -88,41 +86,48 @@ export const getServerSideProps: GetServerSideProps =
             req,
           }
           log(options)
-          return showCommonPage(req, res, 'notFound', pageName)
+          return showCommonPage(req, res, 'notFound', [pageName, pageSlug])
         }
 
         const { pageId: articleId } = extractSinglePagePath(pageSlug)
 
         try {
-          let articleStream = {}
-          let singleArticle = {}
-          await pAll([
-            async () => {
-              const response = await fetchArticleStream({
-                req,
-                pageName,
-                category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-              })
-              articleStream = await transformArticleStream(pageName, response)
-              articleStream = await transformArticleStreamPreviewImages(
-                articleStream
-              )
-            },
-            async () => {
-              // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
-              const singleArticleResponse = await fetchArticleStream({
-                req,
-                pageId: articleId,
-                category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
-              })
-              singleArticle = await transformSingleArticle(
-                singleArticleResponse
-              )
-              singleArticle = await transformArticleStreamPreviewImages(
-                singleArticle
-              )
-            },
-          ])
+          let articleStream: ArticleStream = {}
+          let singleArticle: ArticleStream = {}
+
+          // fetch all article stream
+          const response = await fetchArticleStream({
+            req,
+            pageName,
+            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+          })
+          articleStream = await transformArticleStream(pageName, response)
+          articleStream = await transformArticleStreamPreviewImages(
+            articleStream
+          )
+
+          // validate if article uuid exist in the article stream to prevent being an SSRF proxy host for external uuids.
+          if (!articleStream.ids.includes(idToUuid(articleId))) {
+            const options: logOption = {
+              category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+              message: `[malformed] detect external abusive article uuid | pageName: ${pageName} | pageSlug: ${pageSlug}`,
+              level: 'error',
+              req,
+            }
+            log(options)
+            return showCommonPage(req, res, 'notFound', [pageName, pageSlug])
+          }
+
+          // since getPage for collection view returns all pages with partial blocks, getPage target article then merge to articleStream to add missing blocks
+          const singleArticleResponse = await fetchArticleStream({
+            req,
+            pageId: articleId,
+            category: PAGE_TYPE_ARTICLE_SINGLE_PAGE,
+          })
+          singleArticle = await transformSingleArticle(singleArticleResponse)
+          singleArticle = await transformArticleStreamPreviewImages(
+            singleArticle
+          )
           articleStream = merge(articleStream, singleArticle)
 
           const menuItems = transformMenuItems(pageName, articleStream)
@@ -159,7 +164,7 @@ export const getServerSideProps: GetServerSideProps =
             req,
           }
           log(options)
-          return showCommonPage(req, res, 'error', pageName)
+          return showCommonPage(req, res, 'error', [pageName, pageSlug])
         }
       },
       timeout,
@@ -171,7 +176,7 @@ export const getServerSideProps: GetServerSideProps =
           req,
         }
         log(options)
-        return showCommonPage(req, res, 'error', pageName)
+        return showCommonPage(req, res, 'error', [pageName, pageSlug])
       },
       PAGE_TYPE_ARTICLE_SINGLE_PAGE
     )
