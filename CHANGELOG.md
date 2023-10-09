@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.29.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.28.0...v4.29.0) (2023-10-09)
+
+
+### Build
+
+* **deps-dev:** bump semver from 5.7.1 to 5.7.2 ([#93](https://github.com/dazedbear/dazedbear.github.io/issues/93)) ([aa86a29](https://github.com/dazedbear/dazedbear.github.io/commit/aa86a293b42f565c6986d12906897738fa70adab))
+
 ## [4.28.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.27.0...v4.28.0) (2023-10-09)
 
 
