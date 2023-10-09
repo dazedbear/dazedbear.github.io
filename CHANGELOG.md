@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.27.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.26.1...v4.27.0) (2023-10-09)
+
+
+### Build
+
+* **deps:** bump glob-parent, @storybook/addon-storyshots and @storybook/react ([#85](https://github.com/dazedbear/dazedbear.github.io/issues/85)) ([c0c49c4](https://github.com/dazedbear/dazedbear.github.io/commit/c0c49c46df7cc9a05944c02c110fb5d2773f4504))
+
 ## [4.26.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.26.0...v4.26.1) (2023-04-23)
 
 
