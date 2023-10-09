@@ -206,7 +206,7 @@ export const getSinglePagePath = ({ pageName, pageId, recordMap }) => {
   }
 
   const property: any = getPageProperty({ pageId, recordMap }) || {}
-  const slug = property.Slug || property.Title
+  const slug = property?.Slug || property?.Title
   if (!slug) {
     return
   }
