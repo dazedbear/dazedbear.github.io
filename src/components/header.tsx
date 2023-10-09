@@ -57,7 +57,7 @@ const Header = () => {
               </h2>
             </a>
           </Link>
-          <div className="lg:relative lg:ml-auto lg:flex lg:h-9">
+          <div className="flex lg:relative lg:ml-auto lg:flex lg:h-9">
             <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:relative lg:right-auto lg:top-auto lg:h-auto lg:w-auto lg:bg-none">
               <ul
                 className={classnames(
