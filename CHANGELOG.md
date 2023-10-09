@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.28.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.27.0...v4.28.0) (2023-10-09)
+
+
+### Build
+
+* **deps:** bump trim, @storybook/addon-essentials and @storybook/test-runner ([#94](https://github.com/dazedbear/dazedbear.github.io/issues/94)) ([a63c4d0](https://github.com/dazedbear/dazedbear.github.io/commit/a63c4d012dbbeae3a6ecb3d0e66b04a840ada6eb))
+
 ## [4.27.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.26.1...v4.27.0) (2023-10-09)
 
 
