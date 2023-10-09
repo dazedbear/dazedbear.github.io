@@ -54,18 +54,18 @@ const getPropertyValue = (property) => {
  */
 export const getPageProperty = ({ pageId, recordMap }) => {
   if (!pageId || !recordMap) {
-    return
+    return {}
   }
 
   const pageBlock = get(recordMap, ['block', pageId])
   if (!pageBlock || get(pageBlock, ['value', 'type']) !== 'page') {
-    return
+    return {}
   }
 
   // TODO: need a more robust way to get the correct collection id.
   const collectionId = Object.keys(recordMap.collection)[0]
   if (!collectionId) {
-    return
+    return {}
   }
 
   const collection = get(recordMap, ['collection', collectionId])
@@ -205,8 +205,11 @@ export const getSinglePagePath = ({ pageName, pageId, recordMap }) => {
     return
   }
 
-  const property: any = getPageProperty({ pageId, recordMap })
-  const slug = property.Slug || property.Title
+  const property: any = getPageProperty({ pageId, recordMap }) || {}
+  const slug = property?.Slug || property?.Title
+  if (!slug) {
+    return
+  }
   const pagePath = [encodeURIComponent(slug), uuidToId(pageId)].join('-')
   return pagePath
 }

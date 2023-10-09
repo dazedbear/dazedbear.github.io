@@ -248,20 +248,31 @@ export const transformMenuItems = (
   articleStream: ArticleStream
 ): MenuItem[] => {
   const recordMap = articleStream.content
-  const menuItems: MenuItem[] = articleStream.ids.map((pageId) => {
+  const menuItems: MenuItem[] = articleStream.ids.reduce((items, pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
       recordMap,
     })
-    const url = `/${pageName}/${pagePath}`
-    const block = get(recordMap, ['block', pageId, 'value'])
-    const label = getBlockTitle(block, recordMap as any)
-    return {
-      label,
-      url,
+    if (pagePath) {
+      const url = `/${pageName}/${pagePath}`
+      const block = get(recordMap, ['block', pageId, 'value'])
+      const label = getBlockTitle(block, recordMap as any)
+      const item = {
+        label,
+        url,
+      }
+      items.push(item)
+    } else {
+      const options: logOption = {
+        category: 'transformMenuItems',
+        message: `strip out empty pagePath. | pageName: ${pageName} | pageId: ${pageId}`,
+        level: 'warn',
+      }
+      log(options)
     }
-  })
+    return items
+  }, [])
 
   const schema = {
     type: 'array',
@@ -350,14 +361,25 @@ export const transformPageUrls = (
   articleStream: ArticleStream
 ): string[] => {
   const recordMap = articleStream.content
-  let pageUrls: string[] = articleStream.ids.map((pageId) => {
+  let pageUrls: string[] = articleStream.ids.reduce((items, pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
       recordMap,
     })
-    return `/${pageName}/${pagePath}`
-  })
+    if (pagePath) {
+      const url = `/${pageName}/${pagePath}`
+      items.push(url)
+    } else {
+      const options: logOption = {
+        category: 'transformPageUrls',
+        message: `strip out empty pagePath. | pageName: ${pageName} | pageId: ${pageId}`,
+        level: 'warn',
+      }
+      log(options)
+    }
+    return items
+  }, [])
 
   pageUrls.push(`/${pageName}`)
 
