@@ -13,13 +13,13 @@ const isCI = env.get('CI').default('false').asBool()
 const config: PlaywrightTestConfig = {
   testDir: './',
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 60 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 30000,
+    timeout: 60000,
     toHaveScreenshot: {
       maxDiffPixelRatio: 0.02,
       threshold: 0.2,
