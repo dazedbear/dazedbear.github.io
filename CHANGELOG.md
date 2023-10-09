@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.32.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.31.0...v4.32.0) (2023-10-09)
+
+
+### Bug Fixes
+
+* 500 issue due to invalid Slug ([#97](https://github.com/dazedbear/dazedbear.github.io/issues/97)) ([4d617fd](https://github.com/dazedbear/dazedbear.github.io/commit/4d617fd23aa1fa18aea0890c540a9dc1c7af0824))
+
+
+### Build
+
+* **deps-dev:** bump fast-xml-parser from 4.0.9 to 4.2.5 ([#91](https://github.com/dazedbear/dazedbear.github.io/issues/91)) ([a94a0e2](https://github.com/dazedbear/dazedbear.github.io/commit/a94a0e2c47c773b1bb6490a1df7fdea7594b4e14))
+* **deps-dev:** bump postcss from 8.4.16 to 8.4.31 ([#92](https://github.com/dazedbear/dazedbear.github.io/issues/92)) ([e68b8cd](https://github.com/dazedbear/dazedbear.github.io/commit/e68b8cdb55dd1bab5bf5c061fb0473844da59f41))
+* **deps-dev:** bump word-wrap from 1.2.3 to 1.2.5 ([#96](https://github.com/dazedbear/dazedbear.github.io/issues/96)) ([008383c](https://github.com/dazedbear/dazedbear.github.io/commit/008383cdb2c792b8f59f24192a8f1747c5af4ad7))
+
 ## [4.31.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.30.0...v4.31.0) (2023-10-09)
 
 
