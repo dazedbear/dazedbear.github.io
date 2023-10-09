@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.31.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.30.0...v4.31.0) (2023-10-09)
+
+
+### Build
+
+* **deps:** bump tough-cookie from 4.1.2 to 4.1.3 ([#89](https://github.com/dazedbear/dazedbear.github.io/issues/89)) ([fa3f2f0](https://github.com/dazedbear/dazedbear.github.io/commit/fa3f2f04e435de17972a0134555bfba335db3b27))
+
 ## [4.30.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.29.0...v4.30.0) (2023-10-09)
 
 
