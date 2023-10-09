@@ -23,7 +23,5 @@ module.exports = {
       '<rootDir>/tests/__mocks__/fileMock.ts',
     '\\.(css|less)$': '<rootDir>/tests/__mocks__/styleMock.ts',
   },
-  transform: {
-    '^.+\\.mdx?$': '@storybook/addon-docs/jest-transform-mdx',
-  },
+  transform: {},
 }
