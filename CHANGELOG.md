@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.30.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.29.0...v4.30.0) (2023-10-09)
+
+
+### Others
+
+* remove unused storybook, chromatic, and lighthouse ([#95](https://github.com/dazedbear/dazedbear.github.io/issues/95)) ([7934b7b](https://github.com/dazedbear/dazedbear.github.io/commit/7934b7be5d4ac7b36b9f120fb1c2f12a93de9dc0))
+
 ## [4.29.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.28.0...v4.29.0) (2023-10-09)
 
 
