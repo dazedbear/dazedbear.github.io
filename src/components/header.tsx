@@ -44,7 +44,7 @@ const Header = () => {
     >
       <div className="mx-auto my-0 max-w-1400 px-5 py-0">
         <header className="relative flex flex-row flex-nowrap text-left">
-          <Link href="/">
+          <Link href="/" legacyBehavior>
             <a className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
               <div className="relative mr-2.5 box-content h-9 w-9">
                 <Image src={faviconIcon} alt={meta.title} layout="fill" />
@@ -78,7 +78,7 @@ const Header = () => {
                       className="m-0 flex-auto whitespace-nowrap text-center"
                     >
                       {page ? (
-                        <Link href={page}>
+                        <Link href={page} legacyBehavior>
                           <a
                             className={classnames(linkClass, {
                               [linkActiveClass]: isActive,
