@@ -80,7 +80,7 @@ class MyDocument extends Document {
           <link
             rel="preconnect"
             href={`https://${searchSettings?.appId}-dsn.algolia.net`}
-            crossOrigin="true"
+            crossOrigin="anonymous"
           />
         </Head>
         <body>
