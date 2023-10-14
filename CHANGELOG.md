@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.34.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.33.0...v4.34.0) (2023-10-14)
+
+
+### Features
+
+* use Vercel KV for page content cache ([#100](https://github.com/dazedbear/dazedbear.github.io/issues/100)) ([1bac65e](https://github.com/dazedbear/dazedbear.github.io/commit/1bac65ecf7681673e2fb489e4488e217489db29c))
+
 ## [4.33.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.32.0...v4.33.0) (2023-10-14)
 
 
