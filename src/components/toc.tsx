@@ -22,11 +22,11 @@ const TableOfContent = ({ toc }) => {
   return (
     <section
       className={classnames(
-        'overflow-y-scroll lg:ml-12 lg:mb-10 lg:mt-12 lg:mr-0 lg:h-full lg:max-h-full-viewport lg:w-60 lg:shrink-0 lg:grow-0 lg:border-l lg:border-solid lg:px-4',
+        'overflow-y-scroll lg:mb-10 lg:ml-12 lg:mr-0 lg:mt-12 lg:h-full lg:max-h-full-viewport lg:w-60 lg:shrink-0 lg:grow-0 lg:border-l lg:border-solid lg:px-4',
         {
           block: isTableOfContentViewable,
           hidden: !isTableOfContentViewable,
-          'fixed left-0 right-0 top-0 z-970 m-0 h-full w-full bg-white px-5 pt-40 pb-5':
+          'fixed left-0 right-0 top-0 z-970 m-0 h-full w-full bg-white px-5 pb-5 pt-40':
             isMobile,
         }
       )}

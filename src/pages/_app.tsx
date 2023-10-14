@@ -15,7 +15,7 @@ import {
 } from '../libs/client/hooks'
 import wrapper from '../libs/client/store'
 import { getPageMeta } from '../libs/util'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import NProgress from 'nprogress'
 
@@ -29,7 +29,8 @@ const App = ({ Component, pageProps }) => {
   useInitLogRocket()
   useResizeHandler()
   useCodeSyntaxHighlight()
-  const { title, description, image } = getPageMeta(pageProps.meta)
+  const router = useRouter()
+  const { title, description, image } = getPageMeta(pageProps.meta, router)
   return (
     <div id="app">
       <Head>

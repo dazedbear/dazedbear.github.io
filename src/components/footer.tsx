@@ -65,7 +65,7 @@ const Footer = () => {
         className="relative shrink bg-lavender-purple-900 py-8 text-base font-normal leading-6 text-current antialiased lg:shrink-0"
         id="footer"
       >
-        <section className="mx-auto mt-0 mb-5 flex justify-center">
+        <section className="mx-auto mb-5 mt-0 flex justify-center">
           {communityFeatures.siteFooterIcon.map(({ name: brand, enable }) => {
             if (!enable) return
             let link

@@ -145,7 +145,7 @@ const AboutPage = ({ hasError, pageName }) => {
     <div
       id="notion-about-page"
       data-namespace={pageName}
-      className="my-0 mx-auto flex max-w-1100 flex-grow flex-row flex-nowrap py-0 px-5 pt-24 lg:pt-12"
+      className="mx-auto my-0 flex max-w-1100 flex-grow flex-row flex-nowrap px-5 py-0 pt-24 lg:pt-12"
     >
       <NotionRenderer
         blockId={blockId}
