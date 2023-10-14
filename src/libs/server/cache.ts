@@ -42,6 +42,8 @@ class CacheClient {
     // add dev prefix to prevent key collision with production data
     const key = `${currentEnv}_${originKey}`
     const ttl = overrideOption?.ttl || this.option.ttls.default
+    const forceRefresh =
+      overrideOption?.forceRefresh || this.option.forceRefresh
 
     if (!this.client) {
       log({
@@ -54,7 +56,7 @@ class CacheClient {
 
     try {
       const cacheData = await this.client.get(key)
-      if (cacheData) {
+      if (cacheData && !forceRefresh) {
         log({
           category: 'cacheClient|proxy',
           message: `cache HIT | ${message} | key: ${key}`,
@@ -73,7 +75,9 @@ class CacheClient {
 
     log({
       category: 'cacheClient|proxy',
-      message: `cache MISS | ${message} | key: ${key}`,
+      message: `cache MISS${
+        forceRefresh ? ' (force refresh)' : ''
+      } | ${message} | key: ${key}`,
     })
     const data = await execFunction()
     try {

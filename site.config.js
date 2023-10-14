@@ -29,12 +29,13 @@ module.exports = {
       .get('CACHE_CLIENT_ENABLED')
       .default(`${currentEnv !== 'development'}`)
       .asBool(),
+    forceRefresh: false, // global variable could be mutated by page routes
     token: env.get('CACHE_CLIENT_TOKEN').asString(),
     ttls: {
       // seconds
       default: 30,
-      sitemap: 300,
-      notionPage: 300,
+      sitemap: 86400,
+      notionPage: 86400,
       previewImage: 86400 * 30,
     },
     url: env.get('CACHE_CLIENT_API_URL').asString(),

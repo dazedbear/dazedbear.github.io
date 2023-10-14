@@ -30,9 +30,10 @@ import { idToUuid } from 'notion-utils'
 import { NotionRenderer } from 'react-notion-x'
 
 import { logOption, ArticleStream } from '../../../types'
-import { notion, pageProcessTimeout } from '../../../site.config'
+import { notion, pageProcessTimeout, cache } from '../../../site.config'
 import {
   FAILSAFE_PAGE_GENERATION_QUERY,
+  FORCE_CACHE_REFRESH_QUERY,
   PAGE_TYPE_ARTICLE_SINGLE_PAGE,
 } from '../../libs/constant'
 import {
@@ -51,7 +52,6 @@ import {
   isValidPageSlug,
   isValidPageName,
   executeFunctionWithTimeout,
-  setSSRCacheHeaders,
 } from '../../libs/server/page'
 import {
   transformArticleStream,
@@ -76,6 +76,7 @@ export const getServerSideProps: GetServerSideProps =
     // disable page timeout when failsafe generation mode (?fsg=1)
     const timeout =
       query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+    cache.forceRefresh = query[FORCE_CACHE_REFRESH_QUERY] === '1'
     const props = await executeFunctionWithTimeout(
       async () => {
         if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
@@ -146,7 +147,6 @@ export const getServerSideProps: GetServerSideProps =
             req,
           }
           log(options)
-          setSSRCacheHeaders(res)
           return {
             props: {
               menuItems,
