@@ -29,8 +29,8 @@ module.exports = {
       .get('CACHE_CLIENT_ENABLED')
       .default(`${currentEnv !== 'development'}`)
       .asBool(),
-    host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
-    port: 18768,
+    host: env.get('REDIS_HOST').asString(),
+    port: env.get('REDIS_PORT').asString(),
     token: env.get('REDIS_TOKEN').asString(),
     ttls: {
       // seconds
