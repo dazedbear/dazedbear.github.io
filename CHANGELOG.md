@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.33.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.32.0...v4.33.0) (2023-10-14)
+
+
+### Build
+
+* unpin and upgrade packages ([#99](https://github.com/dazedbear/dazedbear.github.io/issues/99)) ([7e3a4b2](https://github.com/dazedbear/dazedbear.github.io/commit/7e3a4b223a788579655dc9021aa614c23faba099))
+
 ## [4.32.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.31.0...v4.32.0) (2023-10-09)
 
 
