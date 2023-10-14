@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { FaGithub, FaLinkedin, FaSoundcloud, FaYoutube } from 'react-icons/fa'
 import { GiMetronome } from 'react-icons/gi'
 import { IconContext } from 'react-icons'
