@@ -8,12 +8,12 @@ class CacheClient {
   option = null
 
   constructor(option) {
-    if (!option || !option.enable) {
+    this.option = option
+    if (!this.option || !this.option?.enable) {
       log({ category: 'cacheClient', message: 'cache is disabled' })
       this.client = null
       return
     }
-    this.option = option
 
     log({
       category: 'cacheClient',
@@ -21,8 +21,8 @@ class CacheClient {
     })
 
     this.client = createClient({
-      url: this.option.url,
-      token: this.option.token,
+      url: this.option?.url,
+      token: this.option?.token,
     })
   }
 
@@ -41,9 +41,9 @@ class CacheClient {
 
     // add dev prefix to prevent key collision with production data
     const key = `${currentEnv}_${originKey}`
-    const ttl = overrideOption?.ttl || this.option.ttls.default
+    const ttl = overrideOption?.ttl || this.option?.ttls.default
     const forceRefresh =
-      overrideOption?.forceRefresh || this.option.forceRefresh
+      overrideOption?.forceRefresh || this.option?.forceRefresh
 
     if (!this.client) {
       log({
@@ -55,7 +55,7 @@ class CacheClient {
     }
 
     try {
-      const cacheData = await this.client.get(key)
+      const cacheData = await this.client?.get(key)
       if (cacheData && !forceRefresh) {
         log({
           category: 'cacheClient|proxy',
@@ -82,8 +82,8 @@ class CacheClient {
     const data = await execFunction()
     try {
       if (data) {
-        await this.client.set(key, data)
-        await this.client.expire(key, ttl)
+        await this.client?.set(key, data)
+        await this.client?.expire(key, ttl)
       }
     } catch (err) {
       // swallow redis client errors to prevent app crash
