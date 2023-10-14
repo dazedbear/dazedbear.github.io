@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems, searchSettings } from '../../site.config'
@@ -26,7 +27,8 @@ const themeClassMap = {
 }
 
 const Header = () => {
-  const currentTheme = isActivePage('/') ? 'modern' : 'classic'
+  const router = useRouter()
+  const currentTheme = isActivePage('/', router) ? 'modern' : 'classic'
   const linkClass =
     'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-1000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
   const liniInActiveClass = themeClassMap[currentTheme]?.linkInActive || ''
@@ -35,12 +37,12 @@ const Header = () => {
   return (
     <div
       className={classnames(
-        'fixed z-9999 min-h-12 w-full py-2 px-0 lg:shrink-0',
+        'fixed z-9999 min-h-12 w-full px-0 py-2 lg:shrink-0',
         themeClassMap[currentTheme]?.header
       )}
       style={{ transform: 'translateZ(0)' }}
     >
-      <div className="my-0 mx-auto max-w-1400 py-0 px-5">
+      <div className="mx-auto my-0 max-w-1400 px-5 py-0">
         <header className="relative flex flex-row flex-nowrap text-left">
           <Link href="/">
             <a className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
@@ -58,7 +60,7 @@ const Header = () => {
             </a>
           </Link>
           <div className="flex lg:relative lg:ml-auto lg:flex lg:h-9">
-            <nav className="fixed left-0 right-0 top-0 bottom-auto box-border lg:relative lg:right-auto lg:top-auto lg:h-auto lg:w-auto lg:bg-none">
+            <nav className="fixed bottom-auto left-0 right-0 top-0 box-border lg:relative lg:right-auto lg:top-auto lg:h-auto lg:w-auto lg:bg-none">
               <ul
                 className={classnames(
                   'mt-13 box-border flex w-full list-none flex-nowrap p-0 lg:m-0 lg:flex lg:w-auto lg:flex-row lg:flex-nowrap lg:bg-none lg:p-0',
@@ -69,7 +71,7 @@ const Header = () => {
                   if (!enabled) {
                     return null
                   }
-                  const isActive = isActivePage(page)
+                  const isActive = isActivePage(page, router)
                   return (
                     <li
                       key={label}

@@ -28,7 +28,7 @@ const Breadcrumb = ({ title, enableToc = false }) => {
         }
       )}
     >
-      <div className="relative my-0 mx-auto box-border flex max-w-1100 flex-row flex-nowrap overflow-hidden bg-gray-200 py-2 px-5">
+      <div className="relative mx-auto my-0 box-border flex max-w-1100 flex-row flex-nowrap overflow-hidden bg-gray-200 px-5 py-2">
         {/* hamburger lines */}
         <div
           className={classnames('relative mr-3 h-8 w-5', {

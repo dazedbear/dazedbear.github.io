@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import {
   notion,
@@ -26,11 +25,11 @@ export const getDateStr = (date) => {
  * @param {string} page next.js page pathname
  * @returns {boolean} current next.js page is active or not
  */
-export const isActivePage = (page) => {
-  const { asPath } = useRouter()
-  if (!page) {
+export const isActivePage = (page, router) => {
+  if (!page || !router) {
     return false
   }
+  const { asPath } = router || {}
   const pathname = asPath.replace(/\?.*/gi, '') // remove query params
   const regex = new RegExp(`${page}(\/.+)+`, 'i')
   return page === pathname || regex.test(pathname)
@@ -40,8 +39,11 @@ export const isActivePage = (page) => {
  * get title of current page from navigation config
  * @returns {string} title of current page
  */
-export const getPageMeta = (pageMeta: PageMeta = {}): PageMeta => {
-  const { asPath } = useRouter()
+export const getPageMeta = (pageMeta: PageMeta = {}, router): PageMeta => {
+  if (!router) {
+    return {}
+  }
+  const { asPath } = router || {}
   const meta = {
     title: commonMeta.title,
     description: commonMeta.description,
