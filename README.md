@@ -21,7 +21,7 @@ This is dazedbear's personal website. There are some demo, memos, and articles h
     - [NotionX/react-notion-x](https://github.com/NotionX/react-notion-x) for fetching data from Notion then rendering posts
     - [preview image](https://github.com/transitive-bullshit/nextjs-notion-starter-kit#preview-images) to generate image placeholder with lqip.
   - [ijjk/notion-blog](https://github.com/ijjk/notion-blog)
-    - [API response cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) that we use [cache-manager](https://www.npmjs.com/package/cache-manager) and [cache-manager-ioredis](https://github.com/dabroek/node-cache-manager-ioredis) to implement instead
+    - [API response cache](https://github.com/ijjk/notion-blog/commit/5955d77b7c26cc22086702885674f1db2f18314d) that I use [@vercel/kv](https://vercel.com/docs/storage/vercel-kv) to implement instead
 - [Next.js](https://nextjs.org/) - React core framework
   - [Server Side Rendering](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) to serve dynamic data from Notion.
 - [Redux](https://redux.js.org/) - state management

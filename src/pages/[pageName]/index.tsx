@@ -3,7 +3,6 @@ import Error from 'next/error'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import VisibilitySensor from 'react-visibility-sensor'
-import { ExtendedRecordMap } from 'notion-types'
 import { NotionRenderer } from 'react-notion-x'
 import { FaCircleNotch, FaRedo } from 'react-icons/fa'
 
@@ -11,9 +10,10 @@ import Breadcrumb from '../../components/breadcrumb'
 import NavMenu from '../../components/nav-menu'
 import Placeholder from '../../components/placeholder'
 import NotionComponentMap from '../../components/notion-components'
-import { notion, pageProcessTimeout } from '../../../site.config'
+import { notion, pageProcessTimeout, cache } from '../../../site.config'
 import {
   FAILSAFE_PAGE_GENERATION_QUERY,
+  FORCE_CACHE_REFRESH_QUERY,
   PAGE_TYPE_ARTICLE_LIST_PAGE,
 } from '../../libs/constant'
 import { mapNotionPageLinkUrl } from '../../libs/notion'
@@ -26,7 +26,6 @@ import {
   fetchArticleStream,
   isValidPageName,
   executeFunctionWithTimeout,
-  setSSRCacheHeaders,
 } from '../../libs/server/page'
 import {
   transformArticleStream,
@@ -42,6 +41,7 @@ export const getServerSideProps: GetServerSideProps =
     // disable page timeout when failsafe generation mode (?fsg=1)
     const timeout =
       query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+    cache.forceRefresh = query[FORCE_CACHE_REFRESH_QUERY] === '1'
     const props = await executeFunctionWithTimeout(
       async () => {
         if (!isValidPageName(pageName)) {
@@ -79,7 +79,6 @@ export const getServerSideProps: GetServerSideProps =
             req,
           }
           log(options)
-          setSSRCacheHeaders(res)
           return {
             props: {
               menuItems,

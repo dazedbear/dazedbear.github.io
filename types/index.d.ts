@@ -51,12 +51,6 @@ export interface ArticleStream {
 
 export interface SinglePage {}
 
-export type CacheClientServingStatus =
-  | 'default'
-  | 'initializing'
-  | 'running'
-  | 'terminated'
-
 export interface PageMeta {
   title?: string
   description?: string

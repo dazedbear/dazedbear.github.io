@@ -25,12 +25,15 @@ import { GetServerSideProps } from 'next'
 import Error from 'next/error'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
-import { ExtendedRecordMap } from 'notion-types'
 import { NotionRenderer } from 'react-notion-x'
 
 import NotionComponentMap from '../components/notion-components'
-import { notion, pageProcessTimeout } from '../../site.config'
-import { FAILSAFE_PAGE_GENERATION_QUERY, ABOUT_PAGE } from '../libs/constant'
+import { notion, pageProcessTimeout, cache } from '../../site.config'
+import {
+  FAILSAFE_PAGE_GENERATION_QUERY,
+  FORCE_CACHE_REFRESH_QUERY,
+  ABOUT_PAGE,
+} from '../libs/constant'
 import { mapNotionPageLinkUrl } from '../libs/notion'
 import log from '../libs/server/log'
 import wrapper from '../libs/client/store'
@@ -41,7 +44,6 @@ import {
   fetchSinglePage,
   isValidPageName,
   executeFunctionWithTimeout,
-  setSSRCacheHeaders,
 } from '../libs/server/page'
 import {
   transformSinglePage,
@@ -56,6 +58,7 @@ export const getServerSideProps: GetServerSideProps =
     // disable page timeout when failsafe generation mode (?fsg=1)
     const timeout =
       query[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : pageProcessTimeout
+    cache.forceRefresh = query[FORCE_CACHE_REFRESH_QUERY] === '1'
     const props = await executeFunctionWithTimeout(
       async () => {
         if (!isValidPageName(pageName)) {
@@ -89,7 +92,6 @@ export const getServerSideProps: GetServerSideProps =
             req,
           }
           log(options)
-          setSSRCacheHeaders(res)
           return {
             props: {
               pageName,

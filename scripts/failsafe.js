@@ -5,7 +5,10 @@ const get = require('lodash/get')
 const Ajv = require('ajv')
 const addFormats = require('ajv-formats')
 const { aws, currentEnv, website, failsafe } = require('../site.config')
-const { FAILSAFE_PAGE_GENERATION_QUERY } = require('../src/libs/constant')
+const {
+  FAILSAFE_PAGE_GENERATION_QUERY,
+  FORCE_CACHE_REFRESH_QUERY,
+} = require('../src/libs/constant')
 const log = require('./log')
 
 // node-fetch and pMap doesn't support common js since v3.
@@ -32,7 +35,8 @@ const getPageUrls = async () => {
   const sitemapObj = parser.parse(sitemapXml)
 
   const pageUrls = get(sitemapObj, ['urlset', 'url'], []).map(
-    ({ loc }) => `${loc}?${FAILSAFE_PAGE_GENERATION_QUERY}=1`
+    ({ loc }) =>
+      `${loc}?${FAILSAFE_PAGE_GENERATION_QUERY}=1&${FORCE_CACHE_REFRESH_QUERY}=1`
   ) // failsafe generation mode
 
   log({ category: 'getPageUrls', message: pageUrls })

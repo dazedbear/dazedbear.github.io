@@ -29,22 +29,16 @@ module.exports = {
       .get('CACHE_CLIENT_ENABLED')
       .default(`${currentEnv !== 'development'}`)
       .asBool(),
-    host: 'redis-18768.c54.ap-northeast-1-2.ec2.cloud.redislabs.com',
-    port: 18768,
-    token: env.get('REDIS_TOKEN').asString(),
+    forceRefresh: false, // global variable could be mutated by page routes
+    token: env.get('CACHE_CLIENT_TOKEN').asString(),
     ttls: {
       // seconds
-      default: 60,
+      default: 30,
       sitemap: 86400,
-      notionPage: 1800,
+      notionPage: 86400,
       previewImage: 86400 * 30,
     },
-    connectionRetriesDelay: 50, // redis server connection retries delay (ms)
-    connectionMaxRetries: 1, // redis server connection retries
-    connectionTimeout: 500, // redis server connection timeout (ms)
-    maxRetriesPerCommandRequest: 1, // each redis command connection retries
-    statusCheckDelay: 50, // delay time for each connection status checks (ms)
-    statusCheckTimeout: 1000, // timeout for connection status checks (ms)
+    url: env.get('CACHE_CLIENT_API_URL').asString(),
   },
   cdnHost: 'static.dazedbear.pro',
   currentEnv,

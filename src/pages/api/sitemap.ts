@@ -24,6 +24,7 @@ import {
   website,
 } from '../../../site.config'
 import cacheClient from '../../libs/server/cache'
+import { FORCE_CACHE_REFRESH_QUERY } from '../../libs/constant'
 
 const route = '/sitemap'
 const methods = ['GET']
@@ -105,6 +106,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     })
 
     // sitemap cache daily
+    cacheConfig.forceRefresh = req.query[FORCE_CACHE_REFRESH_QUERY] === '1'
     const sitemapXmlKey = `sitemap_${dayjs.utc().format('YYYY-MM-DD')}`
     const sitemapXml = await cacheClient.proxy(
       sitemapXmlKey,
