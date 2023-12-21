@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.34.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.0...v4.34.1) (2023-12-21)
+
+
+### CI/CD
+
+* adjust cronjob schedule and readme ([#104](https://github.com/dazedbear/dazedbear.github.io/issues/104)) ([e935441](https://github.com/dazedbear/dazedbear.github.io/commit/e93544140d3efb33aaf91e4190382bd321dfa3af))
+
 ## [4.34.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.33.0...v4.34.0) (2023-10-14)
 
 
