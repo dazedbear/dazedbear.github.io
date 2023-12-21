@@ -5,8 +5,8 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    # every day 06:00 GMT+8
-    - cron: '0 10 * * *'
+    # 18:00 GMT+8 every Monday
+    - cron: '0 10 * * 1'
 
 env:
   AWS_REGION: ${{ secrets.AWS_REGION }}
