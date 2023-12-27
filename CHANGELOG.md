@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.34.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.1...v4.34.2) (2023-12-27)
+
+
+### Bug Fixes
+
+* increase cache ttls ([#106](https://github.com/dazedbear/dazedbear.github.io/issues/106)) ([3cf5294](https://github.com/dazedbear/dazedbear.github.io/commit/3cf529450721da2d19c90708be590e12079f7ef3))
+
 ## [4.34.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.0...v4.34.1) (2023-12-21)
 
 
