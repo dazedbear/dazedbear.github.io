@@ -105,7 +105,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       req,
     })
 
-    // sitemap cache daily
+    // sitemap cache
     cacheConfig.forceRefresh = req.query[FORCE_CACHE_REFRESH_QUERY] === '1'
     const sitemapXmlKey = `sitemap_${dayjs.utc().format('YYYY-MM-DD')}`
     const sitemapXml = await cacheClient.proxy(
