@@ -34,8 +34,8 @@ module.exports = {
     ttls: {
       // seconds
       default: 30,
-      sitemap: 86400 * 7,
-      notionPage: 86400 * 7,
+      sitemap: 86400,
+      notionPage: 86400,
       previewImage: 86400 * 30,
     },
     url: env.get('CACHE_CLIENT_API_URL').asString(),

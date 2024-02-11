@@ -5,8 +5,8 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    # 18:30 GMT+8 every Monday and Thursday
-    - cron: '30 10 * * 1,4'
+    # 18:30 GMT+8 every day
+    - cron: '30 10 * * *'
 
 jobs:
   wait-for-deployment:
