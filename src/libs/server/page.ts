@@ -149,7 +149,7 @@ export const fetchArticleStream = async ({
       req,
     }
     log(options)
-    throw 'Required info are invalid in fetchArticleStream.'
+    throw Error('Required info are invalid in fetchArticleStream.')
   }
 
   const response = await getNotionPage(id)
@@ -198,7 +198,7 @@ export const fetchSinglePage = async ({
       req,
     }
     log(options)
-    throw 'Required info are invalid in fetchSinglePage.'
+    throw Error('Required info are invalid in fetchSinglePage.')
   }
 
   const response = await getNotionPage(id)

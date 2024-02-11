@@ -98,7 +98,7 @@ export const transformArticleStream = async (
       level: 'warn',
     }
     log(options)
-    throw 'articleStream is invalid'
+    throw Error('articleStream is invalid')
   }
 
   return articleStream
@@ -191,7 +191,7 @@ export const transformSingleArticle = async (
       level: 'warn',
     }
     log(options)
-    throw 'singleArticle is invalid'
+    throw Error('singleArticle is invalid')
   }
 
   return singleArticle
@@ -231,7 +231,7 @@ export const transformSinglePage = async (
       level: 'warn',
     }
     log(options)
-    throw 'single page is invalid'
+    throw Error('single page is invalid')
   }
 
   return pageContent
@@ -296,7 +296,7 @@ export const transformMenuItems = (
       level: 'warn',
     }
     log(options)
-    throw 'menuItems are invalid'
+    throw Error('menuItems are invalid')
   }
 
   return menuItems
@@ -344,7 +344,7 @@ export const transformArticleSinglePageMeta = (
       level: 'warn',
     }
     log(options)
-    throw 'page meta are invalid'
+    throw Error('page meta are invalid')
   }
 
   return pageMeta
@@ -397,7 +397,7 @@ export const transformPageUrls = (
       level: 'warn',
     }
     log(options)
-    throw 'page urls are invalid'
+    throw Error('page urls are invalid')
   }
 
   return pageUrls
@@ -414,7 +414,7 @@ export const transformStreamActionPayload = (
   articleStream: ArticleStream
 ): StreamActionPayloadState => {
   return {
-    name: pageName as string,
+    name: pageName,
     data: {
       content: cloneDeep(articleStream.content),
       hasNext: articleStream.hasNext,
@@ -436,7 +436,7 @@ export const transformPageActionPayload = (
   pageContent: SinglePage
 ): StreamActionPayloadState => {
   return {
-    name: pageName as string,
+    name: pageName,
     data: cloneDeep(pageContent),
   }
 }
