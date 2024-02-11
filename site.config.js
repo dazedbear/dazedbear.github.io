@@ -34,8 +34,8 @@ module.exports = {
     ttls: {
       // seconds
       default: 30,
-      sitemap: 86400 * 7,
-      notionPage: 86400 * 7,
+      sitemap: 86400,
+      notionPage: 86400,
       previewImage: 86400 * 30,
     },
     url: env.get('CACHE_CLIENT_API_URL').asString(),
@@ -190,8 +190,8 @@ module.exports = {
       userName: 'dazedbear',
     },
     youtube: {
-      channelBaseUrl: 'https://www.youtube.com/channel',
-      channelHash: 'UCvyYCMFjUbcHtZhnC-VGwHw',
+      channelBaseUrl: 'https://www.youtube.com',
+      channelHash: '@dazedbearstudio',
     },
   },
   communityFeatures: {
@@ -206,11 +206,11 @@ module.exports = {
       },
       {
         name: 'musicLogbook',
-        enable: true,
+        enable: false,
       },
       {
         name: 'openprocessing',
-        enable: true,
+        enable: false,
       },
       {
         name: 'soundcloud',
