@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.34.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.2...v4.34.3) (2024-02-11)
+
+
+### Bug Fixes
+
+* revert cache and cronjob from few days to daily ([#107](https://github.com/dazedbear/dazedbear.github.io/issues/107)) ([388c09e](https://github.com/dazedbear/dazedbear.github.io/commit/388c09ed888854d5036e0eeb33f08b1be92313ae))
+
 ## [4.34.2](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.1...v4.34.2) (2023-12-27)
 
 
