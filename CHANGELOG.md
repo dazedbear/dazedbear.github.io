@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.34.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.3...v4.34.4) (2024-02-19)
+
+
+### CI/CD
+
+* adjust cronjob frequency to reduce the usage of KV ([#108](https://github.com/dazedbear/dazedbear.github.io/issues/108)) ([6bf476f](https://github.com/dazedbear/dazedbear.github.io/commit/6bf476f069a502e47fe5ca840393f2c694a4fa9c))
+
 ## [4.34.3](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.2...v4.34.3) (2024-02-11)
 
 
