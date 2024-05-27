@@ -6,7 +6,7 @@ import { notion } from '../../site.config'
  * @see https://github.com/NotionX/react-notion-x/blob/be5a0d39cc11538d90b1fba4410cf6aaa0001d64/packages/react-notion-x/src/components/lazy-image.tsx
  */
 const PageCover = ({ alt = '', cover, recordMap }) => {
-  const previewImage = notion.previeImages.enable
+  const previewImage = notion.previewImages.enable
     ? recordMap?.preview_images?.[cover]
     : null
 

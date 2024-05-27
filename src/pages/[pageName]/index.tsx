@@ -128,7 +128,7 @@ const ArticleListPage = ({ hasError, menuItems, pageName }) => {
   const index: number = get(streamState, [pageName, 'index'], 0)
   const isLoading: boolean = get(streamState, [pageName, 'isLoading'])
   const paginationEnabled: boolean = get(notion, ['pagination', 'enabled'])
-  const previewImagesEnabled: boolean = get(notion, ['previeImages', 'enable'])
+  const previewImagesEnabled: boolean = get(notion, ['previewImages', 'enable'])
 
   // hack to temporarily fix "cannot assign type to read-only object" issue in react-notion-x
   const recordMap = cloneDeep(content)

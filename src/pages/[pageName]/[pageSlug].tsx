@@ -205,7 +205,7 @@ const ArticleSinglePage = ({
   const content: any = get(streamState, [pageName, 'content'])
   // hack to temporarily fix "cannot assign type to read-only object" issue in react-notion-x
   const recordMap = cloneDeep(content)
-  const previewImagesEnabled: boolean = get(notion, ['previeImages', 'enable'])
+  const previewImagesEnabled: boolean = get(notion, ['previewImages', 'enable'])
   const property: any = getPageProperty({ pageId, recordMap })
   const enableToc: boolean = toc && toc.length > 0
 

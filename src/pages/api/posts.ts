@@ -101,7 +101,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       options: { limit },
     })
 
-    if (get(notion, ['previeImages', 'enable'])) {
+    if (get(notion, ['previewImages', 'enable'])) {
       const previewImageMap = await getNotionPreviewImages(data.recordMap)
       set(data, ['recordMap', 'preview_images'], previewImageMap)
     }

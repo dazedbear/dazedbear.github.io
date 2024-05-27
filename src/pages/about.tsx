@@ -138,7 +138,7 @@ const AboutPage = ({ hasError, pageName }) => {
 
   const blockId: string = get(notion, ['pages', pageName, 'pageId'])
   const content: any = get(pageState, [pageName])
-  const previewImagesEnabled: boolean = get(notion, ['previeImages', 'enable'])
+  const previewImagesEnabled: boolean = get(notion, ['previewImages', 'enable'])
 
   // hack to temporarily fix "cannot assign type to read-only object" issue in react-notion-x
   const recordMap = cloneDeep(content)
