@@ -44,20 +44,21 @@ const Header = () => {
     >
       <div className="mx-auto my-0 max-w-1400 px-5 py-0">
         <header className="relative flex flex-row flex-nowrap text-left">
-          <Link href="/" legacyBehavior>
-            <a className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
-              <div className="relative mr-2.5 box-content h-9 w-9">
-                <Image src={faviconIcon} alt={meta.title} fill sizes="100vw" />
-              </div>
-              <h2
-                className={classnames(
-                  'relative z-9999 m-0 block text-xl font-semibold',
-                  themeClassMap[currentTheme]?.title
-                )}
-              >
-                {meta.title}
-              </h2>
-            </a>
+          <Link
+            href="/"
+            className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white"
+          >
+            <div className="relative mr-2.5 box-content h-9 w-9">
+              <Image src={faviconIcon} alt={meta.title} fill sizes="100vw" />
+            </div>
+            <h2
+              className={classnames(
+                'relative z-9999 m-0 block text-xl font-semibold',
+                themeClassMap[currentTheme]?.title
+              )}
+            >
+              {meta.title}
+            </h2>
           </Link>
           <div className="flex lg:relative lg:ml-auto lg:flex lg:h-9">
             <nav className="fixed bottom-auto left-0 right-0 top-0 box-border lg:relative lg:right-auto lg:top-auto lg:h-auto lg:w-auto lg:bg-none">
@@ -78,15 +79,14 @@ const Header = () => {
                       className="m-0 flex-auto whitespace-nowrap text-center"
                     >
                       {page ? (
-                        <Link href={page} legacyBehavior>
-                          <a
-                            className={classnames(linkClass, {
-                              [linkActiveClass]: isActive,
-                              [liniInActiveClass]: !isActive,
-                            })}
-                          >
-                            {label}
-                          </a>
+                        <Link
+                          href={page}
+                          className={classnames(linkClass, {
+                            [linkActiveClass]: isActive,
+                            [liniInActiveClass]: !isActive,
+                          })}
+                        >
+                          {label}
                         </Link>
                       ) : (
                         <ExtLink
