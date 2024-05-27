@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import classnames from 'classnames'
@@ -47,7 +47,7 @@ const Header = () => {
           <Link href="/" legacyBehavior>
             <a className="z-1000 flex h-9 flex-row flex-nowrap items-center border-0 border-white">
               <div className="relative mr-2.5 box-content h-9 w-9">
-                <Image src={faviconIcon} alt={meta.title} layout="fill" />
+                <Image src={faviconIcon} alt={meta.title} fill sizes="100vw" />
               </div>
               <h2
                 className={classnames(

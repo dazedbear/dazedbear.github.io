@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 import { notion } from '../../site.config'
 
 /**
@@ -24,8 +24,9 @@ const PageCover = ({ alt = '', cover, recordMap }) => {
           blurDataURL={previewImage.dataURIBase64}
           className="notion-page-cover absolute rounded-md"
           src={cover}
-          layout="fill"
           placeholder="blur"
+          fill
+          sizes="100vw"
         />
       </div>
     )
