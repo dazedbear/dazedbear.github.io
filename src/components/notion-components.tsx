@@ -23,7 +23,7 @@ const NotionComponentMap: object = {
     }
   ),
   PageLink: (props) => (
-    <Link {...props}>
+    <Link {...props} legacyBehavior>
       <a {...props} />
     </Link>
   ),

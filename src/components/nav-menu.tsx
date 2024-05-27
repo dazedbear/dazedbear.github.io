@@ -48,7 +48,7 @@ const NavigationMenu = ({ title, menuItems }) => {
                     isMobile && dispatch(updateNavMenuViewability(false))
                   }}
                 >
-                  <Link href={url || '#'}>
+                  <Link href={url || '#'} legacyBehavior>
                     <a className={linkClass}>{label}</a>
                   </Link>
                 </li>
