@@ -52,6 +52,10 @@ module.exports = withBundleAnalyzer({
     domains: ['images.unsplash.com', 'www.notion.so', 'dazedbear.notion.site'],
   },
 
+  experimental: {
+    largePageDataBytes: 1000000, // 1 MB
+  },
+
   async rewrites() {
     return {
       beforeFiles: [
