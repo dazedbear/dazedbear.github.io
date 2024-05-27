@@ -9,6 +9,10 @@ on:
     secrets:
       VERCEL_TOKEN:
         required: true
+      VERCEL_PROJECT_ID:
+        required: true
+      VERCEL_TEAM_ID:
+        required: true
 
 env:
   VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT: https://api.vercel.com/v6/deployments
@@ -28,14 +32,15 @@ jobs:
           echo "Fetching Vercel deployments using API endpoint: " $VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT
 
           # Fetch all Vercel deployment from this project
-          ALL_VERCEL_DEPLOYMENTS=`curl -H 'Accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}' $VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT`
+          API_ENDPOINT="${VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT}?projectId=${{ secrets.VERCEL_PROJECT_ID }}&teamId=${{ secrets.VERCEL_TEAM_ID }}"
+          ALL_VERCEL_DEPLOYMENTS=`curl -H 'Accept: application/json' -H 'Content-Type: application/json' -H 'Authorization: Bearer ${{ secrets.VERCEL_TOKEN }}' $API_ENDPOINT`
           echo "Vercel deployments: " $ALL_VERCEL_DEPLOYMENTS
 
           # Parse the deployments (as json) to find the latest deployment url, while stripping the double quotes
           VERCEL_DEPLOYMENT_URL=`echo $ALL_VERCEL_DEPLOYMENTS | jq '.deployments [0].url' | tr -d \"`
           echo "VERCEL_DEPLOYMENT_URL=$VERCEL_DEPLOYMENT_URL" >> $GITHUB_ENV
       - name: Wait for Vercel deployment to be ready
-        uses: UnlyEd/github-action-await-vercel@v1
+        uses: UnlyEd/github-action-await-vercel@v2
         id: await-vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
@@ -44,6 +49,6 @@ jobs:
           timeout: 240 # Wait for 4 mins before failing
       - name: Expose Vercel deployment info
         id: expose-vercel-deployment
-        run: echo "::set-output name=vercel-deployment-url::${{ env.VERCEL_DEPLOYMENT_URL }}"
+        run: echo "vercel-deployment-url=${{ env.VERCEL_DEPLOYMENT_URL }}" >> $GITHUB_OUTPUT
       - name: Display Vercel deployment status
         run: 'echo The deployment at ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).url }} is ${{ fromJson(steps.await-vercel.outputs.deploymentDetails).readyState }}'

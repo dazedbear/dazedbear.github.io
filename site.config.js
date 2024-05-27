@@ -137,7 +137,7 @@ module.exports = {
       firstLoadCount: 5,
       batchLoadCount: 5,
     },
-    previeImages: {
+    previewImages: {
       concurrency: Infinity,
       enable: false,
     },

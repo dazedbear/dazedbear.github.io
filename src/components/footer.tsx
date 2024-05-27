@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { FaGithub, FaLinkedin, FaSoundcloud, FaYoutube } from 'react-icons/fa'
 import { GiMetronome } from 'react-icons/gi'
-import { IconContext } from 'react-icons'
 import ExtLink from './ext-link'
 import {
   copyright,
@@ -48,11 +47,7 @@ const CommunityIcon = ({ name, link }) => {
         target="_blank"
         className="inline-block text-gray-500"
       >
-        <IconContext.Provider
-          value={{ className: 'text-gray-300', size: '2em' }}
-        >
-          <IconComponent />
-        </IconContext.Provider>
+        <IconComponent className="text-gray-300" size="2em" />
       </ExtLink>
     </div>
   )

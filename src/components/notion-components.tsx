@@ -22,11 +22,7 @@ const NotionComponentMap: object = {
       ssr: false,
     }
   ),
-  PageLink: (props) => (
-    <Link {...props}>
-      <a {...props} />
-    </Link>
-  ),
+  PageLink: (props) => <Link {...props} />,
   Pdf: dynamic(
     () =>
       import('react-notion-x/build/third-party/pdf').then(

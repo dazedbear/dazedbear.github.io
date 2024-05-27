@@ -108,7 +108,7 @@ export const transformArticleStreamPreviewImages = async (
   articleStream: ArticleStream
 ): Promise<ArticleStream> => {
   const isPreviewImageGenerationEnabled: boolean = get(notion, [
-    'previeImages',
+    'previewImages',
     'enable',
   ])
 
@@ -161,7 +161,7 @@ export const transformSingleArticle = async (
   singleArticle.content = data
 
   const isPreviewImageGenerationEnabled: boolean = get(notion, [
-    'previeImages',
+    'previewImages',
     'enable',
   ])
 
@@ -208,7 +208,7 @@ export const transformSinglePage = async (
   let pageContent: SinglePage = data || {}
 
   const isPreviewImageGenerationEnabled: boolean = get(notion, [
-    'previeImages',
+    'previewImages',
     'enable',
   ])
 
