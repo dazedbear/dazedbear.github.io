@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.35.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.4...v4.35.0) (2024-05-27)
+
+
+### Build
+
+* migrate to Next.js 13, React 18, Github Action v4 ([#109](https://github.com/dazedbear/dazedbear.github.io/issues/109)) ([9858d7a](https://github.com/dazedbear/dazedbear.github.io/commit/9858d7a2a01239c857a6ace0cda6812ac6dc14e1))
+
 ## [4.34.4](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.3...v4.34.4) (2024-02-19)
 
 
