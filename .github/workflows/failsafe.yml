@@ -31,9 +31,9 @@ jobs:
       VERCEL_URL: ${{ needs.wait-for-deployment.outputs.vercel-deployment-url }}
     steps:
       - name: Checkout project source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
       - name: Install dependency
@@ -44,7 +44,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run failsafe e2e tests
         run: npm run test:e2e:failsafe
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stage-deployment-failsafe-test-report
@@ -62,9 +62,9 @@ jobs:
       NEXT_PUBLIC_APP_ENV: production
     steps:
       - name: Checkout project source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
       - name: Install dependency
@@ -75,7 +75,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run failsafe e2e tests
         run: npm run test:e2e:failsafe
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: production-deployment-failsafe-test-report
@@ -93,9 +93,9 @@ jobs:
       NEXT_PUBLIC_APP_ENV: production
     steps:
       - name: Checkout project source
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
       - name: Install dependency
@@ -106,7 +106,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run failsafe e2e tests
         run: npm run test:e2e:failsafe
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: production-schedule-failsafe-test-report
