@@ -1,4 +1,6 @@
-import ExtLink from '../components/ext-link'
+'use client'
+
+import ExtLink from '../../components/ext-link'
 
 const MaintainPage = () => (
   <div className="homeContainer text-center">
