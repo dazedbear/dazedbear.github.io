@@ -23,14 +23,13 @@ export const getDateStr = (date) => {
 /**
  * detect current next.js page is active or not
  * @param {string} page next.js page pathname
+ * @param {string} pathname current next.js pathname
  * @returns {boolean} current next.js page is active or not
  */
-export const isActivePage = (page, router) => {
-  if (!page || !router) {
+export const isActivePage = (page, pathname) => {
+  if (!page || !pathname) {
     return false
   }
-  const { asPath } = router || {}
-  const pathname = asPath.replace(/\?.*/gi, '') // remove query params
   const regex = new RegExp(`${page}(\/.+)+`, 'i')
   return page === pathname || regex.test(pathname)
 }

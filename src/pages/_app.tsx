@@ -31,6 +31,7 @@ const App = ({ Component, pageProps }) => {
   useCodeSyntaxHighlight()
   const router = useRouter()
   const { title, description, image } = getPageMeta(pageProps.meta, router)
+  const pathname = router.asPath.replace(/\?.*/gi, '') // remove query params;
   return (
     <div id="app">
       <Head>
@@ -39,7 +40,7 @@ const App = ({ Component, pageProps }) => {
         <meta name="og:title" content={title} />
         <meta property="og:image" content={image} />
       </Head>
-      <Header />
+      <Header pathname={pathname} />
       <div id="main-content">
         <Component {...pageProps} />
       </div>

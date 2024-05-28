@@ -17,8 +17,20 @@
     "paths": {
       "*": ["types/*"]
     },
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "exclude": ["node_modules", "**/__mocks__", "**/__tests__", "tests/**/*"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/libs/constant.js"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/libs/constant.js",
+    ".next/types/**/*.ts"
+  ]
 }
