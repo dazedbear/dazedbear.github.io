@@ -1,8 +1,10 @@
 import NotionSinglePage from '../notion/single-page'
-import { getNotionSinglePageContent } from '../notion/content'
+import { getNotionContent } from '../notion/content'
+import { PAGE_TYPE_NOTION_SINGLE_PAGE } from '../../libs/constant'
 
 const AboutPage = async ({ searchParams }) => {
-  const pageContent = await getNotionSinglePageContent({
+  const { pageContent } = await getNotionContent({
+    pageType: PAGE_TYPE_NOTION_SINGLE_PAGE,
     pageName: 'about',
     searchParams,
   })

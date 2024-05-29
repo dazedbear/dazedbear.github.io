@@ -84,7 +84,7 @@ export const showCommonPage = (
 export const isValidPageName = (pageName: NotionPageName): boolean => {
   const pageId: string = get(notion, ['pages', pageName, 'pageId'])
   const pageEnabled: boolean = get(notion, ['pages', pageName, 'enabled'])
-  return pageId && pageEnabled
+  return Boolean(pageId && pageEnabled)
 }
 
 /**
@@ -104,12 +104,10 @@ export const isValidPageSlug = (pageSlug: string | string[]): boolean => {
  * @returns {object} raw data from upstream API
  */
 export const fetchArticleStream = async ({
-  req,
   pageName,
   pageId,
   category,
 }: {
-  req?: GetServerSidePropsRequest
   pageName?: NotionPageName
   pageId?: string
   category?: string
@@ -146,7 +144,6 @@ export const fetchArticleStream = async ({
       category: category || 'fetchArticleStream',
       message,
       level: 'error',
-      req,
     }
     log(options)
     throw Error('Required info are invalid in fetchArticleStream.')
