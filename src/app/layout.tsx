@@ -1,7 +1,12 @@
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import App from './app'
-import { currentEnv, meta, searchSettings } from '../../site.config'
+import {
+  currentEnv,
+  currentWebsite,
+  meta,
+  searchSettings,
+} from '../../site.config'
 
 // css
 import 'react-notion-x/src/styles.css'
@@ -11,10 +16,10 @@ import '@docsearch/css'
 import '../styles/global.css'
 import '../styles/notion.css'
 
-const isLocal = currentEnv === 'development'
 const isProduction = currentEnv === 'production'
 
 export const metadata: Metadata = {
+  metadataBase: new URL(`${currentWebsite.protocol}://${currentWebsite.host}`),
   title: meta.title,
   description: meta.description,
   openGraph: {

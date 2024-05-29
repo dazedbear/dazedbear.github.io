@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import prism from 'prismjs'
-import get from 'lodash/get'
 import throttle from 'lodash/throttle'
 import debounce from 'lodash/debounce'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
 import LogRocket from 'logrocket'
 import { AppState, AppDispatch } from './store'
 import {
@@ -13,14 +11,7 @@ import {
   updateTableOfContentViewability,
   updateViewport,
 } from './slices/layout'
-import {
-  currentEnv,
-  trackingSettings,
-  notion,
-  meta as commonMeta,
-  pages as staticPages,
-} from '../../../site.config'
-import { PageMeta } from '../../../types'
+import { currentEnv, trackingSettings } from '../../../site.config'
 
 /**
  * Pre-typed useSelector & useAppDispatch for react-redux.
@@ -200,52 +191,4 @@ export const useCodeSyntaxHighlight = () => {
   useEffect(() => {
     prism.highlightAll()
   })
-}
-
-/**
- * Custom hook to detect current next.js page is active or not
- * @param {string} page next.js page pathname
- * @returns {boolean} current next.js page is active or not
- */
-export const useCheckActivePage = (page) => {
-  const { asPath } = useRouter()
-  if (!page) {
-    return false
-  }
-  const pathname = asPath.replace(/\?.*/gi, '') // remove query params
-  const regex = new RegExp(`${page}(\/.+)+`, 'i')
-  return page === pathname || regex.test(pathname)
-}
-
-/**
- * Custom hook to get title of current page from navigation config
- * @returns {string} title of current page
- */
-export const useGetPageMeta = (pageMeta: PageMeta = {}): PageMeta => {
-  const { asPath } = useRouter()
-  const meta = {
-    title: commonMeta.title,
-    description: commonMeta.description,
-    image: commonMeta.image,
-  }
-
-  // pageMeta is for SSR pages override
-  // add fallback logic for static pages & SSR pages without meta override
-  const pathname = asPath.replace(/\?.*/gi, '') // remove query params
-  const page =
-    pathname === '/' ? 'index' : pathname.split('/').filter(Boolean)[0]
-  const pageTitle =
-    pageMeta.title ||
-    get(staticPages, [page, 'title']) ||
-    get(notion, ['pages', page, 'navMenuTitle'])
-  if (pageTitle) {
-    meta.title = `${pageTitle} · ${commonMeta.title}`
-  }
-  if (pageMeta.description) {
-    meta.description = pageMeta.description
-  }
-  if (pageMeta.image) {
-    meta.image = pageMeta.image
-  }
-  return meta
 }

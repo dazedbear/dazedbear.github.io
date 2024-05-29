@@ -5,12 +5,7 @@ import { logOption } from '../../../types'
 chalk.level = 2 // disable level auto detection to make sure all log has correct color, see https://www.npmjs.com/package/chalk#chalklevel
 
 // level = debug, info, warn, error
-const log = ({
-  category = '',
-  message = '',
-  level = 'info',
-  req = null,
-}: logOption) => {
+const log = ({ category = '', message = '', level = 'info' }: logOption) => {
   const levelMap = {
     debug: {
       method: 'log',

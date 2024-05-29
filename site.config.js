@@ -17,7 +17,7 @@ const normalizeId = (id) => {
 
 // env-var cannot read `NEXT_PUBLIC_` prefix env variables on client-side
 const currentEnv = process.env.NEXT_PUBLIC_APP_ENV || 'production'
-module.exports = {
+const siteConfig = {
   aws: {
     s3bucket: env.get('AWS_S3_BUCKET').asString(),
   },
@@ -41,7 +41,6 @@ module.exports = {
     url: env.get('CACHE_CLIENT_API_URL').asString(),
   },
   cdnHost: 'static.dazedbear.pro',
-  currentEnv,
   failsafe: {
     // AWS S3 upload limit rate: 3500 per sec, ref: https://docs.aws.amazon.com/zh_tw/AmazonS3/latest/userguide/optimizing-performance.html
     // concurrency limit to 30 since redis max connection is fixed to 30 based on the basic plan, ref: https://redis.com/redis-enterprise-cloud/pricing/
@@ -272,3 +271,8 @@ module.exports = {
     },
   },
 }
+
+siteConfig.currentEnv = currentEnv
+siteConfig.currentWebsite = siteConfig.website[currentEnv]
+
+module.exports = siteConfig

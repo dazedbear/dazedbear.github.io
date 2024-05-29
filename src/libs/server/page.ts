@@ -158,12 +158,10 @@ export const fetchArticleStream = async ({
 
 /**
  * fetch single page content from upstream API
- * @param {object} req
  * @param {string} pageName
  * @returns {object} raw data from upstream API
  */
 export const fetchSinglePage = async ({
-  req,
   pageName,
   pageId,
   category,
@@ -195,7 +193,6 @@ export const fetchSinglePage = async ({
       category: category || 'fetchSinglePage',
       message,
       level: 'error',
-      req,
     }
     log(options)
     throw Error('Required info are invalid in fetchSinglePage.')
