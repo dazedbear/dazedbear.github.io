@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
 }
 
-const CustomScript = dynamic(() => import('./customScript'), { ssr: false })
+const CustomScript = dynamic(() => import('./custom-script'), { ssr: false })
 
 const RootLayout = ({
   // Layouts must accept a children prop.

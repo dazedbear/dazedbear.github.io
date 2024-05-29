@@ -1,4 +1,4 @@
-import NotionSinglePage from '../notion/singlePage'
+import NotionSinglePage from '../notion/single-page'
 import { getNotionSinglePageContent } from '../notion/content'
 
 const AboutPage = async ({ searchParams }) => {
