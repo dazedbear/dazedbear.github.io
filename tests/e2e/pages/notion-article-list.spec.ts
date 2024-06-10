@@ -68,7 +68,7 @@ notionPages.forEach((pageName) => {
       page,
     }) => {
       await page.goto(pagePath)
-      await page.waitForTimeout(1500) // wait for layout render script execution
+      await page.waitForTimeout(3000) // wait for layout render script execution
       await expect(page).toHaveScreenshot(
         `${pageName}-screenshot.png`,
         screenshotOption
