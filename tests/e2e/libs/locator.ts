@@ -2,7 +2,7 @@ export default {
   pageTitle: 'title',
   meta: {
     description: 'meta[name="description"]',
-    ogTitle: 'meta[name="og:title"]',
+    ogTitle: 'meta[property="og:title"]',
     ogImage: 'meta[property="og:image"]',
   },
   pages: {
