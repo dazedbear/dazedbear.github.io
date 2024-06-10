@@ -125,9 +125,12 @@ export const getNotionContent = async ({
             // validate if article uuid exist in the article stream to prevent being an SSRF proxy host for external uuids.
             const articleIds = articleStream?.ids || []
             if (!articleIds.includes(idToUuid(articleId))) {
-              throw Error(
-                `[malformed] detect external abusive article uuid | pageName: ${pageName} | pageSlug: ${pageSlug}`
-              )
+              log({
+                category: pageType,
+                message: `[malformed] detect external abusive article uuid | pageName: ${pageName} | pageSlug: ${pageSlug}`,
+                level: 'warn',
+              })
+              return notFound()
             }
 
             // since getPage for collection view returns all pages with partial blocks, get target article then merge to articleStream to add missing blocks
