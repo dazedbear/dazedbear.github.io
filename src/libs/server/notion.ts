@@ -190,10 +190,10 @@ export const getNotionPreviewImages = async (recordMap) => {
       message: 'recordMap not found in getNotionPreviewImages',
       level: 'error',
     })
-    return
+    return {}
   }
   const blockIds = Object.keys(recordMap.block)
-  const imageUrls: string[] = blockIds
+  const imageUrls: any[] = blockIds
     .map((blockId) => {
       const block = recordMap.block[blockId]?.value
       if (block) {
@@ -214,10 +214,13 @@ export const getNotionPreviewImages = async (recordMap) => {
           }
         }
       }
-      return null
+      return {
+        block: '',
+        url: '',
+      }
     })
-    .filter(Boolean)
-    .map(({ block, url }) => mapNotionImageUrl(url, block))
+    .filter(({ url, block }) => Boolean(url && block))
+    .map(({ url, block }) => mapNotionImageUrl(url, block))
     .filter(Boolean)
 
   const results = await pMap(

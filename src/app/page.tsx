@@ -1,3 +1,5 @@
+'use client'
+
 import { meta } from '../../site.config'
 
 const Homepage = () => (

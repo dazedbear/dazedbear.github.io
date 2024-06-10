@@ -1,5 +1,5 @@
 import { communitySettings, communityFeatures } from '../../site.config'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactElement } from 'react'
 
 // https://docs.like.co/developer/likecoin-button/iframe
 const likecoin = ({ url }) =>
@@ -31,7 +31,7 @@ const NotionPageFooter = () => {
   }, [setCurrentUrl])
 
   const communityComponents = communityFeatures.articleFooter.reduce(
-    (enableItems, { name, enable }) => {
+    (enableItems: ReactElement[], { name, enable }) => {
       if (enable) {
         const Component = socialFeatureComponentMap[name]
         enableItems.push(<Component key={name} url={currentUrl} />)

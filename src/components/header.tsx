@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import classnames from 'classnames'
 import ExtLink from './ext-link'
 import { meta, navigation as navItems, searchSettings } from '../../site.config'
@@ -26,9 +25,8 @@ const themeClassMap = {
   },
 }
 
-const Header = () => {
-  const router = useRouter()
-  const currentTheme = isActivePage('/', router) ? 'modern' : 'classic'
+const Header = ({ pathname = '' }: { pathname: string }) => {
+  const currentTheme = isActivePage('/', pathname) ? 'modern' : 'classic'
   const linkClass =
     'box-border items-center border-0 border-white text-base m-0 p-2.5 justify-center flex flex-row flex-nowrap h-12 z-1000 transition duration-300 lg:h-8 font-normal lg:py-1.5 lg:px-2.5'
   const liniInActiveClass = themeClassMap[currentTheme]?.linkInActive || ''
@@ -72,7 +70,7 @@ const Header = () => {
                   if (!enabled) {
                     return null
                   }
-                  const isActive = isActivePage(page, router)
+                  const isActive = isActivePage(page, pathname)
                   return (
                     <li
                       key={label}

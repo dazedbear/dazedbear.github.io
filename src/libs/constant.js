@@ -1,8 +1,7 @@
 module.exports = {
-  ABOUT_PAGE: 'AboutPage',
-  PAGE_TYPE_ARTICLE_LIST_PAGE: 'ArticleListPage',
-  PAGE_TYPE_ARTICLE_SINGLE_PAGE: 'ArticleSinglePage',
-  PAGE_TYPE_ERROR_PAGE: 'ErrorPage',
+  PAGE_TYPE_NOTION_SINGLE_PAGE: 'NotionSinglePage',
+  PAGE_TYPE_NOTION_ARTICLE_LIST_PAGE: 'NotionArticleListPage',
+  PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE: 'NotionArticleDetailPage',
   END_TO_END_TEST_QUERY: 'e2e_test',
   FAILSAFE_PAGE_GENERATION_QUERY: 'fsg',
   FAILSAFE_PAGE_SERVING_QUERY: 'fs',

@@ -12,7 +12,7 @@ export type logLevel = 'debug' | 'info' | 'warn' | 'error'
 
 export interface logOption {
   category: string
-  message: string | object
+  message: string | object | undefined | null
   level?: logLevel
   req?: null | GetServerSidePropsRequest | any
 }

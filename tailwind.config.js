@@ -1,5 +1,9 @@
 module.exports = {
-  content: ['./src/pages/**/*.tsx', './src/components/**/*.tsx'],
+  content: [
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
   important: '#app',
   theme: {
     extend: {

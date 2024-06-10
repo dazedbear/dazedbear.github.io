@@ -44,6 +44,10 @@ module.exports = withBundleAnalyzer({
 
   webpack(cfg) {
     validateRequiredEnv()
+
+    // disable resolving canvas module for react-pdf in Next.js
+    // https://github.com/wojtekmaj/react-pdf?tab=readme-ov-file#nextjs
+    cfg.resolve.alias.canvas = false
     return cfg
   },
   images: {

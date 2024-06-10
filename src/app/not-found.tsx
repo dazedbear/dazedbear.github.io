@@ -1,3 +1,5 @@
+'use client'
+
 import Error from 'next/error'
 
 const NotFoundPage = () => {
