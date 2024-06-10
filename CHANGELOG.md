@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.36.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.35.0...v4.36.0) (2024-06-10)
+
+
+### Features
+
+* App router migration for Next.js 13 ([#111](https://github.com/dazedbear/dazedbear.github.io/issues/111)) ([be80d32](https://github.com/dazedbear/dazedbear.github.io/commit/be80d321e651eb515f2f2a8c77f9a9c8ea72c32e))
+
 ## [4.35.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.34.4...v4.35.0) (2024-05-27)
 
 
