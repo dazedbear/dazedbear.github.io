@@ -63,11 +63,7 @@ export const getNotionContent = async ({
               category: pageType,
             })
             const pageContent = await transformSinglePage(response)
-            log({
-              category: pageType,
-              message: `dumpaccess to /${pageName}`,
-              level: 'info',
-            })
+
             return { pageContent }
           }
 
@@ -89,11 +85,7 @@ export const getNotionContent = async ({
               articleStream
             )
             const menuItems = transformMenuItems(pageName, articleStream)
-            log({
-              category: pageType,
-              message: `dumpaccess to /${pageName}`,
-              level: 'info',
-            })
+
             return {
               menuItems,
               articleStream,
@@ -150,12 +142,6 @@ export const getNotionContent = async ({
             const pageContent = articleStream?.content
             const menuItems = transformMenuItems(pageName, articleStream)
             const toc = transformTableOfContent(articleStream, articleId)
-
-            log({
-              category: 'page',
-              message: `dumpaccess to /${pageName}/${pageSlug}`,
-              level: 'info',
-            })
 
             return { menuItems, pageContent, pageId, toc }
           }

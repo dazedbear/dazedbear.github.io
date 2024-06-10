@@ -2,6 +2,7 @@ import { getPageMeta } from '../../libs/util'
 import NotionSinglePage from '../notion/single-page'
 import { getNotionContent } from '../notion/content'
 import { PAGE_TYPE_NOTION_SINGLE_PAGE } from '../../libs/constant'
+import log from '../../libs/server/log'
 
 const pageName = 'about'
 
@@ -14,6 +15,12 @@ const AboutPage = async ({ searchParams }) => {
     pageType: PAGE_TYPE_NOTION_SINGLE_PAGE,
     pageName,
     searchParams,
+  })
+
+  log({
+    category: PAGE_TYPE_NOTION_SINGLE_PAGE,
+    message: `dumpaccess to /${pageName}`,
+    level: 'info',
   })
   return <NotionSinglePage pageName="about" pageContent={pageContent} />
 }

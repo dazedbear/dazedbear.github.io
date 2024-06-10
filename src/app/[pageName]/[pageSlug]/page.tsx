@@ -3,6 +3,7 @@ import { getNotionContent } from '../../notion/content'
 import { PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE } from '../../../libs/constant'
 import { getPageMeta } from '../../../libs/util'
 import { getPageProperty } from '../../../libs/notion'
+import log from '../../../libs/server/log'
 
 export async function generateMetadata({ params, searchParams }) {
   const { pageName, pageSlug } = params
@@ -30,6 +31,12 @@ const ArticleListPage = async ({ params, searchParams }) => {
     pageName,
     pageSlug,
     searchParams,
+  })
+
+  log({
+    category: PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE,
+    message: `dumpaccess to /${pageName}/${pageSlug}`,
+    level: 'info',
   })
   return (
     <NotionArticleDetailPage
