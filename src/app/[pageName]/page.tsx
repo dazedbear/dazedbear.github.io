@@ -1,4 +1,4 @@
-import NotionArticlePage from '../notion/article-list-page'
+import NotionArticleListPage from '../notion/article-list-page'
 import { getNotionContent } from '../notion/content'
 import { PAGE_TYPE_NOTION_ARTICLE_LIST_PAGE } from '../../libs/constant'
 
@@ -10,7 +10,7 @@ const ArticleListPage = async ({ params, searchParams }) => {
     searchParams,
   })
   return (
-    <NotionArticlePage
+    <NotionArticleListPage
       pageName={pageName}
       menuItems={menuItems}
       articleStream={articleStream}

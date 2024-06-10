@@ -69,56 +69,56 @@
 }
 
 /**
-  * for common notion list page: #app #notion-list-page ...
+  * for common notion list page: #app #notion-article-list-page ...
   */
-#app #notion-list-page .notion-page-title-text {
+#app #notion-article-list-page .notion-page-title-text {
   @apply whitespace-normal text-2xl text-lavender-purple-300;
 }
 
-#app #notion-list-page .notion-gallery-grid {
+#app #notion-article-list-page .notion-gallery-grid {
   @apply block grid-cols-none border-0;
 }
 
-#app #notion-list-page .notion-collection-card {
+#app #notion-article-list-page .notion-collection-card {
   @apply mb-5 border-b border-gray-300 pb-4 shadow-none last:mb-0 last:border-0;
 }
 
-#app #notion-list-page .notion-collection-card-property {
+#app #notion-article-list-page .notion-collection-card-property {
   @apply text-sm;
 }
 
-#app #notion-list-page .notion-collection-card-cover {
+#app #notion-article-list-page .notion-collection-card-cover {
   @apply border-0;
 }
 
-#app #notion-list-page .notion-collection-card-cover img {
+#app #notion-article-list-page .notion-collection-card-cover img {
   @apply rounded-md;
 }
 
-#app #notion-list-page .notion-page-icon-inline {
+#app #notion-article-list-page .notion-page-icon-inline {
   @apply hidden; /* hide page title icon */
 }
 
 /**
- * for common notion single page: #app #notion-single-page ...
+ * for common notion single page: #app #notion-article-detail-page ...
  */
-#app #notion-single-page .notion-collection {
+#app #notion-article-detail-page .notion-collection {
   @apply w-full;
 }
 
-#app #notion-single-page .notion-collection .notion-table {
+#app #notion-article-detail-page .notion-collection .notion-table {
   width: 100% !important;
 }
 
-#app #notion-single-page .notion-collection .notion-table-view {
+#app #notion-article-detail-page .notion-collection .notion-table-view {
   padding: 20px !important;
 }
 
-#app #notion-single-page .notion-code {
+#app #notion-article-detail-page .notion-code {
   overflow: initial;
 }
 
-#app #notion-single-page .notion-code > code {
+#app #notion-article-detail-page .notion-code > code {
   display: block;
   overflow-x: scroll;
   overflow-y: visible;
@@ -130,18 +130,18 @@
   https://github.com/NotionX/react-notion-x/blob/ad7f5f10f3ca88bd43f5fd5f9e07b6a669c2c1bb/packages/notion-types/src/core.ts#L40-L59
  */
 #app
-  #notion-single-page
+  #notion-article-detail-page
   .notion-collection-page-properties
   .notion-collection-row-value {
   @apply p-0;
 }
 
 #app
-  #notion-single-page
+  #notion-article-detail-page
   .notion-collection-page-properties
   .notion-collection-column-title,
 #app
-  #notion-single-page
+  #notion-article-detail-page
   .notion-collection-page-properties
   .notion-collection-row-value
   > span:not(.notion-property-select, .notion-property-multi_select) {
@@ -149,7 +149,7 @@
 }
 
 #app
-  #notion-single-page
+  #notion-article-detail-page
   .notion-collection-page-properties
   .notion-collection-row {
   @apply m-0 border-0;

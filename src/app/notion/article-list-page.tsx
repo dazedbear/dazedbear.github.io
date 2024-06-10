@@ -32,7 +32,7 @@ const NotionArticleListPage = ({
 
   return (
     <div
-      id="notion-list-page"
+      id="notion-article-list-page"
       data-namespace={pageName}
       className="mx-auto my-0 flex max-w-1100 flex-grow flex-row flex-nowrap px-5 py-0 pt-24 lg:pt-12"
     >
