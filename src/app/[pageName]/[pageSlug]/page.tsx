@@ -1,6 +1,27 @@
 import NotionArticleDetailPage from '../../notion/article-detail-page'
 import { getNotionContent } from '../../notion/content'
 import { PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE } from '../../../libs/constant'
+import { getPageMeta } from '../../../libs/util'
+import { getPageProperty } from '../../../libs/notion'
+
+export async function generateMetadata({ params, searchParams }) {
+  const { pageName, pageSlug } = params
+
+  // hack way to get fetched article property.
+  // TODO: need to find a way to pass property instead of redundant request.
+  const { pageContent, pageId } = await getNotionContent({
+    pageType: PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE,
+    pageName,
+    pageSlug,
+    searchParams,
+  })
+  const property: any = getPageProperty({ pageId, recordMap: pageContent })
+  const metaOverride = {
+    title: property?.PageTitle,
+  }
+
+  return getPageMeta(metaOverride, pageName)
+}
 
 const ArticleListPage = async ({ params, searchParams }) => {
   const { pageName, pageSlug } = params

@@ -1,6 +1,11 @@
-'use client'
-
 import ExtLink from '../../components/ext-link'
+import { getPageMeta } from '../../libs/util'
+
+const pageName = 'maintain'
+
+export async function generateMetadata() {
+  return getPageMeta({}, pageName)
+}
 
 const MaintainPage = () => (
   <div className="homeContainer text-center">

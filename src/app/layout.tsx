@@ -1,12 +1,7 @@
-import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import App from './app'
-import {
-  currentEnv,
-  currentWebsite,
-  meta,
-  searchSettings,
-} from '../../site.config'
+import { currentEnv, searchSettings } from '../../site.config'
+import { getPageMeta } from '../libs/util'
 
 // css
 import 'react-notion-x/src/styles.css'
@@ -18,20 +13,8 @@ import '../styles/notion.css'
 
 const isProduction = currentEnv === 'production'
 
-export const metadata: Metadata = {
-  metadataBase: new URL(`${currentWebsite.protocol}://${currentWebsite.host}`),
-  title: meta.title,
-  description: meta.description,
-  openGraph: {
-    title: meta.title,
-    description: meta.description,
-    images: [
-      {
-        url: meta.image,
-        alt: meta.title,
-      },
-    ],
-  },
+export async function generateMetadata() {
+  return getPageMeta()
 }
 
 const CustomScript = dynamic(() => import('./custom-script'), { ssr: false })
