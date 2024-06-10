@@ -1,5 +1,5 @@
 import merge from 'lodash/merge'
-import { ReadonlyURLSearchParams } from 'next/navigation'
+import { ReadonlyURLSearchParams, notFound } from 'next/navigation'
 import { idToUuid } from 'notion-utils'
 import { pageProcessTimeout, cache } from '../../../site.config'
 import {
@@ -51,7 +51,12 @@ export const getNotionContent = async ({
         switch (pageType) {
           case PAGE_TYPE_NOTION_SINGLE_PAGE: {
             if (!isValidPageName(pageName)) {
-              throw Error(`invalid page | pageName: ${pageName}`)
+              log({
+                category: pageType,
+                message: `invalid page | pageName: ${pageName}`,
+                level: 'warn',
+              })
+              return notFound()
             }
             const response = await fetchSinglePage({
               pageName,
@@ -68,7 +73,12 @@ export const getNotionContent = async ({
 
           case PAGE_TYPE_NOTION_ARTICLE_LIST_PAGE: {
             if (!isValidPageName(pageName)) {
-              throw Error(`invalid page | pageName: ${pageName}`)
+              log({
+                category: pageType,
+                message: `invalid page | pageName: ${pageName}`,
+                level: 'warn',
+              })
+              return notFound()
             }
             const response = await fetchArticleStream({
               pageName,
@@ -92,9 +102,12 @@ export const getNotionContent = async ({
 
           case PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE: {
             if (!isValidPageName(pageName) || !isValidPageSlug(pageSlug)) {
-              throw Error(
-                `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`
-              )
+              log({
+                category: pageType,
+                message: `invalid page | pageName: ${pageName} | pageSlug: ${pageSlug}`,
+                level: 'warn',
+              })
+              return notFound()
             }
 
             const { pageId: articleId } = extractSinglePagePath(pageSlug)
