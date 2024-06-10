@@ -4,8 +4,8 @@ import log from './log'
 import { currentEnv, cache as cacheConfig } from '../../../site.config'
 
 class CacheClient {
-  client = null
-  option = null
+  client: any = null
+  option: any = null
 
   constructor(option) {
     this.option = option

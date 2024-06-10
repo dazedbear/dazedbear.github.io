@@ -126,8 +126,8 @@ export const useTOCScrollHandler = () => {
     // https://github.com/Purii/react-use-scrollspy
     const actionSectionScrollSpy = throttle(() => {
       const sections = document.getElementsByClassName(SECTION_CLASS_NAME)
-      let prevBBox: DOMRect = null
-      let currentSectionId: string = activeSectionId
+      let prevBBox: DOMRect | null = null
+      let currentSectionId: any = activeSectionId
 
       for (let i = 0; i < sections.length; ++i) {
         const section = sections[i]
@@ -154,12 +154,12 @@ export const useTOCScrollHandler = () => {
     }, THROTTLE_MILLIONSECOND)
 
     const container = document.querySelector(NOTION_MAIN_CONTENT_CLASS_NAME)
-    container.addEventListener('scroll', actionSectionScrollSpy) // for desktop case
+    container?.addEventListener('scroll', actionSectionScrollSpy) // for desktop case
     window.addEventListener('scroll', actionSectionScrollSpy) // for smartphone case
     actionSectionScrollSpy()
     return () => {
       window.removeEventListener('scroll', actionSectionScrollSpy)
-      container.removeEventListener('scroll', actionSectionScrollSpy)
+      container?.removeEventListener('scroll', actionSectionScrollSpy)
     }
   }, [])
   return {

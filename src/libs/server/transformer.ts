@@ -1,7 +1,6 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
 import isEmpty from 'lodash/isEmpty'
-import cloneDeep from 'lodash/cloneDeep'
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
 import { ExtendedRecordMap } from 'notion-types'
@@ -10,7 +9,6 @@ import { getBlockTitle, idToUuid, getPageTableOfContents } from 'notion-utils'
 import { notion } from '../../../site.config'
 import log from './log'
 import { getNotionPreviewImages } from './notion'
-import { ActionPayloadState as StreamActionPayloadState } from '../client/slices/stream'
 import { getSinglePagePath, getPageProperty } from '../notion'
 import {
   ArticleStream,
@@ -248,7 +246,8 @@ export const transformMenuItems = (
   articleStream: ArticleStream
 ): MenuItem[] => {
   const recordMap = articleStream.content
-  const menuItems: MenuItem[] = articleStream.ids.reduce((items, pageId) => {
+  const ids = articleStream.ids || []
+  const menuItems: MenuItem[] = ids.reduce((items: any[], pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
@@ -361,7 +360,8 @@ export const transformPageUrls = (
   articleStream: ArticleStream
 ): string[] => {
   const recordMap = articleStream.content
-  let pageUrls: string[] = articleStream.ids.reduce((items, pageId) => {
+  const ids: any[] = articleStream?.ids || []
+  let pageUrls: string[] = ids?.reduce((items, pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,
@@ -401,44 +401,6 @@ export const transformPageUrls = (
   }
 
   return pageUrls
-}
-
-/**
- * transform article stream to updateStream action payload
- * @param {string} pageName
- * @param {object} articleStream
- * @returns {object} stream action payload
- */
-export const transformStreamActionPayload = (
-  pageName: NotionPageName,
-  articleStream: ArticleStream
-): StreamActionPayloadState => {
-  return {
-    name: pageName,
-    data: {
-      content: cloneDeep(articleStream.content),
-      hasNext: articleStream.hasNext,
-      ids: articleStream.ids,
-      index: articleStream.index,
-      total: articleStream.total,
-    },
-  }
-}
-
-/**
- * transform single page to updateSinglePage action payload
- * @param {string} pageName
- * @param {object} pageContent
- * @returns {object} stream action payload
- */
-export const transformPageActionPayload = (
-  pageName: NotionPageName,
-  pageContent: SinglePage
-): StreamActionPayloadState => {
-  return {
-    name: pageName,
-    data: cloneDeep(pageContent),
-  }
 }
 
 /**
