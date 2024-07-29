@@ -236,7 +236,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "7.32.0",
     "eslint-config-next": "^13.5.4",
-    "fast-xml-parser": "^4.2.5",
+    "fast-xml-parser": "^4.4.1",
     "husky": "^8.0.1",
     "is-ci": "^3.0.1",
     "jest": "^28.1.3",
