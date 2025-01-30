@@ -75,7 +75,8 @@ const siteConfig = {
     },
   ],
   notion: {
-    token: env.get('NOTION_TOKEN').asString(),
+    token: env.get('NOTION_TOKEN_V2').asString(),
+    user: env.get('NOTION_ACTIVE_USER').asString(),
     // you can insert any notion index page you need here.
     pages: {
       about: {
