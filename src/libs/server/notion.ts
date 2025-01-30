@@ -12,7 +12,10 @@ import fetch from 'node-fetch'
 import lqip from 'lqip-modern'
 import log from './log'
 
-const notionAPI = new NotionAPI({ authToken: notionConfig.token })
+const notionAPI = new NotionAPI({
+  activeUser: notionConfig.user,
+  authToken: notionConfig.token,
+})
 
 export const getNotionPage = async (pageId: string, dataFormatter?: any) => {
   if (!pageId) {

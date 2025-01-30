@@ -25,7 +25,7 @@ jobs:
 
   failsafe-generation-stage:
     name: Failsafe Page Generation (Stage Deployment)
-    runs-on: macos-12 # use macos for failsafe visual test
+    runs-on: macos-15 # use macos for failsafe visual test
     if: contains(github.ref, 'refs/pull')
     needs: wait-for-deployment
     env:
@@ -57,7 +57,7 @@ jobs:
 
   failsafe-generation-production:
     name: Failsafe Page Generation (Production Deployment)
-    runs-on: macos-12 # use macos for failsafe visual test
+    runs-on: macos-15 # use macos for failsafe visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: wait-for-deployment
     env:
@@ -88,7 +88,7 @@ jobs:
 
   failsafe-generation-production-schedule:
     name: Failsafe Page Generation (Production Schedule)
-    runs-on: macos-12 # use macos for failsafe visual test
+    runs-on: macos-15 # use macos for failsafe visual test
     # skip waiting for deployment for production schedule generation
     if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
     env:
