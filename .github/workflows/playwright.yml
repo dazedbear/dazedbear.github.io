@@ -21,7 +21,7 @@ jobs:
     name: Playwright E2E Tests (Stage Deployment)
     needs: wait-for-deployment
     timeout-minutes: 60
-    runs-on: macos-12 # use macos for page visual test
+    runs-on: macos-15 # use macos for page visual test
     if: contains(github.ref, 'refs/pull')
     env:
       NEXT_PUBLIC_APP_ENV: stage
@@ -51,7 +51,7 @@ jobs:
     name: Playwright E2E Tests (Production Deployment)
     needs: wait-for-deployment
     timeout-minutes: 60
-    runs-on: macos-12 # use macos for page visual test
+    runs-on: macos-15 # use macos for page visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     env:
       NEXT_PUBLIC_APP_ENV: production
@@ -79,7 +79,7 @@ jobs:
   playwright-e2e-test-production-schedule:
     name: Playwright E2E Tests (Production Schedule)
     timeout-minutes: 60
-    runs-on: macos-12 # use macos for page visual test
+    runs-on: macos-15 # use macos for page visual test
     if: github.ref == 'refs/heads/main' && github.event_name == 'schedule'
     env:
       NEXT_PUBLIC_APP_ENV: production
