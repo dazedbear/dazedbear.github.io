@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.37.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.36.0...v4.37.0) (2025-01-30)
+
+
+### Build
+
+* upgrade notion v7 and dev packages ([#116](https://github.com/dazedbear/dazedbear.github.io/issues/116)) ([24ca273](https://github.com/dazedbear/dazedbear.github.io/commit/24ca273e18c2d086016237ae0ec43aa50b0acc76))
+
 ## [4.36.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.35.0...v4.36.0) (2024-06-10)
 
 
