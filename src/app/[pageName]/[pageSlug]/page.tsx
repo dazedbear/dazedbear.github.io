@@ -3,6 +3,7 @@ import { getNotionContent } from '../../notion/content'
 import { PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE } from '../../../libs/constant'
 import { getPageMeta } from '../../../libs/util'
 import { getPageProperty } from '../../../libs/notion'
+import { handleForceCacheRefresh } from '../../../libs/server/page'
 import log from '../../../libs/server/log'
 
 export async function generateMetadata({ params, searchParams }) {
@@ -26,6 +27,10 @@ export async function generateMetadata({ params, searchParams }) {
 
 const ArticleListPage = async ({ params, searchParams }) => {
   const { pageName, pageSlug } = params
+  const pathname = `/${pageName}/${pageSlug}`
+
+  handleForceCacheRefresh(pathname, searchParams)
+
   const { menuItems, pageContent, pageId, toc } = await getNotionContent({
     pageType: PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE,
     pageName,
@@ -35,7 +40,7 @@ const ArticleListPage = async ({ params, searchParams }) => {
 
   log({
     category: PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE,
-    message: `dumpaccess to /${pageName}/${pageSlug}`,
+    message: `dumpaccess to ${pathname}`,
     level: 'info',
   })
   return (

@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { ExtendedRecordMap } from 'notion-types'
 import get from 'lodash/get'
 import { performance } from 'perf_hooks'
@@ -7,8 +8,9 @@ import {
   GetServerSidePropsRequest,
 } from '../../../types'
 import log from './log'
-import { notion } from '../../../site.config'
+import { cache, notion } from '../../../site.config'
 import { getNotionPage } from '../../libs/server/notion'
+import { FORCE_CACHE_REFRESH_QUERY } from '../../libs/constant'
 
 /**
  * validate input pageName
@@ -185,4 +187,28 @@ export const executeFunctionWithTimeout = async (
         : false
   }
   return result
+}
+
+/**
+ * common handler for force cache refresh
+ * @param {object} params
+ * @param {object} searchParams
+ * @returns {void}
+ */
+export const handleForceCacheRefresh = (pathname = '/', searchParams = {}) => {
+  const forceCacheRefresh = searchParams[FORCE_CACHE_REFRESH_QUERY] === '1'
+
+  // set flag for cache client
+  cache.forceRefresh = forceCacheRefresh
+
+  // handle Vercel Data Cache revalidation
+  // @see https://vercel.com/docs/infrastructure/data-cache
+  if (forceCacheRefresh && pathname) {
+    log({
+      category: 'handleForceCacheRefresh',
+      message: `revalidate Vercel Data Cache | pathname: ${pathname}`,
+      level: 'info',
+    })
+    revalidatePath(pathname, 'page')
+  }
 }

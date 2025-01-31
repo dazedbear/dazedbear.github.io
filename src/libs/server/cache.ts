@@ -47,7 +47,7 @@ class CacheClient {
 
     if (!this.client) {
       log({
-        category: 'cacheClient|proxy',
+        category: 'cacheClient.proxy',
         message: `cache MISS: cacheClient is disabled. | ${message} | key: ${key}`,
       })
       const data = await execFunction()
@@ -58,7 +58,7 @@ class CacheClient {
       const cacheData = await this.client?.get(key)
       if (cacheData && !forceRefresh) {
         log({
-          category: 'cacheClient|proxy',
+          category: 'cacheClient.proxy',
           message: `cache HIT | ${message} | key: ${key}`,
           level: 'debug',
         })
@@ -67,14 +67,14 @@ class CacheClient {
     } catch (err) {
       // swallow redis client errors to prevent app crash
       log({
-        category: 'cacheClient|proxy',
+        category: 'cacheClient.proxy',
         message: err,
         level: 'error',
       })
     }
 
     log({
-      category: 'cacheClient|proxy',
+      category: 'cacheClient.proxy',
       message: `cache MISS${
         forceRefresh ? ' (force refresh)' : ''
       } | ${message} | key: ${key}`,
@@ -88,7 +88,7 @@ class CacheClient {
     } catch (err) {
       // swallow redis client errors to prevent app crash
       log({
-        category: 'cacheClient|proxy',
+        category: 'cacheClient.proxy',
         message: err,
         level: 'error',
       })
@@ -106,7 +106,7 @@ class CacheClient {
   createCacheKeyFromContent(content, prefix = '') {
     if (!content) {
       log({
-        category: 'cacheClient|createCacheKeyFromContent',
+        category: 'cacheClient.createCacheKeyFromContent',
         message: 'content should not be empty',
         level: 'error',
       })
