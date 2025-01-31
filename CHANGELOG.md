@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.38.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.37.0...v4.38.0) (2025-01-31)
+
+
+### Features
+
+* handle Vercel Data Cache Revalidation ([#117](https://github.com/dazedbear/dazedbear.github.io/issues/117)) ([3719e35](https://github.com/dazedbear/dazedbear.github.io/commit/3719e35bb984833527107f3485f4f7cebe6b0027))
+
 ## [4.37.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.36.0...v4.37.0) (2025-01-30)
 
 
