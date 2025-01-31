@@ -1,10 +1,9 @@
 import merge from 'lodash/merge'
 import { ReadonlyURLSearchParams, notFound } from 'next/navigation'
 import { idToUuid } from 'notion-utils'
-import { pageProcessTimeout, cache } from '../../../site.config'
+import { pageProcessTimeout } from '../../../site.config'
 import {
   FAILSAFE_PAGE_GENERATION_QUERY,
-  FORCE_CACHE_REFRESH_QUERY,
   PAGE_TYPE_NOTION_SINGLE_PAGE,
   PAGE_TYPE_NOTION_ARTICLE_LIST_PAGE,
   PAGE_TYPE_NOTION_ARTICLE_DETAIL_PAGE,
@@ -42,7 +41,6 @@ export const getNotionContent = async ({
 
   if (searchParams) {
     timeout = searchParams[FAILSAFE_PAGE_GENERATION_QUERY] === '1' ? 0 : timeout
-    cache.forceRefresh = searchParams[FORCE_CACHE_REFRESH_QUERY] === '1'
   }
 
   const content = await executeFunctionWithTimeout(
