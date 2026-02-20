@@ -105,7 +105,7 @@ const Header = ({ pathname = '' }: { pathname: string }) => {
             <DocSearch
               appId={searchSettings?.appId}
               apiKey={searchSettings?.apiKey}
-              indexName={searchSettings?.indexName}
+              indices={[searchSettings?.indexName]}
             />
           </div>
         </header>
