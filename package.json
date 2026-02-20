@@ -8,6 +8,7 @@
   },
   "private": true,
   "scripts": {
+    "clean": "git clean -fxd -e '.env.*' -e '.husky/*' -e '.nvmrc' -e 'node_modules'",
     "dev": "next dev --webpack",
     "start": "next start",
     "test:e2e:page": "PLAYWRIGHT_HTML_REPORT=e2e-page-report npx playwright test --project page-test-desktop page-test-mobile --config=tests/e2e/playwright.config.ts",
