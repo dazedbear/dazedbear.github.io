@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.39.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.38.0...v4.39.0) (2026-02-20)
+
+
+### Build
+
+* upgrade next 16, react 19 & notion data issue fix & style fix ([#122](https://github.com/dazedbear/dazedbear.github.io/issues/122)) ([0d26a66](https://github.com/dazedbear/dazedbear.github.io/commit/0d26a6668c7ae14745841d71dd2356eaa4a47146))
+
 ## [4.38.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.37.0...v4.38.0) (2025-01-31)
 
 
