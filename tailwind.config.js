@@ -7,6 +7,9 @@ module.exports = {
   important: '#app',
   theme: {
     extend: {
+      aspectRatio: {
+        '9/16': '9 / 16',
+      },
       backgroundPosition: {
         '50%': '50%',
       },

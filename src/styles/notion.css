@@ -41,11 +41,7 @@
 }
 
 #app .notion-page-cover {
-  @apply object-contain object-center;
-
-  height: auto !important;
-  min-height: unset !important;
-  max-height: unset !important;
+  @apply aspect-9/16 rounded-md object-cover object-center;
 }
 
 #app .notion-page-link {
