@@ -92,3 +92,16 @@
 
 /* end - algolia search */
 /* stylelint-enable selector-class-pattern */
+
+/* start - image zoom */
+/* stylelint-disable selector-class-pattern */
+.medium-zoom-overlay {
+  @apply z-9999;
+}
+
+.medium-zoom-image--opened {
+  @apply z-10000;
+}
+/* stylelint-enable selector-class-pattern */
+
+/* end - image zoom */
