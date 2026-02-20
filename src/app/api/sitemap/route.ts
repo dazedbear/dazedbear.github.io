@@ -65,7 +65,7 @@ const generateSiteMapXml = async () => {
       concurrency: 10,
     }
   )
-  let notionUrls: string[] = currentNotionListUrls.reduce(
+  const notionUrls: string[] = currentNotionListUrls.reduce(
     (urls, currnetNotionPageUrls) => urls.concat(currnetNotionPageUrls),
     []
   )
