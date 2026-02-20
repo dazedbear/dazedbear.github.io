@@ -17,7 +17,7 @@ export async function generateMetadata() {
   return getPageMeta()
 }
 
-const CustomScript = dynamic(() => import('./custom-script'), { ssr: false })
+const CustomScript = dynamic(() => import('./custom-script'))
 
 const RootLayout = ({
   // Layouts must accept a children prop.

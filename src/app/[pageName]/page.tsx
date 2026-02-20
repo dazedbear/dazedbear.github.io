@@ -5,12 +5,14 @@ import { getPageMeta } from '../../libs/util'
 import { handleForceCacheRefresh } from '../../libs/server/page'
 import log from '../../libs/server/log'
 
-export async function generateMetadata({ params: { pageName } }) {
+export async function generateMetadata({ params }) {
+  const { pageName } = await params
   return getPageMeta({}, pageName)
 }
 
-const ArticleListPage = async ({ params, searchParams }) => {
-  const { pageName } = params
+const ArticleListPage = async ({ params, searchParams: rawSearchParams }) => {
+  const { pageName } = await params
+  const searchParams = await rawSearchParams
   const pathname = `/${pageName}`
 
   handleForceCacheRefresh(pathname, searchParams)

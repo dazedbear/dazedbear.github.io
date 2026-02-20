@@ -11,8 +11,9 @@ export async function generateMetadata() {
   return getPageMeta({}, pageName)
 }
 
-const AboutPage = async ({ searchParams }) => {
+const AboutPage = async ({ searchParams: rawSearchParams }) => {
   const pathname = `/${pageName}`
+  const searchParams = await rawSearchParams
 
   handleForceCacheRefresh(pathname, searchParams)
 
