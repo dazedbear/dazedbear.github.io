@@ -45,7 +45,9 @@ const NavigationMenu = ({ title, menuItems }) => {
                   key={label}
                   className={itemClass}
                   onClick={() => {
-                    isMobile && dispatch(updateNavMenuViewability(false))
+                    if (isMobile) {
+                      dispatch(updateNavMenuViewability(false))
+                    }
                   }}
                 >
                   <Link href={url || '#'} className={linkClass}>
@@ -59,7 +61,9 @@ const NavigationMenu = ({ title, menuItems }) => {
                 key={label}
                 className={itemClass}
                 onClick={() => {
-                  isMobile && dispatch(updateNavMenuViewability(false))
+                  if (isMobile) {
+                    dispatch(updateNavMenuViewability(false))
+                  }
                 }}
               >
                 <ExtLink href={url || '#'} className={linkClass}>

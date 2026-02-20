@@ -6,8 +6,12 @@ import { getPageProperty } from '../../../libs/notion'
 import { handleForceCacheRefresh } from '../../../libs/server/page'
 import log from '../../../libs/server/log'
 
-export async function generateMetadata({ params, searchParams }) {
-  const { pageName, pageSlug } = params
+export async function generateMetadata({
+  params,
+  searchParams: rawSearchParams,
+}) {
+  const { pageName, pageSlug } = await params
+  const searchParams = await rawSearchParams
 
   // hack way to get fetched article property.
   // TODO: need to find a way to pass property instead of redundant request.
@@ -25,8 +29,9 @@ export async function generateMetadata({ params, searchParams }) {
   return getPageMeta(metaOverride, pageName)
 }
 
-const ArticleListPage = async ({ params, searchParams }) => {
-  const { pageName, pageSlug } = params
+const ArticleListPage = async ({ params, searchParams: rawSearchParams }) => {
+  const { pageName, pageSlug } = await params
+  const searchParams = await rawSearchParams
   const pathname = `/${pageName}/${pageSlug}`
 
   handleForceCacheRefresh(pathname, searchParams)

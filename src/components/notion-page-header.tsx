@@ -22,7 +22,7 @@ const PageCover = ({ alt = '', cover, recordMap }) => {
         <Image
           alt={alt}
           blurDataURL={previewImage.dataURIBase64}
-          className="notion-page-cover absolute rounded-md"
+          className="notion-page-cover absolute"
           src={cover}
           placeholder="blur"
           fill
@@ -34,7 +34,7 @@ const PageCover = ({ alt = '', cover, recordMap }) => {
   return (
     // use <img> intentionally since we dont know the actual size of pictures without pre-process
     // eslint-disable-next-line @next/next/no-img-element
-    <img alt={alt} className="notion-page-cover rounded-md" src={cover} />
+    <img alt={alt} className="notion-page-cover" src={cover} />
   )
 }
 

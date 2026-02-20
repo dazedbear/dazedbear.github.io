@@ -16,7 +16,7 @@ import {
 const store = configureStore({
   devTools: currentEnv !== 'production',
   middleware: (getDefaultMiddleware) => {
-    let middleware = getDefaultMiddleware({
+    const middleware = getDefaultMiddleware({
       serializableCheck: {
         // https://github.com/bjoluc/next-redux-cookie-wrapper#usage-with-redux-toolkit
         ignoredActions: [SERVE_COOKIES],

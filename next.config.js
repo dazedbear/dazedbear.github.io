@@ -40,8 +40,6 @@ const withBundleAnalyzer = (config) => {
 }
 
 module.exports = withBundleAnalyzer({
-  swcMinify: true,
-
   webpack(cfg) {
     validateRequiredEnv()
 
@@ -53,8 +51,26 @@ module.exports = withBundleAnalyzer({
   images: {
     // domain allowlist for images with absolute urls
     // instead of embed external image url directly, re-upload to notion is better
-    domains: ['images.unsplash.com', 'www.notion.so', 'dazedbear.notion.site'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.notion.so',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dazedbear.notion.site',
+        pathname: '/**',
+      },
+    ],
   },
+
+  allowedDevOrigins: ['local.dazedbear.pro'],
 
   experimental: {
     largePageDataBytes: 1000000, // 1 MB

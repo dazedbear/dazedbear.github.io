@@ -26,6 +26,7 @@ const NotionPageFooter = () => {
 
   useEffect(() => {
     if (document) {
+      // @eslint-disable-next-line react-hooks/exhaustive-deps
       setCurrentUrl(`${document.location.origin}${document.location.pathname}`)
     }
   }, [setCurrentUrl])

@@ -53,36 +53,55 @@
 /* start - algolia search */
 /* stylelint-disable selector-class-pattern */
 :root {
-  --docsearch-primary-color: #ce7bb9;
-  --docsearch-logo-color: #ce7bb9;
-  --docsearch-text-color: #37352f;
-  --docsearch-searchbox-background: #938ca040;
+  /* searchbox modal hover styles */
+  --docsearch-highlight-color: #ce7bb9;
+  --docsearch-hit-highlight-color: #ce7bb9;
+  --docsearch-soft-primary-color: rgb(206 123 185 / 10%);
 
   /* custom variables */
-  --docsearch-searchbox-highlight-color: #fff;
+  --dazedbear-searchbox-highlight-color: #fff;
+  --dazedbear-searchbox-text-color: #969faf;
+  --dazedbear-searchbox-background: #938ca040;
 }
 
-.DocSearch-Button,
+/* Searchbox Button */
+.DocSearch-Button {
+  @apply fixed right-5 z-10000 rounded-[40px] border-2 lg:relative lg:right-0;
+
+  background-color: var(--dazedbear-searchbox-background);
+  border-color: transparent;
+  color: var(--dazedbear-searchbox-text-color);
+}
+
+.DocSearch-Button:hover {
+  border-color: var(--docsearch-highlight-color);
+  color: var(--dazedbear-searchbox-highlight-color);
+}
+
+/* Searchbox Modal */
 .DocSearch-Container {
   @apply z-10000;
 }
 
-#app .DocSearch-Button {
-  @apply fixed right-5 lg:relative lg:right-0;
-
-  background-color: var(
-    --docsearch-searchbox-background
-  ); /* workaround fix for doc search */
-}
-
-#app .DocSearch-Button .DocSearch-Search-Icon {
-  color: var(--docsearch-muted-color);
-}
-
-#app .DocSearch-Button:hover .DocSearch-Search-Icon,
-#app .DocSearch-Button:hover .DocSearch-Button-Placeholder {
-  color: var(--docsearch-searchbox-highlight-color);
+.DocSearch-Container
+  .DocSearch-Hit[aria-selected='true']
+  .DocSearch-Hit-Container
+  * {
+  color: var(--dazedbear-searchbox-highlight-color);
 }
 
 /* end - algolia search */
 /* stylelint-enable selector-class-pattern */
+
+/* start - image zoom */
+/* stylelint-disable selector-class-pattern */
+.medium-zoom-overlay {
+  @apply z-9999;
+}
+
+.medium-zoom-image--opened {
+  @apply z-10000;
+}
+/* stylelint-enable selector-class-pattern */
+
+/* end - image zoom */

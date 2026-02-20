@@ -203,7 +203,7 @@ export const transformSingleArticle = async (
 export const transformSinglePage = async (
   data: ExtendedRecordMap
 ): Promise<SinglePage> => {
-  let pageContent: SinglePage = data || {}
+  const pageContent: SinglePage = data || {}
 
   const isPreviewImageGenerationEnabled: boolean = get(notion, [
     'previewImages',
@@ -255,7 +255,7 @@ export const transformMenuItems = (
     })
     if (pagePath) {
       const url = `/${pageName}/${pagePath}`
-      const block = get(recordMap, ['block', pageId, 'value'])
+      const block = get(recordMap, ['block', pageId, 'value', 'value'])
       const label = getBlockTitle(block, recordMap as any)
       const item = {
         label,
@@ -361,7 +361,7 @@ export const transformPageUrls = (
 ): string[] => {
   const recordMap = articleStream.content
   const ids: any[] = articleStream?.ids || []
-  let pageUrls: string[] = ids?.reduce((items, pageId) => {
+  const pageUrls: string[] = ids?.reduce((items, pageId) => {
     const pagePath = getSinglePagePath({
       pageName,
       pageId,

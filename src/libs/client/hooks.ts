@@ -178,6 +178,7 @@ export const useInitLogRocket = () => {
     const isLocal = currentEnv === 'development'
     if (!isLocal && !isInitialized && trackingSettings?.logRocket?.enable) {
       LogRocket.init(trackingSettings?.logRocket?.id)
+      // @eslint-disable-next-line react-hooks/exhaustive-deps
       setInitialized(true)
     }
   })
