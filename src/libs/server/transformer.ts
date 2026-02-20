@@ -255,7 +255,7 @@ export const transformMenuItems = (
     })
     if (pagePath) {
       const url = `/${pageName}/${pagePath}`
-      const block = get(recordMap, ['block', pageId, 'value'])
+      const block = get(recordMap, ['block', pageId, 'value', 'value'])
       const label = getBlockTitle(block, recordMap as any)
       const item = {
         label,

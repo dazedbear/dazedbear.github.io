@@ -11,8 +11,8 @@ import { NotionPageName } from '../../types'
  * eg: { Slug: { type: 'text', path: ['value', 'schema', 'QzV^'] }}
  */
 const getPropertyPathMap = (collection) => {
-  const schemaPath = ['value', 'schema']
-  const basePath = ['value', 'properties']
+  const schemaPath = ['value', 'value', 'schema']
+  const basePath = ['value', 'value', 'properties']
   const schema = get(collection, schemaPath)
   if (!schema) {
     console.error('schema not found in collection.')
@@ -58,7 +58,7 @@ export const getPageProperty = ({ pageId, recordMap }) => {
   }
 
   const pageBlock = get(recordMap, ['block', pageId])
-  if (!pageBlock || get(pageBlock, ['value', 'type']) !== 'page') {
+  if (!pageBlock || get(pageBlock, ['value', 'value', 'type']) !== 'page') {
     return {}
   }
 
@@ -74,20 +74,20 @@ export const getPageProperty = ({ pageId, recordMap }) => {
   // add more fields into propertyPathMap
   propertyPathMap.PageCover = {
     type: 'image',
-    path: ['value', 'format', 'page_cover'],
+    path: ['value', 'value', 'format', 'page_cover'],
   }
   propertyPathMap.LastEditedTime = {
     type: 'timestamp',
-    path: ['value', 'last_edited_time'],
+    path: ['value', 'value', 'last_edited_time'],
   }
   propertyPathMap.PageTitle = {
     type: 'text',
-    path: ['value', 'properties', 'title'],
+    path: ['value', 'value', 'properties', 'title'],
   }
 
   // extract values from property paths
   const property = {}
-  for (let name in propertyPathMap) {
+  for (const name in propertyPathMap) {
     const { path, type } = propertyPathMap[name]
     property[name] = get(pageBlock, path)
     if (type === 'date') {
