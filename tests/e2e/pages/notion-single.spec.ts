@@ -8,7 +8,9 @@ const screenshotOption: ScreenShotOption = {
   mask: [],
   fullPage: false,
 }
-const notionPages = ['about']
+const notionPages: string[] = [
+  // 'about'
+]
 let pagePath = ''
 
 notionPages.forEach((pageName) => {

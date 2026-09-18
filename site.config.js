@@ -56,7 +56,7 @@ const siteConfig = {
     {
       label: 'About',
       page: '/about',
-      enabled: true,
+      enabled: false,
     },
     {
       label: 'Music',
