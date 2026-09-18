@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.39.1](https://github.com/dazedbear/dazedbear.github.io/compare/v4.39.0...v4.39.1) (2026-09-18)
+
+
+### Bug Fixes
+
+* all pages are 500 due to broken Notion API ([#123](https://github.com/dazedbear/dazedbear.github.io/issues/123)) ([14f1cae](https://github.com/dazedbear/dazedbear.github.io/commit/14f1caeeeafa7fef8e741aabe6500092d4a72049))
+
 ## [4.39.0](https://github.com/dazedbear/dazedbear.github.io/compare/v4.38.0...v4.39.0) (2026-02-20)
 
 
