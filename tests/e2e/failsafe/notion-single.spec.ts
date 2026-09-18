@@ -11,7 +11,7 @@ const screenshotOption: ScreenShotOption = {
   mask: [],
   fullPage: true,
 }
-const notionPages = [
+const notionPages: string[] = [
   // 'about' // FIXME: skip this case temporarily since there is 307 infinite redirection issue on index failsafe page.
 ]
 let pagePath = ''
